@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:BasePage
+    x:Class="DellyShopApp.Views.Pages.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:base="clr-namespace:DellyShopApp.Views.Pages.Base"
+    xmlns:font="clr-namespace:DellyShopApp.Helpers;assembly=DellyShopApp"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:helpers="clr-namespace:DellyShopApp.Languages"
+    xmlns:iOsSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
+    xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
+    iOsSpecific:Page.UseSafeArea="False"
+    BackgroundColor="Black"
+    NavigationPage.HasNavigationBar="False"
+    Visual="Material">
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <forms:CachedImage
+            Aspect="AspectFill"
+            HorizontalOptions="FillAndExpand"
+            Source="BgImage.png"
+            VerticalOptions="FillAndExpand" />
+        <pancakeView:PancakeView
+            BackgroundGradientEndColor="#1B1B1B"
+            BackgroundGradientStartColor="#001B293A"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+        <StackLayout
+            Margin="5,5,0,0"
+            HorizontalOptions="StartAndExpand"
+            Orientation="Vertical"
+            Spacing="0"
+            VerticalOptions="StartAndExpand">
+            <Image
+                Aspect="AspectFit"
+                HeightRequest="50"
+                HorizontalOptions="StartAndExpand"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="50">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BackButton" />
+                </Image.GestureRecognizers>
+                <Image.Source>
+                    <FontImageSource
+                        FontFamily="{DynamicResource MaterialFontFamily}"
+                        Glyph="{x:Static font:FontAwesomeIcons.ThinLeft}"
+                        Size="50"
+                        Color="{DynamicResource WhiteIconBgColor}" />
+                </Image.Source>
+            </Image>
+            <Label
+                Margin="20,15,0,0"
+                Padding="0,0,0,0"
+                FontAttributes="Bold"
+                FontFamily="{DynamicResource VerdanaProRegular}"
+                FontSize="30"
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource LabelStyle}"
+                Text="{x:Static helpers:AppResources.Signin}"
+                TextColor="{DynamicResource LightLabelTextColor}" />
+        </StackLayout>
+            <StackLayout Padding="30" VerticalOptions="CenterAndExpand">
+                <Label
+                    FontFamily="{DynamicResource VerdanaProRegular}"
+                    FontSize="15"
+                    HorizontalOptions="StartAndExpand"
+                    Style="{StaticResource LabelStyle}"
+                    Text="{x:Static helpers:AppResources.Mail}" />
+                <Frame Style="{DynamicResource FrameStyle}">
+                    <StackLayout Orientation="Horizontal">
+                        <Image
+                            Aspect="AspectFit"
+                            HeightRequest="20"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            WidthRequest="20">
+                            <Image.Source>
+                                <FontImageSource
+                                    FontFamily="{DynamicResource MaterialFontFamily}"
+                                    Glyph="{x:Static font:FontAwesomeIcons.UiEmail}"
+                                    Size="20"
+                                    Color="{DynamicResource IconBgColor}" />
+                            </Image.Source>
+                        </Image>
+                        <renderers:BorderlessEntry
+                            HorizontalOptions="FillAndExpand"
+                            Keyboard="Email"
+                            TextColor="{DynamicResource EntryTextColor}" />
+                    </StackLayout>
+                </Frame>
+                <Label
+                    FontFamily="{DynamicResource VerdanaProRegular}"
+                    FontSize="15"
+                    HorizontalOptions="StartAndExpand"
+                    Style="{StaticResource LabelStyle}"
+                    Text="{x:Static helpers:AppResources.Pass}" />
+                <Frame Style="{DynamicResource FrameStyle}">
+                    <StackLayout Orientation="Horizontal">
+                        <Image
+                            Aspect="AspectFit"
+                            HeightRequest="20"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            WidthRequest="20">
+                            <Image.Source>
+                                <FontImageSource
+                                    FontFamily="{DynamicResource MaterialFontFamily}"
+                                    Glyph="{x:Static font:FontAwesomeIcons.UiLock}"
+                                    Size="20"
+                                    Color="{DynamicResource IconBgColor}" />
+                            </Image.Source>
+                        </Image>
+                        <renderers:BorderlessEntry
+                            HorizontalOptions="FillAndExpand"
+                            IsPassword="True"
+                            TextColor="{DynamicResource EntryTextColor}" />
+                    </StackLayout>
+                </Frame>
+                <Button
+                    Margin="20"
+                    BackgroundColor="Transparent"
+                    BorderColor="{DynamicResource ButtonBorderColor}"
+                    Clicked="LoginButtonClick"
+                    Style="{DynamicResource ButtonStyle}"
+                    Text="{x:Static helpers:AppResources.Signin}"
+                    TextColor="White" />
+                <Label
+                    Margin="0,0,0,10"
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{DynamicResource LabelStyle}"
+                    Text="{x:Static helpers:AppResources.ForgotPass}"
+                    TextDecorations="Underline">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ForgetPassClick" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+       
+    </Grid>
+</base:BasePage>

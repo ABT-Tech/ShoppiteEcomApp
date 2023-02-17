@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:BasePage
+    x:Class="DellyShopApp.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:base="clr-namespace:DellyShopApp.Views.Pages.Base"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:helpers="clr-namespace:DellyShopApp.Languages"
+    xmlns:iOsSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
+    iOsSpecific:Page.UseSafeArea="False"
+    BackgroundColor="Black"
+    NavigationPage.HasNavigationBar="False"
+    Visual="Material">
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <forms:CachedImage
+            Aspect="AspectFill"
+            HorizontalOptions="FillAndExpand"
+            Source="BgImage.png"
+            VerticalOptions="FillAndExpand" />
+        <pancakeView:PancakeView
+            BackgroundGradientEndColor="#1B1B1B"
+            BackgroundGradientStartColor="#001B293A"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+        <forms:CachedImage
+            Aspect="AspectFill"
+            HeightRequest="140"
+            HorizontalOptions="CenterAndExpand"
+            Source="icon"
+            VerticalOptions="CenterAndExpand"
+            WidthRequest="140" />
+        <StackLayout
+            Margin="0,0,0,40"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="EndAndExpand">
+            <Button
+                Margin="{x:OnIdiom Tablet='150,20,150,10',
+                                   Phone='50,20,50,10'}"
+                BackgroundColor="Transparent"
+                Clicked="SignUp_Clicked"
+                Style="{DynamicResource ButtonStyle}"
+                Text="{x:Static helpers:AppResources.Signup}"
+                TextColor="{DynamicResource LabelTextColor}" />
+            <Button
+                Margin="{x:OnIdiom Tablet='150,10,150,10',
+                                   Phone='50,10,50,10'}"
+                BackgroundColor="{DynamicResource ButtonBorderColor}"
+                BorderColor="{DynamicResource ButtonBorderColor}"
+                Clicked="LogIn_Clicked"
+                Style="{DynamicResource ButtonStyle}"
+                Text="{x:Static helpers:AppResources.Signin}"
+                TextColor="{DynamicResource LightLabelTextColor}" />
+            
+        </StackLayout>
+    </Grid>
+</base:BasePage>
