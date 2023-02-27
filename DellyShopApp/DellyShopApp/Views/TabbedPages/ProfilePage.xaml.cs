@@ -19,6 +19,10 @@ namespace DellyShopApp.Views.TabbedPages
             if (!(sender is PancakeView stack)) return;
             switch (stack.ClassId)
             {
+                case "EditProfile":
+                    OpenPage(new EditProfilePage());
+                    break;
+
                 case "MyOder":
                     OpenPage(new MyOrderPage());
                     break;
@@ -49,5 +53,7 @@ namespace DellyShopApp.Views.TabbedPages
         {
             Navigation.PushAsync(page);
         }
+
+       
     }
 }

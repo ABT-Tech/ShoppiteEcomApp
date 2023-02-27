@@ -10,7 +10,7 @@
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     BackgroundColor="{DynamicResource MainColor}"
     NavigationPage.HasNavigationBar="False">
-    <Frame BackgroundColor="{DynamicResource MainColor}">
+    <Frame BackgroundColor="LightBlue">
         <StackLayout>
             <ScrollView
                 Margin="10"
@@ -82,7 +82,7 @@
                             Size="100"
                             FontFamily="{DynamicResource MaterialFontFamily}"
                             Glyph="{x:Static font:FontAwesomeIcons.CheckCircled}"
-                            Color="White" />
+                            Color="Black" />
                     </Image.Source>
                 </Image>
                 <Label
@@ -90,14 +90,14 @@
                     FontSize="35"
                     HorizontalOptions="Center"
                     Text="{x:Static languages:AppResources.SuccessOrder}"
-                    TextColor="White"
+                    TextColor="Black"
                     VerticalOptions="StartAndExpand" />
             </StackLayout>
 
             <Button
                 Margin="0,0,0,10"
-                BackgroundColor="{DynamicResource MainColor}"
-                BorderColor="{DynamicResource FontColor}"
+                BackgroundColor="Chocolate"
+                BorderColor="Black"
                 BorderWidth="1"
                 Clicked="ContinueClick"
                 CornerRadius="20"
@@ -107,7 +107,7 @@
                 HorizontalOptions="CenterAndExpand"
                 MinimumWidthRequest="250"
                 Text="{x:Static languages:AppResources.HomePage}"
-                TextColor="{DynamicResource FontColor}"
+                TextColor="Black"
                 VerticalOptions="EndAndExpand"
                 WidthRequest="150" />
 

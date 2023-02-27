@@ -11,7 +11,7 @@
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
     iOsSpecific:Page.UseSafeArea="False"
-    BackgroundColor="Black"
+    BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -57,7 +57,7 @@
                 HorizontalOptions="CenterAndExpand"
                 Style="{StaticResource LabelStyle}"
                 Text="{x:Static helpers:AppResources.Signin}"
-                TextColor="{DynamicResource LightLabelTextColor}" />
+                TextColor="Chocolate" />
         </StackLayout>
             <StackLayout Padding="30" VerticalOptions="CenterAndExpand">
                 <Label
@@ -118,8 +118,7 @@
                 </Frame>
                 <Button
                     Margin="20"
-                    BackgroundColor="Transparent"
-                    BorderColor="{DynamicResource ButtonBorderColor}"
+                    BackgroundColor="Chocolate"                   
                     Clicked="LoginButtonClick"
                     Style="{DynamicResource ButtonStyle}"
                     Text="{x:Static helpers:AppResources.Signin}"

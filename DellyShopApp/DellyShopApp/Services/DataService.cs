@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using DellyShopApp.Helpers;
 using DellyShopApp.Languages;
 using DellyShopApp.Models;
+using DellyShopApp.Views.Pages;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -21,12 +22,14 @@ namespace DellyShopApp.Services
         public ObservableCollection<NotificationModel> NotificationList = new ObservableCollection<NotificationModel>();
         public ObservableCollection<ProductListModel> ProcutListModel = new ObservableCollection<ProductListModel>();
         public ObservableCollection<ProductListModel> BasketModel = new ObservableCollection<ProductListModel>();
-
+     
         public List<Category> CatoCategoriesList = new List<Category>();
         public List<Category> Carousel = new List<Category>();
         public List<StartList> StartList = new List<StartList>();
         public List<Category> CatoCategoriesDetail = new List<Category>();
         public List<CommentModel> CommentList = new List<CommentModel>();
+        public List<ShopModel> ShopDetails= new List<ShopModel>();
+        public ChangeUserData EditProfile = new ChangeUserData();
         public double BaseTotalPrice = 0;
         public static DataService Instance
         {
@@ -112,7 +115,61 @@ namespace DellyShopApp.Services
                 ProductList = new string[] { "py_1", "shoesyellow" },
                 OldPrice = 400
             });
-
+            ShopDetails = new List<ShopModel>();
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Grocery Store",
+                OrgId = 1,
+                Image = "Grocery_Store.png",
+                RowNumber = 0,
+                ColumnNumber = 0,
+                BackGround = "Red"
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Pet Store",
+                OrgId = 2,
+                Image = "Pet_Store.png",
+                RowNumber = 0,
+                ColumnNumber = 1,
+                BackGround = "Blue"
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Coffee Store",
+                OrgId = 3,
+                Image = "Coffee_Store.png",
+                RowNumber = 1,
+                ColumnNumber = 0,
+                BackGround = "Yellow"
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Fruit Store",
+                OrgId = 4,
+                Image = "Fruit_Store.png",
+                RowNumber = 1,
+                ColumnNumber = 1,
+                BackGround = "Green"
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Cloth Store",
+                OrgId = 5,
+                Image = "Cloth_Store.png",
+                RowNumber = 2,
+                ColumnNumber = 0,
+                BackGround = "Orange"
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Hardware Store",
+                OrgId = 6,
+                Image = "Hardware_Store.png",
+                RowNumber = 2,
+                ColumnNumber = 1,
+                BackGround = "Brown"
+            });
             CatoCategoriesList.Add(new Category
             {
                 CategoryName = AppResources.Shoes,
@@ -133,6 +190,13 @@ namespace DellyShopApp.Services
                 Banner = "clothingCategory.png",
                 CategoryId = "3"
             });
+
+            EditProfile.ChangeName = "abc";
+            EditProfile.ChangeEmail = "abc@gmail.com";
+            EditProfile.ChangePhoneNumber = "7878787878";
+            EditProfile.ChangeBdate = "1 / 1 / 2000";
+            EditProfile.ChangeAddress = "India";
+
             StartList.Add(new StartList
             {
                 StarImg = FontAwesomeIcons.Star
@@ -204,6 +268,10 @@ namespace DellyShopApp.Services
             Carousel.Add(new Category
             {
                 Banner = "elecronics.jpeg"
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "images.jpeg"
             });
         }
 

@@ -94,5 +94,10 @@ namespace DellyShopApp.Views.Pages
             {
             DisplayAlert(AppResources.Success, _products.Title+" "+AppResources.AddedBakset,AppResources.Okay);
         }
+
+        private void BuyNow(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new FirstPage());
+        }
     }
 }

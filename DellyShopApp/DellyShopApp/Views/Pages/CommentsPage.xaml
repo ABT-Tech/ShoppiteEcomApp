@@ -9,7 +9,7 @@
     xmlns:languages="clr-namespace:DellyShopApp.Languages;assembly=DellyShopApp"
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
-    BackgroundColor="{DynamicResource BackgroundColor}"
+    BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <AbsoluteLayout>

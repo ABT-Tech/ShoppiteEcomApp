@@ -8,7 +8,7 @@
     xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:languages="clr-namespace:DellyShopApp.Languages;assembly=DellyShopApp"
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
-    BackgroundColor="{DynamicResource BackgroundColor}">
+    BackgroundColor="LightBlue">
     <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
         <StackLayout
             Margin="10"
@@ -24,7 +24,8 @@
                     HorizontalOptions="CenterAndExpand"
                     LineBreakMode="TailTruncation"
                     Text="{x:Static languages:AppResources.MyProfile}"
-                    TextColor="{DynamicResource DarkLabelTextColor}"
+                    TextColor="Chocolate"
+                    FontAttributes="Bold"
                     VerticalOptions="StartAndExpand"
                     VerticalTextAlignment="Center" />
             </StackLayout>
@@ -63,7 +64,12 @@
                             TextColor="{DynamicResource WhiteDarkFontColor}"
                             VerticalOptions="Start"
                             VerticalTextAlignment="Center" />
-                        <pancakeView:PancakeView HorizontalOptions="FillAndExpand" Style="{DynamicResource PancakeFrameStyle}">
+                        <pancakeView:PancakeView HorizontalOptions="FillAndExpand" 
+                                                 ClassId="EditProfile"
+                                                 Style="{DynamicResource PancakeFrameStyle}">
+                            <pancakeView:PancakeView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OrderInfoClick" />
+                            </pancakeView:PancakeView.GestureRecognizers>
                             <StackLayout Orientation="Horizontal">
                                 <Image
                                     Margin="10,0,0,0"
@@ -75,7 +81,7 @@
                                             FontFamily="{DynamicResource MaterialFontFamily}"
                                             Glyph="{x:Static font:FontAwesomeIcons.UiEdit}"
                                             Size="25"
-                                            Color="{DynamicResource IconBgColor}" />
+                                            Color="Chocolate" />
                                     </Image.Source>
                                 </Image>
                                 <Label
@@ -125,7 +131,7 @@
                                 <FontImageSource
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.ThinRight}"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="Chocolate" />
                             </Image.Source>
                         </Image>
                     </StackLayout>
@@ -149,7 +155,7 @@
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.Heart}"
                                     Size="25"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="Chocolate" />
                             </Image.Source>
                         </Image>
                         <Label
@@ -164,7 +170,7 @@
                                 <FontImageSource
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.ThinRight}"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="Chocolate" />
                             </Image.Source>
                         </Image>
                     </StackLayout>
@@ -188,7 +194,7 @@
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.Box}"
                                     Size="25"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="Chocolate" />
                             </Image.Source>
                         </Image>
                         <Label
@@ -203,7 +209,7 @@
                                 <FontImageSource
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.ThinRight}"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="Chocolate" />
                             </Image.Source>
                         </Image>
                     </StackLayout>
@@ -227,7 +233,7 @@
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.SpeechComments}"
                                     Size="25"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="Chocolate" />
                             </Image.Source>
                         </Image>
                         <Label
@@ -242,7 +248,7 @@
                                 <FontImageSource
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.ThinRight}"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="Chocolate" />
                             </Image.Source>
                         </Image>
                     </StackLayout>
@@ -266,7 +272,7 @@
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.Notification}"
                                     Size="25"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="Chocolate" />
                             </Image.Source>
                         </Image>
                         <Label
@@ -281,7 +287,7 @@
                                 <FontImageSource
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.ThinRight}"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="Chocolate" />
                             </Image.Source>
                         </Image>
                     </StackLayout>
@@ -305,7 +311,7 @@
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.UiSettings}"
                                     Size="25"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="Chocolate" />
                             </Image.Source>
                         </Image>
                         <Label
@@ -320,7 +326,7 @@
                                 <FontImageSource
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.ThinRight}"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="Chocolate" />
                             </Image.Source>
                         </Image>
                     </StackLayout>

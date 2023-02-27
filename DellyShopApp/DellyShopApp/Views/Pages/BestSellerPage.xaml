@@ -10,7 +10,7 @@
     xmlns:partialViews="clr-namespace:DellyShopApp.Views.PartialViews;assembly=DellyShopApp"
     iOsSpecific:Page.UseSafeArea="True"
     xmlns:languages="clr-namespace:DellyShopApp.Languages;assembly=DellyShopApp"
-    BackgroundColor="{DynamicResource BackgroundColor}"
+    BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <StackLayout Margin="10">
@@ -23,7 +23,7 @@
 
         <customView:FlowListView
             x:Name="BestSeller"
-            BackgroundColor="{DynamicResource BackgroundColor}"
+            BackgroundColor="Chocolate"
             FlowColumnCount="2"
             FlowColumnExpand="None"
             HasUnevenRows="False"
@@ -72,8 +72,8 @@
                                 FontFamily="{DynamicResource VerdanaProBold}"
                                 FontSize="25"
                                 HorizontalOptions="EndAndExpand"
-                                Text="{Binding Price, StringFormat='{0} $'}"
-                                TextColor="{DynamicResource DarkLabelTextColor}"
+                                Text="{Binding Price, StringFormat='{0} ₹'}"
+                                TextColor="Red"
                                 VerticalOptions="EndAndExpand" />
                         </StackLayout>
                     </customView:PancakeView>

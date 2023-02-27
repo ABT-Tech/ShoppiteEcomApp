@@ -11,7 +11,7 @@
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     xmlns:partialViews="clr-namespace:DellyShopApp.Views.PartialViews;assembly=DellyShopApp"
     iOsSpecific:Page.UseSafeArea="True"
-    BackgroundColor="{DynamicResource BackgroundColor}"
+    BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False">
     <ScrollView>
         <StackLayout Margin="10">
@@ -74,8 +74,8 @@
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             FontSize="22"
                                             HorizontalOptions="EndAndExpand"
-                                            Text="{Binding Price, StringFormat='{0}$'}"
-                                            TextColor="{DynamicResource PriceLabelColor}"
+                                            Text="{Binding Price, StringFormat='{0}₹'}"
+                                            TextColor="Red"
                                             VerticalOptions="CenterAndExpand" />
 
                                     </StackLayout>

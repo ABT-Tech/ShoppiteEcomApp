@@ -11,14 +11,14 @@
     xmlns:partialViews="clr-namespace:DellyShopApp.Views.PartialViews;assembly=DellyShopApp"
     iOsSpecific:Page.UseSafeArea="True"
      xmlns:languages="clr-namespace:DellyShopApp.Languages"
-    BackgroundColor="{DynamicResource BackgroundColor}"
+    BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False">
     <StackLayout Margin="10">
          <partialViews:NavigationBarPartialView
             BackButtonVisibler="True"
             FavVisible="False"
             IsModalpage="False"
-            NavigationTitle="{x:Static languages:AppResources.MyFavorites}" />
+            NavigationTitle="{x:Static languages:AppResources.MyFavorites}"/>
                
        
         <customControl:RepeaterView x:Name="BasketItems">
@@ -46,7 +46,7 @@
                                             FontFamily="{DynamicResource MaterialFontFamily}"
                                             Glyph="{x:Static font:FontAwesomeIcons.Heart}"
                                             Size="25"
-                                            Color="{DynamicResource IconBgColor}" />
+                                            Color="Red" />
                                     </Image.Source>
                                 </Image>
                                 <pancakeView:PancakeView
@@ -80,8 +80,8 @@
                                     FontFamily="{DynamicResource VerdanaProRegular}"
                                     FontSize="22"
                                     HorizontalOptions="EndAndExpand"
-                                    Text="{Binding Price, StringFormat='{0}$'}"
-                                    TextColor="{DynamicResource PriceLabelColor}"
+                                    Text="{Binding Price, StringFormat='{0}₹'}"
+                                    TextColor="Red"
                                     VerticalOptions="CenterAndExpand" />
 
                             </StackLayout>

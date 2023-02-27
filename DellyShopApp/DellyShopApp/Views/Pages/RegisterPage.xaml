@@ -11,7 +11,7 @@
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
     iOsSpecific:Page.UseSafeArea="False"
-    BackgroundColor="Black"
+    BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
 
@@ -58,7 +58,7 @@
                     HorizontalOptions="CenterAndExpand"
                     Style="{StaticResource LabelStyle}"
                     Text="{x:Static helpers:AppResources.Signup}"
-                    TextColor="{DynamicResource LightLabelTextColor}" />
+                    TextColor="Chocolate" />
             </StackLayout>
             <ScrollView Margin="0,120,0,0">
                 <StackLayout Padding="30">
@@ -76,7 +76,7 @@
                                             FontFamily="{DynamicResource MaterialFontFamily}"
                                             Glyph="{x:Static font:FontAwesomeIcons.User}"
                                             Size="20"
-                                            Color="{DynamicResource IconBgColor}" />
+                                            Color="Chocolate" />
                                     </Image.Source>
                                 </Image>
                                 <renderers:BorderlessEntry MaxLength="15" Style="{DynamicResource BorderlessEntry}" />
@@ -89,6 +89,7 @@
                     <Label
                         FontFamily="{DynamicResource VerdanaProRegular}"
                         FontSize="15"
+                        x:Name="EmailEntry"
                         Style="{StaticResource LabelStyle}"
                         Text="{x:Static helpers:AppResources.Mail}" />
                     <Frame Style="{DynamicResource FrameStyle}">
@@ -99,10 +100,10 @@
                                         FontFamily="{DynamicResource MaterialFontFamily}"
                                         Glyph="{x:Static font:FontAwesomeIcons.UiEmail}"
                                         Size="20"
-                                        Color="{DynamicResource IconBgColor}" />
+                                        Color="Chocolate" />
                                 </Image.Source>
                             </Image>
-                            <renderers:BorderlessEntry Keyboard="Email" Style="{DynamicResource BorderlessEntry}" />
+                            <renderers:BorderlessEntry x:Name="EmailAddress" Keyboard="Email" Style="{DynamicResource BorderlessEntry}" />
                         </StackLayout>
                     </Frame>
                     <Label
@@ -117,14 +118,14 @@
                                     <FontImageSource
                                         FontFamily="{DynamicResource MaterialFontFamily}"
                                         Glyph="{x:Static font:FontAwesomeIcons.UiCall}"
-                                        Size="20"
-                                        Color="{DynamicResource IconBgColor}" />
+                                        Size="20"                                        
+                                        Color="Chocolate" />
                                 </Image.Source>
                             </Image>
-                            <renderers:BorderlessEntry Keyboard="Numeric" Style="{DynamicResource BorderlessEntry}" />
+                            <renderers:BorderlessEntry Keyboard="Numeric"  MaxLength="10"  Style="{DynamicResource BorderlessEntry}" />
                         </StackLayout>
                     </Frame>
-                    <Label
+                <Label 
                         FontFamily="{DynamicResource VerdanaProRegular}"
                         FontSize="15"
                         Style="{StaticResource LabelStyle}"
@@ -137,13 +138,13 @@
                                         FontFamily="{DynamicResource MaterialFontFamily}"
                                         Glyph="{x:Static font:FontAwesomeIcons.UiLock}"
                                         Size="20"
-                                        Color="{DynamicResource IconBgColor}" />
+                                        Color="Chocolate" />
                                 </Image.Source>
                             </Image>
-                            <renderers:BorderlessEntry IsPassword="True" Style="{DynamicResource BorderlessEntry}" />
+                        <renderers:BorderlessEntry IsPassword="True"  x:Name="Pswd" Style="{DynamicResource BorderlessEntry}" />
                         </StackLayout>
                     </Frame>
-                    <Label
+                <Label x:Name="cfm"
                         FontFamily="{DynamicResource VerdanaProRegular}"
                         FontSize="15"
                         Style="{StaticResource LabelStyle}"
@@ -156,10 +157,10 @@
                                         FontFamily="{DynamicResource MaterialFontFamily}"
                                         Glyph="{x:Static font:FontAwesomeIcons.UiLock}"
                                         Size="20"
-                                        Color="{DynamicResource IconBgColor}" />
+                                        Color="Chocolate" />
                                 </Image.Source>
                             </Image>
-                            <renderers:BorderlessEntry IsPassword="True" Style="{DynamicResource BorderlessEntry}" />
+                        <renderers:BorderlessEntry IsPassword="True" x:Name="cnfm" Style="{DynamicResource BorderlessEntry}" />
                         </StackLayout>
                     </Frame>
                     <Label
@@ -175,7 +176,7 @@
                                         FontFamily="{DynamicResource MaterialFontFamily}"
                                         Glyph="{x:Static font:FontAwesomeIcons.BirthdayCake}"
                                         Size="20"
-                                        Color="{DynamicResource IconBgColor}" />
+                                        Color="Chocolate" />
                                 </Image.Source>
                             </Image>
                             <renderers:BorderlessDatePicker
@@ -195,11 +196,11 @@
                     </Frame>
                     <Button
                         Margin="20"
-                        BackgroundColor="Transparent"
+                        BackgroundColor="Chocolate"
                         Clicked="RegisteruButtonClick"
                         Style="{DynamicResource ButtonStyle}"
                         Text="{x:Static helpers:AppResources.Signup}"
-                        TextColor="{DynamicResource LabelTextColor}" />
+                        TextColor="White" />
                 </StackLayout>
           
             </ScrollView>

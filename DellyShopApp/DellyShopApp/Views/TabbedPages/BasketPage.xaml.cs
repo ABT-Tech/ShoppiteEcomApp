@@ -34,7 +34,7 @@ namespace DellyShopApp.Views.TabbedPages
             {
                 DataService.Instance.BaseTotalPrice += item.Price;
             }
-            TotalPrice.Text = $"{ DataService.Instance.BaseTotalPrice + 12}$";
+            TotalPrice.Text = $"{ DataService.Instance.BaseTotalPrice + 12}₹";
         }
 
         /// <summary>

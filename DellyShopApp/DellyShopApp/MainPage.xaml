@@ -6,52 +6,99 @@
     xmlns:base="clr-namespace:DellyShopApp.Views.Pages.Base"
     xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:helpers="clr-namespace:DellyShopApp.Languages"
+    xmlns:customControl="clr-namespace:DellyShopApp.CustomControl;assembly=DellyShopApp"
     xmlns:iOsSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     iOsSpecific:Page.UseSafeArea="False"
-    BackgroundColor="Black"
+    BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
-    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        <forms:CachedImage
-            Aspect="AspectFill"
-            HorizontalOptions="FillAndExpand"
-            Source="BgImage.png"
-            VerticalOptions="FillAndExpand" />
-        <pancakeView:PancakeView
-            BackgroundGradientEndColor="#1B1B1B"
-            BackgroundGradientStartColor="#001B293A"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand" />
-        <forms:CachedImage
-            Aspect="AspectFill"
-            HeightRequest="140"
-            HorizontalOptions="CenterAndExpand"
-            Source="icon"
-            VerticalOptions="CenterAndExpand"
-            WidthRequest="140" />
-        <StackLayout
-            Margin="0,0,0,40"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="EndAndExpand">
-            <Button
-                Margin="{x:OnIdiom Tablet='150,20,150,10',
-                                   Phone='50,20,50,10'}"
-                BackgroundColor="Transparent"
-                Clicked="SignUp_Clicked"
-                Style="{DynamicResource ButtonStyle}"
-                Text="{x:Static helpers:AppResources.Signup}"
-                TextColor="{DynamicResource LabelTextColor}" />
-            <Button
-                Margin="{x:OnIdiom Tablet='150,10,150,10',
-                                   Phone='50,10,50,10'}"
-                BackgroundColor="{DynamicResource ButtonBorderColor}"
-                BorderColor="{DynamicResource ButtonBorderColor}"
-                Clicked="LogIn_Clicked"
-                Style="{DynamicResource ButtonStyle}"
-                Text="{x:Static helpers:AppResources.Signin}"
-                TextColor="{DynamicResource LightLabelTextColor}" />
-            
+    <StackLayout Margin="15,10,15,0">
+        <StackLayout Spacing="0">
+            <Label
+                        Margin="0"
+                        Padding="0,5,0,0"
+                        FontAttributes="Bold"
+                        FontFamily="{DynamicResource VerdanaProRegular}"
+                        FontSize="30"
+                        HorizontalOptions="Center"
+                        Style="{DynamicResource LabelStyle}"
+                        Text="Shoppite"
+                        TextColor="Chocolate" />
+            <Label
+                        Margin="0"
+                        Padding="0,5,0,0"
+                        FontAttributes="Bold"
+                        FontFamily="{DynamicResource VerdanaProBold}"
+                        FontSize="15"
+                        HorizontalOptions="Center"
+                        Text="What You Shop Matters!!! "
+                        TextColor="Chocolate" />
         </StackLayout>
-    </Grid>
+        <!--<customControl:RepeaterView x:Name="shop">
+            <customControl:RepeaterView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="5" BackgroundColor="LightBlue">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding Image}"  
+                                    
+                                    Grid.Column="{Binding ColumnNumber}"
+                                    BackgroundColor="{Binding BackGround}"
+                                    HorizontalOptions="FillAndExpand"  
+                                    Margin="15"
+                                    VerticalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Text="{Binding ShopName}"
+                                   FontSize="25" 
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="End"
+                                   FontAttributes="Bold"
+                                   TextColor="Chocolate">
+                            </Label>
+
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </customControl:RepeaterView.ItemTemplate>
+        </customControl:RepeaterView>-->
+        <Grid RowSpacing="5" ColumnSpacing="5" BackgroundColor="LightBlue" x:Name="shop">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--<Image Source="Grocery_Store.png"
+                   Grid.Row="0"  
+                   Grid.Column="0"  
+                   BackgroundColor="LightBlue"        
+                   Margin="15"
+                   VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label Text="Grocery Store"
+                   FontSize="Large"
+                   Margin="-7"
+                   TextColor="Chocolate"
+                   HorizontalOptions="Center"
+                   VerticalOptions="End"
+                   FontAttributes="Bold">
+            </Label>-->
+        </Grid>
+    </StackLayout>
+
 </base:BasePage>

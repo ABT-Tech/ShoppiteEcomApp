@@ -9,7 +9,7 @@
     xmlns:helpers="clr-namespace:DellyShopApp.Languages"
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
-    BackgroundColor="{DynamicResource BackgroundColor}"
+    BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <ContentPage.Content>
@@ -29,7 +29,8 @@
                         HorizontalOptions="CenterAndExpand"
                         LineBreakMode="TailTruncation"
                         Text="{x:Static helpers:AppResources.MyBasket}"
-                        TextColor="{DynamicResource DarkLabelTextColor}"
+                        TextColor="Chocolate"
+                        FontAttributes="Bold"
                         VerticalOptions="StartAndExpand"
                         VerticalTextAlignment="Center" />
                 </StackLayout>
@@ -108,8 +109,8 @@
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 FontSize="22"
                                                 HorizontalOptions="End"
-                                                Text="{Binding Price, StringFormat='{0}$'}"
-                                                TextColor="{DynamicResource PriceLabelColor}"
+                                                Text="{Binding Price, StringFormat='{0}₹'}"
+                                                TextColor="Red"
                                                 VerticalOptions="CenterAndExpand" />
 
                                         </StackLayout>
@@ -158,7 +159,7 @@
                             FontFamily="{DynamicResource VerdanaProRegular}"
                             FontSize="22"
                             HorizontalOptions="EndAndExpand"
-                            Text="12$"
+                            Text="12₹"
                             TextColor="{DynamicResource PriceLabelColor}"
                             VerticalOptions="CenterAndExpand" />
                     </StackLayout>
@@ -171,7 +172,7 @@
                             FontSize="15"
                             HorizontalOptions="StartAndExpand"
                             Text="{x:Static helpers:AppResources.TotalPrice}"
-                            TextColor="{DynamicResource WhiteDarkFontColor}"
+                            TextColor="Red"
                             VerticalOptions="Center" />
                         <Label
                             x:Name="TotalPrice"
@@ -202,7 +203,7 @@
                                         FontFamily="{DynamicResource MaterialFontFamily}"
                                         Glyph="{x:Static font:FontAwesomeIcons.ThinDown}"
                                         Size="40"
-                                        Color="{DynamicResource IconBgColor}" />
+                                        Color="Black" />
                                 </Image.Source>
                             </Image>
                         </StackLayout>
@@ -231,7 +232,7 @@
                                         FontFamily="{DynamicResource MaterialFontFamily}"
                                         Glyph="{x:Static font:FontAwesomeIcons.Plus}"
                                         Size="20"
-                                        Color="{DynamicResource IconBgColor}" />
+                                        Color="Black" />
                                 </Image.Source>
                             </Image>
                         </StackLayout>
@@ -263,7 +264,7 @@
                 </Frame>
                 <Frame
                     Margin="0,0,0,20"
-                    BackgroundColor="{DynamicResource MainColor}"
+                    BackgroundColor="Chocolate"
                     Style="{DynamicResource ButtonFrameStyle}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ContinueClick" />
