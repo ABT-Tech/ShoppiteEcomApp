@@ -10,7 +10,7 @@
     xmlns:partialViews="clr-namespace:DellyShopApp.Views.PartialViews;assembly=DellyShopApp"
     iOsSpecific:Page.UseSafeArea="True"
     xmlns:languages="clr-namespace:DellyShopApp.Languages;assembly=DellyShopApp"
-    BackgroundColor="{DynamicResource BackgroundColor}"
+    BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <StackLayout Margin="10">
@@ -58,22 +58,22 @@
                             <Label
                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                 Text="{Binding Title}"
-                                TextColor="{DynamicResource WhiteDarkFontColor}"
+                                TextColor="Black"
                                 VerticalOptions="Start" />
                             <Label
                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                 FontSize="10"
                                 HorizontalOptions="Start"
                                 Text="{Binding Brand}"
-                                TextColor="{DynamicResource DescLabelColor}"
+                                TextColor="Black"
                                 VerticalOptions="Start" />
 
                             <Label
                                 FontFamily="{DynamicResource VerdanaProBold}"
                                 FontSize="25"
                                 HorizontalOptions="EndAndExpand"
-                                Text="{Binding Price, StringFormat='{0} $'}"
-                                TextColor="{DynamicResource DarkLabelTextColor}"
+                                Text="{Binding Price, StringFormat='{0} ₹'}"
+                                TextColor="Red"
                                 VerticalOptions="EndAndExpand" />
                         </StackLayout>
                     </customView:PancakeView>

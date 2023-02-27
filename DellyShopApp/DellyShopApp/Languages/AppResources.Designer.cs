@@ -598,5 +598,59 @@ namespace DellyShopApp.Languages {
                 return ResourceManager.GetString("ScanCard", resourceCulture);
             }
         }
+       internal static string Grocery_Store
+        {
+            get {
+                return ResourceManager.GetString("Grocery_Store", resourceCulture);
+          }
+        
+
+        }
+        internal static string Pat_Store
+        {
+            get
+            {
+                return ResourceManager.GetString("Pat_Store", resourceCulture);
+            }
+
+
+        }
+        internal static string Shoes_Store
+        {
+            get
+            {
+                return ResourceManager.GetString("Shoes_Store", resourceCulture);
+            }
+
+
+        }
+        internal static string Coffee_Store
+        {
+            get
+            {
+                return ResourceManager.GetString("Coffee_Store", resourceCulture);
+            }
+
+
+        }
+        internal static string Book_Store
+        {
+            get
+            {
+                return ResourceManager.GetString("Book_Store", resourceCulture);
+            }
+
+
+        }
+        internal static string Bakery_Store
+        {
+            get
+            {
+                return ResourceManager.GetString("Bakery_Store", resourceCulture);
+            }
+
+
+        }
+
     }
 }

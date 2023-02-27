@@ -12,13 +12,13 @@
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     xmlns:proc="clr-namespace:DellyShopApp.Processors"
     xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
-    BackgroundColor="{DynamicResource BackgroundColor}"
+    BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <ScrollView Margin="15,10,15,0">
         <StackLayout>
             <!--  DellyShop Title And Description  -->
-            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+            <StackLayout Margin="15,10,15,0">
                 <StackLayout Spacing="0">
                     <Label
                         Margin="0"
@@ -26,19 +26,19 @@
                         FontAttributes="Bold"
                         FontFamily="{DynamicResource VerdanaProRegular}"
                         FontSize="30"
-                        HorizontalOptions="Start"
+                        HorizontalOptions="Center"
                         Style="{DynamicResource LabelStyle}"
-                        Text="{x:Static languages:AppResources.Shop}"
-                        TextColor="{DynamicResource DarkLabelTextColor}" />
+                        Text="Shoppite"
+                        TextColor="Chocolate" />
                     <Label
                         Margin="0"
                         Padding="0,5,0,0"
                         FontAttributes="Bold"
                         FontFamily="{DynamicResource VerdanaProBold}"
-                        FontSize="8"
-                        HorizontalOptions="Start"
-                        Text="{x:Static languages:AppResources.TitleDesc}"
-                        TextColor="{DynamicResource DescLabelColor}" />
+                        FontSize="25"
+                        HorizontalOptions="Center"
+                        Text="What You Shop Matters!!!"
+                        TextColor="Chocolate" />
 
                 </StackLayout>
             </StackLayout>
@@ -50,34 +50,35 @@
                 HeightRequest="35"
                 Style="{DynamicResource FrameStyle}">
                 <renderers:BorderlessSearchBar
-                    BackgroundColor="Transparent"
-                    CancelButtonColor="{DynamicResource MainColor}"
+                    BackgroundColor="White"
+                    CancelButtonColor="Black"
                     FontFamily="{DynamicResource VerdanaProRegular}"
-                    TextColor="{DynamicResource DarkFontColor}" />
+                    TextColor="Black" />
             </Frame>
             <!--  Category Name and Image  -->
             <StackLayout Margin="0,5,0,0" HorizontalOptions="FillAndExpand">
-                <Grid BackgroundColor="Transparent">
+                <Grid BackgroundColor="LightBlue">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="100" />
+                        <RowDefinition Height="65" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Image
+                    <Image 
                         Grid.Row="0"
                         Grid.Column="0"
                         Aspect="AspectFill"
-                        Source="{Binding Image}" />
-                    <pancakeView:PancakeView
+                        Source="{Binding Image}"/>
+                      
+                        <pancakeView:PancakeView
                         Grid.Row="0"
                         Grid.Column="0"
-                        BackgroundGradientEndColor="{DynamicResource DarkFontColor}"
-                        BackgroundGradientStartColor="Transparent"
+                        BackgroundGradientEndColor="White"  
+                        BackgroundGradientStartColor="White"
                         CornerRadius="10"
                         HorizontalOptions="FillAndExpand" />
                     <StackLayout Orientation="Horizontal">
-                        <Image
+                        <Image 
                             Aspect="AspectFit"
                             HeightRequest="50"
                             HorizontalOptions="Start"
@@ -86,12 +87,13 @@
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="BackPage" />
                             </Image.GestureRecognizers>
+
                             <Image.Source>
-                                <FontImageSource
+                                <FontImageSource 
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.ThinLeft}"
                                     Size="30"
-                                    Color="{DynamicResource FontColor}" />
+                                    Color="Black" />
                             </Image.Source>
                         </Image>
                         <Label
@@ -102,7 +104,7 @@
                             FontSize="25"
                             HorizontalOptions="CenterAndExpand"
                             Text="{Binding CategoryName}"
-                            TextColor="{DynamicResource FontColor}"
+                            TextColor="Black"
                             VerticalOptions="CenterAndExpand" />
                     </StackLayout>
 
@@ -145,7 +147,7 @@
                                     DownsampleToViewSize="True"
                                     FadeAnimationDuration="100"
                                     FadeAnimationEnabled="True"
-                                    Source="{Binding Image}" />
+                                    Source="{Binding Banner}" />
                             </ContentView>
                         </DataTemplate>
                     </controls:CarouselView.ItemTemplate>
@@ -160,7 +162,7 @@
                 FontSize="22"
                 HorizontalOptions="Start"
                 Text="{x:Static languages:AppResources.BestSeller}"
-                TextColor="{DynamicResource DarkFontColor}"
+                TextColor="Black"
                 VerticalOptions="Start" />
             <!--  ProcutctList  -->
             <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
@@ -194,21 +196,21 @@
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             Text="{Binding Title}"
-                                            TextColor="{DynamicResource WhiteDarkFontColor}"
+                                            TextColor="Black"
                                             VerticalOptions="Start" />
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             FontSize="10"
                                             HorizontalOptions="Start"
                                             Text="{Binding Brand}"
-                                            TextColor="{DynamicResource DescLabelColor}"
+                                            TextColor="Black"
                                             VerticalOptions="Start" />
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProBold}"
                                             FontSize="25"
                                             HorizontalOptions="EndAndExpand"
-                                            Text="{Binding Price, StringFormat='{0} $'}"
-                                            TextColor="{DynamicResource DarkLabelTextColor}"
+                                            Text="{Binding Price, StringFormat='{0} ₹'}"
+                                            TextColor="red"
                                             VerticalOptions="EndAndExpand" />
                                     </StackLayout>
                                 </pancakeView:PancakeView>
@@ -225,7 +227,7 @@
                 FontSize="22"
                 HorizontalOptions="Start"
                 Text="{x:Static languages:AppResources.PreviousViewed}"
-                TextColor="{DynamicResource DarkFontColor}"
+                TextColor="Black"
                 VerticalOptions="Start" />
             <!--  ProcutctList  -->
             <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
@@ -259,22 +261,22 @@
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             Text="{Binding Title}"
-                                            TextColor="{DynamicResource WhiteDarkFontColor}"
+                                            TextColor="Black"
                                             VerticalOptions="Start" />
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             FontSize="10"
                                             HorizontalOptions="Start"
                                             Text="{Binding Brand}"
-                                            TextColor="{DynamicResource DescLabelColor}"
+                                            TextColor="Black"
                                             VerticalOptions="Start" />
 
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProBold}"
                                             FontSize="25"
                                             HorizontalOptions="EndAndExpand"
-                                            Text="{Binding Price, StringFormat='{0} $'}"
-                                            TextColor="{DynamicResource DarkLabelTextColor}"
+                                            Text="{Binding Price, StringFormat='{0} ₹'}"
+                                            TextColor="Red"
                                             VerticalOptions="EndAndExpand" />
                                     </StackLayout>
                                 </pancakeView:PancakeView>
@@ -291,12 +293,12 @@
                 FontSize="22"
                 HorizontalOptions="Start"
                 Text="{x:Static languages:AppResources.PreviousViewed}"
-                TextColor="{DynamicResource DarkFontColor}"
+                TextColor="Black"
                 VerticalOptions="Start" />
             <!--  ProcutctList  -->
             <controls:FlowListView
                 x:Name="MostNews"
-                BackgroundColor="{DynamicResource BackgroundColor}"
+                BackgroundColor="LightBlue"
                 FlowColumnCount="2"
                 FlowColumnExpand="None"
                 HasUnevenRows="False"
@@ -329,22 +331,22 @@
                                 <Label
                                     FontFamily="{DynamicResource VerdanaProRegular}"
                                     Text="{Binding Title}"
-                                    TextColor="{DynamicResource WhiteDarkFontColor}"
+                                    TextColor="Black"
                                     VerticalOptions="Start" />
                                 <Label
                                     FontFamily="{DynamicResource VerdanaProRegular}"
                                     FontSize="10"
                                     HorizontalOptions="Start"
                                     Text="{Binding Brand}"
-                                    TextColor="{DynamicResource DescLabelColor}"
+                                    TextColor="Black"
                                     VerticalOptions="Start" />
 
                                 <Label
                                     FontFamily="{DynamicResource VerdanaProBold}"
                                     FontSize="25"
                                     HorizontalOptions="EndAndExpand"
-                                    Text="{Binding Price, StringFormat='{0} $'}"
-                                    TextColor="{DynamicResource DarkLabelTextColor}"
+                                    Text="{Binding Price, StringFormat='{0} ₹'}"
+                                    TextColor="Red"
                                     VerticalOptions="EndAndExpand" />
                             </StackLayout>
                         </pancakeView:PancakeView>

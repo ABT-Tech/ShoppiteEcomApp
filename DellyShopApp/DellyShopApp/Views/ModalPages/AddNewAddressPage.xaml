@@ -11,7 +11,7 @@
     xmlns:partialViews="clr-namespace:DellyShopApp.Views.PartialViews;assembly=DellyShopApp"
     xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
     iOsSpecific:Page.UseSafeArea="True"
-    BackgroundColor="{DynamicResource BackgroundColor}"
+    BackgroundColor="LightBlue"
     Visual="Material">
     <StackLayout>
          <partialViews:NavigationBarPartialView
@@ -33,7 +33,7 @@
                         MaxLength="15"
                         Placeholder="{x:Static languages:AppResources.ExampleHomeAddress}"
                         Style="{DynamicResource BorderlessEntry}"
-                        TextColor="{DynamicResource WhiteDarkFontColor}" />
+                        TextColor="Black" />
                 </pancakeView:PancakeView>
                 <Label Style="{DynamicResource EntryHeaderLabel}" Text="{x:Static languages:AppResources.SelectCountry}" />
                 <pancakeView:PancakeView Style="{DynamicResource PancakeFrameStyle}">
@@ -42,8 +42,8 @@
                             Title="{x:Static languages:AppResources.CountryName}"
                             HorizontalOptions="FillAndExpand"
                             Style="{DynamicResource BorderlessPicker}"
-                            TextColor="{DynamicResource WhiteDarkFontColor}"
-                            TitleColor="{DynamicResource WhiteDarkFontColor}" />
+                            TextColor="Black"
+                            TitleColor="Black" />
                         <Image Style="{DynamicResource ImageStyleEntry}">
                             <Image.Source>
                                 <FontImageSource
@@ -62,15 +62,15 @@
                             Title="{x:Static languages:AppResources.CityName}"
                             HorizontalOptions="FillAndExpand"
                             Style="{DynamicResource BorderlessPicker}"
-                            TextColor="{DynamicResource WhiteDarkFontColor}"
-                            TitleColor="{DynamicResource WhiteDarkFontColor}" />
+                            TextColor="Black"
+                            TitleColor="Black" />
                         <Image Style="{DynamicResource ImageStyleEntry}">
                             <Image.Source>
                                 <FontImageSource
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.ThinDown}"
                                     Size="40"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="Chocolate" />
                             </Image.Source>
                         </Image>
                     </StackLayout>
@@ -82,15 +82,15 @@
                             Title="{x:Static languages:AppResources.StreetName}"
                             HorizontalOptions="FillAndExpand"
                             Style="{DynamicResource BorderlessPicker}"
-                            TextColor="{DynamicResource WhiteDarkFontColor}"
-                            TitleColor="{DynamicResource WhiteDarkFontColor}" />
+                            TextColor="Black"
+                            TitleColor="Black" />
                         <Image Style="{DynamicResource ImageStyleEntry}">
                             <Image.Source>
                                 <FontImageSource
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.ThinDown}"
                                     Size="40"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="Chocolate" />
                             </Image.Source>
                         </Image>
                     </StackLayout>
@@ -101,16 +101,16 @@
                         BackgroundColor="Transparent"
                         Keyboard="Text"
                         MaxLength="50"
-                        TextColor="{DynamicResource WhiteDarkFontColor}" />
+                        TextColor="Black" />
                 </pancakeView:PancakeView>
                 <Frame
                     Margin="0,20,0,20"
-                    BackgroundColor="{DynamicResource MainColor}"
+                    BackgroundColor="Chocolate"
                     Style="{DynamicResource ButtonFrameStyle}">
                     <Label
                         Style="{DynamicResource ButtonLabelStyle}"
                         Text="{x:Static languages:AppResources.AddAddress}"
-                        TextColor="{DynamicResource LabelTextColor}" />
+                        TextColor="Black" />
                 </Frame>
             </StackLayout>
         </ScrollView>

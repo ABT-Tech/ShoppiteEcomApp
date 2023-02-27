@@ -13,7 +13,7 @@
     xmlns:partialViews="clr-namespace:DellyShopApp.Views.PartialViews;assembly=DellyShopApp"
     xmlns:proc="clr-namespace:DellyShopApp.Processors"
     iOsSpecific:Page.UseSafeArea="True"
-    BackgroundColor="{DynamicResource BackgroundColor}"
+    BackgroundColor="White"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <AbsoluteLayout>
@@ -48,17 +48,17 @@
                         FontFamily="{DynamicResource VerdanaProRegular}"
                         FontSize="12"
                         Text="{Binding Brand}"
-                        TextColor="{DynamicResource DescLabelColor}" />
+                        TextColor="Black" />
                 </StackLayout>
                 <Label
-                    Margin="0,0,10,0"
+                    Margin="0,10,10,0"
                     FontAttributes="Bold"
                     FontFamily="{DynamicResource VerdanaProRegular}"
                     FontSize="22"
                     HorizontalOptions="EndAndExpand"
-                    Text="{Binding Price, StringFormat='{0}$'}"
+                    Text="{Binding Price, StringFormat='{0} ₹'}"
                     TextColor="{DynamicResource PriceLabelColor}"
-                    VerticalOptions="CenterAndExpand" />
+                    VerticalOptions="CenterAndExpand"/>
             </StackLayout>
 
             <ScrollView
@@ -133,7 +133,7 @@
                             FontFamily="{DynamicResource VerdanaProRegular}"
                             FontSize="17"
                             Text="(4.9)"
-                            TextColor="{DynamicResource DescLabelColor}"
+                            TextColor="Black"
                             VerticalOptions="CenterAndExpand" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
@@ -151,15 +151,15 @@
                                 FontSize="17"
                                 HorizontalOptions="Start"
                                 Text="{Binding Brand}"
-                                TextColor="{DynamicResource DescLabelColor}"
+                                TextColor="Black"
                                 VerticalOptions="Start" />
                         </StackLayout>
                         <Label
                             FontFamily="{DynamicResource VerdanaProBold}"
                             FontSize="44"
                             HorizontalOptions="EndAndExpand"
-                            Text="{Binding Price, StringFormat='{0}$'}"
-                            TextColor="{DynamicResource PriceLabelColor}"
+                            Text="{Binding Price, StringFormat='{0}₹'}"
+                            TextColor="Red"
                             VerticalOptions="StartAndExpand" />
 
 
@@ -222,7 +222,7 @@
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.Minus}"
                                     Size="30"
-                                    Color="{DynamicResource DarkLabelTextColor}" />
+                                    Color="Black" />
                             </Image.Source>
                         </Image>
                         <Label
@@ -247,13 +247,13 @@
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.Plus}"
                                     Size="30"
-                                    Color="{DynamicResource DarkLabelTextColor}" />
+                                    Color="Black" />
                             </Image.Source>
                         </Image>
                     </StackLayout>
                     <Frame
                         Margin="0,20,0,20"
-                        BackgroundColor="{DynamicResource MainColor}"
+                        BackgroundColor="#E1BC29"
                         Style="{DynamicResource ButtonFrameStyle}"
                         VerticalOptions="EndAndExpand">
                         <Frame.GestureRecognizers>
@@ -261,10 +261,28 @@
                         </Frame.GestureRecognizers>
                         <Label
                             Style="{DynamicResource ButtonLabelStyle}"
-                            Text="{x:Static languages:AppResources.AddBasket}"
-                            TextColor="{DynamicResource LabelTextColor}">
+                            Text="Add To Cart"
+                            TextColor="Black">
+                            
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="AddBasketButton" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Frame>
+                    <Frame
+                        Margin="0,-10,0,0"
+                        BackgroundColor="#E59500"
+                        Style="{DynamicResource ButtonFrameStyle}"
+                        VerticalOptions="EndAndExpand">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BuyNow" />
+                        </Frame.GestureRecognizers>
+                        <Label
+                            Style="{DynamicResource ButtonLabelStyle}"
+                            Text="Buy Now"
+                            TextColor="Black">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="BuyNow" />
                             </Label.GestureRecognizers>
                         </Label>
                     </Frame>
@@ -276,7 +294,7 @@
                             FontSize="40"
                             HorizontalOptions="Start"
                             Text="4.9"
-                            TextColor="{DynamicResource DarkLabelTextColor}"
+                            TextColor="Black"
                             VerticalOptions="CenterAndExpand" />
                         <StackLayout VerticalOptions="CenterAndExpand">
                             <customControl:RepeaterView x:Name="starListglobal" Orientation="Horizontal">
@@ -303,7 +321,7 @@
                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                 FontSize="17"
                                 Text="{x:Static languages:AppResources.Commented}"
-                                TextColor="{DynamicResource DescLabelColor}" />
+                                TextColor="Black" />
                         </StackLayout>
                     </StackLayout>
                     <customControl:RepeaterView x:Name="CommentList" Padding="5">
@@ -342,14 +360,15 @@
                                                         FontFamily="{DynamicResource VerdanaProSemiBold}"
                                                         FontSize="15"
                                                         Text="{Binding Name}"
-                                                        TextColor="{DynamicResource DarkLabelTextColor}" />
+                                                        FontAttributes="Bold"
+                                                        TextColor="Black" />
                                                 </StackLayout>
                                                 <StackLayout HorizontalOptions="EndAndExpand">
                                                     <Label
                                                         FontFamily="{DynamicResource VerdanaProLight}"
                                                         FontSize="15"
                                                         Text="{Binding CommentTime}"
-                                                        TextColor="{DynamicResource WhiteDarkFontColor}" />
+                                                        TextColor="Black" />
                                                 </StackLayout>
                                             </StackLayout>
                                             <Label
@@ -357,7 +376,7 @@
                                                 FontFamily="{DynamicResource VerdanaProLight}"
                                                 Style="{DynamicResource ProfleLabelStyle}"
                                                 Text="{x:Static languages:AppResources.LoremComment}"
-                                                TextColor="{DynamicResource WhiteDarkFontColor}"
+                                                TextColor="Black"
                                                 VerticalOptions="StartAndExpand" />
                                         </StackLayout>
                                     </customView:PancakeView>
@@ -367,7 +386,7 @@
                     </customControl:RepeaterView>
                     <Frame
                         Margin="0,10,0,10"
-                        BackgroundColor="{DynamicResource MainColor}"
+                        BackgroundColor="Chocolate"
                         HorizontalOptions="CenterAndExpand"
                         Style="{DynamicResource ButtonFrameStyle}"
                         VerticalOptions="EndAndExpand"
@@ -379,7 +398,7 @@
                         <Label
                             Style="{DynamicResource ButtonLabelStyle}"
                             Text="{x:Static languages:AppResources.ViewAll}"
-                            TextColor="{DynamicResource LabelTextColor}">
+                            TextColor="Black">
 
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="CommentsPageClick" />

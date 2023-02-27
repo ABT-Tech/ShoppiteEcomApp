@@ -10,7 +10,7 @@
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     xmlns:partialViews="clr-namespace:DellyShopApp.Views.PartialViews;assembly=DellyShopApp"
     iOsSpecific:Page.UseSafeArea="True"
-    BackgroundColor="{DynamicResource BackgroundColor}"
+    BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False">
     <ScrollView>
         <StackLayout Margin="10">
@@ -60,12 +60,12 @@
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 FontSize="15"
                                                 Text="{Binding Title}"
-                                                TextColor="{DynamicResource WhiteDarkFontColor}" />
+                                                TextColor="Black" />
                                             <Label
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 FontSize="12"
                                                 Text="{Binding Brand}"
-                                                TextColor="{DynamicResource DescLabelColor}" />
+                                                TextColor="Black" />
                                         </StackLayout>
                                         <Label
                                             Margin="0,0,10,0"
@@ -73,8 +73,8 @@
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             FontSize="22"
                                             HorizontalOptions="EndAndExpand"
-                                            Text="{Binding Price, StringFormat='{0}$'}"
-                                            TextColor="{DynamicResource PriceLabelColor}"
+                                            Text="{Binding Price, StringFormat='{0}₹'}"
+                                            TextColor="Red"
                                             VerticalOptions="CenterAndExpand" />
                                     </StackLayout>
                                 </pancakeView:PancakeView>
@@ -113,14 +113,14 @@
                                                     FontFamily="{DynamicResource VerdanaProSemiBold}"
                                                     FontSize="15"
                                                     Text="{Binding Name}"
-                                                    TextColor="{DynamicResource DarkLabelTextColor}" />
+                                                    TextColor="Black" />
                                             </StackLayout>
                                             <StackLayout HorizontalOptions="EndAndExpand">
                                                 <Label
                                                     FontFamily="{DynamicResource VerdanaProLight}"
                                                     FontSize="15"
                                                     Text="{Binding CommentTime}"
-                                                    TextColor="{DynamicResource WhiteDarkFontColor}" />
+                                                    TextColor="Black" />
                                             </StackLayout>
                                         </StackLayout>
                                         <Label
@@ -128,7 +128,7 @@
                                             FontFamily="{DynamicResource VerdanaProLight}"
                                             Style="{DynamicResource ProfleLabelStyle}"
                                             Text="{x:Static languages:AppResources.LoremComment}"
-                                            TextColor="{DynamicResource WhiteDarkFontColor}"
+                                            TextColor="Black"
                                             VerticalOptions="StartAndExpand" />
                                     </StackLayout>
                                 </pancakeView:PancakeView>

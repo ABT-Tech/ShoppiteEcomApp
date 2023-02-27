@@ -12,7 +12,7 @@
     xmlns:partialViews="clr-namespace:DellyShopApp.Views.PartialViews;assembly=DellyShopApp"
     xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
     iOsSpecific:Page.UseSafeArea="True"
-    BackgroundColor="{DynamicResource BackgroundColor}"
+    BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <ScrollView>
@@ -68,7 +68,7 @@
                             <renderers:BorderlessEntry
                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                 HorizontalOptions="FillAndExpand"
-                                TextColor="{DynamicResource WhiteDarkFontColor}"
+                                TextColor="Black"
                                 Visual="Custom" />
                         </StackLayout>
                     </pancakeView:PancakeView>
@@ -87,7 +87,7 @@
                                 Keyboard="Numeric"
                                 Placeholder="{x:Static languages:AppResources.CardNumber}"
                                 Text="{Binding CardNumber, Mode=TwoWay}"
-                                TextColor="{DynamicResource WhiteDarkFontColor}" 
+                                TextColor="Black" 
                                 Visual="Custom">
                                 <renderers:BorderlessEntry.Behaviors>
                                     <fastEntry:XamarinFastEntryBehaviour Mask="####-####-####-####" MaxLength="19" />
@@ -121,7 +121,7 @@
                                 Keyboard="Numeric"
                                 Placeholder="{x:Static languages:AppResources.Expiration}"
                                 Text="{Binding CardExpirationDate}"
-                                TextColor="{DynamicResource WhiteDarkFontColor}"
+                                TextColor="Black"
                                 Visual="Custom">
                                 <renderers:BorderlessEntry.Behaviors>
                                     <fastEntry:XamarinFastEntryBehaviour Mask="##/##" MaxLength="19" />
@@ -154,7 +154,7 @@
                                 HorizontalOptions="FillAndExpand"
                                 Keyboard="Numeric"
                                 Text="{Binding CardCvv}"
-                                TextColor="{DynamicResource WhiteDarkFontColor}"
+                                TextColor="Black"
                                 Visual="Custom">
                                 <renderers:BorderlessEntry.Behaviors>
                                     <fastEntry:XamarinFastEntryBehaviour Mask="###" MaxLength="3" />
@@ -178,7 +178,7 @@
                                 <Label
                                     Style="{DynamicResource ButtonLabelStyle}"
                                     Text="{x:Static languages:AppResources.ScanCard}"
-                                    TextColor="{DynamicResource LabelTextColor}" />
+                                    TextColor="black" />
                             </StackLayout>
                         </Frame>
                         <Frame
@@ -195,7 +195,7 @@
                                 <Label
                                     Style="{DynamicResource ButtonLabelStyle}"
                                     Text="{x:Static languages:AppResources.Save}"
-                                    TextColor="{DynamicResource LabelTextColor}" />
+                                    TextColor="Black" />
                             </StackLayout>
                         </Frame>
                     </StackLayout>

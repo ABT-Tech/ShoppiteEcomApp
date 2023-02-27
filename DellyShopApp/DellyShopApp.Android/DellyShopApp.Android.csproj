@@ -137,6 +137,26 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Resources\mipmap-hdpi\mipmap-hdpi\Shoppite.png" />
+    <None Include="Resources\mipmap-hdpi\mipmap-hdpi\Shoppite_adaptive_back.png" />
+    <None Include="Resources\mipmap-hdpi\mipmap-hdpi\Shoppite_adaptive_fore.png" />
+    <None Include="Resources\mipmap-xhdpi\mipmap-xhdpi\Shoppite.png" />
+    <None Include="Resources\mipmap-xhdpi\mipmap-xhdpi\Shoppite_adaptive_back.png" />
+    <None Include="Resources\mipmap-xhdpi\mipmap-xhdpi\Shoppite_adaptive_fore.png" />
+    <None Include="Resources\mipmap-xxhdpi\mipmap-xxhdpi\Shoppite.png" />
+    <None Include="Resources\mipmap-xxhdpi\mipmap-xxhdpi\Shoppite_adaptive_back.png" />
+    <None Include="Resources\mipmap-xxhdpi\mipmap-xxhdpi\Shoppite_adaptive_fore.png" />
+    <None Include="Resources\mipmap-xxxhdpi\mipmap-xxxhdpi\Shoppite.png" />
+    <None Include="Resources\mipmap-xxxhdpi\mipmap-xxxhdpi\Shoppite_adaptive_back.png" />
+    <None Include="Resources\mipmap-xxxhdpi\mipmap-xxxhdpi\Shoppite_adaptive_fore.png" />
+    <None Include="Resources\mipmap-mdpi\mipmap-mdpi\Shoppite.png" />
+    <None Include="Resources\mipmap-mdpi\mipmap-mdpi\Shoppite_adaptive_back.png" />
+    <None Include="Resources\mipmap-mdpi\mipmap-mdpi\Shoppite_adaptive_fore.png" />
+    <None Include="Resources\mipmap-hdpi\mipmap-hdpi\icon.png" />
+    <None Include="Resources\mipmap-mdpi\mipmap-mdpi\icon.png" />
+    <None Include="Resources\mipmap-xxxhdpi\mipmap-xxxhdpi\icon.png" />
+    <None Include="Resources\mipmap-xxhdpi\mipmap-xxhdpi\icon.png" />
+    <None Include="Resources\mipmap-xhdpi\mipmap-xhdpi\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
@@ -145,16 +165,6 @@
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\icon.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\icon_round.xml" />
-    <AndroidResource Include="Resources\mipmap-hdpi\icon.png" />
-    <AndroidResource Include="Resources\mipmap-hdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-mdpi\icon.png" />
-    <AndroidResource Include="Resources\mipmap-mdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-xhdpi\icon.png" />
-    <AndroidResource Include="Resources\mipmap-xhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-xxhdpi\icon.png" />
-    <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\drawable\splash_screen_dark.xml">
       <SubType>
       </SubType>
@@ -174,6 +184,30 @@
       </Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\BgImage.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-ldpi\icon.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-mdpi\icon.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-xhdpi\icon.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-xxhdpi\icon.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\icon.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\lightblue.png.jpeg">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>

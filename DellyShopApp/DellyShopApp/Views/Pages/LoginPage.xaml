@@ -11,7 +11,7 @@
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
     iOsSpecific:Page.UseSafeArea="False"
-    BackgroundColor="Black"
+    BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -45,7 +45,7 @@
                         FontFamily="{DynamicResource MaterialFontFamily}"
                         Glyph="{x:Static font:FontAwesomeIcons.ThinLeft}"
                         Size="50"
-                        Color="{DynamicResource WhiteIconBgColor}" />
+                        Color="Black" />
                 </Image.Source>
             </Image>
             <Label
@@ -57,7 +57,7 @@
                 HorizontalOptions="CenterAndExpand"
                 Style="{StaticResource LabelStyle}"
                 Text="{x:Static helpers:AppResources.Signin}"
-                TextColor="{DynamicResource LightLabelTextColor}" />
+                TextColor="Chocolate" />
         </StackLayout>
             <StackLayout Padding="30" VerticalOptions="CenterAndExpand">
                 <Label
@@ -65,7 +65,9 @@
                     FontSize="15"
                     HorizontalOptions="StartAndExpand"
                     Style="{StaticResource LabelStyle}"
-                    Text="{x:Static helpers:AppResources.Mail}" />
+                    Text="{x:Static helpers:AppResources.Mail}"
+                    TextColor="Black"
+                    FontAttributes="Bold"/>
                 <Frame Style="{DynamicResource FrameStyle}">
                     <StackLayout Orientation="Horizontal">
                         <Image
@@ -79,7 +81,7 @@
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.UiEmail}"
                                     Size="20"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="Chocolate" />
                             </Image.Source>
                         </Image>
                         <renderers:BorderlessEntry
@@ -93,7 +95,9 @@
                     FontSize="15"
                     HorizontalOptions="StartAndExpand"
                     Style="{StaticResource LabelStyle}"
-                    Text="{x:Static helpers:AppResources.Pass}" />
+                    Text="{x:Static helpers:AppResources.Pass}"
+                    TextColor="Black"
+                    FontAttributes="Bold"/>
                 <Frame Style="{DynamicResource FrameStyle}">
                     <StackLayout Orientation="Horizontal">
                         <Image
@@ -118,17 +122,19 @@
                 </Frame>
                 <Button
                     Margin="20"
-                    BackgroundColor="Transparent"
-                    BorderColor="{DynamicResource ButtonBorderColor}"
+                    BackgroundColor="Chocolate"
+                    BorderColor="Black"
                     Clicked="LoginButtonClick"
                     Style="{DynamicResource ButtonStyle}"
                     Text="{x:Static helpers:AppResources.Signin}"
-                    TextColor="White" />
+                    TextColor="Black" />
                 <Label
                     Margin="0,0,0,10"
                     HorizontalOptions="CenterAndExpand"
                     Style="{DynamicResource LabelStyle}"
                     Text="{x:Static helpers:AppResources.ForgotPass}"
+                    FontAttributes="Bold"
+                    TextColor="Black"
                     TextDecorations="Underline">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ForgetPassClick" />
