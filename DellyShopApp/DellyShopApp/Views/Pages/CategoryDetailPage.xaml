@@ -18,29 +18,10 @@
     <ScrollView Margin="15,10,15,0">
         <StackLayout>
             <!--  DellyShop Title And Description  -->
-            <StackLayout Margin="15,10,15,0">
-                <StackLayout Spacing="0">
-                    <Label
-                        Margin="0"
-                        Padding="0,5,0,0"
-                        FontAttributes="Bold"
-                        FontFamily="{DynamicResource VerdanaProRegular}"
-                        FontSize="30"
-                        HorizontalOptions="Center"
-                        Style="{DynamicResource LabelStyle}"
-                        Text="Shoppite"
-                        TextColor="Chocolate" />
-                    <Label
-                        Margin="0"
-                        Padding="0,5,0,0"
-                        FontAttributes="Bold"
-                        FontFamily="{DynamicResource VerdanaProBold}"
-                        FontSize="25"
-                        HorizontalOptions="Center"
-                        Text="What You Shop Matters!!!"
-                        TextColor="Chocolate" />
-
-                </StackLayout>
+            <StackLayout  Margin="15,10,15,0">
+                <Image Source="logo.png"
+                       HeightRequest="100"
+                       WidthRequest="100"/>
             </StackLayout>
             <!--  SearchBar  -->
             <Frame
@@ -50,35 +31,34 @@
                 HeightRequest="35"
                 Style="{DynamicResource FrameStyle}">
                 <renderers:BorderlessSearchBar
-                    BackgroundColor="White"
+                    BackgroundColor="Transparent"
                     CancelButtonColor="Black"
                     FontFamily="{DynamicResource VerdanaProRegular}"
                     TextColor="Black" />
             </Frame>
             <!--  Category Name and Image  -->
             <StackLayout Margin="0,5,0,0" HorizontalOptions="FillAndExpand">
-                <Grid BackgroundColor="LightBlue">
+                <Grid BackgroundColor="Transparent">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="65" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Image 
+                    <Image
                         Grid.Row="0"
                         Grid.Column="0"
                         Aspect="AspectFill"
-                        Source="{Binding Image}"/>
-                      
-                        <pancakeView:PancakeView
+                        Source="{Binding Image}" />
+                    <pancakeView:PancakeView
                         Grid.Row="0"
                         Grid.Column="0"
-                        BackgroundGradientEndColor="White"  
+                        BackgroundGradientEndColor="White"
                         BackgroundGradientStartColor="White"
                         CornerRadius="10"
                         HorizontalOptions="FillAndExpand" />
                     <StackLayout Orientation="Horizontal">
-                        <Image 
+                        <Image  
                             Aspect="AspectFit"
                             HeightRequest="50"
                             HorizontalOptions="Start"
@@ -87,9 +67,8 @@
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="BackPage" />
                             </Image.GestureRecognizers>
-
                             <Image.Source>
-                                <FontImageSource 
+                                <FontImageSource
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.ThinLeft}"
                                     Size="30"
@@ -210,7 +189,7 @@
                                             FontSize="25"
                                             HorizontalOptions="EndAndExpand"
                                             Text="{Binding Price, StringFormat='{0} ₹'}"
-                                            TextColor="red"
+                                            TextColor="Red"
                                             VerticalOptions="EndAndExpand" />
                                     </StackLayout>
                                 </pancakeView:PancakeView>
@@ -311,7 +290,7 @@
                         <pancakeView:PancakeView
                             Margin="5"
                             Padding="5"
-                            BackgroundColor="{DynamicResource ItemColor}"
+                            BackgroundColor="White"
                             CornerRadius="8"
                             Elevation="2"
                             HasShadow="False"

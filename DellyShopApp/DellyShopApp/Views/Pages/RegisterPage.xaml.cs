@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Text.RegularExpressions;
 
+
 namespace DellyShopApp.Views.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
@@ -20,7 +21,7 @@ namespace DellyShopApp.Views.Pages
 	        base.OnAppearing();
 	     
         }
-        private async void RegisteruButtonClick(object sender, EventArgs e)
+        private  void RegisteruButtonClick(object sender, EventArgs e)
 	    {
             Regex regex = new Regex(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
             bool EmailCheck = regex.IsMatch(EmailAddress.Text.Trim());
@@ -42,9 +43,10 @@ namespace DellyShopApp.Views.Pages
                 Navigation.PushAsync(new LoginPage());
             }
 
-        }
+            
+	    }
 
-		private void BackButton(object sender, EventArgs e)
+        private void BackButton(object sender, EventArgs e)
         {
             Navigation.PopAsync();
         }

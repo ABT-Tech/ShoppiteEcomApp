@@ -45,7 +45,7 @@
                         FontFamily="{DynamicResource MaterialFontFamily}"
                         Glyph="{x:Static font:FontAwesomeIcons.ThinLeft}"
                         Size="50"
-                        Color="Black" />
+                        Color="{DynamicResource WhiteIconBgColor}" />
                 </Image.Source>
             </Image>
             <Label
@@ -65,9 +65,7 @@
                     FontSize="15"
                     HorizontalOptions="StartAndExpand"
                     Style="{StaticResource LabelStyle}"
-                    Text="{x:Static helpers:AppResources.Mail}"
-                    TextColor="Black"
-                    FontAttributes="Bold"/>
+                    Text="{x:Static helpers:AppResources.Mail}" />
                 <Frame Style="{DynamicResource FrameStyle}">
                     <StackLayout Orientation="Horizontal">
                         <Image
@@ -81,7 +79,7 @@
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.UiEmail}"
                                     Size="20"
-                                    Color="Chocolate" />
+                                    Color="{DynamicResource IconBgColor}" />
                             </Image.Source>
                         </Image>
                         <renderers:BorderlessEntry
@@ -95,9 +93,7 @@
                     FontSize="15"
                     HorizontalOptions="StartAndExpand"
                     Style="{StaticResource LabelStyle}"
-                    Text="{x:Static helpers:AppResources.Pass}"
-                    TextColor="Black"
-                    FontAttributes="Bold"/>
+                    Text="{x:Static helpers:AppResources.Pass}" />
                 <Frame Style="{DynamicResource FrameStyle}">
                     <StackLayout Orientation="Horizontal">
                         <Image
@@ -122,19 +118,16 @@
                 </Frame>
                 <Button
                     Margin="20"
-                    BackgroundColor="Chocolate"
-                    BorderColor="Black"
+                    BackgroundColor="Chocolate"                   
                     Clicked="LoginButtonClick"
                     Style="{DynamicResource ButtonStyle}"
                     Text="{x:Static helpers:AppResources.Signin}"
-                    TextColor="Black" />
+                    TextColor="White" />
                 <Label
                     Margin="0,0,0,10"
                     HorizontalOptions="CenterAndExpand"
                     Style="{DynamicResource LabelStyle}"
                     Text="{x:Static helpers:AppResources.ForgotPass}"
-                    FontAttributes="Bold"
-                    TextColor="Black"
                     TextDecorations="Underline">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ForgetPassClick" />

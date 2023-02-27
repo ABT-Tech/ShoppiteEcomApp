@@ -21,7 +21,7 @@
                 FontFamily="{DynamicResource MaterialFontFamily}"
                 Glyph="{x:Static font:FontAwesomeIcons.ThinLeft}"
                 Size="50"
-                Color="{DynamicResource MainColor}" />
+                Color="Black" />
         </Image.Source>
     </Image>
     <Label
@@ -32,7 +32,7 @@
         HorizontalOptions="CenterAndExpand"
         LineBreakMode="TailTruncation"
         Text="{Binding Title}"
-        TextColor="{DynamicResource MainColor}"
+        TextColor="Chocolate" 
         VerticalOptions="CenterAndExpand"
         VerticalTextAlignment="Center" />
     <pancakeView:PancakeView

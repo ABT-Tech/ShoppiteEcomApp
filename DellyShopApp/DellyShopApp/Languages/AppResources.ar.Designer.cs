@@ -584,7 +584,6 @@ namespace DellyShopApp.Languages {
         internal static string CompleteOrder {
             get {
                 return ResourceManager.GetString("CompleteOrder", resourceCulture);
-                
             }
         }
         
@@ -605,32 +604,21 @@ namespace DellyShopApp.Languages {
                 return ResourceManager.GetString("ScanCard", resourceCulture);
             }
         }
-        internal static string Grocery_Store
+
+        internal static string Grocery_Store 
         {
             get
             {
                 return ResourceManager.GetString("Grocery_Store", resourceCulture);
             }
 
-
         }
-        internal static string Pat_Store
+        internal static string Pet_Store
         {
             get
             {
-                return ResourceManager.GetString("Pat_Store", resourceCulture);
+                return ResourceManager.GetString("Pet_Store", resourceCulture);
             }
-
-
-        }
-        internal static string Shoes_Store
-        {
-            get
-            {
-                return ResourceManager.GetString("Shoes_Store", resourceCulture);
-            }
-
-
         }
         internal static string Coffee_Store
         {
@@ -638,26 +626,27 @@ namespace DellyShopApp.Languages {
             {
                 return ResourceManager.GetString("Coffee_Store", resourceCulture);
             }
-
-
         }
-        internal static string Book_Store
+        internal static string Fruit_Store
         {
             get
             {
-                return ResourceManager.GetString("Book_Store", resourceCulture);
+                return ResourceManager.GetString("Fruit_Store", resourceCulture);
             }
-
-
         }
-        internal static string Bakery_Store
+        internal static string Cloth_Store
         {
             get
             {
-                return ResourceManager.GetString("Bakery_Store", resourceCulture);
+                return ResourceManager.GetString("Cloth_Store", resourceCulture);
             }
-
-
+        }
+        internal static string Hardware_Store
+        {
+            get
+            {
+                return ResourceManager.GetString("Hardware_Store", resourceCulture);
+            }
         }
     }
 }

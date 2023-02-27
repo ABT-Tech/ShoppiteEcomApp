@@ -18,7 +18,7 @@
             BackButtonVisibler="True"
             FavVisible="False"
             IsModalpage="False"
-            NavigationTitle="{x:Static languages:AppResources.MyFavorites}" />
+            NavigationTitle="{x:Static languages:AppResources.MyFavorites}"/>
                
        
         <customControl:RepeaterView x:Name="BasketItems">

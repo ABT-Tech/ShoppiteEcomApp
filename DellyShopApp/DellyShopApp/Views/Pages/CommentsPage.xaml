@@ -9,7 +9,7 @@
     xmlns:languages="clr-namespace:DellyShopApp.Languages;assembly=DellyShopApp"
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
-    BackgroundColor="White"
+    BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <AbsoluteLayout>
@@ -43,7 +43,7 @@
                                 FontFamily="{DynamicResource MaterialFontFamily}"
                                 Glyph="{x:Static font:FontAwesomeIcons.ThinLeft}"
                                 Size="50"
-                                Color="Chocolate" />
+                                Color="{DynamicResource IconBgColor}" />
                         </Image.Source>
                     </Image>
                     <Label
@@ -56,13 +56,13 @@
                         HorizontalOptions="CenterAndExpand"
                         LineBreakMode="TailTruncation"
                         Text="{Binding Title}"
-                        TextColor="Chocolate"
+                        TextColor="{DynamicResource IconBgColor}"
                         VerticalOptions="CenterAndExpand"
                         VerticalTextAlignment="Center" />
                     <pancakeView:PancakeView
                         Grid.Row="0"
                         Grid.Column="2"
-                        BackgroundColor="Chocolate"
+                        BackgroundColor="{DynamicResource DarkLabelTextColor}"
                         CornerRadius="10"
                         HeightRequest="35"
                         HorizontalOptions="End"
@@ -112,7 +112,7 @@
                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                 FontSize="12"
                                 Text="{Binding Brand}"
-                                TextColor="Black" />
+                                TextColor="{DynamicResource DescLabelColor}" />
                         </StackLayout>
                         <Label
                             Margin="0,0,10,0"
@@ -121,8 +121,8 @@
                             FontSize="22"
                             HorizontalOptions="EndAndExpand"
                             HorizontalTextAlignment="End"
-                            Text="{Binding Price, StringFormat='{0}₹'}"
-                            TextColor="Red"
+                            Text="{Binding Price, StringFormat='{0}$'}"
+                            TextColor="{DynamicResource PriceLabelColor}"
                             VerticalOptions="CenterAndExpand"
                             WidthRequest="120" />
                     </StackLayout>
@@ -160,17 +160,17 @@
                                                     </customControl:RepeaterView.ItemTemplate>
                                                 </customControl:RepeaterView>
                                                 <Label
-                                                    FontFamily="bold"
+                                                    FontFamily="{DynamicResource VerdanaProSemiBold}"
                                                     FontSize="15"
                                                     Text="{Binding Name}"
-                                                    TextColor="Black" />
+                                                    TextColor="{DynamicResource DarkLabelTextColor}" />
                                             </StackLayout>
                                             <StackLayout HorizontalOptions="EndAndExpand">
                                                 <Label
                                                     FontFamily="{DynamicResource VerdanaProLight}"
                                                     FontSize="15"
                                                     Text="{Binding CommentTime}"
-                                                    TextColor="Black" />
+                                                    TextColor="{DynamicResource WhiteDarkFontColor}" />
                                             </StackLayout>
                                         </StackLayout>
                                         <Label
@@ -178,7 +178,7 @@
                                             FontFamily="{DynamicResource VerdanaProLight}"
                                             Style="{DynamicResource ProfleLabelStyle}"
                                             Text="{x:Static languages:AppResources.LoremComment}"
-                                            TextColor="Black"
+                                            TextColor="{DynamicResource WhiteDarkFontColor}"
                                             VerticalOptions="StartAndExpand" />
                                     </StackLayout>
                                 </pancakeView:PancakeView>
@@ -187,11 +187,11 @@
                     </customControl:RepeaterView.ItemTemplate>
                 </customControl:RepeaterView>
                 <Label
-                    FontFamily="bold"
+                    FontFamily="{DynamicResource VerdanaProRegular}"
                     FontSize="20"
                     HorizontalOptions="StartAndExpand"
                     Text="{x:Static languages:AppResources.YourComment}"
-                    TextColor="Black" />
+                    TextColor="{DynamicResource DarkLabelTextColor}" />
                 <StackLayout>
                     <pancakeView:PancakeView
                         Margin="0,10,0,10"
@@ -201,12 +201,12 @@
                         VerticalOptions="StartAndExpand">
                         <renderers:BorderlessEditor
                             Placeholder="{x:Static languages:AppResources.SendComment}"
-                            PlaceholderColor="Black"
-                            TextColor="Black" />
+                            PlaceholderColor="{DynamicResource WhiteDarkFontColor}"
+                            TextColor="{DynamicResource WhiteDarkFontColor}" />
                     </pancakeView:PancakeView>
                     <Frame
-                        Margin="0,5,0,10"
-                        BackgroundColor="Chocolate"
+                        Margin="0,10,0,10"
+                        BackgroundColor="{DynamicResource MainColor}"
                         HorizontalOptions="CenterAndExpand"
                         Style="{DynamicResource ButtonFrameStyle}"
                         VerticalOptions="EndAndExpand">
@@ -214,7 +214,7 @@
                             FontSize="18"
                             Style="{DynamicResource ButtonLabelStyle}"
                             Text="{x:Static languages:AppResources.SendComment}"
-                            TextColor="Black" />
+                            TextColor="{DynamicResource LabelTextColor}" />
                     </Frame>
                 </StackLayout>
             </StackLayout>
@@ -235,12 +235,12 @@
                         FontSize="15"
                         HorizontalOptions="Start"
                         Text="{x:Static languages:AppResources.SortType}"
-                        TextColor="Black"
+                        TextColor="{DynamicResource DescLabelColor}"
                         VerticalOptions="CenterAndExpand" />
                     <pancakeView:PancakeView
                         Margin="5"
                         Padding="0"
-                        BorderColor="Black"
+                        BorderColor="{DynamicResource DarkLabelTextColor}"
                         CornerRadius="20"
                         HeightRequest="40"
                         Style="{DynamicResource PancakeFrameStyle}">
@@ -254,7 +254,7 @@
                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                 FontSize="15"
                                 HorizontalOptions="StartAndExpand"
-                                TitleColor="Black"
+                                TitleColor="{DynamicResource WhiteDarkFontColor}"
                                 VerticalOptions="CenterAndExpand" />
                             <Image Style="{DynamicResource ImageStyleEntry}">
                                 <Image.Source>
@@ -262,7 +262,7 @@
                                         FontFamily="{DynamicResource MaterialFontFamily}"
                                         Glyph="{x:Static font:FontAwesomeIcons.ThinDown}"
                                         Size="25"
-                                        Color="Chocolate" />
+                                        Color="{DynamicResource IconBgColor}" />
                                 </Image.Source>
                             </Image>
                         </StackLayout>
@@ -304,7 +304,7 @@
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 FontSize="15"
                                                 Text="(2)"
-                                                TextColor="Black"
+                                                TextColor="{DynamicResource DescLabelColor}"
                                                 VerticalOptions="CenterAndExpand" />
                                             <Image
                                                 Aspect="AspectFit"
@@ -314,7 +314,7 @@
                                                     <FontImageSource
                                                         FontFamily="{DynamicResource MaterialFontFamily}"
                                                         Glyph="{x:Static font:FontAwesomeIcons.ThinRight}"
-                                                        Color="Chocolate" />
+                                                        Color="{DynamicResource IconBgColor}" />
                                                 </Image.Source>
                                             </Image>
                                         </StackLayout>

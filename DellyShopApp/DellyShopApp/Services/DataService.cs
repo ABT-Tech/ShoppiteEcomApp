@@ -1,30 +1,305 @@
-﻿using System;using System.Collections.Generic;using System.Collections.ObjectModel;using System.Linq;using System.Net.Http;using System.Net.Http.Headers;using System.Threading.Tasks;using DellyShopApp.Helpers;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Views.Pages;using Newtonsoft.Json;using Xamarin.Essentials;using Xamarin.Forms;namespace DellyShopApp.Services{    public class DataService : IDisposable    {        static DataService _instance;        public ObservableCollection<NotificationModel> NotificationList = new ObservableCollection<NotificationModel>();        public ObservableCollection<ProductListModel> ProcutListModel = new ObservableCollection<ProductListModel>();        public ObservableCollection<ProductListModel> BasketModel = new ObservableCollection<ProductListModel>();
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using DellyShopApp.Helpers;
+using DellyShopApp.Languages;
+using DellyShopApp.Models;
+using DellyShopApp.Views.Pages;
+using Newtonsoft.Json;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
-        public List<Category> CatoCategoriesList = new List<Category>();        public List<Category> Carousel = new List<Category>();        public List<StartList> StartList = new List<StartList>();        public List<Category> CatoCategoriesDetail = new List<Category>();        public List<CommentModel> CommentList = new List<CommentModel>();        public List<StartList> StartLists = new List<StartList>();        public List<ShopModel> ShopDetails = new List<ShopModel>();        public ChangeUserData EditProfile = new ChangeUserData();        public double BaseTotalPrice = 0;        public static DataService Instance        {            get            {                if (_instance == null)                {                    _instance = new DataService();                }                return _instance;            }        }        public static void Restart()        {            _instance = null;            Disposed = true;        }        protected static bool Disposed { get; private set; }        protected virtual void Dispose(bool disposing)        {            Disposed = true;        }        public void Dispose()        {            Dispose(true);            GC.SuppressFinalize(this);        }        public DataService()        {            NotificationList.Add(new NotificationModel            {                Title = AppResources.NotificatinTitle,                SubTitle = AppResources.NotificationSubtitle,                Description = AppResources.LoremIpsum,                Id = 1,                Image = "elecronics.jpeg",                InstertedAt = DateTime.Now            });            NotificationList.Add(new NotificationModel            {                Title = AppResources.NotificatinTitle,                SubTitle = AppResources.NotificationSubtitle,                Description = AppResources.LoremIpsum,                Id = 2,                Image = "shoes.jpg",                InstertedAt = DateTime.Now            });            ProcutListModel.Add(new ProductListModel            {                Title = AppResources.ProcutTitle,                Brand = AppResources.ProductBrand,                Id = 1,                Image = "shoesBlack",                Price = 362,                VisibleItemDelete = false,                ProductList = new string[] { "red1", "shoesBlack" },                OldPrice = 570            });            ProcutListModel.Add(new ProductListModel            {                Title = AppResources.ProcutTitle1,                Brand = AppResources.ProductBrand1,                Id = 2,                Image = "grazy1",                Price = 150,                VisibleItemDelete = false,                ProductList = new string[] { "garzy2", "grazy1" },                OldPrice = 270            });            ProcutListModel.Add(new ProductListModel            {                Title = AppResources.ProcutTitle2,                Brand = AppResources.ProductBrand2,                Id = 3,                Image = "shoesyellow",                Price = 299,                VisibleItemDelete = false,                ProductList = new string[] { "py_1", "shoesyellow" },                OldPrice = 400            });            ShopDetails = new List<ShopModel>();            ShopDetails.Add(new ShopModel
-            {                ShopName = AppResources.Grocery_Store,                OrgId = 1,
-                Image = "Grocery_Store.png"            });            ShopDetails.Add(new ShopModel            {
-                ShopName = AppResources.Pat_Store,
+namespace DellyShopApp.Services
+{
+    public class DataService : IDisposable
+    {
+        static DataService _instance;
+
+        public ObservableCollection<NotificationModel> NotificationList = new ObservableCollection<NotificationModel>();
+        public ObservableCollection<ProductListModel> ProcutListModel = new ObservableCollection<ProductListModel>();
+        public ObservableCollection<ProductListModel> BasketModel = new ObservableCollection<ProductListModel>();
+     
+        public List<Category> CatoCategoriesList = new List<Category>();
+        public List<Category> Carousel = new List<Category>();
+        public List<StartList> StartList = new List<StartList>();
+        public List<Category> CatoCategoriesDetail = new List<Category>();
+        public List<CommentModel> CommentList = new List<CommentModel>();
+        public List<ShopModel> ShopDetails= new List<ShopModel>();
+        public ChangeUserData EditProfile = new ChangeUserData();
+        public double BaseTotalPrice = 0;
+        public static DataService Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new DataService();
+                }
+                return _instance;
+            }
+        }
+        public static void Restart()
+        {
+
+            _instance = null;
+            Disposed = true;
+        }
+        protected static bool Disposed { get; private set; }
+        protected virtual void Dispose(bool disposing)
+        {
+            Disposed = true;
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        public DataService()
+        {
+            NotificationList.Add(new NotificationModel
+            {
+                Title = AppResources.NotificatinTitle,
+                SubTitle = AppResources.NotificationSubtitle,
+                Description = AppResources.LoremIpsum,
+                Id = 1,
+                Image = "elecronics.jpeg",
+                InstertedAt = DateTime.Now
+
+            });
+
+            NotificationList.Add(new NotificationModel
+            {
+
+                Title = AppResources.NotificatinTitle,
+                SubTitle = AppResources.NotificationSubtitle,
+                Description = AppResources.LoremIpsum,
+                Id = 2,
+                Image = "shoes.jpg",
+                InstertedAt = DateTime.Now
+
+            });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle,
+                Brand = AppResources.ProductBrand,
+                Id = 1,
+                Image = "shoesBlack",
+                Price = 362,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "red1", "shoesBlack" },
+                OldPrice = 570
+            });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle1,
+                Brand = AppResources.ProductBrand1,
+                Id = 2,
+                Image = "grazy1",
+                Price = 150,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "garzy2", "grazy1" },
+                OldPrice = 270
+            });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle2,
+                Brand = AppResources.ProductBrand2,
+                Id = 3,
+                Image = "shoesyellow",
+                Price = 299,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "py_1", "shoesyellow" },
+                OldPrice = 400
+            });
+            ShopDetails = new List<ShopModel>();
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Grocery Store",
+                OrgId = 1,
+                Image = "Grocery_Store.png",
+                RowNumber = 0,
+                ColumnNumber = 0,
+                BackGround = "Red"
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Pet Store",
                 OrgId = 2,
-                Image = "Pat_Store.png"
-            });            ShopDetails.Add(new ShopModel            {
-                ShopName = AppResources.Shoes_Store,
-                OrgId = 2,
-                Image = "Shoes_Store.png"
-            });            ShopDetails.Add(new ShopModel            {
-                ShopName = AppResources.Coffee_Store,
-                OrgId = 2,
-                Image = "Coffee_Store.png"
-            });            ShopDetails.Add(new ShopModel            {
-                ShopName = AppResources.Book_Store,
-                OrgId = 2,
-                Image = "Book_Store.png"
-            });            ShopDetails.Add(new ShopModel            {
-                ShopName = AppResources.Bakery_Store,
-                OrgId = 2,
-                Image = "Bakery_Store.png"
-            });            CatoCategoriesList.Add(new Category            {                CategoryName = AppResources.Shoes,                Banner = "shoesCategory.png",                CategoryId = "1"            });            CatoCategoriesList.Add(new Category            {                CategoryName = AppResources.Electronics,                Banner = "electronicCategory.png",                CategoryId = "2"            });            CatoCategoriesList.Add(new Category            {                CategoryName = AppResources.Clothing,                Banner = "clothingCategory.png",                CategoryId = "3"            });            EditProfile.ChnageName = "abc";            EditProfile.ChangeEmail = "abc123@gmail.com";            EditProfile.ChangePhoneNumber = "1234567892";            EditProfile.ChangeBdate = "1 / 1 / 2000";            EditProfile.ChnagAddress = "India";                        StartList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            StartList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            StartList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            StartList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            StartList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            CommentList.Add(new CommentModel            {                Name = "Ufuk Sahin",                CommentTime = "12/1/19",                Id = 1,                Rates = StartList            });            CommentList.Add(new CommentModel            {                Name = "Hans Goldman",                CommentTime = "11/6/19",                Id = 2,                Rates = StartList.Skip(0).ToList()            });            CommentList.Add(new CommentModel            {                Name = "Jon Goodman",                CommentTime = "12/8/19",                Id = 3,                Rates = StartList.Skip(1).ToList()            });            CommentList.Add(new CommentModel            {                Name = "UfuK Zimmer",                CommentTime = "12/8/20",                Id = 3,                Rates = StartList.Skip(1).ToList()            });            CatoCategoriesDetail.Add(new Category            {                Banner = "shoes.jpg"            });            CatoCategoriesDetail.Add(new Category            {                Banner = "bestShoes.jpg"            });            CatoCategoriesDetail.Add(new Category            {                Banner = "bestofYear.jpg"            });            Carousel.Add(new Category            {                Banner = "shoes.jpg"            });            Carousel.Add(new Category            {                Banner = "clothing.jpg"            });            Carousel.Add(new Category            {                Banner = "elecronics.jpeg"            });            Carousel.Add(new Category            {                Banner = "images.jpeg"            });        }        public static async Task<List<Category>> GetCategories()        {            try            {
+                Image = "Pet_Store.png",
+                RowNumber = 0,
+                ColumnNumber = 1,
+                BackGround = "Blue"
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Coffee Store",
+                OrgId = 3,
+                Image = "Coffee_Store.png",
+                RowNumber = 1,
+                ColumnNumber = 0,
+                BackGround = "Yellow"
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Fruit Store",
+                OrgId = 4,
+                Image = "Fruit_Store.png",
+                RowNumber = 1,
+                ColumnNumber = 1,
+                BackGround = "Green"
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Cloth Store",
+                OrgId = 5,
+                Image = "Cloth_Store.png",
+                RowNumber = 2,
+                ColumnNumber = 0,
+                BackGround = "Orange"
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Hardware Store",
+                OrgId = 6,
+                Image = "Hardware_Store.png",
+                RowNumber = 2,
+                ColumnNumber = 1,
+                BackGround = "Brown"
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = AppResources.Shoes,
+                Banner = "shoesCategory.png",
+                CategoryId = "1"
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = AppResources.Electronics,
+
+                Banner = "electronicCategory.png",
+                CategoryId = "2"
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = AppResources.Clothing,
+
+                Banner = "clothingCategory.png",
+                CategoryId = "3"
+            });
+
+            EditProfile.ChangeName = "abc";
+            EditProfile.ChangeEmail = "abc@gmail.com";
+            EditProfile.ChangePhoneNumber = "7878787878";
+            EditProfile.ChangeBdate = "1 / 1 / 2000";
+            EditProfile.ChangeAddress = "India";
+
+            StartList.Add(new StartList
+            {
+                StarImg = FontAwesomeIcons.Star
+            });
+            StartList.Add(new StartList
+            {
+                StarImg = FontAwesomeIcons.Star
+            });
+            StartList.Add(new StartList
+            {
+                StarImg = FontAwesomeIcons.Star
+            });
+            StartList.Add(new StartList
+            {
+                StarImg = FontAwesomeIcons.Star
+            });
+            StartList.Add(new StartList
+            {
+                StarImg = FontAwesomeIcons.Star
+            });
+            CommentList.Add(new CommentModel
+            {
+                Name = "Ufuk Sahin",
+                CommentTime = "12/1/19",
+                Id = 1,
+                Rates = StartList
+            });
+            CommentList.Add(new CommentModel
+            {
+                Name = "Hans Goldman",
+                CommentTime = "11/6/19",
+                Id = 2,
+                Rates = StartList.Skip(0).ToList()
+            });
+            CommentList.Add(new CommentModel
+            {
+                Name = "Jon Goodman",
+                CommentTime = "12/8/19",
+                Id = 3,
+                Rates = StartList.Skip(1).ToList()
+            });
+            CommentList.Add(new CommentModel
+            {
+                Name = "UfuK Zimmer",
+                CommentTime = "12/8/20",
+                Id = 3,
+                Rates = StartList.Skip(1).ToList()
+            });
+            CatoCategoriesDetail.Add(new Category
+            {
+                Banner = "shoes.jpg"
+            });
+            CatoCategoriesDetail.Add(new Category
+            {
+                Banner = "bestShoes.jpg"
+            });
+            CatoCategoriesDetail.Add(new Category
+            {
+                Banner = "bestofYear.jpg"
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "shoes.jpg"
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "clothing.jpg"
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "elecronics.jpeg"
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "images.jpeg"
+            });
+        }
+
+        public static async Task<List<Category>> GetCategories()
+        {
+            try
+            {
                 //await TokenValidator.CheckTokenValidity();
 
                 //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
                 //    "bearer", Preferences.Get("accessToken", string.Empty));
-                HttpClientHandler clientHandler = new HttpClientHandler                {                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }                };                HttpClient httpClient = new HttpClient(clientHandler);                var response = await httpClient.GetAsync(                    AppSettings.ApiUrl + "api/Category/GetAllCategories?OrgId=1");                string result = await response.Content.ReadAsStringAsync();                return JsonConvert.DeserializeObject<List<Category>>(result);            }            catch (Exception ex)            {                throw;            }        }    }}
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Category/GetAllCategories?OrgId=1");
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<Category>>(result);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+    }
+}
+

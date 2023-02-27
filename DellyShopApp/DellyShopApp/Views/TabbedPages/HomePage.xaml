@@ -20,10 +20,10 @@
 
         <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
             <StackLayout Margin="15,10,15,0">
-               <Image Source="logo.png"
-
-                      HeightRequest="100"
-                      WidthRequest="50"/>             
+                <Image Source="logo.png"
+                       WidthRequest="200"
+                       HeightRequest="100"
+                       HorizontalOptions="Start"/>
                 <Frame
                     Margin="0,20,0,10"
                     CornerRadius="17"
@@ -41,7 +41,7 @@
                     Padding="5,5,0,0"
                     FontAttributes="Bold"
                     FontFamily="{DynamicResource VerdanaProBold}"
-                    FontSize="25"
+                    FontSize="22"
                     HorizontalOptions="Start"
                     Text="{x:Static helpers:AppResources.Categories}"
                     TextColor="{DynamicResource TitleLabelColor}"
@@ -55,13 +55,13 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout
-                                        Margin="0"
+                                        Margin="0"                                        
                                         HorizontalOptions="Start"
                                         WidthRequest="150">
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="ClickCategory" />
                                         </StackLayout.GestureRecognizers>
-                                        <Grid BackgroundColor="White">
+                                        <Grid BackgroundColor="LightBlue">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="50" />
                                             </Grid.RowDefinitions>
@@ -71,17 +71,18 @@
                                             <forms:CachedImage
                                                 Grid.Row="0"
                                                 Grid.Column="0"
+                                                
                                                 Aspect="AspectFill"
                                                 Source="{Binding Image}">
-                                                <!--Image.GestureRecognizers>
+                                                <Image.GestureRecognizers>
                                                     <TapGestureRecognizer Tapped="ClickCategory" />
-                                                </Image.GestureRecognizers-->
+                                                </Image.GestureRecognizers>
                                             </forms:CachedImage>
                                             <pancakeView:PancakeView
                                                 Grid.Row="0"
                                                 Grid.Column="0"
                                                 BackgroundGradientEndColor="White"
-                                                BackgroundGradientStartColor="Transparent"
+                                                BackgroundGradientStartColor="White"
                                                 CornerRadius="10"
                                                 HorizontalOptions="FillAndExpand" />
                                             <Label
@@ -108,6 +109,7 @@
                     Padding="0"
                     CornerRadius="8"
                     Elevation="2"
+                    BackgroundColor="LightBlue"
                     HasShadow="False">
 
                     <controls:CarouselView
@@ -128,19 +130,19 @@
                                 RotationFactor="0"
                                 ScaleFactor=".8" />
                         </x:Arguments>
-                        <customControl:IndicatorsControl  UnselectedIndicatorStyle="{DynamicResource InactiveIndicator}" />
+                        <customControl:IndicatorsControl SelectedIndicatorStyle="{StaticResource ActiveIndicator}" UnselectedIndicatorStyle="{DynamicResource InactiveIndicator}" />
                         <controls:CarouselView.ItemTemplate>
                             <DataTemplate>
                                 <ContentView>
                                     <forms:CachedImage
                                         Margin="0"
                                         Aspect="AspectFill"
-                                        BackgroundColor="White"
-                                        Source="{Binding Banner}" />
-                                       
-                                   
-                                </ContentView>
+                                        Source="{Binding Banner}"                                        
+                                        WidthRequest="50"
+                                        HeightRequest="50"/>                                
+                                </ContentView>                                
                             </DataTemplate>
+                          
                         </controls:CarouselView.ItemTemplate>
                     </controls:CarouselView>
                 </pancakeView:PancakeView>
@@ -163,7 +165,7 @@
                         FontSize="18"
                         HorizontalOptions="End"
                         Text="{x:Static helpers:AppResources.ViewAll}"
-                        TextColor="Black"
+                        TextColor="Gray"
                         VerticalOptions="Start">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="VireAllTapped" />
@@ -183,8 +185,8 @@
                                         Padding="5"
                                         BackgroundColor="White"
                                         CornerRadius="8"
-                                        Elevation="2"
-                                        HasShadow="False"
+                                        Elevation="3"
+                                        HasShadow="True"
                                         HeightRequest="250"
                                         HorizontalOptions="StartAndExpand"
                                         VerticalOptions="StartAndExpand"
@@ -205,7 +207,7 @@
                                             <Label
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 Text="{Binding Title}"
-                                                TextColor="{DynamicResource WhiteDarkFontColor}"
+                                                TextColor="Black"
                                                 VerticalOptions="Start" />
                                             <Label
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
@@ -263,7 +265,7 @@
                                         BackgroundColor="White"
                                         CornerRadius="8"
                                         Elevation="2"
-                                        HasShadow="False"
+                                        HasShadow="True"
                                         HeightRequest="250"
                                         HorizontalOptions="StartAndExpand"
                                         VerticalOptions="StartAndExpand"
@@ -329,7 +331,7 @@
                             <pancakeView:PancakeView
                                 Margin="5"
                                 Padding="5"
-                                BackgroundColor="{DynamicResource ItemColor}"
+                                BackgroundColor="White"
                                 CornerRadius="8"
                                 Elevation="2"
                                 HasShadow="False"
@@ -349,7 +351,7 @@
                                     <Label
                                         FontFamily="{DynamicResource VerdanaProRegular}"
                                         Text="{Binding Title}"
-                                        TextColor="{DynamicResource WhiteDarkFontColor}"
+                                        TextColor="Black"
                                         VerticalOptions="Start" />
                                     <Label
                                         FontFamily="{DynamicResource VerdanaProRegular}"

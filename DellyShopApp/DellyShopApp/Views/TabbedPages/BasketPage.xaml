@@ -29,7 +29,8 @@
                         HorizontalOptions="CenterAndExpand"
                         LineBreakMode="TailTruncation"
                         Text="{x:Static helpers:AppResources.MyBasket}"
-                        TextColor="{DynamicResource DarkLabelTextColor}"
+                        TextColor="Chocolate"
+                        FontAttributes="Bold"
                         VerticalOptions="StartAndExpand"
                         VerticalTextAlignment="Center" />
                 </StackLayout>
@@ -108,8 +109,8 @@
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 FontSize="22"
                                                 HorizontalOptions="End"
-                                                Text="{Binding Price, StringFormat='{0} ₹'}"
-                                                TextColor="{DynamicResource PriceLabelColor}"
+                                                Text="{Binding Price, StringFormat='{0}₹'}"
+                                                TextColor="Red"
                                                 VerticalOptions="CenterAndExpand" />
 
                                         </StackLayout>
@@ -133,7 +134,7 @@
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.TruckAlt}"
                                     Size="50"
-                                    Color="Chocolate" />
+                                    Color="{DynamicResource IconBgColor}" />
                             </Image.Source>
                         </Image>
                         <StackLayout Spacing="0" VerticalOptions="CenterAndExpand">
@@ -142,7 +143,7 @@
                                 FontSize="15"
                                 HorizontalOptions="StartAndExpand"
                                 Text="{x:Static helpers:AppResources.ShippingCost}"
-                                TextColor="Black"
+                                TextColor="{DynamicResource WhiteDarkFontColor}"
                                 VerticalOptions="Center" />
                             <Label
                                 FontAttributes="Bold"
@@ -150,7 +151,7 @@
                                 FontSize="10"
                                 HorizontalOptions="StartAndExpand"
                                 Text="Express"
-                                TextColor="Black"
+                                TextColor="{DynamicResource DescLabelColor}"
                                 VerticalOptions="Center" />
                         </StackLayout>
                         <Label
@@ -159,7 +160,7 @@
                             FontSize="22"
                             HorizontalOptions="EndAndExpand"
                             Text="12₹"
-                            TextColor="Red"
+                            TextColor="{DynamicResource PriceLabelColor}"
                             VerticalOptions="CenterAndExpand" />
                     </StackLayout>
                 </pancakeView:PancakeView>
@@ -171,7 +172,7 @@
                             FontSize="15"
                             HorizontalOptions="StartAndExpand"
                             Text="{x:Static helpers:AppResources.TotalPrice}"
-                            TextColor="Black"
+                            TextColor="Red"
                             VerticalOptions="Center" />
                         <Label
                             x:Name="TotalPrice"
@@ -180,7 +181,7 @@
                             FontFamily="{DynamicResource VerdanaProSemiBold}"
                             FontSize="22"
                             HorizontalOptions="EndAndExpand"
-                            TextColor="Red"
+                            TextColor="{DynamicResource PriceLabelColor}"
                             VerticalOptions="CenterAndExpand" />
                     </StackLayout>
                 </pancakeView:PancakeView>
@@ -194,15 +195,15 @@
                             <renderers:BorderlessPicker
                                 Title="{x:Static helpers:AppResources.SelectAddress}"
                                 Style="{DynamicResource BorderlessPicker}"
-                                TextColor="Black"
-                                TitleColor="Black" />
+                                TextColor="{DynamicResource WhiteDarkFontColor}"
+                                TitleColor="{DynamicResource WhiteDarkFontColor}" />
                             <Image Style="{DynamicResource ImageStyleEntry}">
                                 <Image.Source>
                                     <FontImageSource
                                         FontFamily="{DynamicResource MaterialFontFamily}"
                                         Glyph="{x:Static font:FontAwesomeIcons.ThinDown}"
                                         Size="40"
-                                        Color="Chocolate" />
+                                        Color="Black" />
                                 </Image.Source>
                             </Image>
                         </StackLayout>
@@ -218,7 +219,7 @@
                                 FontSize="15"
                                 HorizontalOptions="StartAndExpand"
                                 Text="{x:Static helpers:AppResources.AddAddress}"
-                                TextColor="Black"
+                                TextColor="{DynamicResource WhiteDarkFontColor}"
                                 VerticalOptions="Center" />
                             <Image
                                 Aspect="AspectFit"
@@ -231,7 +232,7 @@
                                         FontFamily="{DynamicResource MaterialFontFamily}"
                                         Glyph="{x:Static font:FontAwesomeIcons.Plus}"
                                         Size="20"
-                                        Color="Chocolate" />
+                                        Color="Black" />
                                 </Image.Source>
                             </Image>
                         </StackLayout>
@@ -271,7 +272,7 @@
                     <Label
                         Style="{DynamicResource ButtonLabelStyle}"
                         Text="{x:Static helpers:AppResources.SelectCreditCard}"
-                        TextColor="Black">
+                        TextColor="{DynamicResource LabelTextColor}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="ContinueClick" />
                         </Label.GestureRecognizers>

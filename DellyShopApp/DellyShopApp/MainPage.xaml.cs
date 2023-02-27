@@ -1,51 +1,98 @@
 ﻿using System;
-using System.Collections.Generic;
-using DellyShopApp.Views.CustomView;
-using DellyShopApp.Services;
-
+using DellyShopApp.Models;
+using DellyShopApp.Languages;
+using DellyShopApp.Views.Pages;
 using Xamarin.Forms;
+using DellyShopApp.Services;
 
 namespace DellyShopApp
 {
-    public partial class MainPage 
+   
+    
+    public partial class MainPage
     {
         public MainPage()
         {
             InitializeComponent();
             this.BindingContext = this;
-            shop.ItemsSource = DataService.Instance.ShopDetails;
-            
-
+            float rows = (float)DataService.Instance.ShopDetails.Count / 2;
+            double rowcount = Math.Round(rows);
+            if (DataService.Instance.ShopDetails.Count % 2 == 1)
+            {
+                rowcount = rowcount + 1;
+            }
+            var productIndex = 0;
+            for (int rowIndex = 0; rowIndex < rowcount; rowIndex++)
+            {
+                for (int columnIndex = 0; columnIndex < 2; columnIndex++)
+                {
+                    if (productIndex >= DataService.Instance.ShopDetails.Count)
+                    {
+                        break;
+                    }
+                    var product = DataService.Instance.ShopDetails[productIndex];
+                    productIndex += 1;
+                    var label = new Label
+                    {
+                        Text = product.ShopName,
+                        VerticalOptions = LayoutOptions.End,
+                        HorizontalOptions = LayoutOptions.Center,
+                        TextColor= Color.Chocolate,
+                        FontAttributes= FontAttributes.Bold,
+                        FontSize = 20
+                    };
+                    var image = new Image
+                    {
+                        Source= product.Image,
+                        BackgroundColor = Color.LightBlue,
+                        Margin = 15,
+                        VerticalOptions = LayoutOptions.Center
+                    };
+                    var Orglabel = new Label
+                    {
+                        Text = product.OrgId.ToString(),
+                        IsVisible = false
+                    };
+                    image.GestureRecognizers.Add(new TapGestureRecognizer
+                    {
+                        Command = new Command(() => TapGestureRecognizer_Tapped(Orglabel.Text)),
+                    });
+                    shop.Children.Add(image, columnIndex, rowIndex);
+                    shop.Children.Add(label, columnIndex, rowIndex);
+                    shop.Children.Add(Orglabel, columnIndex, rowIndex);
+                }
+            }
+            //shop.ItemsSource = DataService.Instance.ShopDetails;
         }
 
-        void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        private void TapGestureRecognizer_Tapped(string orgId)
         {
-            Navigation.PushAsync(new Views.Pages.HomeTabbedPage());
+            Navigation.PushAsync(new HomeTabbedPage());
         }
 
-        void TapGestureRecognizer_Tapped_1(System.Object sender, System.EventArgs e)
+        private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Views.Pages.HomeTabbedPage());
+            Navigation.PushAsync(new HomeTabbedPage());
         }
 
-        void TapGestureRecognizer_Tapped_2(System.Object sender, System.EventArgs e)
+        private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Views.Pages.HomeTabbedPage());
+            Navigation.PushAsync(new HomeTabbedPage());
         }
 
-        void TapGestureRecognizer_Tapped_3(System.Object sender, System.EventArgs e)
+        private void TapGestureRecognizer_Tapped_3(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Views.Pages.HomeTabbedPage());
+            Navigation.PushAsync(new HomeTabbedPage());
         }
 
-        void TapGestureRecognizer_Tapped_4(System.Object sender, System.EventArgs e)
+        private void TapGestureRecognizer_Tapped_4(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Views.Pages.HomeTabbedPage());
+            Navigation.PushAsync(new HomeTabbedPage());
         }
 
-        void TapGestureRecognizer_Tapped_5(System.Object sender, System.EventArgs e)
+        private void TapGestureRecognizer_Tapped_5(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Views.Pages.HomeTabbedPage());
+            Navigation.PushAsync(new HomeTabbedPage());
         }
     }
 }
