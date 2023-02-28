@@ -32,10 +32,13 @@
                     Style="{DynamicResource FrameStyle}">
                     <renderers:BorderlessSearchBar
                         BackgroundColor="Transparent"
-                        CancelButtonColor="{DynamicResource MainColor}"
+                        CancelButtonColor="Black"
                         FontFamily="{DynamicResource VerdanaProRegular}"
                         TextColor="{DynamicResource EntryTextColor}"
-                        Placeholder="Search Item....."/>
+                        Placeholder="Search Item....."
+                        PlaceholderColor="Black"
+                        TextChanged="BorderlessSearchBar_TextChanged"
+                        />
                 </Frame>
                 <Label
                     Margin="0"
@@ -75,7 +78,7 @@
                                                 
                                                 Aspect="AspectFill"
                                                 Source="{Binding Image}">
-                                                <Image.GestureRecognizers>
+                                               <Image.GestureRecognizers>
                                                     <TapGestureRecognizer Tapped="ClickCategory" />
                                                 </Image.GestureRecognizers>
                                             </forms:CachedImage>

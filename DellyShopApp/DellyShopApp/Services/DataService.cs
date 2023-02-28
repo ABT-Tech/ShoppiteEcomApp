@@ -22,7 +22,7 @@ namespace DellyShopApp.Services
         public ObservableCollection<NotificationModel> NotificationList = new ObservableCollection<NotificationModel>();
         public ObservableCollection<ProductListModel> ProcutListModel = new ObservableCollection<ProductListModel>();
         public ObservableCollection<ProductListModel> BasketModel = new ObservableCollection<ProductListModel>();
-        //public ObservableCollection<Carosol> HomePage = new ObservableCollection<Carosol>();
+        
      
         public List<Category> CatoCategoriesList = new List<Category>();
         public List<Category> Carousel = new List<Category>();
@@ -162,6 +162,48 @@ namespace DellyShopApp.Services
                 Image = "Hardware_Store.png",
                
             });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Grocery Store",
+                OrgId = 1,
+                Image = "Grocery_Store.png",
+
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Pet Store",
+                OrgId = 2,
+                Image = "Pet_Store.png",
+
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Coffee Store",
+                OrgId = 3,
+                Image = "Coffee_store.png",
+
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Fruit Store",
+                OrgId = 4,
+                Image = "Fruit_Store.png",
+
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Cloth Store",
+                OrgId = 5,
+                Image = "Cloth_Store.png",
+
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Hardware Store",
+                OrgId = 6,
+                Image = "Hardware_Store.png",
+
+            });
             CatoCategoriesList.Add(new Category
             {
                 CategoryName = AppResources.Shoes,
@@ -250,6 +292,11 @@ namespace DellyShopApp.Services
             {
                 Banner = "bestofYear.jpg"
             });
+            CatoCategoriesDetail.Add(new Category
+            {
+                Banner = "shoes.jpg"
+            });
+
             Carousel.Add(new Category
             {
                 Banner = "shoes.jpg",

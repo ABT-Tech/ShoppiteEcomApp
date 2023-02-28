@@ -13,7 +13,7 @@
     xmlns:partialViews="clr-namespace:DellyShopApp.Views.PartialViews;assembly=DellyShopApp"
     xmlns:proc="clr-namespace:DellyShopApp.Processors"
     iOsSpecific:Page.UseSafeArea="True"
-    BackgroundColor="White"
+    BackgroundColor="{DynamicResource BackgroundColor}"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <AbsoluteLayout>
