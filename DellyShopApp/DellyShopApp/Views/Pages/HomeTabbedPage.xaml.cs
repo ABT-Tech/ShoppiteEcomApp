@@ -1,5 +1,7 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using DellyShopApp.Services;
 
 namespace DellyShopApp.Views.Pages
 {
@@ -8,9 +10,8 @@ namespace DellyShopApp.Views.Pages
     {
         public HomeTabbedPage()
         {
-            InitializeComponent();
-
-           
+            InitializeComponent();         
+                       
         }
     }
 }

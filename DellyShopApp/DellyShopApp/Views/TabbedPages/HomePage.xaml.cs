@@ -5,6 +5,7 @@ using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.Pages;
 using System;
 using System.Linq;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,9 +15,12 @@ namespace DellyShopApp.Views.TabbedPages
     public partial class HomePage
     {
         ProductListModel product = new ProductListModel();
+        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+        private bool x;
+
         public HomePage()
         {
-            if(!DataService.Instance.ProcutListModel.Any(x=>x.Id ==4))
+            if (!DataService.Instance.ProcutListModel.Any(x => x.Id == 4))
             {
                 DataService.Instance.ProcutListModel.Insert(0, new ProductListModel
                 {
@@ -32,20 +36,25 @@ namespace DellyShopApp.Views.TabbedPages
                 });
             }
             InitializeComponent();
+            ShopLogo.Source = DataService.Instance.ObjOrgData.Image;
+           
             InittHomePage();
+          
         }
 
-        private async void InittHomePage() 
+        private async void InittHomePage()
         {
-            CategoryList.ItemsSource = DataService.Instance.CatoCategoriesList;//await DataService.GetCategories();
-            CarouselView.ItemsSource = DataService.Instance.Carousel;
-            BestSellerList.ItemsSource = DataService.Instance.ProcutListModel;
-            PreviousViewedList.ItemsSource = DataService.Instance.ProcutListModel;
-            MostNews.FlowItemsSource = DataService.Instance.ProcutListModel;
+            CategoryList.ItemsSource = DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId);//await DataService.GetCategories();
+            CarouselView.ItemsSource = DataService.Instance.Carousel.Where(x => x.orgID == orgId);
+            BestSellerList.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
+            PreviousViewedList.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
+            MostNews.FlowItemsSource = DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList();
+
         }
 
         private async void ProductDetailClick(object sender, EventArgs e)
         {
+
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;
             await Navigation.PushAsync(new ProductDetail(item));
@@ -53,11 +62,12 @@ namespace DellyShopApp.Views.TabbedPages
 
         private async void ClickCategory(object sender, EventArgs e)
         {
+
             if (!(sender is StackLayout stack)) return;
             if (!(stack.BindingContext is Category ca)) return;
             await Navigation.PushAsync(new CategoryDetailPage(ca));
         }
-       async void VireAllTapped(System.Object sender, System.EventArgs e)
+        async void VireAllTapped(System.Object sender, System.EventArgs e)
         {
             await Navigation.PushAsync(new BestSellerPage());
         }
@@ -75,5 +85,8 @@ namespace DellyShopApp.Views.TabbedPages
             BasketLayout.IsVisible = true;
             product = ((sender as Element).BindingContext) as ProductListModel;
         }
+
+     
+
     }
 }

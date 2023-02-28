@@ -13,9 +13,10 @@
     BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
-    <StackLayout Margin="15,10,15,0">
-        <StackLayout Spacing="0">
-            <Label
+    <ScrollView>
+        <StackLayout Margin="15,10,15,0">
+            <StackLayout Spacing="0">
+                <Label
                         Margin="0"
                         Padding="0,5,0,0"
                         FontAttributes="Bold"
@@ -25,7 +26,7 @@
                         Style="{DynamicResource LabelStyle}"
                         Text="Shoppite"
                         TextColor="Chocolate" />
-            <Label
+                <Label
                         Margin="0"
                         Padding="0,5,0,0"
                         FontAttributes="Bold"
@@ -34,71 +35,20 @@
                         HorizontalOptions="Center"
                         Text="What You Shop Matters!!! "
                         TextColor="Chocolate" />
+            </StackLayout>
+          
+            <Grid  BackgroundColor="LightBlue" x:Name="shop">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+              
+            </Grid>
         </StackLayout>
-        <!--<customControl:RepeaterView x:Name="shop">
-            <customControl:RepeaterView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid Padding="5" BackgroundColor="LightBlue">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{Binding Image}"  
-                                    
-                                    Grid.Column="{Binding ColumnNumber}"
-                                    BackgroundColor="{Binding BackGround}"
-                                    HorizontalOptions="FillAndExpand"  
-                                    Margin="15"
-                                    VerticalOptions="Center">
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                                </Image.GestureRecognizers>
-                            </Image>
-                            <Label Text="{Binding ShopName}"
-                                   FontSize="25" 
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="End"
-                                   FontAttributes="Bold"
-                                   TextColor="Chocolate">
-                            </Label>
-
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </customControl:RepeaterView.ItemTemplate>
-        </customControl:RepeaterView>-->
-        <Grid RowSpacing="5" ColumnSpacing="5" BackgroundColor="LightBlue" x:Name="shop">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <!--<Image Source="Grocery_Store.png"
-                   Grid.Row="0"  
-                   Grid.Column="0"  
-                   BackgroundColor="LightBlue"        
-                   Margin="15"
-                   VerticalOptions="Center">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                </Image.GestureRecognizers>
-            </Image>
-            <Label Text="Grocery Store"
-                   FontSize="Large"
-                   Margin="-7"
-                   TextColor="Chocolate"
-                   HorizontalOptions="Center"
-                   VerticalOptions="End"
-                   FontAttributes="Bold">
-            </Label>-->
-        </Grid>
-    </StackLayout>
-
+    </ScrollView>
 </base:BasePage>

@@ -12,6 +12,8 @@ namespace DellyShopApp.Views.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoryDetailPage
     {
+      
+
         public CategoryDetailPage(Category category)
         {
             InitializeComponent();
@@ -21,6 +23,11 @@ namespace DellyShopApp.Views.Pages
             PreviousViewedList.ItemsSource = DataService.Instance.ProcutListModel.Where(x=>x.Id!=4);
             MostNews.FlowItemsSource = DataService.Instance.ProcutListModel.Where(x=>x.Id!=4).ToList();
         }
+
+        public CategoryDetailPage()
+        {
+        }
+
         private async void ClickCategory(object sender, EventArgs e)
         {
             if (!(sender is StackLayout stack)) return;
@@ -36,6 +43,11 @@ namespace DellyShopApp.Views.Pages
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;
             await Navigation.PushAsync(new ProductDetail(item));
+        }
+
+        private async void BannerTab(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ProductDetail());
         }
     }
 }

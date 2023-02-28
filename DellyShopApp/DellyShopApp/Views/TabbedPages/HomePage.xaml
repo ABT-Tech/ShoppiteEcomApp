@@ -20,7 +20,8 @@
 
         <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
             <StackLayout Margin="15,10,15,0">
-                <Image Source="logo.png"
+                <Image Source="{Binding Image}"
+                       x:Name="ShopLogo"
                        WidthRequest="200"
                        HeightRequest="100"
                        HorizontalOptions="Start"/>
@@ -59,7 +60,7 @@
                                         HorizontalOptions="Start"
                                         WidthRequest="150">
                                         <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="ClickCategory" />
+                                            <TapGestureRecognizer Tapped="ClickCategory"/>
                                         </StackLayout.GestureRecognizers>
                                         <Grid BackgroundColor="LightBlue">
                                             <Grid.RowDefinitions>
@@ -139,7 +140,7 @@
                                         Aspect="AspectFill"
                                         Source="{Binding Banner}"                                        
                                         WidthRequest="50"
-                                        HeightRequest="50"/>                                
+                                        HeightRequest="50"/>                                   
                                 </ContentView>                                
                             </DataTemplate>
                           
