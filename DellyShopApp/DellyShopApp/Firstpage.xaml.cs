@@ -1,14 +1,13 @@
-﻿
-using System;
+﻿using System;
 using DellyShopApp.Languages;
 using DellyShopApp.Views.Pages;
 using Xamarin.Forms;
 
 namespace DellyShopApp
 {
-    public partial class Firstpage
+    public partial class FirstPage
     {
-        public Firstpage()
+        public FirstPage()
         {
             InitializeComponent();
 

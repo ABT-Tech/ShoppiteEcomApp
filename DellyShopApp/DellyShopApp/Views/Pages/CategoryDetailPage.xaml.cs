@@ -12,6 +12,8 @@ namespace DellyShopApp.Views.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoryDetailPage
     {
+        public object C { get; private set; }
+
         public CategoryDetailPage(Category category)
         {
             InitializeComponent();
@@ -20,6 +22,7 @@ namespace DellyShopApp.Views.Pages
             BestSellerList.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.Id != 4);
             PreviousViewedList.ItemsSource = DataService.Instance.ProcutListModel.Where(x=>x.Id!=4);
             MostNews.FlowItemsSource = DataService.Instance.ProcutListModel.Where(x=>x.Id!=4).ToList();
+            
         }
         private async void ClickCategory(object sender, EventArgs e)
         {

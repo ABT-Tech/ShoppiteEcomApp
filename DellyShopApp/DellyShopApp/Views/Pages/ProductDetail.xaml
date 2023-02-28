@@ -404,6 +404,7 @@
                                 </Label.GestureRecognizers>
                             </Label>
                         </Frame>
+
                         <!--<Button
                             Margin="0,0,0,10"
                             BackgroundColor="White"

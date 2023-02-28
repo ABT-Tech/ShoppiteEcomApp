@@ -12,11 +12,17 @@ namespace DellyShopApp.Views.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductDetail
     {
+
+
+
+
+
         int productCount;
         private readonly List<StartList> _startList = new List<StartList>();
         private readonly List<CommentModel> _comments = new List<CommentModel>();
         private readonly ProductListModel _products;
         public ProductDetail(ProductListModel product)
+        
         {
             _products = product;
 

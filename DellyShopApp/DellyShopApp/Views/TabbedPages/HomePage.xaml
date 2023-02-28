@@ -34,7 +34,8 @@
                         BackgroundColor="Transparent"
                         CancelButtonColor="{DynamicResource MainColor}"
                         FontFamily="{DynamicResource VerdanaProRegular}"
-                        TextColor="{DynamicResource EntryTextColor}" />
+                        TextColor="{DynamicResource EntryTextColor}"
+                        Placeholder="Search Item....."/>
                 </Frame>
                 <Label
                     Margin="0"
@@ -79,6 +80,7 @@
                                                 </Image.GestureRecognizers>
                                             </forms:CachedImage>
                                             <pancakeView:PancakeView
+                                                x:Uid="Id"
                                                 Grid.Row="0"
                                                 Grid.Column="0"
                                                 BackgroundGradientEndColor="White"
@@ -139,7 +141,12 @@
                                         Aspect="AspectFill"
                                         Source="{Binding Banner}"                                        
                                         WidthRequest="50"
-                                        HeightRequest="50"/>                                
+                                        HeightRequest="50"/>
+                         <forms:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Click_Banner" />
+                         </forms:CachedImage.GestureRecognizers>
+                                    
+                                    
                                 </ContentView>                                
                             </DataTemplate>
                           
@@ -181,6 +188,7 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <pancakeView:PancakeView
+                                        x:Name="Id"
                                         Margin="5"
                                         Padding="5"
                                         BackgroundColor="White"

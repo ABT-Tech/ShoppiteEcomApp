@@ -36,6 +36,7 @@
             <customView:FlowListView.FlowColumnTemplate>
                 <DataTemplate>
                     <customView:PancakeView
+                        x:Uid="OrgId"
                         Margin="5"
                         Padding="5"
                         BackgroundColor="{DynamicResource ItemColor}"

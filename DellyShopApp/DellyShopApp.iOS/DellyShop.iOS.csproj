@@ -134,6 +134,9 @@
     <BundleResource Include="Resources\images.jpeg" />
     <BundleResource Include="Resources\loko.jpg" />
     <BundleResource Include="Resources\logo.png" />
+    <BundleResource Include="Resources\Fruit_Store.png" />
+    <BundleResource Include="Resources\Cloth_Store.png" />
+    <BundleResource Include="Resources\Hardware_Store.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
