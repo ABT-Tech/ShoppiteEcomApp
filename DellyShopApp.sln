@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellyShopApp.Android", "DellyShopApp\DellyShopApp.Android\DellyShopApp.Android.csproj", "{4AB913E1-A69E-471A-A58F-DA46CF5AAF01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellyShop.iOS", "DellyShopApp\DellyShopApp.iOS\DellyShop.iOS.csproj", "{08B98A4F-5E26-4AE1-92E7-77EE71DCEA43}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DellyShopApp.iOS", "DellyShopApp\DellyShopApp.iOS\DellyShopApp.iOS.csproj", "{08B98A4F-5E26-4AE1-92E7-77EE71DCEA43}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DellyShopApp", "DellyShopApp\DellyShopApp\DellyShopApp.csproj", "{DFE6DA77-875D-4CCB-BFCC-22F17BABB84E}"
 EndProject
