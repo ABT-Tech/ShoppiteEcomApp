@@ -374,26 +374,26 @@ namespace DellyShopApp.Services
 
             Carousel.Add(new Category
             {
-                CategoryId = "1"  
+                CategoryId = "1",  
                 Banner = "shoes.jpg",
                 orgID = 1
             });
             Carousel.Add(new Category
             {
                 Banner = "clothing.jpg",
-                orgID = 1
+                orgID = 1,
                 CategoryId = "2"
             });
             Carousel.Add(new Category
             {
                 Banner = "elecronics.jpeg",
-                CategoryId = "3"
+                CategoryId = "3",
                 orgID = 2
             });
             Carousel.Add(new Category
             {
                 Banner = "images.jpeg",
-                CategoryId = "3"
+                CategoryId = "3",
                 orgID = 2
             });
         }
