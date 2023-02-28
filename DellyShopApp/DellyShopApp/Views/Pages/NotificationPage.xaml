@@ -51,12 +51,12 @@
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             FontSize="15"
                                             Text="{Binding Title}"
-                                            TextColor="{DynamicResource WhiteDarkFontColor}" />
+                                            TextColor="Black" />
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             FontSize="12"
                                             Text="{Binding SubTitle}"
-                                            TextColor="{DynamicResource DescLabelColor}" />
+                                            TextColor="Black" />
                                     </StackLayout>
                                     <Image
                                         HorizontalOptions="EndAndExpand"
@@ -68,7 +68,7 @@
                                                 FontFamily="{DynamicResource MaterialFontFamily}"
                                                 Glyph="{x:Static font:FontAwesomeIcons.ThinRight}"
                                                 Size="25"
-                                                Color="{DynamicResource IconBgColor}" />
+                                                Color="Chocolate" />
                                         </Image.Source>
                                     </Image>
                                 </StackLayout>

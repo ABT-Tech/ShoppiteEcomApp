@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <None Remove="Languages\AppResources.ar" />
+    <None Remove="Views\Pages\Base\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="App.xaml">
@@ -155,6 +156,7 @@
     <Folder Include="CustomControl\FlowListViewControl\" />
     <Folder Include="DependencyServices\" />
     <Folder Include="Services\" />
+    <Folder Include="Views\Pages\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Languages\AppResources.ar.Designer.cs">

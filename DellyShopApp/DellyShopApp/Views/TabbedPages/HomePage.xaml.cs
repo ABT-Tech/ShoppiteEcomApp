@@ -15,6 +15,10 @@ namespace DellyShopApp.Views.TabbedPages
     public partial class HomePage
     {
         ProductListModel product = new ProductListModel();
+
+        public Category C { get; private set; }
+        public object ProcutListModel { get; private set; }
+
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         private bool x;
 
@@ -58,6 +62,9 @@ namespace DellyShopApp.Views.TabbedPages
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;
             await Navigation.PushAsync(new ProductDetail(item));
+            
+           // await Shell.Current.GoToAsync(nameof(ProductDetail));
+           
         }
 
         private async void ClickCategory(object sender, EventArgs e)
@@ -86,7 +93,25 @@ namespace DellyShopApp.Views.TabbedPages
             product = ((sender as Element).BindingContext) as ProductListModel;
         }
 
-     
+        private async void Click_Banner(System.Object sender, System.EventArgs e)
+        {
+            if (!(sender is ContentView content)) return;
+            if (!(content.BindingContext is Category c)) return;
+            Category Ca = DataService.Instance.CatoCategoriesList.Where(x => x.CategoryId == c.CategoryId).FirstOrDefault();
+            await Navigation.PushAsync(new CategoryDetailPage(Ca));
+        }
+
+        void BorderlessSearchBar_TextChanged(System.Object sender, Xamarin.Forms.TextChangedEventArgs e)
+        {
+            
+            
+                //SearchBar searchBar = (SearchBar)sender;
+                //ProductListModel.Insource = DataService.(searchBar.Text);
+
+                //SearchBar searchBar = new SearchBar { Placeholder = "Search items..." };
+                //var Searchbar = ProcutListModel.Add(c => c.ProductListModel.Cotains(SearchBar.Text));
+            
+        }
 
     }
 }

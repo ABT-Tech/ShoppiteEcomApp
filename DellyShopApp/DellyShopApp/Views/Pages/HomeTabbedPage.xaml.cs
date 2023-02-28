@@ -10,8 +10,9 @@ namespace DellyShopApp.Views.Pages
     {
         public HomeTabbedPage()
         {
-            InitializeComponent();         
-                       
+           InitializeComponent();
+
+           
         }
     }
 }

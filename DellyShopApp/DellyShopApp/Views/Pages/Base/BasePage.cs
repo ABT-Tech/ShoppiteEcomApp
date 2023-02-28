@@ -15,7 +15,7 @@ namespace DellyShopApp.Views.Pages.Base
     {
         public BasePage()
         {
-             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             var safeInsets = On<iOS>().SafeAreaInsets();
             On<iOS>().SetPrefersHomeIndicatorAutoHidden(true);
             On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True).SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);

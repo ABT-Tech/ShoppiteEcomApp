@@ -36,6 +36,7 @@
             <customView:FlowListView.FlowColumnTemplate>
                 <DataTemplate>
                     <customView:PancakeView
+                        x:Uid="OrgId"
                         Margin="5"
                         Padding="5"
                         BackgroundColor="{DynamicResource ItemColor}"
@@ -58,14 +59,14 @@
                             <Label
                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                 Text="{Binding Title}"
-                                TextColor="{DynamicResource WhiteDarkFontColor}"
+                                TextColor="Black"
                                 VerticalOptions="Start" />
                             <Label
                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                 FontSize="10"
                                 HorizontalOptions="Start"
                                 Text="{Binding Brand}"
-                                TextColor="{DynamicResource DescLabelColor}"
+                                TextColor="Black"
                                 VerticalOptions="Start" />
 
                             <Label

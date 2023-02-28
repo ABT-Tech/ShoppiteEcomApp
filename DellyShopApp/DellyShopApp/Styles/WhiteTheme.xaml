@@ -36,7 +36,7 @@
     <!--  ItemColors  -->
     <Color x:Key="ItemColor">White</Color>
     <!--  ItemColors  -->
-    <Color x:Key="BackgroundColor">White</Color>
+    <Color x:Key="BackgroundColor">white</Color>
     <Color x:Key="MainColor">#F16A38</Color>
 
 

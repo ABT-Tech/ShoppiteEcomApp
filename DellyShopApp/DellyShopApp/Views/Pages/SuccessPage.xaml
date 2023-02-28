@@ -8,7 +8,7 @@
     xmlns:font="clr-namespace:DellyShopApp.Helpers;assembly=DellyShopApp"
     xmlns:languages="clr-namespace:DellyShopApp.Languages;assembly=DellyShopApp"
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
-    BackgroundColor="{DynamicResource MainColor}"
+    BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False">
     <Frame BackgroundColor="LightBlue">
         <StackLayout>
@@ -47,12 +47,12 @@
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             FontSize="15"
                                             Text="{Binding Title}"
-                                            TextColor="#2E2E2E" />
+                                            TextColor="Black" />
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             FontSize="12"
                                             Text="{Binding Brand}"
-                                            TextColor="#917A7A" />
+                                            TextColor="Black" />
                                     </StackLayout>
                                     <Label
                                         Margin="0,0,10,0"
@@ -60,8 +60,8 @@
                                         FontFamily="{DynamicResource VerdanaProRegular}"
                                         FontSize="22"
                                         HorizontalOptions="EndAndExpand"
-                                        Text="{Binding Price, StringFormat='{0} $'}"
-                                        TextColor="{DynamicResource MainColor}"
+                                        Text="{Binding Price, StringFormat='{0} ₹'}"
+                                        TextColor="Black"
                                         VerticalOptions="CenterAndExpand" />
                                 </StackLayout>
                             </pancakeView:PancakeView>

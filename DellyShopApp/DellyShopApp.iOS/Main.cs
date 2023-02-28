@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace DellyShopApp.iOS
+namespace ShoppitApp.iOS
 {
     public class Application
     {

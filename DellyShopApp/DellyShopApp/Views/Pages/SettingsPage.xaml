@@ -36,8 +36,8 @@
                         VerticalOptions="CenterAndExpand" />
                     <Switch
                         HorizontalOptions="EndAndExpand"
-                        OnColor="{DynamicResource DarkLabelTextColor}"
-                        ThumbColor="{DynamicResource DarkLabelTextColor}"
+                        OnColor="Chocolate"
+                        ThumbColor="Chocolate"
                         VerticalOptions="CenterAndExpand" />
 
                 </StackLayout>
@@ -52,12 +52,12 @@
                         FontSize="20"
                         Style="{DynamicResource ProfleLabelStyle}"
                         Text="{x:Static languages:AppResources.DarkThemeEnabled}"
-                        TextColor="{DynamicResource WhiteDarkFontColor}"
+                        TextColor="Black"
                         VerticalOptions="CenterAndExpand" />
                     <Switch
                         HorizontalOptions="EndAndExpand"
-                        OnColor="{DynamicResource DarkLabelTextColor}"
-                        ThumbColor="{DynamicResource DarkLabelTextColor}"
+                        OnColor="Chocolate"
+                        ThumbColor="Chocolate"
                         Toggled="Toggled"
                         VerticalOptions="CenterAndExpand" />
 
@@ -77,7 +77,7 @@
                         FontSize="20"
                         Style="{DynamicResource ProfleLabelStyle}"
                         Text="{x:Static languages:AppResources.SelectLanguage}"
-                        TextColor="{DynamicResource WhiteDarkFontColor}"
+                        TextColor="Black"
                         VerticalOptions="CenterAndExpand" />
                     <Image
                         Margin="0,0,10,0"
@@ -91,7 +91,7 @@
                                 FontFamily="{DynamicResource MaterialFontFamily}"
                                 Glyph="{x:Static font:FontAwesomeIcons.ThinRight}"
                                 Size="50"
-                                Color="{DynamicResource IconBgColor}" />
+                                Color="Chocolate" />
                         </Image.Source>
                     </Image>
                 </StackLayout>
@@ -109,7 +109,7 @@
                         FontSize="20"
                         Style="{DynamicResource ProfleLabelStyle}"
                         Text="{x:Static languages:AppResources.Logout}"
-                        TextColor="{DynamicResource WhiteDarkFontColor}"
+                        TextColor="Black"
                         VerticalOptions="CenterAndExpand" />
                     <Image
                         Margin="0,0,10,0"
@@ -123,7 +123,7 @@
                                 FontFamily="{DynamicResource MaterialFontFamily}"
                                 Glyph="{x:Static font:FontAwesomeIcons.Exit}"
                                 Size="30"
-                                Color="{DynamicResource IconBgColor}" />
+                                Color="Chocolate" />
                         </Image.Source>
                     </Image>
 
