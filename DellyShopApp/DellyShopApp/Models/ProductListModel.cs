@@ -41,7 +41,6 @@ namespace DellyShopApp.Models
         public int orgId { get; set; }
         public string[] ProductList { get; set; }
         public int OldPrice { get; set; }
-        public int orgId { get; set; }
     }
 }
 
