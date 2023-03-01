@@ -38,6 +38,7 @@ namespace DellyShopApp.Models
         public string Image { get; set; }
         public double Price { get; set; }
         public int Id { get; set; }
+        public int orgId { get; set; }
         public string[] ProductList { get; set; }
         public int OldPrice { get; set; }
         public int orgId { get; set; }

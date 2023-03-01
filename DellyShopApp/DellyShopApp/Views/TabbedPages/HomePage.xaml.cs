@@ -20,9 +20,12 @@ namespace DellyShopApp.Views.TabbedPages
         public Category C { get; private set; }
         public object ProcutListModel { get; private set; }
 
+        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+        private bool x;
+
         public HomePage()
         {
-            if(!DataService.Instance.ProcutListModel.Any(x=>x.Id ==4))
+            if (!DataService.Instance.ProcutListModel.Any(x => x.Id == 4))
             {
                 DataService.Instance.ProcutListModel.Insert(0, new ProductListModel
                 {
@@ -38,10 +41,13 @@ namespace DellyShopApp.Views.TabbedPages
                 });
             }
             InitializeComponent();
+            ShopLogo.Source = DataService.Instance.ObjOrgData.Image;
+           
             InittHomePage();
+          
         }
 
-        private async void InittHomePage() 
+        private async void InittHomePage()
         {
             CategoryList.ItemsSource = DataService.Instance.CatoCategoriesList;//await DataService.GetCategories();
             CarouselView.ItemsSource = DataService.Instance.Carousel;
@@ -54,6 +60,7 @@ namespace DellyShopApp.Views.TabbedPages
 
         private async void ProductDetailClick(object sender, EventArgs e)
         {
+
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;
             await Navigation.PushAsync(new ProductDetail(item));
@@ -64,11 +71,12 @@ namespace DellyShopApp.Views.TabbedPages
 
         private async void ClickCategory(object sender, EventArgs e)
         {
+
             if (!(sender is StackLayout stack)) return;
             if (!(stack.BindingContext is Category ca)) return;
             await Navigation.PushAsync(new CategoryDetailPage(ca));
         }
-       async void VireAllTapped(System.Object sender, System.EventArgs e)
+        async void VireAllTapped(System.Object sender, System.EventArgs e)
         {
             await Navigation.PushAsync(new BestSellerPage());
         }

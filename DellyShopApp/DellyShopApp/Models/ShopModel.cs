@@ -10,5 +10,10 @@ namespace DellyShopApp.Models
         public int  OrgId { get; set; }
         public string Image { get; set; }
        
+
+        public static implicit operator int(ShopModel v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

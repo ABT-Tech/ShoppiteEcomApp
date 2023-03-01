@@ -127,6 +127,10 @@
                                     FadeAnimationDuration="100"
                                     FadeAnimationEnabled="True"
                                     Source="{Binding Banner}" />
+                               
+                                <forms:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="BannerTab" />
+                                </forms:CachedImage.GestureRecognizers>
                             </ContentView>
                         </DataTemplate>
                     </controls:CarouselView.ItemTemplate>

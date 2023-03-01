@@ -31,7 +31,8 @@ namespace DellyShopApp.Services
         public List<CommentModel> CommentList = new List<CommentModel>();
         public List<ShopModel> ShopDetails = new List<ShopModel>();
         public ChangeUserData EditProfile = new ChangeUserData();
-
+        public List<CategoryDetailPage> Details = new List<CategoryDetailPage>();      
+        public OrgData ObjOrgData = new OrgData();
         public double BaseTotalPrice = 0;
         public static DataService Instance
         {
@@ -64,6 +65,7 @@ namespace DellyShopApp.Services
         }
         public DataService()
         {
+            
             NotificationList.Add(new NotificationModel
             {
                 Title = AppResources.NotificatinTitle,
@@ -120,7 +122,7 @@ namespace DellyShopApp.Services
                 VisibleItemDelete = false,
                 ProductList = new string[] { "py_1", "shoesyellow" },
                 OldPrice = 400,
-                orgId = 2                
+                orgId = 2
             });
             ShopDetails = new List<ShopModel>();
             ShopDetails.Add(new ShopModel
@@ -205,29 +207,95 @@ namespace DellyShopApp.Services
                 ShopName = "Hardware Store",
                 OrgId = 6,
                 Image = "Hardware_Store.png",
+               
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Book Store",
+                OrgId = 7,
+                Image = "Book_Store.png",
 
             });
-            CatoCategoriesList.Add(new Category
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Coffee Store",
+                OrgId = 8,
+                Image = "Coffee_Store.png",
+
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Fruit Store",
+                OrgId = 9,
+                Image = "Fruit_Store.png",
+
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Cloth Store",
+                OrgId = 10,
+                Image = "Cloth_Store.png",
+
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Hardware Store",
+                OrgId = 11,
+                Image = "Hardware_Store.png",
+            });
+
+
+                CatoCategoriesList.Add(new Category
             {
                 CategoryName = AppResources.Shoes,
                 Banner = "shoesCategory.png",
-                CategoryId = "1"
+                CategoryId = "1",
+                orgID = 1
+                
             });
             CatoCategoriesList.Add(new Category
             {
                 CategoryName = AppResources.Electronics,
 
                 Banner = "electronicCategory.png",
-                CategoryId = "2"
+                CategoryId = "2",
+                orgID = 1
             });
             CatoCategoriesList.Add(new Category
             {
                 CategoryName = AppResources.Clothing,
 
                 Banner = "clothingCategory.png",
-                CategoryId = "3"
+                CategoryId = "3",
+                orgID = 1
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = AppResources.Shoes,
+                Banner = "shoesCategory.png",
+                CategoryId = "1",
+                orgID = 2
+
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = AppResources.Electronics,
+
+                Banner = "electronicCategory.png",
+                CategoryId = "2",
+                orgID = 2
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = AppResources.Clothing,
+
+                Banner = "clothingCategory.png",
+                CategoryId = "3",
+                orgID = 2
             });
 
+            ObjOrgData.ID = 1;
+            ObjOrgData.Image = "logo.png";
 
             EditProfile.ChangeName = "abc";
             EditProfile.ChangeEmail = "abc@gmail.com";
@@ -285,15 +353,19 @@ namespace DellyShopApp.Services
             });
             CatoCategoriesDetail.Add(new Category
             {
-                Banner = "shoes.jpg"
+                Banner = "shoes.jpg",
+                orgID =  1
+
             });
             CatoCategoriesDetail.Add(new Category
             {
-                Banner = "bestShoes.jpg"
+                Banner = "bestShoes.jpg",
+                orgID = 2
             });
             CatoCategoriesDetail.Add(new Category
             {
-                Banner = "bestofYear.jpg"
+                Banner = "bestofYear.jpg",
+                orgID = 3
             });
             CatoCategoriesDetail.Add(new Category
             {
@@ -302,23 +374,27 @@ namespace DellyShopApp.Services
 
             Carousel.Add(new Category
             {
+                CategoryId = "1",  
                 Banner = "shoes.jpg",
-                CategoryId = "1"
+                orgID = 1
             });
             Carousel.Add(new Category
             {
                 Banner = "clothing.jpg",
+                orgID = 1,
                 CategoryId = "2"
             });
             Carousel.Add(new Category
             {
                 Banner = "elecronics.jpeg",
-                CategoryId = "3"
+                CategoryId = "3",
+                orgID = 2
             });
             Carousel.Add(new Category
             {
                 Banner = "images.jpeg",
-                CategoryId = "3"
+                CategoryId = "3",
+                orgID = 2
             });
         }
 

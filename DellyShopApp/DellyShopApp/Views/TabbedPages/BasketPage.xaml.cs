@@ -137,8 +137,8 @@ namespace DellyShopApp.Views.TabbedPages
             #endregion
 
             #region Shipping Address (Optional)
-            //Shipping Address (Optional)
-            //Optional shipping address parameter into Buy methods.
+           // Shipping Address(Optional)
+           // Optional shipping address parameter into Buy methods.
             //var resultShippingAddress = await CrossPayPalManager.Current.Buy(
             //            new PayPalItem(
             //                "Test Product",

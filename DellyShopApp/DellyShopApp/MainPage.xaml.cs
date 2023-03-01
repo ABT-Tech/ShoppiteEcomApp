@@ -4,11 +4,10 @@ using DellyShopApp.Languages;
 using DellyShopApp.Views.Pages;
 using Xamarin.Forms;
 using DellyShopApp.Services;
+using Xamarin.Essentials;
 
 namespace DellyShopApp
-{
-   
-    
+{    
     public partial class MainPage
     {
         public MainPage()
@@ -80,8 +79,9 @@ namespace DellyShopApp
             //shop.ItemsSource = DataService.Instance.ShopDetails;
         }
 
-        private void TapGestureRecognizer_Tapped(string orgId)
+        private  void TapGestureRecognizer_Tapped(string orgId)
         {
+            SecureStorage.SetAsync("OrgId",orgId);
             Navigation.PushAsync(new HomeTabbedPage());
          
         }

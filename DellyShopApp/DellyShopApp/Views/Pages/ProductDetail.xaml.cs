@@ -68,6 +68,11 @@ namespace DellyShopApp.Views.Pages
             CommentList.ItemsSource = _comments;
             //MainScroll.Scrolled += MainScroll_Scrolled; 
         }
+
+        public ProductDetail()
+        {
+        }
+
         private void PlusClick(object sender, EventArgs e)
         {
             if (productCount >= 10) return;
