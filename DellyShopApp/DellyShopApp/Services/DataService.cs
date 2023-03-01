@@ -22,16 +22,16 @@ namespace DellyShopApp.Services
         public ObservableCollection<NotificationModel> NotificationList = new ObservableCollection<NotificationModel>();
         public ObservableCollection<ProductListModel> ProcutListModel = new ObservableCollection<ProductListModel>();
         public ObservableCollection<ProductListModel> BasketModel = new ObservableCollection<ProductListModel>();
-        
-     
+
+
         public List<Category> CatoCategoriesList = new List<Category>();
         public List<Category> Carousel = new List<Category>();
         public List<StartList> StartList = new List<StartList>();
         public List<Category> CatoCategoriesDetail = new List<Category>();
         public List<CommentModel> CommentList = new List<CommentModel>();
-        public List<ShopModel> ShopDetails= new List<ShopModel>();
+        public List<ShopModel> ShopDetails = new List<ShopModel>();
         public ChangeUserData EditProfile = new ChangeUserData();
-        
+
         public double BaseTotalPrice = 0;
         public static DataService Instance
         {
@@ -95,7 +95,8 @@ namespace DellyShopApp.Services
                 Price = 362,
                 VisibleItemDelete = false,
                 ProductList = new string[] { "red1", "shoesBlack" },
-                OldPrice = 570
+                OldPrice = 570,
+                orgId = 1
             });
             ProcutListModel.Add(new ProductListModel
             {
@@ -106,7 +107,8 @@ namespace DellyShopApp.Services
                 Price = 150,
                 VisibleItemDelete = false,
                 ProductList = new string[] { "garzy2", "grazy1" },
-                OldPrice = 270
+                OldPrice = 270,
+                orgId = 1
             });
             ProcutListModel.Add(new ProductListModel
             {
@@ -117,7 +119,8 @@ namespace DellyShopApp.Services
                 Price = 299,
                 VisibleItemDelete = false,
                 ProductList = new string[] { "py_1", "shoesyellow" },
-                OldPrice = 400
+                OldPrice = 400,
+                orgId = 2                
             });
             ShopDetails = new List<ShopModel>();
             ShopDetails.Add(new ShopModel
@@ -125,42 +128,42 @@ namespace DellyShopApp.Services
                 ShopName = "Grocery Store",
                 OrgId = 1,
                 Image = "Grocery_Store.png",
-                
+
             });
             ShopDetails.Add(new ShopModel
             {
                 ShopName = "Pet Store",
                 OrgId = 2,
                 Image = "Pet_Store.png",
-               
+
             });
             ShopDetails.Add(new ShopModel
             {
                 ShopName = "Coffee Store",
                 OrgId = 3,
                 Image = "Coffee_store.png",
-               
+
             });
             ShopDetails.Add(new ShopModel
             {
                 ShopName = "Fruit Store",
                 OrgId = 4,
                 Image = "Fruit_Store.png",
-                
+
             });
             ShopDetails.Add(new ShopModel
             {
                 ShopName = "Cloth Store",
                 OrgId = 5,
                 Image = "Cloth_Store.png",
-               
+
             });
             ShopDetails.Add(new ShopModel
             {
                 ShopName = "Hardware Store",
                 OrgId = 6,
                 Image = "Hardware_Store.png",
-               
+
             });
             ShopDetails.Add(new ShopModel
             {
@@ -224,7 +227,7 @@ namespace DellyShopApp.Services
                 Banner = "clothingCategory.png",
                 CategoryId = "3"
             });
-           
+
 
             EditProfile.ChangeName = "abc";
             EditProfile.ChangeEmail = "abc@gmail.com";
@@ -301,7 +304,7 @@ namespace DellyShopApp.Services
             {
                 Banner = "shoes.jpg",
                 CategoryId = "1"
-            });  
+            });
             Carousel.Add(new Category
             {
                 Banner = "clothing.jpg",
@@ -344,6 +347,60 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
+
+        public static async Task<List<ShopModel>> GetAllOrganizations()
+        {
+            try
+            {
+                // await TokenValidator.CheckTokenValidity();
+
+               //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+              //"bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Organization/GetAllOrganizations?OrgId=1");
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<ShopModel>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+                
+            }
+        }
+        public static async Task<List<ProductListModel>> GetMostSellerProductsByOrganizations(int orgId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Products/GetMostSellerProductsByOrganizations?org_Id=" + orgId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<ProductListModel>>(result);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
     }
 }
+    
 

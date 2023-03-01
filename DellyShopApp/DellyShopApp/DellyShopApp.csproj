@@ -90,10 +90,6 @@
     <None Update="Views\TabbedPages\HomePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
-<None Update="Views\TabbedPages\ProfilePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-
   </ItemGroup>
 
   <ItemGroup>

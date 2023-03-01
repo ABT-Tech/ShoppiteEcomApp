@@ -5,6 +5,7 @@ using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.Pages;
 using System;
 using System.Linq;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,6 +15,7 @@ namespace DellyShopApp.Views.TabbedPages
     public partial class HomePage
     {
         ProductListModel product = new ProductListModel();
+        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("orgId").Result);
 
         public Category C { get; private set; }
         public object ProcutListModel { get; private set; }
@@ -43,7 +45,7 @@ namespace DellyShopApp.Views.TabbedPages
         {
             CategoryList.ItemsSource = DataService.Instance.CatoCategoriesList;//await DataService.GetCategories();
             CarouselView.ItemsSource = DataService.Instance.Carousel;
-            BestSellerList.ItemsSource = DataService.Instance.ProcutListModel;
+            BestSellerList.ItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId);//DataService.Instance.ProcutListModel;
             PreviousViewedList.ItemsSource = DataService.Instance.ProcutListModel;
             MostNews.FlowItemsSource = DataService.Instance.ProcutListModel;
 
@@ -56,7 +58,7 @@ namespace DellyShopApp.Views.TabbedPages
             if (!(pancake.BindingContext is ProductListModel item)) return;
             await Navigation.PushAsync(new ProductDetail(item));
             
-           // await Shell.Current.GoToAsync(nameof(ProductDetail));
+          // await Shell.Current.GoToAsync(nameof(ProductDetail));
            
         }
 
@@ -95,14 +97,23 @@ namespace DellyShopApp.Views.TabbedPages
 
         void BorderlessSearchBar_TextChanged(System.Object sender, Xamarin.Forms.TextChangedEventArgs e)
         {
-            
-            
-                //SearchBar searchBar = (SearchBar)sender;
-                //ProductListModel.Insource = DataService.(searchBar.Text);
+           /*if (string.IsNullOrEmpty(e.NewTextValue))
+            {
+                ShopModel.ItemsSource = ;
+            }
 
-                //SearchBar searchBar = new SearchBar { Placeholder = "Search items..." };
-                //var Searchbar = ProcutListModel.Add(c => c.ProductListModel.Cotains(SearchBar.Text));
-            
+            else
+            {
+                list.ItemsSource = tempdata.Where(x => x.Name.StartsWith(e.NewTextValue));
+            }*/
+
+
+            //SearchBar searchBar = (SearchBar)sender;
+            //ProductListModel. = DataService.Instance(searchBar.Text);
+
+            //SearchBar searchBar = new SearchBar { Placeholder = "Search items..." };
+            // var Searchbar = ProcutListModel.ToString(c => c.ProductListModel.Cotains(SearchBar.Text));
+
         }
 
     }

@@ -178,34 +178,7 @@
                     </Label>
 
                     <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                        <customView:PancakeView
-                            BackgroundColor="#416F7D"
-                            CornerRadius="20"
-                            HeightRequest="40"
-                            HorizontalOptions="Start"
-                            VerticalOptions="CenterAndExpand"
-                            WidthRequest="40" />
-                        <customView:PancakeView
-                            BackgroundColor="#45484D"
-                            CornerRadius="20"
-                            HeightRequest="40"
-                            HorizontalOptions="Start"
-                            VerticalOptions="CenterAndExpand"
-                            WidthRequest="40" />
-                        <customView:PancakeView
-                            BackgroundColor="#32A797"
-                            CornerRadius="20"
-                            HeightRequest="40"
-                            HorizontalOptions="Start"
-                            VerticalOptions="CenterAndExpand"
-                            WidthRequest="40" />
-                        <customView:PancakeView
-                            BackgroundColor="#BB732A"
-                            CornerRadius="20"
-                            HeightRequest="40"
-                            HorizontalOptions="Start"
-                            VerticalOptions="CenterAndExpand"
-                            WidthRequest="40" />
+                       
                         <Image
                             Margin="{x:OnIdiom Tablet='20,0,0,0',
                                                Phone='10,0,0,0'}"
@@ -224,7 +197,7 @@
                                     Size="30"
                                     Color="{DynamicResource DarkLabelTextColor}" />
                             </Image.Source>
-                        </Image>
+                        </Image> 
                         <Label
                             x:Name="ProductCountLabel"
                             FontFamily="{DynamicResource VerdanaProLight}"
@@ -320,7 +293,7 @@
                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                 FontSize="17"
                                 Text="{x:Static languages:AppResources.Commented}"
-                                TextColor="{DynamicResource DescLabelColor}" />
+                                TextColor="Black" />
                             </StackLayout>
                         </StackLayout>
                         <customControl:RepeaterView x:Name="CommentList" Padding="5">
