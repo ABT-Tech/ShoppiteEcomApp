@@ -23,7 +23,7 @@
 
         <customView:FlowListView
             x:Name="BestSeller"
-            BackgroundColor="Chocolate"
+            BackgroundColor="LightBlue"
             FlowColumnCount="2"
             FlowColumnExpand="None"
             HasUnevenRows="False"

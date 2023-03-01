@@ -32,7 +32,8 @@ namespace DellyShopApp.Views.TabbedPages
                     Price = 499,
                     OldPrice = 699,
                     VisibleItemDelete = false,
-                    ProductList = new string[] { "ip8_1", "ip8_2" }
+                    ProductList = new string[] { "ip8_1", "ip8_2" } ,
+                    orgId = 1
                 });
             }
             InitializeComponent();
@@ -44,10 +45,10 @@ namespace DellyShopApp.Views.TabbedPages
 
         private async void InittHomePage()
         {
-            CategoryList.ItemsSource = DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId);//await DataService.GetCategories();
-            CarouselView.ItemsSource = DataService.Instance.Carousel.Where(x => x.orgID == orgId);
-            BestSellerList.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
-            PreviousViewedList.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
+            CategoryList.ItemsSource = await DataService.GetCategories(orgId);//DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId);
+            CarouselView.ItemsSource =DataService.Instance.Carousel.Where(x => x.orgID == orgId);
+            BestSellerList.ItemsSource =DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
+            PreviousViewedList.ItemsSource = await DataService.GetAllProductsByOrganizations(orgId);//DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
             MostNews.FlowItemsSource = DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList();
 
         }

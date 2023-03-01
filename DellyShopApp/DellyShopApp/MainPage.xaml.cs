@@ -14,9 +14,10 @@ namespace DellyShopApp
         {
             InitializeComponent();
             this.BindingContext = this;
-            float rows = (float)DataService.Instance.ShopDetails.Count / 2;
+            var AllOrganizations = DataService.Instance.ShopDetails; //await DataService.GetAllOrganizations();
+            float rows = (float)AllOrganizations.Count / 2;
             double rowcount = Math.Round(rows);
-            if (DataService.Instance.ShopDetails.Count % 2 == 1)
+            if (AllOrganizations.Count % 2 == 1)
             {
                 rowcount = rowcount + 1;
             }
@@ -25,22 +26,21 @@ namespace DellyShopApp
             {
                 for (int columnIndex = 0; columnIndex < 2; columnIndex++)
                 {
-                    if (productIndex >= DataService.Instance.ShopDetails.Count)
+                    if (productIndex >= AllOrganizations.Count)
                     {
                         break;
                     }
-                    var product = DataService.Instance.ShopDetails[productIndex];
+                    var product = AllOrganizations[productIndex];
                     productIndex += 1;
                     var label = new Label
                     {
                         Text = product.ShopName,
                         VerticalOptions = LayoutOptions.End,
                         HorizontalOptions = LayoutOptions.Center,
-                        TextColor= Color.Chocolate,
-                        FontAttributes= FontAttributes.Bold,
-                        FontSize = 20, 
-                        Padding = -5,
-                        
+                        TextColor = Color.Chocolate,
+                        FontAttributes = FontAttributes.Bold,
+                        FontSize = 20,  
+                       
                     };
                     var image = new Image
                     {
