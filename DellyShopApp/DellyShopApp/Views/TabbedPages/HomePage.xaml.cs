@@ -37,7 +37,8 @@ namespace DellyShopApp.Views.TabbedPages
                     Price = 499,
                     OldPrice = 699,
                     VisibleItemDelete = false,
-                    ProductList = new string[] { "ip8_1", "ip8_2" }
+                    ProductList = new string[] { "ip8_1", "ip8_2" } ,
+                    orgId = 1
                 });
             }
             InitializeComponent();
