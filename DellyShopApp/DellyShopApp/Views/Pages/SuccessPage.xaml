@@ -97,17 +97,15 @@
             <Button
                 Margin="0,0,0,10"
                 BackgroundColor="Chocolate"
-                BorderColor="Black"
-                BorderWidth="1"
                 Clicked="ContinueClick"
                 CornerRadius="20"
                 FontFamily="{DynamicResource VerdanaProRegular}"
                 FontSize="15"
-                HeightRequest="40"
+                HeightRequest="40"                
                 HorizontalOptions="CenterAndExpand"
                 MinimumWidthRequest="250"
                 Text="{x:Static languages:AppResources.HomePage}"
-                TextColor="Black"
+                TextColor="White"
                 VerticalOptions="EndAndExpand"
                 WidthRequest="150" />
 

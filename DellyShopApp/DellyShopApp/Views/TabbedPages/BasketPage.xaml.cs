@@ -32,7 +32,7 @@ namespace DellyShopApp.Views.TabbedPages
             BasketItems.ItemsSource = _basketVm.ProcutListModel;
             foreach (var item in DataService.Instance.BasketModel)
             {
-                DataService.Instance.BaseTotalPrice += item.Price;
+                //DataService.Instance.BaseTotalPrice += item.Price;
             }
             TotalPrice.Text = $"{ DataService.Instance.BaseTotalPrice + 12}₹";
         }
@@ -49,7 +49,7 @@ namespace DellyShopApp.Views.TabbedPages
 
         private async void ContinueClick(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SelectCreditCardPage(), true);
+            await Navigation.PushAsync(new SuccessPage(), true);
         }
         /// <summary>
         /// Delete Visible Settings

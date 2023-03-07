@@ -4,6 +4,9 @@ using System.Linq;
 using DellyShopApp.Helpers;
 using DellyShopApp.Languages;
 using DellyShopApp.Models;
+using DellyShopApp.Services;
+using DellyShopApp.Views.TabbedPages;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,12 +15,23 @@ namespace DellyShopApp.Views.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductDetail
     {
+        public int proId = Convert.ToInt32(SecureStorage.GetAsync("ProId").Result);
+      
+
         int productCount;
+        private static IEnumerable<ProductListModel> ItemsSource;
         private readonly List<StartList> _startList = new List<StartList>();
         private readonly List<CommentModel> _comments = new List<CommentModel>();
         private readonly ProductListModel _products;
+
+       
+
         public ProductDetail(ProductListModel product)
         {
+            //if (product.ProductList.Length == 0 || (product.ProductList.Length == 1 && string.IsNullOrEmpty(product.ProductList[0])) )
+            //{
+            //    product.ProductList = new string[] { product.Image };
+            //}
             _products = product;
 
             _startList.Add(new StartList
@@ -61,8 +75,16 @@ namespace DellyShopApp.Views.Pages
 
             CommentList.ItemsSource = _comments;
             //MainScroll.Scrolled += MainScroll_Scrolled; 
+
+            InittProductDetail();
         }
 
+        private async void InittProductDetail()
+        {
+            ProductDetail.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.proId == proId);
+           
+        }
+     
         public ProductDetail()
         {
         }
@@ -95,14 +117,29 @@ namespace DellyShopApp.Views.Pages
             await Navigation.PushAsync(new CommentsPage(_products));
         }
 
-        void AddBasketButton(object sender, EventArgs e)
-            {
-            DisplayAlert(AppResources.Success, _products.Title+" "+AppResources.AddedBakset,AppResources.Okay);
-        }
-
-        private void BuyNow(object sender, EventArgs e)
+       async void AddBasketButton(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new FirstPage());
+            Cart cart = new Cart();
+            cart.orgId = _products.orgId;
+            cart.UserId = 1;
+            cart.proId = _products.Id;
+            cart.Qty = Convert.ToInt32(ProductCountLabel.Text);           
+            await DataService.AddToCart(cart);
+            await DisplayAlert(AppResources.Success, _products.Title + " " + AppResources.AddedBakset, AppResources.Okay);
         }
+        
+        private async void BuyNow(object sender, EventArgs e)
+        {
+            Order order = new Order();
+            order.orgId = _products.orgId;
+            order.orderGuId = _products.orderGuId;
+            await DataService.PlaceOrder(order);
+            int Id = DataService.Instance.order.orgId;
+            int userId = DataService.Instance.order.UserId;
+            await Navigation.PushAsync(new MyCartPage());
+           
+        }
+        
+
     }
 }

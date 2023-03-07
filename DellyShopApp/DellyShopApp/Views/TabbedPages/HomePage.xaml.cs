@@ -37,22 +37,18 @@ namespace DellyShopApp.Views.TabbedPages
                 });
             }
             InitializeComponent();
-            ShopLogo.Source = DataService.Instance.ObjOrgData.Image;
-           
+            ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result;  //DataService.Instance.ObjOrgData.Image;
             InittHomePage();
-          
         }
-
         private async void InittHomePage()
         {
             CategoryList.ItemsSource = await DataService.GetCategories(orgId);//DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId);
-            CarouselView.ItemsSource =DataService.Instance.Carousel.Where(x => x.orgID == orgId);
+            CarouselView.ItemsSource = await DataService.GetAllCategories(orgId); //DataService.Instance.Carousel.Where(x => x.orgID == orgId);
             BestSellerList.ItemsSource =DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
-            PreviousViewedList.ItemsSource = await DataService.GetAllProductsByOrganizations(orgId);//DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
-            MostNews.FlowItemsSource = DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList();
+            PreviousViewedList.ItemsSource = await DataService.GetLastVisitedProductsByOrganizations(orgId);//DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
+            MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList();
 
         }
-
         private async void ProductDetailClick(object sender, EventArgs e)
         {
 
@@ -86,8 +82,5 @@ namespace DellyShopApp.Views.TabbedPages
             BasketLayout.IsVisible = true;
             product = ((sender as Element).BindingContext) as ProductListModel;
         }
-
-     
-
     }
 }

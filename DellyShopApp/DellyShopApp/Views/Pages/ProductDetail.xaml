@@ -43,22 +43,25 @@
                         FontFamily="{DynamicResource VerdanaProRegular}"
                         FontSize="15"
                         Text="{Binding Title}"
-                        TextColor="{DynamicResource WhiteDarkFontColor}" />
-                    <Label
-                        FontFamily="{DynamicResource VerdanaProRegular}"
-                        FontSize="12"
-                        Text="{Binding Brand}"
-                        TextColor="{DynamicResource DescLabelColor}" />
+                        TextColor="{DynamicResource WhiteDarkFontColor}" 
+                        MaxLines="1"
+                        WidthRequest="320"
+                        LineBreakMode="TailTruncation"/>
+                 
+                  
                 </StackLayout>
                 <Label
                     Margin="0,0,10,0"
                     FontAttributes="Bold"
                     FontFamily="{DynamicResource VerdanaProRegular}"
-                    FontSize="22"
+                    FontSize="18"
+                    WidthRequest="120"
+                    MaxLines="1"
                     HorizontalOptions="EndAndExpand"
                     Text="{Binding Price, StringFormat='{0}₹'}"
                     TextColor="{DynamicResource PriceLabelColor}"
-                    VerticalOptions="CenterAndExpand" />
+                    VerticalOptions="Center" />
+
             </StackLayout>
 
             <ScrollView
@@ -143,8 +146,7 @@
                                 FontSize="22"
                                 Text="{Binding Title}"
                                 TextColor="Black"
-                                VerticalOptions="Start"
-                                WidthRequest="150" />
+                                VerticalOptions="Start" />
 
                             <Label
                                 FontFamily="{DynamicResource VerdanaProRegular}"
@@ -153,15 +155,16 @@
                                 Text="{Binding Brand}"
                                 TextColor="Black"
                                 VerticalOptions="Start" />
-                        </StackLayout>
-                        <Label
+                            <Label
                             FontFamily="{DynamicResource VerdanaProBold}"
-                            FontSize="44"
-                            HorizontalOptions="EndAndExpand"
+                            FontSize="34"
+                            HorizontalOptions="Start"
                             Text="{Binding Price, StringFormat='{0}₹'}"
                             TextColor="Red"
                             VerticalOptions="StartAndExpand" />
 
+                        </StackLayout>
+                      
 
                     </StackLayout>
                     <Label

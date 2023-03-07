@@ -9,11 +9,18 @@
     xmlns:helpers="clr-namespace:DellyShopApp.Languages"
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
+    xmlns:partialViews="clr-namespace:DellyShopApp.Views.PartialViews"
     BackgroundColor="LightBlue"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
+   
+    
+    
     <ContentPage.Content>
+       
         <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
+            
+                
             <StackLayout
                 x:Name="MainStack"
                 Margin="10"
@@ -28,7 +35,7 @@
                         FontSize="25"
                         HorizontalOptions="CenterAndExpand"
                         LineBreakMode="TailTruncation"
-                        Text="{x:Static helpers:AppResources.MyBasket}"
+                        Text="Procced To CheckOut"
                         TextColor="Chocolate"
                         FontAttributes="Bold"
                         VerticalOptions="StartAndExpand"
@@ -239,7 +246,7 @@
                     </pancakeView:PancakeView>
                 </StackLayout>
                 <StackLayout  VerticalOptions="EndAndExpand">
-                    <Frame
+                    <!--<Frame
                     Margin="0,0,0,20"
                     BackgroundColor="#015598"
                     Style="{DynamicResource ButtonFrameStyle}">
@@ -249,29 +256,28 @@
                         <Image
                             Grid.Column="0"
                             Aspect="AspectFill"
-                            HeightRequest="80"
                             HorizontalOptions="CenterAndExpand"
-                            VerticalOptions="CenterAndExpand"
-                            WidthRequest="80">
+                            VerticalOptions="CenterAndExpand">
                             <Image.Source>
                                 <FontImageSource
                                     FontFamily="{DynamicResource MaterialFontFamily}"
-                                    Glyph="{x:Static font:FontAwesomeIcons.BrandPaypal}"
-                                    Size="100"
+                                    Glyph="Paytm"
+                                    Size="20"
                                     Color="{DynamicResource LabelTextColor}" />
                             </Image.Source>
                         </Image>
-                </Frame>
+                </Frame>-->
                 <Frame
-                    Margin="0,0,0,20"
-                    BackgroundColor="Chocolate"
+                    Margin="0,0,0,150"
+                    BackgroundColor="#E59500e"
                     Style="{DynamicResource ButtonFrameStyle}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ContinueClick" />
                     </Frame.GestureRecognizers>
                     <Label
                         Style="{DynamicResource ButtonLabelStyle}"
-                        Text="{x:Static helpers:AppResources.SelectCreditCard}"
+                        Text="Cash On Delivery"
+                        FontSize="20"
                         TextColor="{DynamicResource LabelTextColor}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="ContinueClick" />

@@ -22,7 +22,8 @@ namespace DellyShopApp.Services
         public ObservableCollection<NotificationModel> NotificationList = new ObservableCollection<NotificationModel>();
         public ObservableCollection<ProductListModel> ProcutListModel = new ObservableCollection<ProductListModel>();
         public ObservableCollection<ProductListModel> BasketModel = new ObservableCollection<ProductListModel>();
-     
+      
+
         public List<Category> CatoCategoriesList = new List<Category>();
         public List<Category> Carousel = new List<Category>();
         public List<StartList> StartList = new List<StartList>();
@@ -32,6 +33,7 @@ namespace DellyShopApp.Services
         public ChangeUserData EditProfile = new ChangeUserData();
         public List<CategoryDetailPage> Details = new List<CategoryDetailPage>();      
         public OrgData ObjOrgData = new OrgData();
+        public Order order = new Order();
         public double BaseTotalPrice = 0;
         public static DataService Instance
         {
@@ -95,7 +97,7 @@ namespace DellyShopApp.Services
                 VisibleItemDelete = false,
                 ProductList = new string[] { "red1", "shoesBlack" },
                 OldPrice = 570,
-                orgId = 1
+                orgId = 1,
             });
             ProcutListModel.Add(new ProductListModel
             {
@@ -107,7 +109,7 @@ namespace DellyShopApp.Services
                 VisibleItemDelete = false,
                 ProductList = new string[] { "garzy2", "grazy1" },
                 OldPrice = 270,
-                orgId = 1
+                orgId = 1,
             });
             ProcutListModel.Add(new ProductListModel
             {
@@ -119,8 +121,81 @@ namespace DellyShopApp.Services
                 VisibleItemDelete = false,
                 ProductList = new string[] { "py_1", "shoesyellow" },
                 OldPrice = 400,
-                orgId = 2
+                orgId = 2,
             });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle,
+                Brand = AppResources.ProductBrand,
+                Id = 1,
+                Image = "shoesBlack",
+                Price = 362,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "red1", "shoesBlack" },
+                OldPrice = 570,
+                orgId = 1,
+            });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle1,
+                Brand = AppResources.ProductBrand1,
+                Id = 2,
+                Image = "grazy1",
+                Price = 150,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "garzy2", "grazy1" },
+                OldPrice = 270,
+                orgId = 1,
+            });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle2,
+                Brand = AppResources.ProductBrand2,
+                Id = 3,
+                Image = "shoesyellow",
+                Price = 299,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "py_1", "shoesyellow" },
+                OldPrice = 400,
+                orgId = 2,
+            });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle2,
+                Brand = AppResources.ProductBrand2,
+                Id = 3,
+                Image = "shoesyellow",
+                Price = 299,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "py_1", "shoesyellow" },
+                OldPrice = 400,
+                orgId = 2,
+            });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle2,
+                Brand = AppResources.ProductBrand2,
+                Id = 3,
+                Image = "shoesyellow",
+                Price = 299,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "py_1", "shoesyellow" },
+                OldPrice = 400,
+                orgId = 2,
+            });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle2,
+                Brand = AppResources.ProductBrand2,
+                Id = 3,
+                Image = "shoesyellow",
+                Price = 299,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "py_1", "shoesyellow" },
+                OldPrice = 400,
+                orgId = 2,
+            });
+
             ShopDetails = new List<ShopModel>();
             ShopDetails.Add(new ShopModel
             {
@@ -200,7 +275,7 @@ namespace DellyShopApp.Services
             });
 
 
-                CatoCategoriesList.Add(new Category
+            CatoCategoriesList.Add(new Category
             {
                 CategoryName = AppResources.Shoes,
                 Banner = "shoesCategory.png",
@@ -248,6 +323,10 @@ namespace DellyShopApp.Services
                 CategoryId = "3",
                 orgID = 2
             });
+
+            order.orgId = 1;
+            order.UserId = 1;
+               
 
             ObjOrgData.ID = 1;
             ObjOrgData.Image = "logo.png";
@@ -388,6 +467,95 @@ namespace DellyShopApp.Services
                 return JsonConvert.DeserializeObject<List<ProductListModel>>(result);
             }
             catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public static async Task<List<ProductListModel>> GetLastVisitedProductsByOrganizations(int orgId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Products/GetLastVisitedProductsByOrganizations?org_Id=" + orgId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<ProductListModel>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<List<Category>> GetAllCategories(int orgId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Category/GetAllCategories?OrgId=" + orgId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<Category>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<int> AddToCart(Cart cart)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                return 0;
+            }
+            catch (Exception ex)
+
+            {
+                throw;
+            }
+        }
+        public static async Task<int> PlaceOrder(Order order)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                return 0;
+            }
+            catch (Exception ex)
+
             {
                 throw;
             }
