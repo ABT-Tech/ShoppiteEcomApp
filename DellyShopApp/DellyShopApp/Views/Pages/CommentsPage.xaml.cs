@@ -17,7 +17,7 @@ namespace DellyShopApp.Views.Pages
 
         private readonly List<CommentModel> _comments = new List<CommentModel>();
         private bool filterLayout = false;
-        public CommentsPage(ProductListModel product)
+        public CommentsPage(Order product)
         {
             _startList.Add(new StartList
             {
@@ -75,7 +75,14 @@ namespace DellyShopApp.Views.Pages
             CommentList.ItemsSource = _comments;
             filterStars.ItemsSource = _filter;
         }
-        
+
+        public CommentsPage(ProductListModel products)
+        {
+            Products = products;
+        }
+
+        public ProductListModel Products { get; }
+
         private async void BackButton(object sender, EventArgs e)
         {
           await Navigation.PopAsync();

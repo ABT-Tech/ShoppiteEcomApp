@@ -53,7 +53,22 @@ namespace DellyShopApp.CustomControl
 			}
 		}
 
-		protected override void OnBindingContextChanged()
+        internal object FindBycontrol<T>(string v)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        internal object FindByNamel<T>(string v)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        internal object FindByName<T>(string v)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void OnBindingContextChanged()
 		{
 			base.OnBindingContextChanged();
 			this.Populate();

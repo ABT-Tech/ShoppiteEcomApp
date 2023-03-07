@@ -34,7 +34,7 @@ namespace DellyShopApp.Views.Pages
                 CardColor = "#68C277"
             });
             InitializeComponent();
-            CarouselView.ItemsSource = _crediCard;
+            //CarouselView.ItemsSource = _crediCard;
         }
 
         private void AddCardClick(object sender, EventArgs e)

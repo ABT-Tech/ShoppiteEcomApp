@@ -31,7 +31,9 @@
     <MtouchDebug>true</MtouchDebug>
     <CodesignExtraArgs>
     </CodesignExtraArgs>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>Apple Development: jenith.thakkar@icloud.com (8DPLR3WPX2)</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>iOS Team Provisioning Profile: *</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>

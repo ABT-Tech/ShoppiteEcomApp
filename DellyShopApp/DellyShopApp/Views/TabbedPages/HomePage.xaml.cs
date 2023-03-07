@@ -14,14 +14,16 @@ namespace DellyShopApp.Views.TabbedPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage
     {
-        ProductListModel product = new ProductListModel();
-        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("orgId").Result);
-
-        public Category C { get; private set; }
-        public object ProcutListModel { get; private set; }
-
+        //Order product = new Order();
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+
+       
+       public Category C { get; private set; }
+       public object ProcutListModel { get; private set; }
+
+        
         private bool x;
+        private ProductListModel product;
 
         public HomePage()
         {
@@ -42,8 +44,8 @@ namespace DellyShopApp.Views.TabbedPages
                 });
             }
             InitializeComponent();
-            ShopLogo.Source = DataService.Instance.ObjOrgData.Image;
-           
+            ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;
+
             InittHomePage();
           
         }
@@ -51,12 +53,13 @@ namespace DellyShopApp.Views.TabbedPages
         private async void InittHomePage()
         {
             CategoryList.ItemsSource = DataService.Instance.CatoCategoriesList;//await DataService.GetCategories();
-            CarouselView.ItemsSource = DataService.Instance.Carousel;
+            CarouselView.ItemsSource = await DataService.GetAllCategories(orgId);//DataService.Instance.Carousel;
             BestSellerList.ItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId);//DataService.Instance.ProcutListModel;
             PreviousViewedList.ItemsSource = DataService.Instance.ProcutListModel;
-            MostNews.FlowItemsSource = DataService.Instance.ProcutListModel;
+            MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId);//DataService.Instance.ProcutListModel;
 
-           
+
+
         }
 
         private async void ProductDetailClick(object sender, EventArgs e)
@@ -66,7 +69,7 @@ namespace DellyShopApp.Views.TabbedPages
             if (!(pancake.BindingContext is ProductListModel item)) return;
             await Navigation.PushAsync(new ProductDetail(item));
             
-          // await Shell.Current.GoToAsync(nameof(ProductDetail));
+          
            
         }
 
@@ -106,23 +109,7 @@ namespace DellyShopApp.Views.TabbedPages
 
         void BorderlessSearchBar_TextChanged(System.Object sender, Xamarin.Forms.TextChangedEventArgs e)
         {
-           /*if (string.IsNullOrEmpty(e.NewTextValue))
-            {
-                ShopModel.ItemsSource = ;
-            }
-
-            else
-            {
-                list.ItemsSource = tempdata.Where(x => x.Name.StartsWith(e.NewTextValue));
-            }*/
-
-
-            //SearchBar searchBar = (SearchBar)sender;
-            //ProductListModel. = DataService.Instance(searchBar.Text);
-
-            //SearchBar searchBar = new SearchBar { Placeholder = "Search items..." };
-            // var Searchbar = ProcutListModel.ToString(c => c.ProductListModel.Cotains(SearchBar.Text));
-
+           
         }
 
     }

@@ -69,7 +69,7 @@ namespace DellyShopApp
                     };
                     image.GestureRecognizers.Add(new TapGestureRecognizer
                     {
-                        Command = new Command(() => TapGestureRecognizer_Tapped(Orglabel.Text)),
+                        Command = new Command(() => TapGestureRecognizer_Tapped(Orglabel.Text,product.Image.ToString())),
                     });
                     shop.Children.Add(image, columnIndex, rowIndex);
                     shop.Children.Add(label, columnIndex, rowIndex);
@@ -79,9 +79,10 @@ namespace DellyShopApp
             //shop.ItemsSource = DataService.Instance.ShopDetails;
         }
 
-        private  void TapGestureRecognizer_Tapped(string orgId)
+        private  void TapGestureRecognizer_Tapped(string orgId,String Img)
         {
             SecureStorage.SetAsync("OrgId",orgId);
+            SecureStorage.SetAsync("ImgId", Img);
             Navigation.PushAsync(new HomeTabbedPage());
          
         }

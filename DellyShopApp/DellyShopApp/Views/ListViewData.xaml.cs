@@ -12,6 +12,8 @@ namespace DellyShopApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListViewData : ContentPage
     {
+        internal static object children;
+
         public IList<shop> Shops { get; set; }
         public ListViewData()
         {

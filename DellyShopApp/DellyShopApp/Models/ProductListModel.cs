@@ -20,6 +20,9 @@ namespace DellyShopApp.Models
 
         
         private int _rotate;
+        internal string orderStatus;
+        internal Guid orderGuid;
+
         public int Rotate
         {
             get => _rotate;
@@ -41,6 +44,9 @@ namespace DellyShopApp.Models
         public int orgId { get; set; }
         public string[] ProductList { get; set; }
         public int OldPrice { get; set; }
+        public int proId { get; set; }
+        public Guid GuId { get; internal set; }
+        public DateTime InsertDate { get; internal set; }
     }
 }
 

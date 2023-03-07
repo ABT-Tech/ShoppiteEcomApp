@@ -10,7 +10,7 @@ namespace DellyShopApp.Views.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SuccessPage
     {
-        private List<ProductListModel> _procutListModel = new List<ProductListModel>();
+        private List<Order> _procutListModel = new List<Order>();
 
         public SuccessPage()
         {

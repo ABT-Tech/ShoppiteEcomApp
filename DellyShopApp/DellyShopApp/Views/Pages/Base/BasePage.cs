@@ -20,6 +20,5 @@ namespace DellyShopApp.Views.Pages.Base
             On<iOS>().SetPrefersHomeIndicatorAutoHidden(true);
             On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True).SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             this.FlowDirection = Settings.SelectLanguage == "ar" ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
-        }
-    }
+        }    }
 }

@@ -49,7 +49,7 @@ namespace DellyShopApp.Views.TabbedPages
 
         private async void ContinueClick(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SelectCreditCardPage(), true);
+            await Navigation.PushAsync(new SuccessPage(), true);
         }
         /// <summary>
         /// Delete Visible Settings
