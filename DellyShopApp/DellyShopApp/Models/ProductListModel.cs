@@ -45,8 +45,19 @@ namespace DellyShopApp.Models
         public string[] ProductList { get; set; }
         public int OldPrice { get; set; }
         public int proId { get; set; }
-        public Guid GuId { get; internal set; }
+        public Guid OrderGuId { get; internal set; }
         public DateTime InsertDate { get; internal set; }
+        public int UserId { get; set; }
+        // public class name
+        //{
+        //    public int Qty;
+        //    public int Name { get { return name; } set { name = value; } }
+        //}
+
+        public static implicit operator ProductListModel(List<ProductListModel> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

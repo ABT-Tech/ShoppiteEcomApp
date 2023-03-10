@@ -7,6 +7,7 @@ using DellyShopApp.Views.Pages;
 using PayPal.Forms;
 using PayPal.Forms.Abstractions;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Xamarin.Forms;
@@ -19,10 +20,13 @@ namespace DellyShopApp.Views.TabbedPages
     {
 
         private readonly BasketPageVm _basketVm = new BasketPageVm();
-
-        public BasketPage()
+        private List<ProductListModel> Product { get; set; }
+        public BasketPage(List<ProductListModel>product)
         {
+
             InitializeComponent();
+            this.Product = product;
+            this.BindingContext = product;
         }
         protected override async void OnAppearing()
         {

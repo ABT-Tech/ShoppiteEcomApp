@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using DellyShopApp.Helpers;
 using DellyShopApp.Languages;
@@ -33,7 +34,6 @@ namespace DellyShopApp.Services
         public List<ShopModel> ShopDetails = new List<ShopModel>();
         public ChangeUserData EditProfile = new ChangeUserData();
         public List<CategoryDetailPage> Details = new List<CategoryDetailPage>();
-       // public List<Order> orders = new List<Order>();
         public OrgData ObjOrgData = new OrgData();
         public Order order = new Order();
         public double BaseTotalPrice = 0;
@@ -102,7 +102,11 @@ namespace DellyShopApp.Services
                 ProductList = new string[] { "red1", "shoesBlack" },
                 OldPrice = 570,
                 orgId = 1,
-                proId = 1
+                proId = 1,
+                UserId = 1,
+                //Qty = Int32.MaxValue
+               
+                
             });
             ProcutListModel.Add(new ProductListModel
             {
@@ -115,7 +119,25 @@ namespace DellyShopApp.Services
                 ProductList = new string[] { "garzy2", "grazy1" },
                 OldPrice = 270,
                 orgId = 1,
-                proId = 2
+                proId = 2,
+                UserId = 2
+                
+              
+        });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle2,
+                Brand = AppResources.ProductBrand2,
+                Id = 3,
+                Image = "shoesyellow",
+                Price = 299,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "py_1", "shoesyellow" },
+                OldPrice = 400,
+                orgId = 2,
+                proId = 2,
+                UserId = 3
+                
             });
             ProcutListModel.Add(new ProductListModel
             {
@@ -128,73 +150,9 @@ namespace DellyShopApp.Services
                 ProductList = new string[] { "py_1", "shoesyellow" },
                 OldPrice = 400,
                 orgId = 2,
-                proId = 2
-            });
-            ProcutListModel.Add(new ProductListModel
-            {
-                Title = AppResources.ProcutTitle,
-                Brand = AppResources.ProductBrand,
-                Id = 1,
-                Image = "shoesBlack",
-                Price = 362,
-                VisibleItemDelete = false,
-                ProductList = new string[] { "red1", "shoesBlack" },
-                OldPrice = 570,
-                orgId = 1,
-                proId = 1
-            });
-            ProcutListModel.Add(new ProductListModel
-            {
-                Title = AppResources.ProcutTitle,
-                Brand = AppResources.ProductBrand,
-                Id = 1,
-                Image = "shoesBlack",
-                Price = 362,
-                VisibleItemDelete = false,
-                ProductList = new string[] { "red1", "shoesBlack" },
-                OldPrice = 570,
-                orgId = 1,
-                proId = 1
-            });
-            ProcutListModel.Add(new ProductListModel
-            {
-                Title = AppResources.ProcutTitle2,
-                Brand = AppResources.ProductBrand2,
-                Id = 3,
-                Image = "shoesyellow",
-                Price = 299,
-                VisibleItemDelete = false,
-                ProductList = new string[] { "py_1", "shoesyellow" },
-                OldPrice = 400,
-                orgId = 2,
-                proId = 2
-            });
-            ProcutListModel.Add(new ProductListModel
-            {
-                Title = AppResources.ProcutTitle,
-                Brand = AppResources.ProductBrand,
-                Id = 1,
-                Image = "shoesBlack",
-                Price = 362,
-                VisibleItemDelete = false,
-                ProductList = new string[] { "red1", "shoesBlack" },
-                OldPrice = 570,
-                orgId = 1,
-                proId = 1
-            });
-           
-            ProcutListModel.Add(new ProductListModel
-            {
-                Title = AppResources.ProcutTitle2,
-                Brand = AppResources.ProductBrand2,
-                Id = 3,
-                Image = "shoesyellow",
-                Price = 299,
-                VisibleItemDelete = false,
-                ProductList = new string[] { "py_1", "shoesyellow" },
-                OldPrice = 400,
-                orgId = 2,
-                proId = 2
+                proId = 2,
+                UserId = 3
+               
             });
             ShopDetails = new List<ShopModel>();
             ShopDetails.Add(new ShopModel
@@ -601,18 +559,31 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
-        public static async Task<int> AddToCart(Cart cart)
+        public static async Task<string> AddToCart(Cart cart)
         {
             try
             {
-                
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
                 HttpClientHandler clientHandler = new HttpClientHandler
                 {
                     ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
                 };
-                return 0;
+
+                var payload = JsonConvert.SerializeObject(cart);
+
+                HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+                HttpClient httpClient = new HttpClient(clientHandler);
+                httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+                var response = await httpClient.PostAsync("/api/Cart/AddToCart", c);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return result;
             }
             catch (Exception ex)
+
             {
                 throw;
             }
