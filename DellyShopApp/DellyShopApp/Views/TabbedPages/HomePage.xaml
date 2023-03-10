@@ -33,9 +33,11 @@
                     Style="{DynamicResource FrameStyle}">
                     <renderers:BorderlessSearchBar
                         BackgroundColor="Transparent"
-                        CancelButtonColor="{DynamicResource MainColor}"
+                        CancelButtonColor="Black"
                         FontFamily="{DynamicResource VerdanaProRegular}"
-                        TextColor="{DynamicResource EntryTextColor}" />
+                        TextColor="{DynamicResource EntryTextColor}"
+                        Placeholder="Search Item...."
+                        PlaceholderColor="Black"/>
                 </Frame>
                 <Label
                     Margin="0"

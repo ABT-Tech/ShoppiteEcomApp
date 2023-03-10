@@ -9,5 +9,6 @@ namespace DellyShopApp.Models
         public int orgId { get; set; }
         public Guid orderGuId { get; set; }
         public int UserId { get; set; }
+        public int Qty { get; set; }
     }
 }

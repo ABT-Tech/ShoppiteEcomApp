@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using DellyShopApp.Helpers;
 using DellyShopApp.Languages;
@@ -33,6 +34,7 @@ namespace DellyShopApp.Services
         public ChangeUserData EditProfile = new ChangeUserData();
         public List<CategoryDetailPage> Details = new List<CategoryDetailPage>();      
         public OrgData ObjOrgData = new OrgData();
+        public Cart cart = new Cart();
         public Order order = new Order();
         public double BaseTotalPrice = 0;
         public static DataService Instance
@@ -324,9 +326,12 @@ namespace DellyShopApp.Services
                 orgID = 2
             });
 
+            cart.orgId = 1;
+            cart.UserId = 1;
+
             order.orgId = 1;
             order.UserId = 1;
-               
+            
 
             ObjOrgData.ID = 1;
             ObjOrgData.Image = "logo.png";
@@ -520,8 +525,8 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
-        public static async Task<int> AddToCart(Cart cart)
-        {
+        public static async Task<string> AddToCart(Cart cart)
+         {
             try
             {
                 //await TokenValidator.CheckTokenValidity();
@@ -532,7 +537,16 @@ namespace DellyShopApp.Services
                 {
                     ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
                 };
-                return 0;
+                
+                var payload = JsonConvert.SerializeObject(cart);
+
+                HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+                HttpClient httpClient = new HttpClient(clientHandler);
+                httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+                var response = await httpClient.PostAsync( "/api/Cart/AddToCart",c);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return result;
             }
             catch (Exception ex)
 
@@ -541,7 +555,7 @@ namespace DellyShopApp.Services
             }
         }
         public static async Task<int> PlaceOrder(Order order)
-        {
+         {
             try
             {
                 //await TokenValidator.CheckTokenValidity();

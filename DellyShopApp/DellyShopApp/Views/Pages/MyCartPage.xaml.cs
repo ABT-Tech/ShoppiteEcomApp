@@ -18,8 +18,10 @@ namespace DellyShopApp.Views.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MyCartPage 
     {
-        int productCount; 
+        int productCount;        
+        private readonly  Order _items;
         public  MyCartPage()
+
         {
             InitializeComponent();
             BasketItems.ItemsSource = DataService.Instance.ProcutListModel;
@@ -30,9 +32,13 @@ namespace DellyShopApp.Views.Pages
             if (!(pancake.BindingContext is ProductListModel item)) return;
             await Navigation.PushAsync(new ProductDetail(item));
         }
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new BasketPage());
+            Order order = new Order();
+            order.orgId = 1;
+            order.UserId = 1;         
+            await DataService.PlaceOrder(order);
+           await Navigation.PushAsync(new BasketPage());
         }
         private void PlusClick(object sender, EventArgs e)
         {
@@ -49,8 +55,7 @@ namespace DellyShopApp.Views.Pages
             StackLayout repaterStack = (StackLayout)image.Parent;
             Label MyCartCountLable = (Label)repaterStack.Children[1];
             int CurrentQuantity = Convert.ToInt32(MyCartCountLable.Text);
-            if (CurrentQuantity == 1) return;
-            
+            if (CurrentQuantity == 1) return;            
             MyCartCountLable.Text = (--CurrentQuantity).ToString();
         }
         private void MainScroll_Scrolled(object sender, ScrolledEventArgs e)

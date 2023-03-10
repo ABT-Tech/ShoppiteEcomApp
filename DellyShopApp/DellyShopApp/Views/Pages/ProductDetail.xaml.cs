@@ -130,16 +130,15 @@ namespace DellyShopApp.Views.Pages
         
         private async void BuyNow(object sender, EventArgs e)
         {
-            Order order = new Order();
-            order.orgId = _products.orgId;
-            order.orderGuId = _products.orderGuId;
-            await DataService.PlaceOrder(order);
-            int Id = DataService.Instance.order.orgId;
-            int userId = DataService.Instance.order.UserId;
-            await Navigation.PushAsync(new MyCartPage());
-           
-        }
-        
-
+            Cart cart = new Cart();
+            cart.orgId = _products.orgId;
+            cart.UserId = 1;
+            cart.proId = _products.Id;
+            cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
+            await DataService.AddToCart(cart);
+            int Id = DataService.Instance.cart.orgId;
+            int userId = DataService.Instance.cart.UserId;
+            await Navigation.PushAsync(new MyCartPage());           
+        }  
     }
 }

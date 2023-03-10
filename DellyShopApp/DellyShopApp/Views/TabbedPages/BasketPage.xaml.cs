@@ -7,6 +7,7 @@ using DellyShopApp.Views.Pages;
 using PayPal.Forms;
 using PayPal.Forms.Abstractions;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Xamarin.Forms;
@@ -19,11 +20,17 @@ namespace DellyShopApp.Views.TabbedPages
     {
 
         private readonly BasketPageVm _basketVm = new BasketPageVm();
-
-        public BasketPage()
+      
+       
+        public BasketPage(List<Order> _items)
         {
             InitializeComponent();
         }
+
+        public BasketPage()
+        {
+        }
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
@@ -32,7 +39,7 @@ namespace DellyShopApp.Views.TabbedPages
             BasketItems.ItemsSource = _basketVm.ProcutListModel;
             foreach (var item in DataService.Instance.BasketModel)
             {
-                //DataService.Instance.BaseTotalPrice += item.Price;
+               // DataService.Instance.BaseTotalPrice += item.Price;
             }
             TotalPrice.Text = $"{ DataService.Instance.BaseTotalPrice + 12}₹";
         }
