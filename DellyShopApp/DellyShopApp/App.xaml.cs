@@ -72,6 +72,7 @@ namespace DellyShopApp
                 System.Diagnostics.Debug.WriteLine("Deleted");
             };
             MainPage navigation = new MainPage();
+            MainPage = new NavigationPage(new MainPage());
             NavigationPage navpage = new NavigationPage(navigation);
             NavigationPage.SetHasNavigationBar(navpage, false);
             NavigationPage.SetHasNavigationBar(navigation, false);

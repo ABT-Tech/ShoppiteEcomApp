@@ -42,11 +42,11 @@ namespace DellyShopApp.Views.TabbedPages
         }
         private async void InittHomePage()
         {
-            CategoryList.ItemsSource = await DataService.GetCategories(orgId);//DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId);
-            CarouselView.ItemsSource = await DataService.GetAllCategories(orgId); //DataService.Instance.Carousel.Where(x => x.orgID == orgId);
+            CategoryList.ItemsSource = await DataService.GetCategories(orgId); //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId);
+            CarouselView.ItemsSource =await DataService.GetAllCategories(orgId); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
             BestSellerList.ItemsSource =DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
-            PreviousViewedList.ItemsSource = await DataService.GetLastVisitedProductsByOrganizations(orgId);//DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
-            MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList();
+            PreviousViewedList.ItemsSource = await DataService.GetLastVisitedProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
+            MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
 
         }
         private async void ProductDetailClick(object sender, EventArgs e)

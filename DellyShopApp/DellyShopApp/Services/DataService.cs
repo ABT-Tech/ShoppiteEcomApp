@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using DellyShopApp.Helpers;
+﻿using DellyShopApp.Helpers;
 using DellyShopApp.Languages;
 using DellyShopApp.Models;
 using DellyShopApp.Views.Pages;
 using Newtonsoft.Json;
-using Xamarin.Essentials;
-using Xamarin.Forms;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DellyShopApp.Services
 {
@@ -23,19 +20,20 @@ namespace DellyShopApp.Services
         public ObservableCollection<NotificationModel> NotificationList = new ObservableCollection<NotificationModel>();
         public ObservableCollection<ProductListModel> ProcutListModel = new ObservableCollection<ProductListModel>();
         public ObservableCollection<ProductListModel> BasketModel = new ObservableCollection<ProductListModel>();
-      
 
         public List<Category> CatoCategoriesList = new List<Category>();
         public List<Category> Carousel = new List<Category>();
         public List<StartList> StartList = new List<StartList>();
         public List<Category> CatoCategoriesDetail = new List<Category>();
         public List<CommentModel> CommentList = new List<CommentModel>();
-        public List<ShopModel> ShopDetails= new List<ShopModel>();
+        public List<ShopModel> ShopDetails = new List<ShopModel>();
         public ChangeUserData EditProfile = new ChangeUserData();
-        public List<CategoryDetailPage> Details = new List<CategoryDetailPage>();      
+        public List<ChangeAddress> changeAddress = new List<ChangeAddress>();
+        public List<CategoryDetailPage> Details = new List<CategoryDetailPage>();
         public OrgData ObjOrgData = new OrgData();
         public Cart cart = new Cart();
         public Order order = new Order();
+        public OrderCheckOut ordercheckout = new OrderCheckOut();
         public double BaseTotalPrice = 0;
         public static DataService Instance
         {
@@ -66,7 +64,7 @@ namespace DellyShopApp.Services
         }
         public DataService()
         {
-            
+
             NotificationList.Add(new NotificationModel
             {
                 Title = AppResources.NotificatinTitle,
@@ -100,6 +98,7 @@ namespace DellyShopApp.Services
                 ProductList = new string[] { "red1", "shoesBlack" },
                 OldPrice = 570,
                 orgId = 1,
+                Quantity = 1
             });
             ProcutListModel.Add(new ProductListModel
             {
@@ -112,6 +111,7 @@ namespace DellyShopApp.Services
                 ProductList = new string[] { "garzy2", "grazy1" },
                 OldPrice = 270,
                 orgId = 1,
+                Quantity = 1
             });
             ProcutListModel.Add(new ProductListModel
             {
@@ -124,79 +124,9 @@ namespace DellyShopApp.Services
                 ProductList = new string[] { "py_1", "shoesyellow" },
                 OldPrice = 400,
                 orgId = 2,
+                Quantity = 1
             });
-            ProcutListModel.Add(new ProductListModel
-            {
-                Title = AppResources.ProcutTitle,
-                Brand = AppResources.ProductBrand,
-                Id = 1,
-                Image = "shoesBlack",
-                Price = 362,
-                VisibleItemDelete = false,
-                ProductList = new string[] { "red1", "shoesBlack" },
-                OldPrice = 570,
-                orgId = 1,
-            });
-            ProcutListModel.Add(new ProductListModel
-            {
-                Title = AppResources.ProcutTitle1,
-                Brand = AppResources.ProductBrand1,
-                Id = 2,
-                Image = "grazy1",
-                Price = 150,
-                VisibleItemDelete = false,
-                ProductList = new string[] { "garzy2", "grazy1" },
-                OldPrice = 270,
-                orgId = 1,
-            });
-            ProcutListModel.Add(new ProductListModel
-            {
-                Title = AppResources.ProcutTitle2,
-                Brand = AppResources.ProductBrand2,
-                Id = 3,
-                Image = "shoesyellow",
-                Price = 299,
-                VisibleItemDelete = false,
-                ProductList = new string[] { "py_1", "shoesyellow" },
-                OldPrice = 400,
-                orgId = 2,
-            });
-            ProcutListModel.Add(new ProductListModel
-            {
-                Title = AppResources.ProcutTitle2,
-                Brand = AppResources.ProductBrand2,
-                Id = 3,
-                Image = "shoesyellow",
-                Price = 299,
-                VisibleItemDelete = false,
-                ProductList = new string[] { "py_1", "shoesyellow" },
-                OldPrice = 400,
-                orgId = 2,
-            });
-            ProcutListModel.Add(new ProductListModel
-            {
-                Title = AppResources.ProcutTitle2,
-                Brand = AppResources.ProductBrand2,
-                Id = 3,
-                Image = "shoesyellow",
-                Price = 299,
-                VisibleItemDelete = false,
-                ProductList = new string[] { "py_1", "shoesyellow" },
-                OldPrice = 400,
-                orgId = 2,
-            });
-            ProcutListModel.Add(new ProductListModel
-            {
-                Title = AppResources.ProcutTitle2,
-                Brand = AppResources.ProductBrand2,
-                Id = 3,
-                Image = "shoesyellow",
-                Price = 299,
-                VisibleItemDelete = false,
-                ProductList = new string[] { "py_1", "shoesyellow" },
-                OldPrice = 400,
-                orgId = 2,
-            });
+
 
             ShopDetails = new List<ShopModel>();
             ShopDetails.Add(new ShopModel
@@ -204,42 +134,42 @@ namespace DellyShopApp.Services
                 ShopName = "Grocery Store",
                 OrgId = 1,
                 Image = "Grocery_Store.png",
-               
+
             });
             ShopDetails.Add(new ShopModel
             {
                 ShopName = "Pet Store",
                 OrgId = 2,
                 Image = "Pet_Store.png",
-             
+
             });
             ShopDetails.Add(new ShopModel
             {
                 ShopName = "Coffee Store",
                 OrgId = 3,
                 Image = "Coffee_Store.png",
-               
+
             });
             ShopDetails.Add(new ShopModel
             {
                 ShopName = "Fruit Store",
                 OrgId = 4,
                 Image = "Fruit_Store.png",
-              
+
             });
             ShopDetails.Add(new ShopModel
             {
                 ShopName = "Cloth Store",
                 OrgId = 5,
                 Image = "Cloth_Store.png",
-             
+
             });
             ShopDetails.Add(new ShopModel
             {
                 ShopName = "Hardware Store",
                 OrgId = 6,
                 Image = "Hardware_Store.png",
-               
+
             });
             ShopDetails.Add(new ShopModel
             {
@@ -283,7 +213,7 @@ namespace DellyShopApp.Services
                 Banner = "shoesCategory.png",
                 CategoryId = "1",
                 orgID = 1
-                
+
             });
             CatoCategoriesList.Add(new Category
             {
@@ -331,7 +261,7 @@ namespace DellyShopApp.Services
 
             order.orgId = 1;
             order.UserId = 1;
-            
+
 
             ObjOrgData.ID = 1;
             ObjOrgData.Image = "logo.png";
@@ -341,6 +271,16 @@ namespace DellyShopApp.Services
             EditProfile.ChangePhoneNumber = "7878787878";
             EditProfile.ChangeBdate = "1 / 1 / 2000";
             EditProfile.ChangeAddress = "India";
+
+            changeAddress.Add(new ChangeAddress
+            {
+                AddressId = 1,
+                AddressTitle = "c-807",
+                SelectCountry = "india",
+                SelectCity = "Rajkot",
+                SelectStreet = "1",
+                AddressDetail = "abc"
+            });
 
             StartList.Add(new StartList
             {
@@ -393,7 +333,7 @@ namespace DellyShopApp.Services
             CatoCategoriesDetail.Add(new Category
             {
                 Banner = "shoes.jpg",
-                orgID =  1
+                orgID = 1
 
             });
             CatoCategoriesDetail.Add(new Category
@@ -442,7 +382,7 @@ namespace DellyShopApp.Services
                 };
                 HttpClient httpClient = new HttpClient(clientHandler);
                 var response = await httpClient.GetAsync(
-                    AppSettings.ApiUrl + "api/Category/GetAllCategories?OrgId="+ orgId);
+                    AppSettings.ApiUrl + "api/Category/GetAllCategories?OrgId=" + orgId);
 
                 string result = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<Category>>(result);
@@ -526,7 +466,7 @@ namespace DellyShopApp.Services
             }
         }
         public static async Task<string> AddToCart(Cart cart)
-         {
+        {
             try
             {
                 //await TokenValidator.CheckTokenValidity();
@@ -537,13 +477,13 @@ namespace DellyShopApp.Services
                 {
                     ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
                 };
-                
+
                 var payload = JsonConvert.SerializeObject(cart);
 
                 HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
                 HttpClient httpClient = new HttpClient(clientHandler);
                 httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
-                var response = await httpClient.PostAsync( "/api/Cart/AddToCart",c);
+                var response = await httpClient.PostAsync("/api/Cart/AddToCart", c);
 
                 string result = await response.Content.ReadAsStringAsync();
                 return result;
@@ -555,7 +495,27 @@ namespace DellyShopApp.Services
             }
         }
         public static async Task<int> PlaceOrder(Order order)
-         {
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                return 0;
+            }
+            catch (Exception ex)
+
+            {
+                throw;
+            }
+        }
+        public static async Task<int> Checkout(OrderCheckOut orderCheckOut)
+        {
             try
             {
                 //await TokenValidator.CheckTokenValidity();

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage  xmlns:pages="http://rotorgames.com"
+                  xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DellyShopApp.Views.Pages.PopupView">
+    <StackLayout Margin="12"
+                 Padding="24"
+                 Spacing="24"
+                 BackgroundColor="White"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center">
+        <StackLayout>            <Label Text="Address Title"/>            <Entry Text=""                   FontSize="25"/>        </StackLayout>        <StackLayout>            <Label Text="Select Country"/>            <Entry Text=""                   FontSize="25"/>        </StackLayout>        <StackLayout>            <Label Text="Select City"/>            <Entry Text=""                   FontSize="25"/>        </StackLayout>        <StackLayout>            <Label Text="Select Street"/>            <Entry Text=""                   FontSize="25"/>        </StackLayout>        <StackLayout>            <Label Text="Address Detail"/>            <Entry Text=""                   FontSize="25"/>        </StackLayout>        <Button Text="Address Add"                BackgroundColor="Chocolate"                FontSize="25"                TextColor="White"                Clicked="Button_Clicked"/>
+    </StackLayout>
+</pages:PopupPage>

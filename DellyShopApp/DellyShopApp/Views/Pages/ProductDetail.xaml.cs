@@ -81,7 +81,7 @@ namespace DellyShopApp.Views.Pages
 
         private async void InittProductDetail()
         {
-            ProductDetail.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.proId == proId);
+            ProductDetail.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.Id == proId);
            
         }
      

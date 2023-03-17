@@ -1,18 +1,21 @@
 ﻿using System;
-using DellyShopApp.Models;
-using DellyShopApp.Languages;
 using DellyShopApp.Views.Pages;
 using Xamarin.Forms;
 using DellyShopApp.Services;
 using Xamarin.Essentials;
+using Android.OS;
+using Android.Runtime;
 
 namespace DellyShopApp
-{    
+{
+    
     public partial class MainPage
     {
+
         public MainPage()
         {
             InitializeComponent();
+            
             this.BindingContext = this;
             var AllOrganizations = DataService.Instance.ShopDetails; //await DataService.GetAllOrganizations();
             float rows = (float)AllOrganizations.Count / 2;
@@ -70,11 +73,14 @@ namespace DellyShopApp
             //shop.ItemsSource = DataService.Instance.ShopDetails;
         }
 
+
         private  void TapGestureRecognizer_Tapped(string orgId,string Img)
         {
             SecureStorage.SetAsync("OrgId",orgId);
             SecureStorage.SetAsync("ImgId", Img);
             Navigation.PushAsync(new HomeTabbedPage());
-        }      
+        } 
+        
     }
+   
 }

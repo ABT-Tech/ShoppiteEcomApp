@@ -12,8 +12,6 @@ namespace DellyShopApp.Views.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoryDetailPage
     {
-      
-
         public CategoryDetailPage(Category category)
         {
             InitializeComponent();

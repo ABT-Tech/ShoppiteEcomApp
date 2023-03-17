@@ -11,8 +11,6 @@ namespace DellyShopApp.Views.Pages
         public  string ChangePhoneNumber { get; set; }
         public  string ChangeBdate { get; set; }
         public  string ChangeAddress { get; set; }
-
-    }
-   
+    }   
 }
  

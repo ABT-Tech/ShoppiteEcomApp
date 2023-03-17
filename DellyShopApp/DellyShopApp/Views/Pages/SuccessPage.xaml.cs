@@ -10,12 +10,31 @@ namespace DellyShopApp.Views.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SuccessPage
     {
-        private List<ProductListModel> _procutListModel = new List<ProductListModel>();
+        private List<Order> _procutListModel = new List<Order>();
+
+        public List<ProductListModel> Product { get; }
+
+        public SuccessPage(List<ProductListModel> product)
+        {
+            InitializeComponent();
+            InittSuccessPage();
+            this.Product = product;
+            this.BindingContext = product;
+            BasketItems.ItemsSource = DataService.Instance.BasketModel;
+            foreach (var item in DataService.Instance.ProcutListModel)
+            {
+                DataService.Instance.BaseTotalPrice += item.Price;
+
+            }
+        }
 
         public SuccessPage()
         {
-            InitializeComponent();
-            BasketItems.ItemsSource = DataService.Instance.BasketModel;
+        }
+
+        private async void InittSuccessPage()
+        {
+            //BasketItems.ItemsSource = DataService.Instance.ProcutListModel;
         }
 
         private async void ContinueClick(object sender, EventArgs e)

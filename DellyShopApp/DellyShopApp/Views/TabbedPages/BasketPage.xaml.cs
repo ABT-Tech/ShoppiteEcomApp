@@ -2,7 +2,6 @@
 using DellyShopApp.Services;
 using DellyShopApp.ViewModel;
 using DellyShopApp.Views.CustomView;
-using DellyShopApp.Views.ModalPages;
 using DellyShopApp.Views.Pages;
 using PayPal.Forms;
 using PayPal.Forms.Abstractions;
@@ -10,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,30 +18,56 @@ namespace DellyShopApp.Views.TabbedPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BasketPage
     {
-
         private readonly BasketPageVm _basketVm = new BasketPageVm();
-      
-       
-        public BasketPage(List<Order> _items)
+        private int _quantity;
+        private Page2 page;
+
+        private List<ProductListModel> Product { get; set; }
+        public BasketPage(List<ProductListModel> product)
         {
+
             InitializeComponent();
+            InittBasketPage();
+            this.Product = product;
+            this.BindingContext = product;
         }
 
-        public BasketPage()
+        public BasketPage(Page2 page)
         {
+            this.page = page;
+        }
+
+        public partial class Page2 : ContentPage
+        {
+            public ChangeAddress model;
+            public Page2(ChangeAddress m)
+            {
+                this.model = m;
+            }
+
+        }
+
+        private async void InittBasketPage()
+        {
+            BasketItems.ItemsSource = DataService.Instance.ProcutListModel;
+            AddressPicker.ItemsSource = DataService.Instance.changeAddress;
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-           
-            _basketVm.ProcutListModel = DataService.Instance.BasketModel;
+            //double sum;
+            this.BindingContext = Product;
+            _basketVm.ProcutListModel = DataService.Instance.ProcutListModel;
             BasketItems.ItemsSource = _basketVm.ProcutListModel;
-            foreach (var item in DataService.Instance.BasketModel)
+            foreach (var product in DataService.Instance.ProcutListModel)
             {
-               // DataService.Instance.BaseTotalPrice += item.Price;
+                DataService.Instance.BaseTotalPrice += product.Price;
+                // sum =  product.Quantity * product.Price;
+                //product.Price = sum;
             }
-            TotalPrice.Text = $"{ DataService.Instance.BaseTotalPrice + 12}₹";
+            SubTotal.Text = $"{ DataService.Instance.BaseTotalPrice}₹";
+            TotalPrice.Text = $"{ DataService.Instance.BaseTotalPrice + 12 }₹";
         }
 
         /// <summary>
@@ -51,12 +77,18 @@ namespace DellyShopApp.Views.TabbedPages
         /// <param name="e"></param>
         private void AddAddressClick(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new AddNewAddressPage());
+
         }
 
         private async void ContinueClick(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SuccessPage(), true);
+            OrderCheckOut orderCheckOut = new OrderCheckOut();
+            orderCheckOut.ProductLists = DataService.Instance.ProcutListModel.ToList();
+            orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+            orderCheckOut.Address = (ChangeAddress)AddressPicker.SelectedItem;
+            orderCheckOut.BaseTotalPrice = ((decimal)DataService.Instance.BaseTotalPrice);
+            await DataService.Checkout(orderCheckOut);
+            await Navigation.PushAsync(new SuccessPage(DataService.Instance.ProcutListModel.ToList()));
         }
         /// <summary>
         /// Delete Visible Settings
@@ -72,6 +104,7 @@ namespace DellyShopApp.Views.TabbedPages
                 VisibleDelete(item.Id);
             }
         }
+
         /// <summary>
         /// Delete Visible Settings
         /// </summary>
@@ -103,7 +136,7 @@ namespace DellyShopApp.Views.TabbedPages
             await Navigation.PushAsync(new ProductDetail(item));
         }
 
-       async void  ContinueWithPaypal(System.Object sender, System.EventArgs e)
+        async void ContinueWithPaypal(System.Object sender, System.EventArgs e)
         {
             //Single Item
             var result = await CrossPayPalManager.Current.Buy(new PayPalItem("Test Product", new Decimal(12.50), "USD"), new Decimal(0));
@@ -119,6 +152,7 @@ namespace DellyShopApp.Views.TabbedPages
             {
                 Debug.WriteLine(result.ServerResponse.Response.Id);
             }
+
 
             #region List of Items
             //var resultList = await CrossPayPalManager.Current.Buy(new PayPalItem[] {
@@ -144,8 +178,8 @@ namespace DellyShopApp.Views.TabbedPages
             #endregion
 
             #region Shipping Address (Optional)
-           // Shipping Address(Optional)
-           // Optional shipping address parameter into Buy methods.
+            // Shipping Address(Optional)
+            // Optional shipping address parameter into Buy methods.
             //var resultShippingAddress = await CrossPayPalManager.Current.Buy(
             //            new PayPalItem(
             //                "Test Product",
@@ -206,5 +240,7 @@ namespace DellyShopApp.Views.TabbedPages
             //Debug.WriteLine(CrossPayPalManager.Current.ClientMetadataId);
             #endregion
         }
+
+
     }
 }
