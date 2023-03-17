@@ -33,7 +33,8 @@ namespace DellyShopApp.Views.TabbedPages
                 {
                     Title = AppResources.ProcutTitle3,
                     Brand = AppResources.ProductBrand3,
-
+                    Quantity = 1,
+                    UserId = 1,
                     Id = 4,
                     Image = "iphone",
                     Price = 499,

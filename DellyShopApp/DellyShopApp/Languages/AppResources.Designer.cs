@@ -31,7 +31,9 @@ namespace DellyShopApp.Languages {
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal AppResources() {
         }
-        
+
+        public static int BaseTotalPrice { get; internal set; }
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -887,7 +889,17 @@ namespace DellyShopApp.Languages {
                 return ResourceManager.GetString("YourComment", resourceCulture);
             }
         }
-        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Comment.
+        /// </summary>
+        internal static string SubTotal
+        {
+            get
+            {
+                return ResourceManager.GetString("SubTotal", resourceCulture);
+            }
+        }
+
 
     }
 }

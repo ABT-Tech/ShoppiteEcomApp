@@ -604,7 +604,13 @@ namespace DellyShopApp.Languages {
                 return ResourceManager.GetString("ScanCard", resourceCulture);
             }
         }
+        internal static string SubTotal
+        {
+            get
+            {
+                return ResourceManager.GetString("SubTotal", resourceCulture);
+            }
+        }
 
-       
     }
 }

@@ -49,7 +49,7 @@ namespace DellyShopApp.Views.Pages
 
         private async void ContinueOrderButton(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SuccessPage());
+            //await Navigation.PushAsync (new ());
         }
     }
 }

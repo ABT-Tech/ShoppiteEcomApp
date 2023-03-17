@@ -33,10 +33,16 @@ namespace DellyShopApp.Services
         public List<CommentModel> CommentList = new List<CommentModel>();
         public List<ShopModel> ShopDetails = new List<ShopModel>();
         public ChangeUserData EditProfile = new ChangeUserData();
+        public List<ChangeAddress> changeAddress = new List<ChangeAddress>();
         public List<CategoryDetailPage> Details = new List<CategoryDetailPage>();
         public OrgData ObjOrgData = new OrgData();
+        public OrderCheckOut ordercheckout = new OrderCheckOut();
         public Order order = new Order();
+
+       
+
         public double BaseTotalPrice = 0;
+        public double TotalPrice = 12;
         public static DataService Instance
         {
             get
@@ -56,7 +62,7 @@ namespace DellyShopApp.Services
         }
         protected static bool Disposed { get; private set; }
         public object Category { get; internal set; }
-
+       
         protected virtual void Dispose(bool disposing)
         {
             Disposed = true;
@@ -102,11 +108,11 @@ namespace DellyShopApp.Services
                 ProductList = new string[] { "red1", "shoesBlack" },
                 OldPrice = 570,
                 orgId = 1,
-                proId = 1,
                 UserId = 1,
-                //Qty = Int32.MaxValue
-               
-                
+                Quantity = 1,
+             
+              
+
             });
             ProcutListModel.Add(new ProductListModel
             {
@@ -119,40 +125,48 @@ namespace DellyShopApp.Services
                 ProductList = new string[] { "garzy2", "grazy1" },
                 OldPrice = 270,
                 orgId = 1,
-                proId = 2,
-                UserId = 2
-                
-              
-        });
-            ProcutListModel.Add(new ProductListModel
-            {
-                Title = AppResources.ProcutTitle2,
-                Brand = AppResources.ProductBrand2,
-                Id = 3,
-                Image = "shoesyellow",
-                Price = 299,
-                VisibleItemDelete = false,
-                ProductList = new string[] { "py_1", "shoesyellow" },
-                OldPrice = 400,
-                orgId = 2,
-                proId = 2,
-                UserId = 3
-                
-            });
-            ProcutListModel.Add(new ProductListModel
-            {
-                Title = AppResources.ProcutTitle2,
-                Brand = AppResources.ProductBrand2,
-                Id = 3,
-                Image = "shoesyellow",
-                Price = 299,
-                VisibleItemDelete = false,
-                ProductList = new string[] { "py_1", "shoesyellow" },
-                OldPrice = 400,
-                orgId = 2,
-                proId = 2,
-                UserId = 3
+                UserId = 2,
+                Quantity = 1,
                
+
+
+            });
+          
+            
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle,
+                Brand = AppResources.ProductBrand,
+                Id = 1,
+                Image = "shoesBlack",
+                Price = 362,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "red1", "shoesBlack" },
+                OldPrice = 570,
+                orgId = 1,
+                UserId = 1,
+                Quantity = 1,
+              
+
+            });
+     
+            changeAddress.Add(new ChangeAddress
+            {
+                AddressId = 1,
+                AddressTitle = "123",
+                SelectCountry = "ABC",
+                SelectCity = "ABC",
+                SelectStreet = "456",
+                AddressDetail = "123"
+            });
+            changeAddress.Add(new ChangeAddress
+            {
+                AddressId = 2,
+                AddressTitle = "111",
+                SelectCountry = "AAA",
+                SelectCity = "BBB",
+                SelectStreet = "222",
+                AddressDetail = "999"
             });
             ShopDetails = new List<ShopModel>();
             ShopDetails.Add(new ShopModel
@@ -335,6 +349,13 @@ namespace DellyShopApp.Services
             EditProfile.ChangePhoneNumber = "7878787878";
             EditProfile.ChangeBdate = "1 / 1 / 2000";
             EditProfile.ChangeAddress = "India";
+
+            //changeAddress.AddressTitle = "c-807";
+            //changeAddress.SelectCountry = "india";
+            //changeAddress.SelectCity = "Rajkot";
+            //changeAddress.SelectStreet = "1";
+            //changeAddress.AddressDetail = "abc";
+            //changeAddress
 
             StartList.Add(new StartList
             {
@@ -600,6 +621,26 @@ namespace DellyShopApp.Services
                 return 0;
             }
             catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<int> Checkout(OrderCheckOut orderCheckOut)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                return 0;
+            }
+            catch (Exception ex)
+
             {
                 throw;
             }

@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,25 +21,74 @@ namespace DellyShopApp.Views.TabbedPages
     {
 
         private readonly BasketPageVm _basketVm = new BasketPageVm();
+        private int _quantity;
+        private Page2 page;
+
         private List<ProductListModel> Product { get; set; }
         public BasketPage(List<ProductListModel>product)
         {
 
             InitializeComponent();
+            InittBasketPage();
             this.Product = product;
             this.BindingContext = product;
+            
+          
+            
         }
+
+        public BasketPage(Page2 page)
+        {
+            this.page = page;
+        }
+
+        public BasketPage()
+        {
+        }
+
+        public partial class Page2 : ContentPage
+        {
+            public ChangeAddress model;
+            public Page2(ChangeAddress m)
+            {
+                this.model = m;
+            }
+
+        }
+
+        private async void InittBasketPage()
+        {
+            BasketItems.ItemsSource = DataService.Instance.ProcutListModel;
+            AddressPicker.ItemsSource = DataService.Instance.changeAddress;
+            
+        }
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+          
+            this.BindingContext = Product;
            
-            _basketVm.ProcutListModel = DataService.Instance.BasketModel;
+            _basketVm.ProcutListModel = DataService.Instance.ProcutListModel;
             BasketItems.ItemsSource = _basketVm.ProcutListModel;
-            foreach (var item in DataService.Instance.BasketModel)
+            foreach (var product in DataService.Instance.ProcutListModel)
             {
-                DataService.Instance.BaseTotalPrice += item.Price;
+               
+                DataService.Instance.BaseTotalPrice += product.Price;
+                DataService.Instance.TotalPrice += product.Price;
+                
+
+                //return;
+                //{
+                //   DataService.Instance.BaseTotalPrice = product.Quantity * product.Price;
+                //}
             }
-            TotalPrice.Text = $"{ DataService.Instance.BaseTotalPrice + 12}₹";
+           SubTotal.Text  = $"{ DataService.Instance.BaseTotalPrice}₹"  ;
+           TotalPrice.Text= $"{ DataService.Instance.BaseTotalPrice + 12}₹";
+          
+
+
+
         }
 
         /// <summary>
@@ -46,18 +96,28 @@ namespace DellyShopApp.Views.TabbedPages
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AddAddressClick(object sender, EventArgs e)
+        private async void AddAddressClick(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new AddNewAddressPage());
+    
+                await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));
         }
 
         private async void ContinueClick(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SuccessPage(), true);
+            OrderCheckOut orderCheckOut = new OrderCheckOut();
+            orderCheckOut.ProductLists = DataService.Instance.ProcutListModel.ToList();
+            orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+            orderCheckOut.Address = (ChangeAddress)AddressPicker.SelectedItem;
+            orderCheckOut.BaseTotalPrice = ((decimal)DataService.Instance.BaseTotalPrice);
+            orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice);
+            await DataService.Checkout(orderCheckOut);
+            await Navigation.PushAsync(new SuccessPage(DataService.Instance.ProcutListModel.ToList()));
+
+
         }
         /// <summary>
         /// Delete Visible Settings
-        /// </summary>
+        /// </summary
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void DeleteItemSwipe(object sender, SwipedEventArgs e)
@@ -74,7 +134,7 @@ namespace DellyShopApp.Views.TabbedPages
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UndeleteItem(object sender, SwipedEventArgs e)
+        private void UndeleteI(object sender, SwipedEventArgs e)
         {
             if (!(sender is PancakeView pancake)) return;
             if (pancake.BindingContext is ProductListModel item)
@@ -202,6 +262,13 @@ namespace DellyShopApp.Views.TabbedPages
             //Print Client Metadata Id
             //Debug.WriteLine(CrossPayPalManager.Current.ClientMetadataId);
             #endregion
+        }
+
+       private  void Click_Btn(System.Object sender, System.EventArgs e)
+        {
+            int Id = DataService.Instance.order.orgId;
+            int UserId = DataService.Instance.order.UserId;
+
         }
     }
 }

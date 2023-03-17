@@ -19,7 +19,7 @@ namespace DellyShopApp
         private async void InittMainPage()
         {
             this.BindingContext = this;
-            var AllOrganizations = await DataService.GetAllOrganizations();//DataService.Instance.ShopDetails;
+            var AllOrganizations =  await DataService.GetAllOrganizations(); //DataService.Instance.ShopDetails;
             float rows = (float)AllOrganizations.Count / 2;
             double rowcount = Math.Round(rows);
             if (AllOrganizations.Count % 2 == 1)

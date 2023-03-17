@@ -15,6 +15,7 @@ namespace DellyShopApp.Views.Pages
         public EditProfilePage()
         {
             InitializeComponent();
+           
             UserName.Text = DataService.Instance.EditProfile.ChangeName;
             EmailAddress.Text = DataService.Instance.EditProfile.ChangeEmail;
             PhoneNumber.Text = DataService.Instance.EditProfile.ChangePhoneNumber;

@@ -18,10 +18,12 @@ namespace DellyShopApp.Models
             }
         }
 
-        
+
         private int _rotate;
         internal string orderStatus;
         internal Guid orderGuid;
+        private int _Quantity;
+        internal double product;
 
         public int Rotate
         {
@@ -44,20 +46,26 @@ namespace DellyShopApp.Models
         public int orgId { get; set; }
         public string[] ProductList { get; set; }
         public int OldPrice { get; set; }
-        public int proId { get; set; }
+    
         public Guid OrderGuId { get; internal set; }
         public DateTime InsertDate { get; internal set; }
         public int UserId { get; set; }
-        // public class name
-        //{
-        //    public int Qty;
-        //    public int Name { get { return name; } set { name = value; } }
-        //}
+        public int Quantity { get; set; }
+        public ChangeAddress changeAddress { get; set; }
+        public OrderCheckOut ordercheckout { get; set; }
+        public object BaseTotalPrice  { get; internal set; }
 
+
+
+
+        public object Children { get; internal set; }
+                                    
         public static implicit operator ProductListModel(List<ProductListModel> v)
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }
 

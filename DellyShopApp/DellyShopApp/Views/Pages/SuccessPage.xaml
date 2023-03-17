@@ -44,6 +44,7 @@
                                     </StackLayout>
                                     <StackLayout VerticalOptions="CenterAndExpand">
                                         <Label
+                                              
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             FontSize="15"
                                             Text="{Binding Title}"
