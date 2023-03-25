@@ -66,13 +66,13 @@
                                         FontSize="15"
                                         LineBreakMode="TailTruncation"
                                         Text="{Binding Title}"
-                                        TextColor="{DynamicResource WhiteDarkFontColor}"
+                                        TextColor="Black"
                                         WidthRequest="180" />
                                     <Label
                                         FontFamily="{DynamicResource VerdanaProRegular}"
                                         FontSize="12"
                                         Text="{Binding Brand}"
-                                        TextColor="{DynamicResource DescLabelColor}" />
+                                        TextColor="Black" />
                                 </StackLayout>
                                 <Label
                                     Margin="0,0,10,0"

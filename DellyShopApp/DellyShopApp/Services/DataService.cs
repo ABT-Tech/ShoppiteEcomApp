@@ -57,6 +57,8 @@ namespace DellyShopApp.Services
             Disposed = true;
         }
         protected static bool Disposed { get; private set; }
+        public object Category { get; internal set; }
+
         protected virtual void Dispose(bool disposing)
         {
             Disposed = true;
@@ -138,6 +140,48 @@ namespace DellyShopApp.Services
 
 
             ShopDetails = new List<ShopModel>();
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Grocery Store",
+                OrgId = 1,
+                Image = "Grocery_Store.png",
+                
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Pet Store",
+                OrgId = 2,
+                Image = "Pet_Store.png",
+               
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Coffee Store",
+                OrgId = 3,
+                Image = "Coffee_store.png",
+               
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Fruit Store",
+                OrgId = 4,
+                Image = "Fruit_Store.png",
+                
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Cloth Store",
+                OrgId = 5,
+                Image = "Cloth_Store.png",
+               
+            });
+            ShopDetails.Add(new ShopModel
+            {
+                ShopName = "Hardware Store",
+                OrgId = 6,
+                Image = "Hardware_Store.png",
+               
+            });
             ShopDetails.Add(new ShopModel
             {
                 ShopName = "Grocery Store",
@@ -360,24 +404,33 @@ namespace DellyShopApp.Services
                 Banner = "bestofYear.jpg",
                 orgID = 3
             });
+            CatoCategoriesDetail.Add(new Category
+            {
+                Banner = "shoes.jpg"
+            });
+
             Carousel.Add(new Category
             {
+                CategoryId = "1",  
                 Banner = "shoes.jpg",
                 orgID = 1
             });
             Carousel.Add(new Category
             {
                 Banner = "clothing.jpg",
-                orgID = 1
+                orgID = 1,
+                CategoryId = "2"
             });
             Carousel.Add(new Category
             {
                 Banner = "elecronics.jpeg",
+                CategoryId = "3",
                 orgID = 2
             });
             Carousel.Add(new Category
             {
                 Banner = "images.jpeg",
+                CategoryId = "3",
                 orgID = 2
             });
         }

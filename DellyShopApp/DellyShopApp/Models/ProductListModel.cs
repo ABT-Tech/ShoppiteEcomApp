@@ -31,6 +31,10 @@ namespace DellyShopApp.Models
                 OnPropertyChanged(nameof(Rotate));
             }
         }
+
+
+
+
         public string Title { get; set; }
         public string Brand { get; set; }
         public string Image { get; set; }
