@@ -8,9 +8,9 @@
     xmlns:font="clr-namespace:DellyShopApp.Helpers;assembly=DellyShopApp"
     xmlns:languages="clr-namespace:DellyShopApp.Languages;assembly=DellyShopApp"
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
-    BackgroundColor="LightBlue"
+    BackgroundColor="#f5f5f5"
     NavigationPage.HasNavigationBar="False">
-    <Frame BackgroundColor="LightBlue">
+    <Frame BackgroundColor="#f5f5f5">
         <StackLayout>
             <ScrollView
                 Margin="10"
@@ -110,8 +110,25 @@
                 Text="{x:Static languages:AppResources.HomePage}"
                 TextColor="White"
                 VerticalOptions="EndAndExpand"
-                WidthRequest="150" />
-
+                WidthRequest="150" >
+            <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="commostates">
+                <VisualState x:Name="normal">
+                    <VisualState.Setters>
+                        <Setter Property="Scale"
+                                Value="1"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="pressed">
+                    <VisualState.Setters>
+                        <Setter Property="Scale"
+                                Value="0.8"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+                
+            </VisualStateManager.VisualStateGroups>
+                </Button>
         </StackLayout>
     </Frame>
 </base:BasePage>

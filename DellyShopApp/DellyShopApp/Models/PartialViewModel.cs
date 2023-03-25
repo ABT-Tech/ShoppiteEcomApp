@@ -3,5 +3,6 @@
    public class PartialViewModel
     {
         public string Title { get; set; }
+
     }
 }

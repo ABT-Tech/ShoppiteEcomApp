@@ -16,6 +16,7 @@ namespace DellyShopApp.Views.TabbedPages
 
         private void OrderInfoClick(object sender, EventArgs e)
         {
+            
             if (!(sender is PancakeView stack)) return;
             switch (stack.ClassId)
             {
@@ -47,13 +48,20 @@ namespace DellyShopApp.Views.TabbedPages
                     OpenPage(new SettingsPage());
                     break;
             }
+            
         }
 
         private void OpenPage(Page page)
         {
+         
             Navigation.PushAsync(page);
         }
+        protected void LogOutClick(object sender, EventArgs args)
+        {
+            Application.Current.MainPage = new NavigationPage(new MainPage());
+        }
 
-       
+
+
     }
 }

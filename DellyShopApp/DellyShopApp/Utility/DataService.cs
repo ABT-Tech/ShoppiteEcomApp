@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,10 +21,26 @@ namespace DellyShopApp.Services
     {
         static DataService _instance;
 
+        internal static Task<IEnumerable> GetWishlistByUser(object orgId)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static Task Login(Login login)
+        {
+            throw new NotImplementedException();
+        }
+
         public ObservableCollection<NotificationModel> NotificationList = new ObservableCollection<NotificationModel>();
         public ObservableCollection<ProductListModel> ProcutListModel = new ObservableCollection<ProductListModel>();
+
+        internal static Task<IEnumerable> GetAllCategories(object orgId)
+        {
+            throw new NotImplementedException();
+        }
+
         public ObservableCollection<ProductListModel> BasketModel = new ObservableCollection<ProductListModel>();
-      
+
 
 
         public List<Category> CatoCategoriesList = new List<Category>();
@@ -35,14 +52,17 @@ namespace DellyShopApp.Services
         public ChangeUserData EditProfile = new ChangeUserData();
         public List<ChangeAddress> changeAddress = new List<ChangeAddress>();
         public List<CategoryDetailPage> Details = new List<CategoryDetailPage>();
+        public Login login = new Login();
         public OrgData ObjOrgData = new OrgData();
         public OrderCheckOut ordercheckout = new OrderCheckOut();
         public Order order = new Order();
 
-       
+
 
         public double BaseTotalPrice = 0;
         public double TotalPrice = 12;
+        internal object cart;
+
         public static DataService Instance
         {
             get
@@ -62,7 +82,7 @@ namespace DellyShopApp.Services
         }
         protected static bool Disposed { get; private set; }
         public object Category { get; internal set; }
-       
+
         protected virtual void Dispose(bool disposing)
         {
             Disposed = true;
@@ -110,8 +130,9 @@ namespace DellyShopApp.Services
                 orgId = 1,
                 UserId = 1,
                 Quantity = 1,
-             
-              
+                orderId = 1
+
+
 
             });
             ProcutListModel.Add(new ProductListModel
@@ -127,12 +148,13 @@ namespace DellyShopApp.Services
                 orgId = 1,
                 UserId = 2,
                 Quantity = 1,
-               
+                orderId = 2
+
 
 
             });
-          
-            
+
+
             ProcutListModel.Add(new ProductListModel
             {
                 Title = AppResources.ProcutTitle,
@@ -146,13 +168,14 @@ namespace DellyShopApp.Services
                 orgId = 1,
                 UserId = 1,
                 Quantity = 1,
-              
+                orderId = 3
+
 
             });
-     
+
             changeAddress.Add(new ChangeAddress
             {
-                AddressId = 1,
+               // AddressId = 1,
                 AddressTitle = "123",
                 SelectCountry = "ABC",
                 SelectCity = "ABC",
@@ -161,13 +184,17 @@ namespace DellyShopApp.Services
             });
             changeAddress.Add(new ChangeAddress
             {
-                AddressId = 2,
+               // AddressId = 2,
                 AddressTitle = "111",
                 SelectCountry = "AAA",
                 SelectCity = "BBB",
                 SelectStreet = "222",
                 AddressDetail = "999"
             });
+            login.email = "";
+            login.password = "";
+            login.orgId = 1;
+
             ShopDetails = new List<ShopModel>();
             ShopDetails.Add(new ShopModel
             {
@@ -342,20 +369,22 @@ namespace DellyShopApp.Services
             ObjOrgData.Image = "logo.png";
 
             order.orgId = 1;
-            order.UserId = 1; 
+            order.UserId = 1;
 
+            EditProfile.UserId = 1;
             EditProfile.ChangeName = "abc";
             EditProfile.ChangeEmail = "abc@gmail.com";
             EditProfile.ChangePhoneNumber = "7878787878";
-            EditProfile.ChangeBdate = "1 / 1 / 2000";
             EditProfile.ChangeAddress = "India";
+
+
 
             //changeAddress.AddressTitle = "c-807";
             //changeAddress.SelectCountry = "india";
             //changeAddress.SelectCity = "Rajkot";
             //changeAddress.SelectStreet = "1";
             //changeAddress.AddressDetail = "abc";
-            //changeAddress
+
 
             StartList.Add(new StartList
             {
@@ -476,7 +505,7 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
-       
+
 
         public static async Task<List<ShopModel>> GetAllOrganizations()
         {
@@ -644,7 +673,170 @@ namespace DellyShopApp.Services
             {
                 throw;
             }
+           
+            
         }
+        public static async Task<string> MyFavourite(Favourite favourite)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+
+                var payload = JsonConvert.SerializeObject(favourite);
+
+                HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+                HttpClient httpClient = new HttpClient(clientHandler);
+                httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+                var response = await httpClient.PostAsync("/api/Cart/AddToCart", c);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return result;
+            }
+            catch (Exception ex)
+
+            {
+                throw;
+            }
+        }
+        public static async Task<string> RemoveMyFavourite(Favourite favourite)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+
+                var payload = JsonConvert.SerializeObject(favourite);
+
+                HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+                HttpClient httpClient = new HttpClient(clientHandler);
+                httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+                var response = await httpClient.PostAsync("/api/Cart/AddToCart", c);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return result;
+            }
+            catch (Exception ex)
+
+            {
+                throw;
+            }
+        }
+        public static async Task<List<ProductListModel>> GetWishlistByUser(int orgId,int userId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Products/GetWishlistByUser?org_Id="+orgId+"&user_Id=" + userId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<ProductListModel>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<List<ProductListModel>> GetAllCartDetails(int orgId, int userId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Cart/GetAllCartDetails?OrgId="+orgId+ "&UserId="+userId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<ProductListModel>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<List<ProductListModel>> GetMyOrderDetails(int orgId, int userId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Cart/GetMyOrderDetails?OrgId=" + orgId + "&UserId=" + userId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<ProductListModel>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<Users_DTO> Loginpage(Login login)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+
+                var payload = JsonConvert.SerializeObject(login);
+
+                HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+                HttpClient httpClient = new HttpClient(clientHandler);
+                httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+                var response = await httpClient.PostAsync("api/Auth/UserLogin", c);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Users_DTO>(result);
+            }
+            catch (Exception ex)
+
+            {
+                throw;
+            }
+        }
+
+
     }
 } 
 

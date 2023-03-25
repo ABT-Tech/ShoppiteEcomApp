@@ -12,30 +12,34 @@
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     xmlns:proc="clr-namespace:DellyShopApp.Processors"
     xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
-    BackgroundColor="LightBlue"
+    BackgroundColor="#f5f5f5"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
-    <ScrollView Margin="15,10,15,0">
+    <ScrollView Margin="-10,0,-10,0">
         <StackLayout>
-            <!--  DellyShop Title And Description  -->
-            <StackLayout  Margin="15,10,15,0">
-                <Image Source="logo.png"
+            <!--  DellyShop Title And Description  -->  
+             <StackLayout Margin="15,10,15,0">
+                <Image Source="{Binding Image}"
+                       x:Name="ShopLogo"
+                       WidthRequest="100"
                        HeightRequest="100"
-                       WidthRequest="100"/>
-            </StackLayout>
+                       HorizontalOptions="Start"/> 
             <!--  SearchBar  -->
-            <Frame
-                Margin="0,20,0,10"
-                CornerRadius="17"
-                HasShadow="False"
-                HeightRequest="35"
-                Style="{DynamicResource FrameStyle}">
-                <renderers:BorderlessSearchBar
-                    BackgroundColor="Transparent"
-                    CancelButtonColor="Black"
-                    FontFamily="{DynamicResource VerdanaProRegular}"
-                    TextColor="Black" />
-            </Frame>
+                    <Frame
+                    Margin="0,20,0,10"
+                    CornerRadius="17"
+                    HasShadow="False"
+                    HeightRequest="35"
+                    Style="{DynamicResource FrameStyle}">
+                    <renderers:BorderlessSearchBar
+                        BackgroundColor="white"
+                        CancelButtonColor="Black"
+                        FontFamily="{DynamicResource VerdanaProRegular}"
+                        TextColor="{DynamicResource EntryTextColor}"
+                        Placeholder="Search Item...."
+                        PlaceholderColor="Black"/>
+                </Frame>
+         
             <!--  Category Name and Image  -->
             <StackLayout Margin="0,5,0,0" HorizontalOptions="FillAndExpand">
                 <Grid BackgroundColor="Transparent">
@@ -72,6 +76,7 @@
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.ThinLeft}"
                                     Size="30"
+                                    
                                     Color="Black" />
                             </Image.Source>
                         </Image>
@@ -152,7 +157,7 @@
                 <customControl:RepeaterView
                     x:Name="BestSellerList"
                     Orientation="Horizontal"
-                    Spacing="10">
+                    Spacing="1">
                     <customControl:RepeaterView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -217,7 +222,7 @@
                 <customControl:RepeaterView
                     x:Name="PreviousViewedList"
                     Orientation="Horizontal"
-                    Spacing="10">
+                    Spacing="1">
                     <customControl:RepeaterView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -281,7 +286,7 @@
             <!--  ProcutctList  -->
             <controls:FlowListView
                 x:Name="MostNews"
-                BackgroundColor="LightBlue"
+                BackgroundColor="#f5f5f5"
                 FlowColumnCount="2"
                 FlowColumnExpand="None"
                 HasUnevenRows="False"
@@ -337,5 +342,6 @@
                 </controls:FlowListView.FlowColumnTemplate>
             </controls:FlowListView>
         </StackLayout>
+            </StackLayout>
     </ScrollView>
 </base:BasePage>

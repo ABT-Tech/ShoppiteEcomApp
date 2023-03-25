@@ -34,7 +34,7 @@ namespace DellyShopApp.Views.Pages
         }
         protected void LogOutClick(object sender, EventArgs args)
         {
-                Application.Current.MainPage = new NavigationPage(new MainPage());
+               
         }
         protected async void SelectLanguage(object sender, EventArgs args)
         {

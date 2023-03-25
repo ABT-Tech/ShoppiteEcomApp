@@ -6,6 +6,6 @@ namespace DellyShopApp
 {
     public static class AppSettings
     {
-        public static string ApiUrl = "http://admin.shoppite.in/";
+        public static string ApiUrl = "https://marketapi.shooppy.in/shopapi/";
     }
 }

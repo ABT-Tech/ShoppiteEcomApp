@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using DellyShopApp.ViewModel;
 
 namespace DellyShopApp.Models
@@ -46,7 +47,7 @@ namespace DellyShopApp.Models
         public int orgId { get; set; }
         public string[] ProductList { get; set; }
         public int OldPrice { get; set; }
-    
+        public int orderId { get; set; }
         public Guid OrderGuId { get; internal set; }
         public DateTime InsertDate { get; internal set; }
         public int UserId { get; set; }
@@ -59,7 +60,9 @@ namespace DellyShopApp.Models
 
 
         public object Children { get; internal set; }
-                                    
+        public object RemoveCommand { get; internal set; }
+        public int Empty { get; internal set; }
+
         public static implicit operator ProductListModel(List<ProductListModel> v)
         {
             throw new NotImplementedException();

@@ -16,6 +16,7 @@ namespace DellyShopApp.Views.TabbedPages
     {
         //Order product = new Order();
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+        public int orderId = Convert.ToInt32(SecureStorage.GetAsync("orderId").Result);
 
        
        public Category C { get; private set; }
@@ -41,7 +42,8 @@ namespace DellyShopApp.Views.TabbedPages
                     OldPrice = 699,
                     VisibleItemDelete = false,
                     ProductList = new string[] { "ip8_1", "ip8_2" } ,
-                    orgId = 1
+                    orgId = 1,
+                    orderId = 1
                 });
             }
             InitializeComponent();
@@ -69,6 +71,7 @@ namespace DellyShopApp.Views.TabbedPages
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;
             await Navigation.PushAsync(new ProductDetail(item));
+          
             
           
            
@@ -78,8 +81,11 @@ namespace DellyShopApp.Views.TabbedPages
         {
 
             if (!(sender is StackLayout stack)) return;
+
             if (!(stack.BindingContext is Category ca)) return;
+          
             await Navigation.PushAsync(new CategoryDetailPage(ca));
+
         }
         async void VireAllTapped(System.Object sender, System.EventArgs e)
         {
@@ -112,6 +118,8 @@ namespace DellyShopApp.Views.TabbedPages
         {
            
         }
+       
+
 
     }
 }

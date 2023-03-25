@@ -9,7 +9,7 @@
     iOsSpecific:Page.UseSafeArea="True"
     xmlns:languages="clr-namespace:DellyShopApp.Languages"
 
-    BackgroundColor="LightBlue"
+    BackgroundColor="#f5f5f5"
     NavigationPage.HasNavigationBar="False">
     <StackLayout>
           <partialViews:NavigationBarPartialView

@@ -1,6 +1,7 @@
 ﻿using System;
 using DellyShopApp.Models;
 using DellyShopApp.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,11 +11,16 @@ namespace DellyShopApp.Views.Pages
     public partial class MyOrderPage
     {
         private bool _open = false;
-
+        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+        public int userId = 2116;//Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public MyOrderPage()
         {
             InitializeComponent();
-            BasketItems.ItemsSource = DataService.Instance.ProcutListModel;
+            InittMyOrderPage();
+        }
+        private async void InittMyOrderPage()
+        {
+            BasketItems.ItemsSource = await DataService.GetMyOrderDetails(orgId, userId);//DataService.Instance.ProcutListModel;
         }
 
         private void OpenDetailClick(object sender, EventArgs e)

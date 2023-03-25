@@ -59,5 +59,6 @@ namespace DellyShopApp.ViewModel
                 VisibleItemDelete = false
             });
         }
+
     }
 }
