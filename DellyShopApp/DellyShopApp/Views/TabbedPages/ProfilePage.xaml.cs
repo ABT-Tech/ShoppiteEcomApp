@@ -1,14 +1,18 @@
-﻿using DellyShopApp.Views.CustomView;
+﻿using Android.Views;
+using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.Pages;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static Android.Views.View;
 
 namespace DellyShopApp.Views.TabbedPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage
     {
+        public object Element { get; private set; }
+
         public ProfilePage()
         {
             InitializeComponent();
@@ -53,7 +57,24 @@ namespace DellyShopApp.Views.TabbedPages
         {
             Navigation.PushAsync(page);
         }
+        private void LogOutClick(object sender, EventArgs args)
+        {
+            Application.Current.MainPage = new NavigationPage(new MainPage());
+              //if (touchEventArgs.Event.Action == MotionEventActions.Down)
+              //  {
+              //  this.Element.ScaleTo(0.95, 50, Easing.CubicOut);
+              //  }
+              //  else if (touchEventArgs.Event.Action == MotionEventActions.Up)
+              //  {
+              //  this.Element.ScaleTo(1, 50, Easing.CubicIn);
 
-       
+              //      if (this.Element != null && this.Element.Command != null)
+              //      {
+              //          this.Element.Command.Execute(this.Element.CommandParameter);
+              //      }
+                
+              //  }
+        }
+
     }
 }

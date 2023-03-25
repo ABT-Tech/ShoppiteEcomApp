@@ -12,7 +12,7 @@
     xmlns:partialViews="clr-namespace:DellyShopApp.Views.PartialViews;assembly=DellyShopApp"
     xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
     iOsSpecific:Page.UseSafeArea="True"
-    BackgroundColor="LightBlue"
+    BackgroundColor="#f5f5f5"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <ScrollView>

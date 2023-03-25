@@ -20,6 +20,8 @@ namespace DellyShopApp.Models
 
         
         private int _rotate;
+  
+
         public int Rotate
         {
             get => _rotate;
@@ -39,7 +41,15 @@ namespace DellyShopApp.Models
         public int OldPrice { get; set; }
         public int Quantity { get; set; }
         public Guid orderGuId { get; set; }
-        public ChangeAddress changeAddress { get; set; }      
+        public ChangeAddress changeAddress { get; set; }   
+        public int orderId { get; set; }
+        public string orderStatus { get; set; }
+        public string orderDate { get; set; }
+        public string UserId { get; set; }
+        internal void Remove(int proId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

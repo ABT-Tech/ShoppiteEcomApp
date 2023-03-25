@@ -1,5 +1,7 @@
 ﻿using System;
 using DellyShopApp.Languages;
+using DellyShopApp.Models;
+using DellyShopApp.Services;
 using Xamarin.Forms.Xaml;
 
 namespace DellyShopApp.Views.Pages
@@ -14,6 +16,14 @@ namespace DellyShopApp.Views.Pages
 
         private async void LoginButtonClick(object sender, EventArgs e)
         {
+            var login = new Login
+            {
+                email = email.Text,
+                Password = pswd.Text,
+                org_Id = 1,                
+            };
+            
+            await DataService.Login(login);
             await Navigation.PushAsync(new HomeTabbedPage());
         }
         private void BackButton(object sender, EventArgs e)

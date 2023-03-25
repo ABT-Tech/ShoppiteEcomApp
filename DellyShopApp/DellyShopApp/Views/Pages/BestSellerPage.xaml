@@ -10,7 +10,7 @@
     xmlns:partialViews="clr-namespace:DellyShopApp.Views.PartialViews;assembly=DellyShopApp"
     iOsSpecific:Page.UseSafeArea="True"
     xmlns:languages="clr-namespace:DellyShopApp.Languages;assembly=DellyShopApp"
-    BackgroundColor="LightBlue"
+    BackgroundColor="#f5f5f5"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <StackLayout Margin="10">
@@ -23,7 +23,7 @@
 
         <customView:FlowListView
             x:Name="BestSeller"
-            BackgroundColor="LightBlue"
+            BackgroundColor="#f5f5f5"
             FlowColumnCount="2"
             FlowColumnExpand="None"
             HasUnevenRows="False"

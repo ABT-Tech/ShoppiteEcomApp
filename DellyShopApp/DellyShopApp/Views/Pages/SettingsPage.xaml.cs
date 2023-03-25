@@ -32,10 +32,7 @@ namespace DellyShopApp.Views.Pages
                 ThemeManager.ChangeTheme(Themes.White);
             }
         }
-        protected void LogOutClick(object sender, EventArgs args)
-        {
-                Application.Current.MainPage = new NavigationPage(new MainPage());
-        }
+      
         protected async void SelectLanguage(object sender, EventArgs args)
         {
             var selectlanguage = await DisplayActionSheet(AppResources.SelectLanguage, AppResources.Cancel, AppResources.Cancel, languages);

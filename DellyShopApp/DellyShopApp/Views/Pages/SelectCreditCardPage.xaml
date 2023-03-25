@@ -12,7 +12,7 @@
     xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
     xmlns:cards="clr-namespace:DellyShopApp.Views.CustomView" xmlns:proc="clr-namespace:DellyShopApp.Processors"
     iOsSpecific:Page.UseSafeArea="True"
-    BackgroundColor="LightBlue"
+    BackgroundColor="#f5f5f5"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <StackLayout Margin="10">

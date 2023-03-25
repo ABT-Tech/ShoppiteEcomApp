@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using DellyShopApp.Models;
+﻿using DellyShopApp.Models;
 using DellyShopApp.Services;
+using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

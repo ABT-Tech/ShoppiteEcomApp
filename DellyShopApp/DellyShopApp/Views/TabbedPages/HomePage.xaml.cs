@@ -1,4 +1,5 @@
-﻿using DellyShopApp.Languages;
+﻿using Acr.UserDialogs;
+using DellyShopApp.Languages;
 using DellyShopApp.Models;
 using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
@@ -42,18 +43,20 @@ namespace DellyShopApp.Views.TabbedPages
         }
         private async void InittHomePage()
         {
-            CategoryList.ItemsSource = await DataService.GetCategories(orgId); //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId);
+            CategoryList.ItemsSource =  await DataService.GetCategories(orgId); //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId); //
             CarouselView.ItemsSource =await DataService.GetAllCategories(orgId); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
-            BestSellerList.ItemsSource =DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
+            BestSellerList.ItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
             PreviousViewedList.ItemsSource = await DataService.GetLastVisitedProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
             MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
 
         }
         private async void ProductDetailClick(object sender, EventArgs e)
         {
-
+           
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;
+            
+
             await Navigation.PushAsync(new ProductDetail(item));
         }
 
@@ -82,5 +85,6 @@ namespace DellyShopApp.Views.TabbedPages
             BasketLayout.IsVisible = true;
             product = ((sender as Element).BindingContext) as ProductListModel;
         }
+        
     }
 }

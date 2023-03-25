@@ -17,12 +17,14 @@
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <AbsoluteLayout>
+
         <StackLayout
             Margin="15,20,15,0"
             Padding="2"
             AbsoluteLayout.LayoutBounds="1,1,1,1"
             AbsoluteLayout.LayoutFlags="All">
-            <partialViews:NavigationBarPartialView x:Name="Navbar" NavigationTitle="{x:Static languages:AppResources.ProductDetail}" BackButtonVisibler="True" IsModalpage="False" FavVisible="True" >
+            
+            <partialViews:NavigationBarPartialView x:Name="Navbar" NavigationTitle="{x:Static languages:AppResources.ProductDetail}"  BackButtonVisibler="True" IsModalpage="False" FavVisible="False" >
             </partialViews:NavigationBarPartialView>
 
             <StackLayout
@@ -38,6 +40,7 @@
                     HeightRequest="50"
                     Source="{Binding Image}"
                     WidthRequest="50" />
+                
                 <StackLayout VerticalOptions="CenterAndExpand">
                     <Label
                         FontFamily="{DynamicResource VerdanaProRegular}"
@@ -47,8 +50,6 @@
                         MaxLines="1"
                         WidthRequest="320"
                         LineBreakMode="TailTruncation"/>
-                 
-                  
                 </StackLayout>
                 <Label
                     Margin="0,0,10,0"
@@ -61,6 +62,7 @@
                     Text="{Binding Price, StringFormat='{0}₹'}"
                     TextColor="{DynamicResource PriceLabelColor}"
                     VerticalOptions="Center" />
+               
 
             </StackLayout>
 
@@ -101,14 +103,20 @@
                                         <forms:CachedImage
                                             Margin="0"
                                             Aspect="AspectFit"
-                                            Source="{Binding .}" />
-                                    </ContentView>
+                                            Source="{Binding .}"/>                                       
+                                    </ContentView>                                   
                                 </DataTemplate>
                             </customView:CarouselView.ItemTemplate>
-                        </customView:CarouselView>
-
+                        </customView:CarouselView>                        
                     </customView:PancakeView>
+                    <StackLayout  >
+                        <StackLayout HorizontalOptions="End" >
+                            <Image  Aspect="AspectFit"                                     x:Name="myImage"                                   HeightRequest="35"                                   WidthRequest="35"                                                                       Source="black.png">                                <Image.GestureRecognizers>                                    <TapGestureRecognizer                                         Tapped="TapGestureRecognizer_Tapped"/>                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                    </StackLayout>
                     <StackLayout Orientation="Horizontal">
+                        
                         <customControl:RepeaterView
                             x:Name="starList"
                             HorizontalOptions="Start"
@@ -139,15 +147,16 @@
                             TextColor="Black"
                             VerticalOptions="CenterAndExpand" />
                     </StackLayout>
+                   
+
                     <StackLayout Orientation="Horizontal">
-                        <StackLayout HorizontalOptions="StartAndExpand">
+                        <StackLayout HorizontalOptions="StartAndExpand" >
                             <Label
                                 FontFamily="{DynamicResource VerdanaProBold}"
                                 FontSize="22"
                                 Text="{Binding Title}"
                                 TextColor="Black"
                                 VerticalOptions="Start" />
-
                             <Label
                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                 FontSize="17"
@@ -162,11 +171,12 @@
                             Text="{Binding Price, StringFormat='{0}₹'}"
                             TextColor="Red"
                             VerticalOptions="StartAndExpand" />
-
+                           
                         </StackLayout>
-                      
+                        
 
                     </StackLayout>
+                   
                     <Label
                         Margin="0,0,0,0"
                         FontFamily="{DynamicResource VerdanaProCondLight}"

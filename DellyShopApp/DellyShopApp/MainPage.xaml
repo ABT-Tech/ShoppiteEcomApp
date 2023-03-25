@@ -10,7 +10,7 @@
     xmlns:iOsSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     iOsSpecific:Page.UseSafeArea="False"
-    BackgroundColor="LightBlue"
+    BackgroundColor="#f5f5f5"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <ScrollView>
@@ -36,8 +36,8 @@
                         Text="What You Shop Matters!!! "
                         TextColor="Chocolate" />
             </StackLayout>
-          
-            <Grid  BackgroundColor="LightBlue" x:Name="shop">
+
+            <Grid  BackgroundColor="#f5f5f5" x:Name="shop" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>

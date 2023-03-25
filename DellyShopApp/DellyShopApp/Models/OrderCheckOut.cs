@@ -10,5 +10,6 @@ namespace DellyShopApp.Models
         public List<ProductListModel> ProductLists { get; set; }
         public ChangeAddress Address { get; set; }
         public object BaseTotalPrice { get; set; }
+        public object TotalPrice { get; set; }
     }
 }

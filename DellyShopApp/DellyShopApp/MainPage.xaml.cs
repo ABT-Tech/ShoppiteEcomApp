@@ -5,6 +5,8 @@ using DellyShopApp.Services;
 using Xamarin.Essentials;
 using Android.OS;
 using Android.Runtime;
+using Acr.UserDialogs;
+using static DellyShopApp.Views.ListViewData;
 
 namespace DellyShopApp
 {
@@ -50,7 +52,7 @@ namespace DellyShopApp
                         Source= product.Image,
                         HeightRequest= 200,
                         WidthRequest= 200,
-                        BackgroundColor = Color.LightBlue,
+                        BackgroundColor = Color.WhiteSmoke,
                         Margin = 15,
                         VerticalOptions = LayoutOptions.Center,
                         HorizontalOptions = LayoutOptions.Center,
@@ -76,8 +78,10 @@ namespace DellyShopApp
 
         private  void TapGestureRecognizer_Tapped(string orgId,string Img)
         {
+
             SecureStorage.SetAsync("OrgId",orgId);
             SecureStorage.SetAsync("ImgId", Img);
+            //UserDialogs.Instance.ShowLoading("Shop is Loading..");
             Navigation.PushAsync(new HomeTabbedPage());
         } 
         

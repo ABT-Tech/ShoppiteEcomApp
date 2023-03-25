@@ -4,6 +4,7 @@ using DellyShopApp.Views.CustomView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +16,7 @@ namespace DellyShopApp.Views.Pages
         public CategoryDetailPage(Category category)
         {
             InitializeComponent();
+            ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result;
             this.BindingContext = category;
             CarouselView.ItemsSource = DataService.Instance.CatoCategoriesDetail;
             BestSellerList.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.Id != 4);

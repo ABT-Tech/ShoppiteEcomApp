@@ -13,7 +13,7 @@ namespace DellyShopApp.Views.ModalPages
     public partial class AddNewAddressPage
     {
        
-            public AddNewAddressPage(List<ChangeAddress> changeAddress)
+        public AddNewAddressPage(List<ChangeAddress> changeAddress)
         {
             InitializeComponent();
             AddTitle.ItemsSource = DataService.Instance.changeAddress;

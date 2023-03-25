@@ -11,7 +11,7 @@
     xmlns:partialViews="clr-namespace:DellyShopApp.Views.PartialViews;assembly=DellyShopApp"
     iOsSpecific:Page.UseSafeArea="True"
      xmlns:languages="clr-namespace:DellyShopApp.Languages"
-    BackgroundColor="LightBlue"
+    BackgroundColor="#f5f5f5"
     NavigationPage.HasNavigationBar="False">
     <StackLayout Margin="10">
          <partialViews:NavigationBarPartialView
@@ -19,8 +19,8 @@
             FavVisible="False"
             IsModalpage="False"
             NavigationTitle="{x:Static languages:AppResources.MyFavorites}"/>
-               
-       
+
+        <ScrollView>
         <customControl:RepeaterView x:Name="BasketItems">
             <customControl:RepeaterView.ItemTemplate>
                 <DataTemplate>
@@ -90,6 +90,6 @@
                 </DataTemplate>
             </customControl:RepeaterView.ItemTemplate>
         </customControl:RepeaterView>
-
+        </ScrollView>
     </StackLayout>
 </base:BasePage>

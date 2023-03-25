@@ -2,6 +2,7 @@
 using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
 using System;
+using Xamarin.Essentials;
 using Xamarin.Forms.Xaml;
 
 namespace DellyShopApp.Views.Pages
@@ -9,10 +10,19 @@ namespace DellyShopApp.Views.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MyFavoritePage
     {
+        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+        public int userId = 34; //Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
+
         public MyFavoritePage()
+
         {
             InitializeComponent();
-            BasketItems.ItemsSource = DataService.Instance.ProcutListModel;
+            InittFavoritePage();
+        }
+        public async void InittFavoritePage()
+        {
+        
+            BasketItems.ItemsSource = await DataService.GetWishlistByUser(orgId , userId); //DataService.Instance.ProcutListModel;
         }
 
         private async void ClickItem(object sender, EventArgs e)

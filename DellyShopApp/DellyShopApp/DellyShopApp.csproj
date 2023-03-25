@@ -12,6 +12,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+	 <PackageReference Include="Acr.UserDialogs" Version="8.1.0-alpha-0009" />
+	 <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
+	 <PackageReference Include="Microsoft.Azure.Management.Network" Version="26.0.0" />
 	 <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
 	 <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
@@ -122,9 +125,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Pages\NotificationPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\TabbedPages\PopupView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Pages\SettingsPage.xaml">

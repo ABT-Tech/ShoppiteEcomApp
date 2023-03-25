@@ -19,9 +19,9 @@ namespace DellyShopApp.Views.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MyCartPage
     {
-        ProductListModel ProductListModel = new ProductListModel();
+        List<ProductListModel> productListModel = new List<ProductListModel>();
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
-        public int UserId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
+        public int userId = 2116; //Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
 
 
 
@@ -36,7 +36,8 @@ namespace DellyShopApp.Views.Pages
         }
         private async void InittMyCartPage()
         {
-            BasketItems.ItemsSource = DataService.Instance.ProcutListModel;
+            productListModel = await DataService.GetAllCartDetails(orgId, userId);
+            BasketItems.ItemsSource = productListModel; //DataService.Instance.ProcutListModel;
         }
         private async void ClickItem(object sender, EventArgs e)
         {
@@ -48,7 +49,7 @@ namespace DellyShopApp.Views.Pages
         }
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new BasketPage(DataService.Instance.ProcutListModel.ToList()));
+            await Navigation.PushAsync(new BasketPage(productListModel));
         }
         private async void PlusClick(object sender, EventArgs e)
         {
@@ -59,7 +60,7 @@ namespace DellyShopApp.Views.Pages
             if (CurrentQuantity >= 10) return;
             MyCartCountLable.Text = (++CurrentQuantity).ToString();
             Label CartSelectedProduct = (Label)repaterStack.Children[2];
-            var products = DataService.Instance.ProcutListModel.Where(x => x.Id == Convert.ToInt32(CartSelectedProduct.Text)).FirstOrDefault();
+            var products = productListModel.Where(x => x.Id == Convert.ToInt32(CartSelectedProduct.Text)).FirstOrDefault();
             products.Quantity = CurrentQuantity;
         }
 
@@ -72,7 +73,7 @@ namespace DellyShopApp.Views.Pages
             Label CartSelectedProduct = (Label)repaterStack.Children[2];
             if (CurrentQuantity == 1) return;
             MyCartCountLable.Text = (--CurrentQuantity).ToString();
-            var products = DataService.Instance.ProcutListModel.Where(x => x.Id == Convert.ToInt32(CartSelectedProduct.Text)).FirstOrDefault();
+            var products = productListModel.Where(x => x.Id == Convert.ToInt32(CartSelectedProduct.Text)).FirstOrDefault();
             products.Quantity = CurrentQuantity;
 
         }

@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using DellyShopApp.Helpers;
 using DellyShopApp.Languages;
 using DellyShopApp.Models;
 using DellyShopApp.Services;
+using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.TabbedPages;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static Android.Graphics.Interpolator;
+
+
 
 namespace DellyShopApp.Views.Pages
 {
@@ -16,10 +21,12 @@ namespace DellyShopApp.Views.Pages
     public partial class ProductDetail
     {
         public int proId = Convert.ToInt32(SecureStorage.GetAsync("ProId").Result);
+        public int orderId = Convert.ToInt32(SecureStorage.GetAsync("OrderId").Result);
       
 
         int productCount;
         private static IEnumerable<ProductListModel> ItemsSource;
+        private Color _myColor;
         private readonly List<StartList> _startList = new List<StartList>();
         private readonly List<CommentModel> _comments = new List<CommentModel>();
         private readonly ProductListModel _products;
@@ -79,7 +86,7 @@ namespace DellyShopApp.Views.Pages
             InittProductDetail();
         }
 
-        private async void InittProductDetail()
+        private  void InittProductDetail()
         {
             ProductDetail.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.Id == proId);
            
@@ -138,7 +145,40 @@ namespace DellyShopApp.Views.Pages
             await DataService.AddToCart(cart);
             int Id = DataService.Instance.cart.orgId;
             int userId = DataService.Instance.cart.UserId;
-            await Navigation.PushAsync(new MyCartPage());           
-        }  
+            await Navigation.PushAsync(new LoginPage());           
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            {
+                var img = myImage.Source as FileImageSource;
+
+                if (img.File == "red.png")
+                {
+                    myImage.Source = "black.png";
+                    Favourite favourite = new Favourite();
+                    await DataService.RemoveFavourite(favourite);
+                }
+                else
+                {
+                    myImage.Source = "red.png";
+                    Favourite favourite = new Favourite();
+                    favourite.orgId = _products.orgId;
+                    favourite.UserId = 1;
+                    favourite.proId = _products.Id;
+                    favourite.Title = _products.Title;
+                    favourite.Brand = _products.Brand;
+                    favourite.Image = _products.Image;
+                    favourite.Price = _products.Price;
+                    await DataService.MyFavourite(favourite);
+                }
+               
+            }
+        }
+
+        private void OnPropertyChanged(int orgId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

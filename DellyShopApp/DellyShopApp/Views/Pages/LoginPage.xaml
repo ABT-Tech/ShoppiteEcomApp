@@ -11,7 +11,7 @@
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
     iOsSpecific:Page.UseSafeArea="False"
-    BackgroundColor="LightBlue"
+    BackgroundColor="#f5f5f5"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -85,6 +85,7 @@
                         <renderers:BorderlessEntry
                             HorizontalOptions="FillAndExpand"
                             Keyboard="Email"
+                            x:Name="email"
                             TextColor="{DynamicResource EntryTextColor}" />
                     </StackLayout>
                 </Frame>
@@ -113,6 +114,7 @@
                         <renderers:BorderlessEntry
                             HorizontalOptions="FillAndExpand"
                             IsPassword="True"
+                            x:Name="pswd"
                             TextColor="{DynamicResource EntryTextColor}" />
                     </StackLayout>
                 </Frame>
