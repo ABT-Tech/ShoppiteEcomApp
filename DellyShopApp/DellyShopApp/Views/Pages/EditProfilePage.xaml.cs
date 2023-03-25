@@ -1,5 +1,6 @@
 ﻿using DellyShopApp.Services;
 using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static DellyShopApp.Views.Pages.HomeTabbedPage;
@@ -19,8 +20,10 @@ namespace DellyShopApp.Views.Pages
             EmailAddress.Text = DataService.Instance.EditProfile.ChangeEmail;
             PhoneNumber.Text = DataService.Instance.EditProfile.ChangePhoneNumber;
             Address.Text = DataService.Instance.EditProfile.ChangeAddress;
-
         }
+
+       
+
         protected override void OnAppearing()
         {
             base.OnAppearing();

@@ -1,14 +1,18 @@
-﻿using DellyShopApp.Views.CustomView;
+﻿using Android.Views;
+using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.Pages;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static Android.Views.View;
 
 namespace DellyShopApp.Views.TabbedPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage
     {
+        public object Element { get; private set; }
+
         public ProfilePage()
         {
             InitializeComponent();

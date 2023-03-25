@@ -54,6 +54,7 @@
                         FontFamily="{DynamicResource VerdanaProRegular}"
                         FontSize="22"
                         HorizontalOptions="CenterAndExpand"
+                        
                         LineBreakMode="TailTruncation"
                         Text="{Binding Title}"
                         TextColor="{DynamicResource IconBgColor}"

@@ -2,7 +2,6 @@
 using DellyShopApp.Services;
 using DellyShopApp.ViewModel;
 using DellyShopApp.Views.CustomView;
-using DellyShopApp.Views.ModalPages;
 using DellyShopApp.Views.Pages;
 using PayPal.Forms;
 using PayPal.Forms.Abstractions;
@@ -19,7 +18,6 @@ namespace DellyShopApp.Views.TabbedPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BasketPage
     {
-
         private readonly BasketPageVm _basketVm = new BasketPageVm();
         private int _quantity;
         private Page2 page;
@@ -122,13 +120,14 @@ namespace DellyShopApp.Views.TabbedPages
         /// <param name="e"></param>
         private void DeleteItemSwipe(object sender, SwipedEventArgs e)
         {
-            if (!(sender is PancakeView pancake)) return;
+            if (!(sender is PancakeView pancake)) return ;
             if (pancake.BindingContext is ProductListModel item)
             {
                 item.VisibleItemDelete = true;
                 VisibleDelete(item.Id);
             }
         }
+
         /// <summary>
         /// Delete Visible Settings
         /// </summary>
@@ -160,7 +159,7 @@ namespace DellyShopApp.Views.TabbedPages
             await Navigation.PushAsync(new ProductDetail(item));
         }
 
-       async void  ContinueWithPaypal(System.Object sender, System.EventArgs e)
+        async void ContinueWithPaypal(System.Object sender, System.EventArgs e)
         {
             //Single Item
             var result = await CrossPayPalManager.Current.Buy(new PayPalItem("Test Product", new Decimal(12.50), "USD"), new Decimal(0));
@@ -176,6 +175,7 @@ namespace DellyShopApp.Views.TabbedPages
             {
                 Debug.WriteLine(result.ServerResponse.Response.Id);
             }
+
 
             #region List of Items
             //var resultList = await CrossPayPalManager.Current.Buy(new PayPalItem[] {
@@ -201,8 +201,8 @@ namespace DellyShopApp.Views.TabbedPages
             #endregion
 
             #region Shipping Address (Optional)
-           // Shipping Address(Optional)
-           // Optional shipping address parameter into Buy methods.
+            // Shipping Address(Optional)
+            // Optional shipping address parameter into Buy methods.
             //var resultShippingAddress = await CrossPayPalManager.Current.Buy(
             //            new PayPalItem(
             //                "Test Product",

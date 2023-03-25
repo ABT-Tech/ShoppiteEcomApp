@@ -10,6 +10,8 @@ namespace DellyShopApp.Views.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MyOrderPage
     {
+        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+        public int userId = 2116; //Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         private bool _open = false;
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int userId = 2116;//Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);

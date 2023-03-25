@@ -1,15 +1,19 @@
 ﻿using System;
-using DellyShopApp.Models;
-using DellyShopApp.Languages;
 using DellyShopApp.Views.Pages;
 using Xamarin.Forms;
 using DellyShopApp.Services;
 using Xamarin.Essentials;
+using Android.OS;
+using Android.Runtime;
+using Acr.UserDialogs;
+using static DellyShopApp.Views.ListViewData;
 
 namespace DellyShopApp
-{    
+{
+    
     public partial class MainPage
     {
+
         public MainPage()
         {
             InitializeComponent();
@@ -79,8 +83,10 @@ namespace DellyShopApp
             //shop.ItemsSource = DataService.Instance.ShopDetails;
         }
 
-        private  void TapGestureRecognizer_Tapped(string orgId,String Img)
+
+        private  void TapGestureRecognizer_Tapped(string orgId,string Img)
         {
+
             SecureStorage.SetAsync("OrgId",orgId);
             SecureStorage.SetAsync("ImgId", Img);
             Navigation.PushAsync(new HomeTabbedPage());
@@ -88,4 +94,5 @@ namespace DellyShopApp
         }
 
     }
+   
 }

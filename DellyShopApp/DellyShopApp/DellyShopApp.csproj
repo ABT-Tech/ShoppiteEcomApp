@@ -12,6 +12,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+	 <PackageReference Include="Acr.UserDialogs" Version="8.1.0-alpha-0009" />
+	 <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
+	 <PackageReference Include="Microsoft.Azure.Management.Network" Version="26.0.0" />
+	 <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
 	 <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
@@ -122,6 +126,9 @@
     <EmbeddedResource Update="Views\Pages\LastViewPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Pages\MyCartPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Pages\NotificationDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -165,6 +172,11 @@
     <Folder Include="Services\" />
     <Folder Include="Views\Pages\Base\" />
     <Folder Include="Themes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Android">
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v10.0\Mono.Android.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Languages\AppResources.ar.Designer.cs">

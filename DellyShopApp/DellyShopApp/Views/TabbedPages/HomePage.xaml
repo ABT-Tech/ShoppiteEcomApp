@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <base:BasePage
     x:Class="DellyShopApp.Views.TabbedPages.HomePage"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:base="clr-namespace:DellyShopApp.Views.Pages.Base;assembly=DellyShopApp"
@@ -20,10 +21,10 @@
 
 
         <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
-            <StackLayout Margin="15,10,15,0">
+            <StackLayout Margin="5,10,5,0">
                 <Image Source="{Binding Image}"
                        x:Name="ShopLogo"
-                       WidthRequest="100"
+                       WidthRequest="100" 
                        HeightRequest="100"
                        HorizontalOptions="Start"/>  
              <Frame
@@ -72,22 +73,21 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="150" />
                                             </Grid.ColumnDefinitions>
+
                                             <forms:CachedImage
                                                 Grid.Row="0"
                                                 Grid.Column="0"
-                                                
                                                 Aspect="AspectFill"
                                                 Source="{Binding Image}">
-                                               <Image.GestureRecognizers>
+                                                <Image.GestureRecognizers>
                                                     <TapGestureRecognizer Tapped="ClickCategory" />
                                                 </Image.GestureRecognizers>
                                             </forms:CachedImage>
                                             <pancakeView:PancakeView
-                                                x:Uid="Id"
                                                 Grid.Row="0"
                                                 Grid.Column="0"
                                                 BackgroundGradientEndColor="White"
-                                                BackgroundGradientStartColor="White"
+                                                BackgroundGradientStartColor="white"
                                                 CornerRadius="10"
                                                 HorizontalOptions="FillAndExpand" />
                                             <Label
@@ -123,6 +123,7 @@
                         BackgroundColor="#f5f5f5"
                         HeightRequest="{x:OnIdiom Tablet=350,
                                                   Phone=200}"
+                       
                         SelectedIndex="0"
                         WidthRequest="300">
                         <x:Arguments>
@@ -144,12 +145,7 @@
                                         Aspect="AspectFill"
                                         Source="{Binding Banner}"                                        
                                         WidthRequest="50"
-                                        HeightRequest="50"/>
-                         <forms:CachedImage.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="Click_Banner" />
-                         </forms:CachedImage.GestureRecognizers>
-                                    
-                                    
+                                        HeightRequest="50"/>                                   
                                 </ContentView>                                
                             </DataTemplate>
                           
@@ -191,7 +187,6 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <pancakeView:PancakeView
-                                        x:Name="Id"
                                         Margin="5"
                                         Padding="5"
                                         BackgroundColor="White"
@@ -201,6 +196,7 @@
                                         HeightRequest="250"
                                         HorizontalOptions="StartAndExpand"
                                         VerticalOptions="StartAndExpand"
+                                       
                                         WidthRequest="{x:OnIdiom Tablet=150,
                                                                  Phone=130}">
                                         <pancakeView:PancakeView.GestureRecognizers>
@@ -224,7 +220,9 @@
                                                 
                                                 LineBreakMode="TailTruncation"
                                                 TextColor="Black"
-                                                VerticalOptions="Start" />
+                                                VerticalOptions="Start" 
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="1"/>
                                             <Label
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 FontSize="10"
@@ -238,7 +236,7 @@
                                                     FontSize="{x:OnPlatform Android=13,
                                                                             iOS=18}"
                                                     HorizontalOptions="EndAndExpand"
-                                                    Text="{Binding OldPrice, StringFormat='{0} ₹'}"
+                                                    Text="{Binding OldPrice, StringFormat='{0}₹'}"
                                                     TextColor="Red"
                                                     WidthRequest="50"
 
@@ -249,7 +247,7 @@
                                                     FontFamily="{DynamicResource VerdanaProBold}"
                                                     FontSize="25"
                                                     HorizontalOptions="EndAndExpand"
-                                                    Text="{Binding Price, StringFormat='{0} ₹'}"
+                                                    Text="{Binding Price, StringFormat='{0}₹'}"
                                                     TextColor="Red"
                                                     WidthRequest="100"
                                                     VerticalOptions="CenterAndExpand" />
@@ -291,6 +289,7 @@
                                         VerticalOptions="StartAndExpand"
                                         WidthRequest="{x:OnIdiom Tablet=150,
                                                                  Phone=130}">
+                                       
                                         <pancakeView:PancakeView.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="ProductDetailClick" />
                                         </pancakeView:PancakeView.GestureRecognizers>
@@ -304,7 +303,9 @@
                                                 Text="{Binding Title}"
                                                
                                                 TextColor="{DynamicResource WhiteDarkFontColor}"
-                                                VerticalOptions="Start" />
+                                                VerticalOptions="Start"
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="1"/>
                                             <Label
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 FontSize="10"
@@ -317,7 +318,7 @@
                                                 FontFamily="{DynamicResource VerdanaProBold}"
                                                 FontSize="25"
                                                 HorizontalOptions="EndAndExpand"
-                                                Text="{Binding Price, StringFormat='{0} ₹'}"
+                                                Text="{Binding Price, StringFormat='{0}₹'}"
                                                 TextColor="Red"
                                                 VerticalOptions="EndAndExpand" />
                                         </StackLayout>
@@ -376,7 +377,9 @@
                                         MaxLines="1"
                                         LineBreakMode="TailTruncation"
                                         TextColor="Black"
-                                        VerticalOptions="Start" />
+                                        VerticalOptions="Start"
+                                        LineBreakMode="TailTruncation"
+                                        MaxLines="1"/>
                                     <Label
                                         FontFamily="{DynamicResource VerdanaProRegular}"
                                         FontSize="10"

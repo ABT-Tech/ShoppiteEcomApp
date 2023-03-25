@@ -23,13 +23,13 @@ namespace DellyShopApp.Views.Pages
         public CategoryDetailPage(Category category)
         {
             InitializeComponent();
+            ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result;
             this.BindingContext = category;
             ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;
             CarouselView.ItemsSource = DataService.Instance.CatoCategoriesDetail;
             BestSellerList.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.Id != 4);
             PreviousViewedList.ItemsSource = DataService.Instance.ProcutListModel.Where(x=>x.Id!=4);
             MostNews.FlowItemsSource = DataService.Instance.ProcutListModel.Where(x=>x.Id!=4).ToList();
-            
         }
        
         public CategoryDetailPage()

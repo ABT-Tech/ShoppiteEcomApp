@@ -60,13 +60,13 @@
                                                 FontSize="15"
                                                 LineBreakMode="TailTruncation"
                                                 Text="{Binding Title}"
-                                                TextColor="Black"
+                                                TextColor="{DynamicResource WhiteDarkFontColor}"
                                                 WidthRequest="180" />
                                             <Label
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 FontSize="12"
                                                 Text="{Binding Brand}"
-                                                TextColor="Black" />
+                                                TextColor="{DynamicResource DescLabelColor}" />
                                         </StackLayout>
                                         <Label
                                             Margin="0,0,10,0"
@@ -90,7 +90,7 @@
                                             FontFamily="{DynamicResource VerdanaProLight}"
                                             FontSize="15"
                                             Text="{x:Static languages:AppResources.ShowMoreDetail}"
-                                            TextColor="Black"
+                                            TextColor="{DynamicResource WhiteDarkFontColor}"
                                             VerticalOptions="CenterAndExpand" />
                                         <Image
                                             HorizontalOptions="EndAndExpand"
@@ -102,7 +102,7 @@
                                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                                     Glyph="{x:Static font:FontAwesomeIcons.ThinRight}"
                                                     Size="25"
-                                                    Color="Chocolate" />
+                                                    Color="{DynamicResource IconBgColor}" />
                                             </Image.Source>
                                         </Image>
                                     </StackLayout>
@@ -121,14 +121,14 @@
                                             FontSize="15"
                                             HorizontalOptions="StartAndExpand"
                                             Text="{x:Static languages:AppResources.OrderNo}"
-                                            TextColor="Black"
+                                            TextColor="{DynamicResource WhiteDarkFontColor}"
                                             VerticalOptions="CenterAndExpand" />
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProLight}"
                                             FontSize="15"
                                             HorizontalOptions="EndAndExpand"
-                                            Text="516516548"
-                                            TextColor="Black"
+                                            Text="{Binding orderId}"
+                                            TextColor="{DynamicResource WhiteDarkFontColor}"
                                             VerticalOptions="CenterAndExpand" />
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal">
@@ -137,14 +137,14 @@
                                             FontSize="15"
                                             HorizontalOptions="StartAndExpand"
                                             Text="{x:Static languages:AppResources.OrderDate}"
-                                            TextColor="Black"
+                                            TextColor="{DynamicResource WhiteDarkFontColor}"
                                             VerticalOptions="CenterAndExpand" />
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProLight}"
                                             FontSize="15"
                                             HorizontalOptions="EndAndExpand"
-                                            Text="12/05/2019"
-                                            TextColor="Black"
+                                            Text="{Binding orderDate}"
+                                            TextColor="{DynamicResource WhiteDarkFontColor}"
                                             VerticalOptions="CenterAndExpand" />
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal">
@@ -153,14 +153,14 @@
                                             FontSize="15"
                                             HorizontalOptions="StartAndExpand"
                                             Text="{x:Static languages:AppResources.OrderStatus}"
-                                            TextColor="Black"
+                                            TextColor="{DynamicResource WhiteDarkFontColor}"
                                             VerticalOptions="CenterAndExpand" />
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProLight}"
                                             FontSize="15"
                                             HorizontalOptions="EndAndExpand"
-                                            Text="{x:Static languages:AppResources.PackingStage}"
-                                            TextColor="Black"
+                                            Text="{Binding orderStatus}"
+                                            TextColor="{DynamicResource WhiteDarkFontColor}"
                                             VerticalOptions="CenterAndExpand" />
                                     </StackLayout>
                                 </StackLayout>

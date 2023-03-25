@@ -1,4 +1,5 @@
-﻿using DellyShopApp.Languages;
+﻿using Acr.UserDialogs;
+using DellyShopApp.Languages;
 using DellyShopApp.Models;
 using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
@@ -50,24 +51,19 @@ namespace DellyShopApp.Views.TabbedPages
             ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;
 
             InittHomePage();
-          
         }
-
         private async void InittHomePage()
         {
-            CategoryList.ItemsSource = DataService.Instance.CatoCategoriesList;//await DataService.GetCategories();
-            CarouselView.ItemsSource = await DataService.GetAllCategories(orgId);//DataService.Instance.Carousel;
-            BestSellerList.ItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId);//DataService.Instance.ProcutListModel;
-            PreviousViewedList.ItemsSource = DataService.Instance.ProcutListModel;
-            MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId);//DataService.Instance.ProcutListModel;
-
-
+            CategoryList.ItemsSource =  await DataService.GetCategories(orgId); //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId); //
+            CarouselView.ItemsSource =await DataService.GetAllCategories(orgId); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
+            BestSellerList.ItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
+            PreviousViewedList.ItemsSource = await DataService.GetLastVisitedProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
+            MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
 
         }
-
         private async void ProductDetailClick(object sender, EventArgs e)
         {
-
+           
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;
             await Navigation.PushAsync(new ProductDetail(item));

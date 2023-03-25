@@ -17,6 +17,10 @@ namespace DellyShopApp.Views.Pages
         public BestSellerPage()
         {
             InitializeComponent();
+            InittBestSellerPage();
+        }
+        private async void InittBestSellerPage()
+        {
             BestSeller.FlowItemsSource = DataService.Instance.ProcutListModel;
         }
         private async void ProductDetailClick(object sender, EventArgs e)

@@ -36,8 +36,8 @@
                         VerticalOptions="CenterAndExpand" />
                     <Switch
                         HorizontalOptions="EndAndExpand"
-                        OnColor="Chocolate"
-                        ThumbColor="Chocolate"
+                        OnColor="{DynamicResource DarkLabelTextColor}"
+                        ThumbColor="{DynamicResource DarkLabelTextColor}"
                         VerticalOptions="CenterAndExpand" />
 
                 </StackLayout>
@@ -52,12 +52,12 @@
                         FontSize="20"
                         Style="{DynamicResource ProfleLabelStyle}"
                         Text="{x:Static languages:AppResources.DarkThemeEnabled}"
-                        TextColor="Black"
+                        TextColor="{DynamicResource WhiteDarkFontColor}"
                         VerticalOptions="CenterAndExpand" />
                     <Switch
                         HorizontalOptions="EndAndExpand"
-                        OnColor="Chocolate"
-                        ThumbColor="Chocolate"
+                        OnColor="{DynamicResource DarkLabelTextColor}"
+                        ThumbColor="{DynamicResource DarkLabelTextColor}"
                         Toggled="Toggled"
                         VerticalOptions="CenterAndExpand" />
 
@@ -77,7 +77,7 @@
                         FontSize="20"
                         Style="{DynamicResource ProfleLabelStyle}"
                         Text="{x:Static languages:AppResources.SelectLanguage}"
-                        TextColor="Black"
+                        TextColor="{DynamicResource WhiteDarkFontColor}"
                         VerticalOptions="CenterAndExpand" />
                     <Image
                         Margin="0,0,10,0"
@@ -91,44 +91,12 @@
                                 FontFamily="{DynamicResource MaterialFontFamily}"
                                 Glyph="{x:Static font:FontAwesomeIcons.ThinRight}"
                                 Size="50"
-                                Color="Chocolate" />
+                                Color="{DynamicResource IconBgColor}" />
                         </Image.Source>
                     </Image>
                 </StackLayout>
             </pancakeView:PancakeView>
-            <pancakeView:PancakeView Margin="0,10,0,0" Style="{DynamicResource PancakeFrameStyle}">
-                <StackLayout
-                    BackgroundColor="{DynamicResource ItemColor}"
-                    Orientation="Horizontal"
-                    VerticalOptions="FillAndExpand">
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="LogOutClick" />
-                    </StackLayout.GestureRecognizers>
-                    <Label
-                        FontFamily="{DynamicResource VerdanaProRegular}"
-                        FontSize="20"
-                        Style="{DynamicResource ProfleLabelStyle}"
-                        Text="{x:Static languages:AppResources.Logout}"
-                        TextColor="Black"
-                        VerticalOptions="CenterAndExpand" />
-                    <Image
-                        Margin="0,0,10,0"
-                        Aspect="AspectFit"
-                        HeightRequest="30"
-                        HorizontalOptions="EndAndExpand"
-                        VerticalOptions="CenterAndExpand"
-                        WidthRequest="30">
-                        <Image.Source>
-                            <FontImageSource
-                                FontFamily="{DynamicResource MaterialFontFamily}"
-                                Glyph="{x:Static font:FontAwesomeIcons.Exit}"
-                                Size="30"
-                                Color="Chocolate" />
-                        </Image.Source>
-                    </Image>
-
-                </StackLayout>
-            </pancakeView:PancakeView>
+           
         </StackLayout>
     </StackLayout>
 </base:BasePage>
