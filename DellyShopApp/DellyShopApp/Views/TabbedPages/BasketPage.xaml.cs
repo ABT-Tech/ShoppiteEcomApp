@@ -2,6 +2,7 @@
 using DellyShopApp.Services;
 using DellyShopApp.ViewModel;
 using DellyShopApp.Views.CustomView;
+using DellyShopApp.Views.ModalPages;
 using DellyShopApp.Views.Pages;
 using PayPal.Forms;
 using PayPal.Forms.Abstractions;

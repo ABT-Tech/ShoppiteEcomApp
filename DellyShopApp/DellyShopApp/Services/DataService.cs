@@ -9,8 +9,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace DellyShopApp.Services
 {
@@ -310,8 +313,8 @@ namespace DellyShopApp.Services
             });
 
             login.email = "";
-            login.Password = "";
-            login.org_Id = 1;
+            login.password = "";
+            login.orgId = 1;
 
 
             cart.orgId = 1;
@@ -324,7 +327,7 @@ namespace DellyShopApp.Services
             ObjOrgData.ID = 1;
             ObjOrgData.Image = "logo.png";
 
-            EditProfile.userId = 1;
+            EditProfile.UserId = 1;
             EditProfile.ChangeName = "";
             EditProfile.ChangeEmail = "";
             EditProfile.ChangePhoneNumber = "";
@@ -456,6 +459,56 @@ namespace DellyShopApp.Services
             }
             catch (Exception ex)
             {
+                throw;
+            }
+        }
+         public static async Task<List<ShopModel>> GetAllOrganizations()
+        {
+            try
+            {
+                // await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //"bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Organization/GetAllOrganizations?OrgId=1");
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<ShopModel>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+
+            }
+        }
+        public static async Task<List<ProductListModel>> GetMostSellerProductsByOrganizations(int orgId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Products/GetMostSellerProductsByOrganizations?org_Id=" + orgId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<ProductListModel>>(result);
+            }
+            catch (Exception ex)
+            {
+
                 throw;
             }
         }
@@ -762,31 +815,7 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
-        public static async Task<List<ProductListModel>> GetMostSellerProductsByOrganizations(int orgId)
-        {
-            try
-            {
-                //await TokenValidator.CheckTokenValidity();
-
-                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
-                //    "bearer", Preferences.Get("accessToken", string.Empty));
-                HttpClientHandler clientHandler = new HttpClientHandler
-                {
-                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
-                };
-                HttpClient httpClient = new HttpClient(clientHandler);
-                var response = await httpClient.GetAsync(
-                    AppSettings.ApiUrl + "api/Products/GetMostSellerProductsByOrganizations?org_Id=" + orgId);
-
-                string result = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<ProductListModel>>(result);
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-        }
+        
     }
 }
 

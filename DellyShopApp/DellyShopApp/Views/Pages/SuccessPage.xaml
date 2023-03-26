@@ -109,8 +109,7 @@
                 HorizontalOptions="CenterAndExpand"
                 Text="{x:Static languages:AppResources.HomePage}"
                 TextColor="White"
-                VerticalOptions="EndAndExpand"
-                WidthRequest="150" >
+                VerticalOptions="EndAndExpand">
             <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="commostates">
                 <VisualState x:Name="normal">

@@ -220,9 +220,7 @@
                                                 
                                                 LineBreakMode="TailTruncation"
                                                 TextColor="Black"
-                                                VerticalOptions="Start" 
-                                                LineBreakMode="TailTruncation"
-                                                MaxLines="1"/>
+                                                VerticalOptions="Start" />
                                             <Label
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 FontSize="10"
@@ -377,9 +375,7 @@
                                         MaxLines="1"
                                         LineBreakMode="TailTruncation"
                                         TextColor="Black"
-                                        VerticalOptions="Start"
-                                        LineBreakMode="TailTruncation"
-                                        MaxLines="1"/>
+                                        VerticalOptions="Start"/>
                                     <Label
                                         FontFamily="{DynamicResource VerdanaProRegular}"
                                         FontSize="10"

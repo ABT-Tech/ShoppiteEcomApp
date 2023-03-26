@@ -45,7 +45,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                 myImage.Source = "black.png";
                 Favourite favourite = new Favourite();
                
-                await DataService.RemoveMyFavourite(favourite);
+                await DataService.RemoveFavourite(favourite);
 
 
             }
