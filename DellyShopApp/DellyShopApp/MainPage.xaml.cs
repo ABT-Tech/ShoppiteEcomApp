@@ -3,8 +3,6 @@ using DellyShopApp.Views.Pages;
 using Xamarin.Forms;
 using DellyShopApp.Services;
 using Xamarin.Essentials;
-using Android.OS;
-using Android.Runtime;
 using Acr.UserDialogs;
 using static DellyShopApp.Views.ListViewData;
 
