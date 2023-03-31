@@ -5,6 +5,8 @@ using DellyShopApp.Services;
 using Xamarin.Essentials;
 using Acr.UserDialogs;
 using static DellyShopApp.Views.ListViewData;
+using System.Net.NetworkInformation;
+using System.Net;
 
 namespace DellyShopApp
 {
@@ -14,6 +16,7 @@ namespace DellyShopApp
 
         public MainPage()
         {
+            
             InitializeComponent();
             InittMainPage();
            
@@ -90,7 +93,7 @@ namespace DellyShopApp
             Navigation.PushAsync(new HomeTabbedPage());
          
         }
-
+      
     }
    
 }

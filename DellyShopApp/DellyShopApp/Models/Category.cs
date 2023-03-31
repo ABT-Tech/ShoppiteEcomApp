@@ -4,6 +4,8 @@ namespace DellyShopApp.Models
 {
     public class Category
     {
+        internal int proId;
+
         public string Banner { get; set; }
         public string CategoryName { get; set; }
         public string CategoryId { get; set; }

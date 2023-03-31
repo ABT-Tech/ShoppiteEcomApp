@@ -4,5 +4,6 @@ namespace DellyShopApp.Renderers
 {
   public  class BorderlessSearchBar : SearchBar
     {
+       
     }
 }

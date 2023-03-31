@@ -19,6 +19,10 @@ namespace DellyShopApp.Views.TabbedPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BasketPage
     {
+        List<ProductListModel> productListModel = new List<ProductListModel>();
+        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
+
         private readonly BasketPageVm _basketVm = new BasketPageVm();
         private int _quantity;
         private Page2 page;
@@ -57,9 +61,11 @@ namespace DellyShopApp.Views.TabbedPages
 
         private async void InittBasketPage()
         {
-            BasketItems.ItemsSource = DataService.Instance.ProcutListModel;
+            BasketItems.ItemsSource = await DataService.GetAllCartDetails(orgId, userId);//DataService.Instance.ProcutListModel;
             AddressPicker.ItemsSource = DataService.Instance.changeAddress;
-            
+            productListModel = await DataService.GetAllCartDetails(orgId, userId);
+            BasketItems.ItemsSource = productListModel;
+           
         }
 
         protected override async void OnAppearing()
@@ -67,10 +73,10 @@ namespace DellyShopApp.Views.TabbedPages
             base.OnAppearing();
           
             this.BindingContext = Product;
-           
-            _basketVm.ProcutListModel = DataService.Instance.ProcutListModel;
-            BasketItems.ItemsSource = _basketVm.ProcutListModel;
-            foreach (var product in DataService.Instance.ProcutListModel)
+            BasketItems.ItemsSource = await DataService.GetAllCartDetails(orgId, userId);
+            DataService.Instance.BaseTotalPrice = 0;
+            DataService.Instance.TotalPrice = 0;
+            foreach (var product in await DataService.GetAllCartDetails(orgId, userId)) 
             {
                
                 DataService.Instance.BaseTotalPrice += product.Price;
@@ -82,8 +88,8 @@ namespace DellyShopApp.Views.TabbedPages
                 //   DataService.Instance.BaseTotalPrice = product.Quantity * product.Price;
                 //}
             }
-           SubTotal.Text  = $"{ DataService.Instance.BaseTotalPrice}₹"  ;
-           TotalPrice.Text= $"{ DataService.Instance.BaseTotalPrice + 12}₹";
+           SubTotal.Text  = $"{ DataService.Instance.BaseTotalPrice }₹"  ;
+           TotalPrice.Text= $"{ DataService.Instance.BaseTotalPrice +12}₹";
           
 
 
@@ -104,13 +110,13 @@ namespace DellyShopApp.Views.TabbedPages
         private async void ContinueClick(object sender, EventArgs e)
         {
             OrderCheckOut orderCheckOut = new OrderCheckOut();
-            orderCheckOut.ProductLists = DataService.Instance.ProcutListModel.ToList();
+            orderCheckOut.ProductLists = productListModel;
             orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
             orderCheckOut.Address = (ChangeAddress)AddressPicker.SelectedItem;
             orderCheckOut.BaseTotalPrice = ((decimal)DataService.Instance.BaseTotalPrice);
-            orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice);
+            orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice + 12);
             await DataService.Checkout(orderCheckOut);
-            await Navigation.PushAsync(new SuccessPage(DataService.Instance.ProcutListModel.ToList()));
+            await Navigation.PushAsync(new SuccessPage(productListModel));
 
 
         }
@@ -265,11 +271,6 @@ namespace DellyShopApp.Views.TabbedPages
             #endregion
         }
 
-       private  void Click_Btn(System.Object sender, System.EventArgs e)
-        {
-            int Id = DataService.Instance.order.orgId;
-            int UserId = DataService.Instance.order.UserId;
-
-        }
+       
     }
 }

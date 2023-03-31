@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using DellyShopApp.Models;
-
-namespace DellyShopApp.Views.Pages
+namespace DellyShopApp.Models
 {
-    public class ChangeUserData
+    public class Registration
     {
-        public static ObservableCollection<ProductListModel> ItemsSource { get; internal set; }
         public string Username { get; set; }
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
         public string ContactNumber { get; set; }
         public string Email { get; set; }
         public string State { get; set; }
@@ -17,7 +13,5 @@ namespace DellyShopApp.Views.Pages
         public string city { get; set; }
         public string Address { get; set; }
         public int OrgId { get; set; }
-
-    }   
+    }
 }
- 

@@ -62,12 +62,9 @@ namespace DellyShopApp.Models
         public object Children { get; internal set; }
         public object RemoveCommand { get; internal set; }
         public int Empty { get; internal set; }
+        public object Name { get; internal set; }
 
-        public static implicit operator ProductListModel(List<ProductListModel> v)
-        {
-            throw new NotImplementedException();
-        }
-
+      
        
     }
 }

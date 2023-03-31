@@ -59,6 +59,7 @@
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 FontSize="15"
                                                 LineBreakMode="TailTruncation"
+                                                MaxLines="1"
                                                 Text="{Binding Title}"
                                                 TextColor="{DynamicResource WhiteDarkFontColor}"
                                                 WidthRequest="180" />
@@ -66,7 +67,7 @@
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 FontSize="12"
                                                 Text="{Binding Brand}"
-                                                TextColor="{DynamicResource DescLabelColor}" />
+                                                TextColor="Black" />
                                         </StackLayout>
                                         <Label
                                             Margin="0,0,10,0"
@@ -75,7 +76,7 @@
                                             FontSize="22"
                                             HorizontalOptions="EndAndExpand"
                                             Text="{Binding Price, StringFormat='{0}₹'}"
-                                            TextColor="Red"
+                                            TextColor="Black"
                                             VerticalOptions="CenterAndExpand" />
 
                                     </StackLayout>

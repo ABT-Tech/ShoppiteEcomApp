@@ -11,7 +11,7 @@ namespace DellyShopApp.Views.Pages
     public partial class MyFavoritePage
     {
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
-        public int userId = 34;//Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         public MyFavoritePage()
 
         {
