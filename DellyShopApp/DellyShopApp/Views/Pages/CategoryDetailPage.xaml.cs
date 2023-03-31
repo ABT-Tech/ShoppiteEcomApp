@@ -15,25 +15,31 @@ namespace DellyShopApp.Views.Pages
     {
         public object C { get; private set; }
         ActivityIndicator activityIndicator = new ActivityIndicator { IsRunning = true };
-
-
-
-
+        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
 
         public CategoryDetailPage(Category category)
         {
             InitializeComponent();
-            ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result;
-            this.BindingContext = category;
-            ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;
-            CarouselView.ItemsSource = DataService.Instance.CatoCategoriesDetail;
-            BestSellerList.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.Id != 4);
-            PreviousViewedList.ItemsSource = DataService.Instance.ProcutListModel.Where(x=>x.Id!=4);
-            MostNews.FlowItemsSource = DataService.Instance.ProcutListModel.Where(x=>x.Id!=4).ToList();
+            InitCategoryPage(category);
         }
        
         public CategoryDetailPage()
         {
+        }
+
+        public async void InitCategoryPage(Category category) 
+        {
+            ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result;
+            this.BindingContext = category;
+            ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;
+            var AllCarosol = await DataService.GetAllCategories(orgId);
+            var AllBestSeller = await DataService.GetMostSellerProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
+            var AllPrevious = await DataService.GetLastVisitedProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
+            var AllMostSeller = await DataService.GetAllProductsByOrganizations(orgId);
+            CarouselView.ItemsSource = AllCarosol.Where(x => x.CategoryId == category.CategoryId).ToList();
+            BestSellerList.ItemsSource = AllBestSeller;
+            PreviousViewedList.ItemsSource = AllPrevious;
+            MostNews.FlowItemsSource = AllMostSeller;
         }
 
         private async void ClickCategory(object sender, EventArgs e)
@@ -58,11 +64,6 @@ namespace DellyShopApp.Views.Pages
             await Navigation.PushAsync(new ProductDetail());
 
         }
-
-       
-
-
-
 
     }
 }

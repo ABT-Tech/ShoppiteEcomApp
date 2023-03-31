@@ -14,15 +14,13 @@ namespace DellyShopApp.Views.Pages
         public EditProfilePage()
         {
             InitializeComponent();
-
+            
             int UserId = DataService.Instance.EditProfile.UserId;
             UserName.Text = DataService.Instance.EditProfile.ChangeName;
             EmailAddress.Text = DataService.Instance.EditProfile.ChangeEmail;
             PhoneNumber.Text = DataService.Instance.EditProfile.ChangePhoneNumber;
             Address.Text = DataService.Instance.EditProfile.ChangeAddress;
         }
-
-       
 
         protected override void OnAppearing()
         {
@@ -33,22 +31,27 @@ namespace DellyShopApp.Views.Pages
         {
             var changeUserData = new ChangeUserData
             {
-
-                
                 ChangeName = UserName.Text,
                 ChangeEmail = EmailAddress.Text,
                 ChangePhoneNumber = PhoneNumber.Text,
                 ChangeAddress = Address.Text,
+                ChangeState = statename.Text,
+                ChangeCity = cityname.Text,
+                ChangeZipCode = zipcode.Text,
             };
             var Page = new Page2(changeUserData);
             _ = DisplayAlert("Yes", "Your Profile Edit Successfully", "Okay");
             await Navigation.PushAsync(new HomeTabbedPage());
-           
         }
 
         void BackButton(System.Object sender, System.EventArgs e)
         {
             Navigation.PopAsync();
+        }
+
+        public void UserProfileChange()
+        {
+
         }
       
     }

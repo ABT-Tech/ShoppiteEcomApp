@@ -59,6 +59,7 @@
                             <Label
                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                 Text="{Binding Title}"
+                                LineBreakMode="TailTruncation"
                                 TextColor="Black"
                                 VerticalOptions="Start" />
                             <Label
@@ -71,10 +72,10 @@
 
                             <Label
                                 FontFamily="{DynamicResource VerdanaProBold}"
-                                FontSize="25"
+                                FontSize="16"
                                 HorizontalOptions="EndAndExpand"
                                 Text="{Binding Price, StringFormat='{0} ₹'}"
-                                TextColor="Red"
+                                TextColor="Black"
                                 VerticalOptions="EndAndExpand" />
                         </StackLayout>
                     </customView:PancakeView>
