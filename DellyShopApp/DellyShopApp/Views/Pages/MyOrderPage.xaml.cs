@@ -11,7 +11,7 @@ namespace DellyShopApp.Views.Pages
     public partial class MyOrderPage
     {
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
-        public int userId = 2116; //Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
+        public int userId =Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         private bool _open = false;
         
         public MyOrderPage()

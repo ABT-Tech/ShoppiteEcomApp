@@ -7,18 +7,21 @@ using Android.OS;
 using Android.Runtime;
 using Acr.UserDialogs;
 using static DellyShopApp.Views.ListViewData;
+using System.Net.NetworkInformation;
+using System.Net;
 
 namespace DellyShopApp
 {
-    
+
     public partial class MainPage
     {
 
         public MainPage()
         {
+            GetDeviceInfo();
             InitializeComponent();
             InittMainPage();
-           
+
         }
         private async void InittMainPage()
         {
@@ -49,7 +52,7 @@ namespace DellyShopApp
                         TextColor = Color.Chocolate,
                         FontAttributes = FontAttributes.Bold,
                         FontSize = 20,
-                        
+
 
                     };
                     var image = new Image
@@ -61,8 +64,8 @@ namespace DellyShopApp
                         HorizontalOptions = LayoutOptions.Center,
                         HeightRequest = 200,
                         WidthRequest = 200
-                        
-                        
+
+
 
 
                     };
@@ -73,7 +76,7 @@ namespace DellyShopApp
                     };
                     image.GestureRecognizers.Add(new TapGestureRecognizer
                     {
-                        Command = new Command(() => TapGestureRecognizer_Tapped(Orglabel.Text,product.Image.ToString())),
+                        Command = new Command(() => TapGestureRecognizer_Tapped(Orglabel.Text, product.Image.ToString())),
                     });
                     shop.Children.Add(image, columnIndex, rowIndex);
                     shop.Children.Add(label, columnIndex, rowIndex);
@@ -84,15 +87,37 @@ namespace DellyShopApp
         }
 
 
-        private  void TapGestureRecognizer_Tapped(string orgId,string Img)
+        private void TapGestureRecognizer_Tapped(string orgId, string Img)
         {
 
-            SecureStorage.SetAsync("OrgId",orgId);
+            SecureStorage.SetAsync("OrgId", orgId);
             SecureStorage.SetAsync("ImgId", Img);
             Navigation.PushAsync(new HomeTabbedPage());
-         
+
+        }
+        private string GetDeviceInfo()
+        {
+            string mac = string.Empty;
+            string ip = string.Empty;
+
+            foreach (var netInterface in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (netInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 ||      
+                    netInterface.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                {
+                    var address = netInterface.GetPhysicalAddress();
+                    mac = BitConverter.ToString(address.GetAddressBytes());
+
+                    IPAddress[] addresses = Dns.GetHostAddresses(Dns.GetHostName());
+                    if (addresses != null && addresses[0] != null)
+                    {
+                        ip = addresses[0].ToString();
+                        break;
+                    }
+                }
+            }
+            return mac;
         }
 
     }
-   
 }
