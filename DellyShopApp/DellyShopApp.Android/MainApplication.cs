@@ -45,9 +45,9 @@ namespace DellyShopApp.Droid
 			//https://github.com/CrossGeeks/FirebasePushNotificationPlugin/blob/master/docs/GettingStarted.md
 			//If debug you should reset the token each time.
 #if DEBUG
-			//FirebasePushNotificationManager.Initialize(this, true);
+			FirebasePushNotificationManager.Initialize(this, true);
 #else
-              //FirebasePushNotificationManager.Initialize(this,false);
+             FirebasePushNotificationManager.Initialize(this,false);
 #endif
 
 			//Handle notification when app is closed here

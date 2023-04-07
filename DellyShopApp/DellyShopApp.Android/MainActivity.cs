@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -18,6 +19,8 @@ namespace DellyShopApp.Droid
     [Activity(Label = "Shoppit", Icon = "@mipmap/Shoppit", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        private bool IsNotification = false;
+        private IDictionary<string, object> NotificationData;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -55,11 +58,19 @@ namespace DellyShopApp.Droid
             CrossPayPalManager.Init(config, this);
             CardsViewRenderer.Preserve();
             CachedImageRenderer.InitImageViewHandler();
-           // PayCardsRecognizerService.Initialize(this);
-            LoadApplication(new App());
+            // PayCardsRecognizerService.Initialize(this);
+            if (!IsNotification)
+                LoadApplication(new App());
             //Activate after adding the Google-Service.json file.
             //https://github.com/CrossGeeks/FirebasePushNotificationPlugin/blob/master/docs/GettingStarted.md
-            //FirebasePushNotificationManager.ProcessIntent(this, Intent);
+            FirebasePushNotificationManager.ProcessIntent(this, Intent);
+            CrossFirebasePushNotification.Current.OnNotificationOpened += (s, p) =>
+            {
+                System.Diagnostics.Debug.WriteLine("NOTIFICATION Opened", p.Data);
+                NotificationData = p.Data;
+                IsNotification = true;
+                LoadApplication(new App(IsNotification, NotificationData));
+            };
         }
         protected override void OnNewIntent(Intent intent)
         {
