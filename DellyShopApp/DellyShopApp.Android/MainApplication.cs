@@ -32,6 +32,7 @@ namespace DellyShopApp.Droid
 		{
 			base.OnCreate();
 
+
 			//Set the default notification channel for your app when running Android Oreo
 			if (Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.O)
 			{

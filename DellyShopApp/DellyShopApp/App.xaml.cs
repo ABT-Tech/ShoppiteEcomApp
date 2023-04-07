@@ -34,6 +34,7 @@ namespace DellyShopApp
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.SelectLanguage);
                 AppResources.Culture = new CultureInfo(Settings.SelectLanguage);
             }
+            CrossFirebasePushNotification.Current.Subscribe("general");
             //Token event usage sample:
             CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
             {

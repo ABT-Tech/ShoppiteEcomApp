@@ -121,5 +121,6 @@ namespace DellyShopApp.Droid
             base.OnDestroy();
             PayPalManagerImplementation.Manager.Destroy();
         }
+
     }
 }
