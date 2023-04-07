@@ -5,7 +5,10 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
        List< ProductListModel> productListModel = new List<ProductListModel> ();
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
-      
+        
+        
+
+
 
 
         int MyCartCountLable;

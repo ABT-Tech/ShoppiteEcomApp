@@ -1,6 +1,7 @@
 ﻿using System;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using Xamarin.Essentials;
 using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class LoginPage    {
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public LoginPage()        {            InitializeComponent();        }        private async void LoginButtonClick(object sender, EventArgs e)        {            var login = new Login            {                email = email.Text,                password = pswd.Text,                org_Id = orgId,
+                type = "Client"
             };
             
             var userDetail = await DataService.Login(login);
@@ -8,6 +9,7 @@ using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompila
             {
                 await Xamarin.Essentials.SecureStorage.SetAsync("UserId", userDetail.UserId.ToString());
                 await Xamarin.Essentials.SecureStorage.SetAsync("Tokan", userDetail.jwt_token.ToString());
+                await DisplayAlert("Yes", "You Have a Login Successfully", "Ok");
             }
             else
             {
@@ -23,5 +25,11 @@ using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompila
       private async  void TapGestureRecognizer_Tapped_1(System.Object sender, System.EventArgs e)
         {
             await Navigation.PushAsync(new RegisterPage());
+        }
+
+     private async void Button_Clicked(System.Object sender, System.EventArgs e)
+        {
+
+            await Navigation.PushAsync(new VenderLoginPage());
         }
     }}

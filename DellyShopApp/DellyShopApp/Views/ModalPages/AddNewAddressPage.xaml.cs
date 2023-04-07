@@ -16,7 +16,7 @@ namespace DellyShopApp.Views.ModalPages{    [XamlCompilation(XamlCompilationOp
 
         private  void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            var changeAddress = new ChangeAddress            {                AddressTitle = AddTitle.Text,                SelectCountry = SelCnty.Text,                SelectCity = SelCity.Text,                SelectStreet = SelStreet.Text,                AddressDetail = AddDetail.Text,                                           };            var Page = new Page2(changeAddress);
+            var changeAddress = new ChangeAddress            {                //AddressTitle = AddTitle.Text,                //SelectCountry = SelCnty.Text,                //SelectCity = SelCity.Text,                //SelectStreet = SelStreet.Text,                //AddressDetail = AddDetail.Text,                                           };            var Page = new Page2(changeAddress);
 
             DisplayAlert("Sucess", "Address Added Successfully", "ok");
             Navigation.PushAsync(new BasketPage(Page));

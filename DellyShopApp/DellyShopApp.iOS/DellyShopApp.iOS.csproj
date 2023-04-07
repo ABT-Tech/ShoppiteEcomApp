@@ -164,6 +164,11 @@
     <BundleResource Include="Resources\basket11.png" />
     <BundleResource Include="Resources\userimg.png" />
     <BundleResource Include="Resources\basket00.png" />
+    <BundleResource Include="Resources\vendor.png.jpg" />
+    <BundleResource Include="Resources\pexel.jpg" />
+    <BundleResource Include="Resources\abc.jpg" />
+    <BundleResource Include="Resources\abcd.png" />
+    <BundleResource Include="Resources\abcde.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

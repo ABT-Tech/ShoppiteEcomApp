@@ -259,7 +259,7 @@
                                                     HorizontalOptions="EndAndExpand"
                                                     Text="{Binding OldPrice, StringFormat='{0}₹'}"
                                                     TextColor="Gray"
-                                                    WidthRequest="50"
+                                                    WidthRequest="80"
 
                                                     
                                                     TextDecorations="Strikethrough"
@@ -267,7 +267,7 @@
                                                 <Label
                                                     FontFamily="{DynamicResource VerdanaProBold}"
                                                     FontSize="15"
-                                                    HorizontalOptions="EndAndExpand"
+                                                    HorizontalOptions="End"
                                                     Text="{Binding Price, StringFormat='{0}₹'}"
                                                     TextColor="Black"
                                                     WidthRequest="100"

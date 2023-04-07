@@ -14,7 +14,7 @@ namespace DellyShopApp.Views.TabbedPages
         public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         public ProfilePage()
         {
-         
+
             InitializeComponent();
             if (userId == 0)
             {
@@ -74,14 +74,14 @@ namespace DellyShopApp.Views.TabbedPages
                     OpenPage(new SettingsPage());
                     break;
             }
-           
+
         }
 
         private async void OpenPage(Page page)
         {
-          
-               await Navigation.PushAsync(page);
-                      
+
+            await Navigation.PushAsync(page);
+
         }
         protected void LogOutClick(object sender, EventArgs args)
         {
@@ -93,6 +93,10 @@ namespace DellyShopApp.Views.TabbedPages
             OpenPage(new LoginPage());
         }
 
+        private async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new VenderLoginPage());
 
+        }
     }
 }
