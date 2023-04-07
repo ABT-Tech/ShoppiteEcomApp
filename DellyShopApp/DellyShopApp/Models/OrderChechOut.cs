@@ -12,7 +12,7 @@ namespace DellyShopApp.Models
         public ChangeAddress Address { get; set; }
         public object BaseTotalPrice { get; set; }
         public object TotalPrice { get; set; }
-        public object Contactnumber { get; set; }
+          
 
         internal List<OrderCheckOut> ToList()
         {

@@ -45,7 +45,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             }            else
             {
                 Cart cart = new Cart();
-                cart.orgId = _products.orgId;
+                cart.orgId =_products.orgId;
                 cart.UserId = Convert.ToInt32(UserId);
                 cart.proId = _products.Id;
                 cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
@@ -66,7 +66,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             {
                 myImage.Source = "black.png";
                 Favourite favourite = new Favourite();
-                favourite.orgId = _products.orgId;
+                favourite.orgId =_products.orgId;
                 favourite.UserId = Convert.ToInt32(UserId);
                 favourite.proId = _products.Id;
                 await DataService.RemovefromFavourite(favourite.proId, favourite.UserId, favourite.orgId); //RemoveFavourite(favourite);

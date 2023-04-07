@@ -42,7 +42,6 @@ namespace DellyShopApp.Views.TabbedPages
                     UserId = 1,
                     Id = 4,
                     Image = "iphone",
-                    Price = 499,
                     OldPrice = 699,
                     VisibleItemDelete = false,
                     ProductList = new string[] { "ip8_1", "ip8_2" },
@@ -58,7 +57,8 @@ namespace DellyShopApp.Views.TabbedPages
         private async void InittHomePage()
         {
             CategoryList.ItemsSource = await DataService.GetCategories(orgId); //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId); //
-            CarouselView.ItemsSource = await DataService.GetAllCategories(orgId); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
+            var CarosalList = await DataService.GetAllCategories(orgId);
+            CarouselView.ItemsSource = CarosalList.Where(x => x.Banner != null && x.Banner!="").ToList(); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
             BestSellerList.ItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
             PreviousViewedList.ItemsSource = await DataService.GetLastVisitedProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
             MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
@@ -114,7 +114,6 @@ namespace DellyShopApp.Views.TabbedPages
             {
                 searchResults.IsVisible = true;
                 searchResults.ItemsSource = await DataService.SearchProducts(orgId, searchBar.Text);
-
             }
             else
             {

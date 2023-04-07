@@ -14,11 +14,8 @@ namespace DellyShopApp.Views.Pages
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
 
         public RegisterPage ()
-		{
-		   
-
-            InitializeComponent ();
-		  
+		{	  
+            InitializeComponent ();		  
 		}
 	    protected override async void OnAppearing()
 	    {

@@ -170,7 +170,6 @@
     <Folder Include="CustomControl\FlowListViewControl\" />
     <Folder Include="DependencyServices\" />
     <Folder Include="Services\" />
-    <Folder Include="Views\Pages\Base\" />
     <Folder Include="Themes\" />
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +188,15 @@
       <DependentUpon>AppResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Views\Pages\VendorsOrderDetails.xaml.cs">
+      <DependentUpon>VendorsOrderDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Pages\VendorsOrder.xaml.cs">
+      <DependentUpon>VendorsOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Pages\VendorLoginPage.xaml.cs">
+      <DependentUpon>VendorLoginPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

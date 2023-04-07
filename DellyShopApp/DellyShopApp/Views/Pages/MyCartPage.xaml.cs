@@ -5,8 +5,6 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
        List< ProductListModel> productListModel = new List<ProductListModel> ();
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
-      
-
 
         int MyCartCountLable;
 
@@ -56,11 +54,11 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             var products = productListModel.Where(x => x.Id == Convert.ToInt32(CartSelectedProduct.Text)).FirstOrDefault();
             products.Quantity = CurrentQuantity;
          
-        }        private void MainScroll_Scrolled(object sender, ScrolledEventArgs e)        {            var height = Math.Round(Application.Current.MainPage.Height);            var ycordinate = Math.Round(e.ScrollY);            if (ycordinate > (height / 3))            {
-                // NavbarStack.IsVisible = true;
-                return;            }
-            // NavbarStack.IsVisible = false;
-        }        protected void LogInClick(object sender, EventArgs args)
+        }        //private void MainScroll_Scrolled(object sender, ScrolledEventArgs e)        //{        //    var height = Math.Round(Application.Current.MainPage.Height);        //    var ycordinate = Math.Round(e.ScrollY);        //    if (ycordinate > (height / 3))        //    {
+        //        // NavbarStack.IsVisible = true;
+        //        return;        //    }
+        //    // NavbarStack.IsVisible = false;
+        //}        protected void LogInClick(object sender, EventArgs args)
         {
             Navigation.PushAsync(new LoginPage());
         }    }}
