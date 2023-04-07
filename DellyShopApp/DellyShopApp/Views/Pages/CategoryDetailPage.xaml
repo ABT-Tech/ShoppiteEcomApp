@@ -24,7 +24,7 @@
                        WidthRequest="100"
                        HeightRequest="100"
                        HorizontalOptions="Start"/> 
-            <!--  SearchBar  -->
+            <!--  SearchBar  --><!--
                     <Frame
                     Margin="0,20,0,10"
                     CornerRadius="17"
@@ -38,7 +38,7 @@
                         TextColor="{DynamicResource EntryTextColor}"
                         Placeholder="Search Item...."
                         PlaceholderColor="Black"/>
-                </Frame>
+                </Frame>-->
          
             <!--  Category Name and Image  -->
             <StackLayout Margin="10,5,10,0" HorizontalOptions="FillAndExpand">
@@ -100,11 +100,12 @@
                 Padding="0"
                 CornerRadius="8"
                 Elevation="2"
+                 BackgroundColor="#f5f5f5"
                 HasShadow="False">
                 <controls:CarouselView
                     x:Name="CarouselView"
                     Margin="0,0,0,0"
-                    BackgroundColor="{DynamicResource MainColor}"
+                    BackgroundColor="Transparent"
                     HeightRequest="{x:OnIdiom Tablet=350,
                                               Phone=200}"
                     SelectedIndex="0"
@@ -124,7 +125,7 @@
                     <controls:CarouselView.ItemTemplate>
                         <DataTemplate>
                             <ContentView>
-                                <forms:CachedImage
+                                    <forms:CachedImage
                                     Margin="0"
                                     Aspect="AspectFill"
                                     CacheType="Memory"
@@ -132,8 +133,7 @@
                                     FadeAnimationDuration="100"
                                     FadeAnimationEnabled="True"
                                     Source="{Binding Banner}" />
-                               
-                                <forms:CachedImage.GestureRecognizers>
+                                    <forms:CachedImage.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="BannerTab" />
                                 </forms:CachedImage.GestureRecognizers>
                             </ContentView>
@@ -185,7 +185,8 @@
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             Text="{Binding Title}"
                                             TextColor="Black"
-                                            VerticalOptions="Start" />
+                                            VerticalOptions="Start"
+                                            LineBreakMode="TailTruncation"/>
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             FontSize="10"
@@ -195,10 +196,10 @@
                                             VerticalOptions="Start" />
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProBold}"
-                                            FontSize="25"
+                                            FontSize="16"
                                             HorizontalOptions="EndAndExpand"
                                             Text="{Binding Price, StringFormat='{0} ₹'}"
-                                            TextColor="Red"
+                                            TextColor="Black"
                                             VerticalOptions="EndAndExpand" />
                                     </StackLayout>
                                 </pancakeView:PancakeView>
@@ -214,7 +215,7 @@
                 FontFamily="{DynamicResource VerdanaProBold}"
                 FontSize="22"
                 HorizontalOptions="Start"
-                Text="{x:Static languages:AppResources.PreviousViewed}"
+                Text="Top Deals"
                 TextColor="Black"
                 VerticalOptions="Start" />
             <!--  ProcutctList  -->
@@ -250,7 +251,8 @@
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             Text="{Binding Title}"
                                             TextColor="Black"
-                                            VerticalOptions="Start" />
+                                            VerticalOptions="Start"
+                                            LineBreakMode="TailTruncation"/>
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProRegular}"
                                             FontSize="10"
@@ -261,10 +263,10 @@
 
                                         <Label
                                             FontFamily="{DynamicResource VerdanaProBold}"
-                                            FontSize="25"
+                                            FontSize="16"
                                             HorizontalOptions="EndAndExpand"
                                             Text="{Binding Price, StringFormat='{0} ₹'}"
-                                            TextColor="Red"
+                                            TextColor="Black"
                                             VerticalOptions="EndAndExpand" />
                                     </StackLayout>
                                 </pancakeView:PancakeView>
@@ -320,7 +322,8 @@
                                     FontFamily="{DynamicResource VerdanaProRegular}"
                                     Text="{Binding Title}"
                                     TextColor="Black"
-                                    VerticalOptions="Start" />
+                                    VerticalOptions="Start"
+                                    LineBreakMode="TailTruncation"/>
                                 <Label
                                     FontFamily="{DynamicResource VerdanaProRegular}"
                                     FontSize="10"
@@ -331,10 +334,10 @@
 
                                 <Label
                                     FontFamily="{DynamicResource VerdanaProBold}"
-                                    FontSize="25"
+                                    FontSize="16"
                                     HorizontalOptions="EndAndExpand"
                                     Text="{Binding Price, StringFormat='{0} ₹'}"
-                                    TextColor="Red"
+                                    TextColor="Black"
                                     VerticalOptions="EndAndExpand" />
                             </StackLayout>
                         </pancakeView:PancakeView>
