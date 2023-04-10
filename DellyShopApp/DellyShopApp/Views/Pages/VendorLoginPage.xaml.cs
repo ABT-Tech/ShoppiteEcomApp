@@ -6,14 +6,14 @@
             {
                 await Xamarin.Essentials.SecureStorage.SetAsync("UserId", userDetail.UserId.ToString());
                 await Xamarin.Essentials.SecureStorage.SetAsync("Token", userDetail.jwt_token.ToString());
+                await DisplayAlert("Congrulations", "You are Login Successfully", "ok");
             }
             else
             {
                 await DisplayAlert("Opps", "InValid Username or Password", "ok");
                 return;
             }
-
-            await Navigation.PushAsync(new VendorsOrder());
+            await Navigation.PushAsync(new VendorsOrderPage());
 
         }        private void BackButton(object sender, EventArgs e)        {            Navigation.PopAsync();        }        private async void ForgetPassClick(object sender, EventArgs e)        {            string result = await DisplayPromptAsync(AppResources.ForgotPass,                AppResources.EnterEmailAddress);            if (string.IsNullOrEmpty(result)) return;            await DisplayAlert(AppResources.Success,                AppResources.SuccessSendEmail                + " " + result, AppResources.Okay);        }
     }}

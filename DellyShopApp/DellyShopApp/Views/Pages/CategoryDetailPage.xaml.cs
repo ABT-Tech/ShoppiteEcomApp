@@ -7,6 +7,7 @@ using System.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static Android.Media.Session.MediaSession;
 
 namespace DellyShopApp.Views.Pages
 {
@@ -62,8 +63,11 @@ namespace DellyShopApp.Views.Pages
         private async void BannerTab(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ProductDetail());
-
         }
 
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MainPage());           
+        }
     }
 }

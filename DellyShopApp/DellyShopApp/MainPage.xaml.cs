@@ -15,7 +15,7 @@ namespace DellyShopApp
 
     public partial class MainPage
     {
-
+        public int oldorgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public MainPage()
         {
             GetDeviceInfo();
@@ -52,8 +52,6 @@ namespace DellyShopApp
                         TextColor = Color.Chocolate,
                         FontAttributes = FontAttributes.Bold,
                         FontSize = 20,
-
-
                     };
                     var image = new Image
                     {
@@ -64,10 +62,6 @@ namespace DellyShopApp
                         HorizontalOptions = LayoutOptions.Center,
                         HeightRequest = 200,
                         WidthRequest = 200
-
-
-
-
                     };
                     var Orglabel = new Label
                     {
@@ -89,11 +83,15 @@ namespace DellyShopApp
 
         private void TapGestureRecognizer_Tapped(string orgId, string Img)
         {
-
+            
+            var neworgId = Convert.ToInt32(orgId);
+            if (neworgId != oldorgId)
+            {
+                Xamarin.Essentials.SecureStorage.RemoveAll();
+            }
             SecureStorage.SetAsync("OrgId", orgId);
             SecureStorage.SetAsync("ImgId", Img);
             Navigation.PushAsync(new HomeTabbedPage());
-
         }
         private string GetDeviceInfo()
         {

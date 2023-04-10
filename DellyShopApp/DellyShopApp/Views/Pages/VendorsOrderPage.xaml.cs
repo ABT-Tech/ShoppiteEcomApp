@@ -9,13 +9,13 @@ using Xamarin.Forms.Xaml;
 namespace DellyShopApp.Views.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class VendorsOrder
+    public partial class VendorsOrderPage
     {
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int userId =Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         private bool _open = false;
         
-        public VendorsOrder()
+        public VendorsOrderPage()
         {
             InitializeComponent();
             InittMyOrderPage();
@@ -31,7 +31,7 @@ namespace DellyShopApp.Views.Pages
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             
-            Navigation.PushAsync(new TabbedPages.VendorsOrderDetails());
+            Navigation.PushAsync(new TabbedPages.VendorsOrderDetailsPage());
         }
 
         //private async void ProductDetailClick(object sender, EventArgs e)

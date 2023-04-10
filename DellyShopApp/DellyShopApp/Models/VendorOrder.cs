@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DellyShopApp.Models
 {
-   public class VendorOrder
+   public class VendorsOrder
     {
         public int orgId { get; set; }
         public int userId { get; set; }

@@ -36,7 +36,7 @@ namespace DellyShopApp.Services
         public ChangeUserData EditProfile = new ChangeUserData();
         public List<ChangeAddress> changeAddress = new List<ChangeAddress>();
         public List<CategoryDetailPage> Details = new List<CategoryDetailPage>();
-        public List<VendorOrder> vendors = new List<VendorOrder>();
+        public List<VendorsOrder> vendors = new List<VendorsOrder>();
         public OrderDetails orderdetails = new OrderDetails();
         public OrgData ObjOrgData = new OrgData();
         public Cart cart = new Cart();
@@ -143,29 +143,29 @@ namespace DellyShopApp.Services
                 Quantity = 1,
                 orderId = 1                
             });
-            vendors = new List<VendorOrder>();
-            vendors.Add(new VendorOrder
+            vendors = new List<VendorsOrder>();
+            vendors.Add(new VendorsOrder
             {
                 orgId = 1,
                 userId = 1,
                 orderId = 123,
                 Price = 555
             });
-            vendors.Add (new VendorOrder
+            vendors.Add (new VendorsOrder
             {
                 orgId = 2,
                 userId = 2,
                 orderId = 111,
                 Price = 500
             });
-            vendors.Add(new VendorOrder
+            vendors.Add(new VendorsOrder
             {
                 orgId = 3,
                 userId = 3,
                 orderId = 112,
                 Price = 232
             });
-            vendors.Add(new VendorOrder
+            vendors.Add(new VendorsOrder
             {
                 orgId = 4,
                 userId = 4,
@@ -177,33 +177,29 @@ namespace DellyShopApp.Services
             {
                 orgId = 1,
                 UserId = 1,
-                Address = "rajkot aaaaaaaaaaaaa aaaaaaaaaa aaaaaaaa",
-                Date = "1/1/1/"
+               
             });
             OrderModel.Add(new OrderListModel
             {
                 orgId = 1,
                 UserId = 1,
-                Address = "jamnagar",              
-                Date = "1/1/1/"
+               
             });
             OrderModel.Add(new OrderListModel
             {
                 orgId = 1,
                 UserId = 1,
-                Address = "morbi",
-                Date = "1/1/1/"
             });
             OrderModel.Add(new OrderListModel
             {
                 orgId = 1,
                 UserId = 1,
-                Address = "ahm",
-                Date = "1/1/1/"
+               
             });
             orderdetails.ProductLists = OrderModel.ToList();
-            orderdetails.Date = "1/1/1";
+            orderdetails.Date = "01/01/2023";
             orderdetails.Address = "rajkot asas ladjf hgdf kjdbf";
+
             ShopDetails = new List<ShopModel>();
             ShopDetails.Add(new ShopModel
             {
@@ -380,11 +376,16 @@ namespace DellyShopApp.Services
             order.UserId = 1;
 
             ObjOrgData.ID = 1;
-            ObjOrgData.Image = "logo.png";        
+            ObjOrgData.Image = "logo.png";
 
-            
-
-            
+            changeAddress.Add(new ChangeAddress
+            {
+                AddressId = 1,
+                zipcode = "123",
+                SelectCity = "Rajkot",
+                SelectState = "1",
+                AddressDetail = "abc",
+            });
 
             StartList.Add(new StartList
             {
@@ -963,6 +964,59 @@ namespace DellyShopApp.Services
                 return JsonConvert.DeserializeObject<List<ChangeUserData>>(result);
             }
             catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<List<ChangeAddress>> GetAddressByUserId(int orgId, int userId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Cart/GetAddressByUserId?OrgId=" + orgId + "&UserId=" + userId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<ChangeAddress>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<string> Submit(Orders orders)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+
+                var payload = JsonConvert.SerializeObject(orders);
+
+                HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+                HttpClient httpClient = new HttpClient(clientHandler);
+                httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+                var response = await httpClient.PostAsync("api/Cart/AddToCart", c);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return result;
+            }
+            catch (Exception ex)
+
             {
                 throw;
             }

@@ -1,8 +1,8 @@
 ﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.ViewModel;using DellyShopApp.Views.CustomView;using DellyShopApp.Views.ModalPages;using DellyShopApp.Views.Pages;using System;using System.Collections.Generic;using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;
-namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class VendorsOrderDetails    {        List<ProductListModel> productListModel = new List<ProductListModel>();        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);        private readonly BasketPageVm _basketVm = new BasketPageVm();
-        private Page2 page;        private List<ProductListModel> Product { get; set; }        public VendorsOrderDetails(List<ProductListModel> product)        {
+namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class VendorsOrderDetailsPage    {        List<ProductListModel> productListModel = new List<ProductListModel>();        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);        private readonly BasketPageVm _basketVm = new BasketPageVm();
+        private Page2 page;        private List<ProductListModel> Product { get; set; }        public VendorsOrderDetailsPage(List<ProductListModel> product)        {
             this.Product = product;            InitializeComponent();            InittBasketPage();            this.BindingContext = product;
-        }        public VendorsOrderDetails()        {
+        }        public VendorsOrderDetailsPage()        {
             InitializeComponent();            InittBasketPage();
             PickerDemo.ItemsSource = new List<string>
         {
@@ -30,13 +30,26 @@ namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationO
             }
             TotalPrice.Text = $"{ DataService.Instance.BaseTotalPrice}₹";
         }        private async void AddAddressClick(object sender, EventArgs e)        {
-
             await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }        private async void ContinueClick(object sender, EventArgs e)        {            OrderCheckOut orderCheckOut = new OrderCheckOut();            orderCheckOut.ProductLists = productListModel;            orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);            orderCheckOut.BaseTotalPrice = ((decimal)DataService.Instance.BaseTotalPrice);            orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice + 12);
             //orderCheckOut.Contactnumber = ((decimal)DataService.Instance.Contactnumber);
-            await DataService.Checkout(orderCheckOut);            await Navigation.PushAsync(new SuccessPage(productListModel));        }        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));        }
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+            await DataService.Checkout(orderCheckOut);            await Navigation.PushAsync(new SuccessPage(productListModel));        }       
+        private async void Submitclick(object sender, EventArgs e)
         {
-            DisplayAlert("Done", "submited", "ok");
+            var orders = new Orders            {
+                Remark = VendorRemark.Text,
+                orgId = orgId,
+                UserId = userId,
+                orderstatus = (string)PickerDemo.SelectedItem
+        };
+
+            await DataService.Submit(orders);
+            await DisplayAlert("Done", "submited", "ok");
+            await Navigation.PushAsync(new VendorsOrderPage());
         }
 
+        private void Log_outclick(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MainPage());
+            Xamarin.Essentials.SecureStorage.RemoveAll();
+        }
     }}

@@ -29,6 +29,7 @@ namespace DellyShopApp.Views.TabbedPages
                 Login.IsVisible = true;
                 txt.IsVisible = true;
                 userimg.IsVisible = true;
+                vendorlogin.IsVisible = true;
             }
             else 
             {
@@ -40,6 +41,7 @@ namespace DellyShopApp.Views.TabbedPages
                 Login.IsVisible = false;
                 txt.IsVisible = false; 
                 userimg.IsVisible = false;
+                vendorlogin.IsVisible = false;
             }
         }
 
@@ -93,6 +95,9 @@ namespace DellyShopApp.Views.TabbedPages
             OpenPage(new LoginPage());
         }
 
-      
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new VendorLoginPage());
+        }
     }
 }
