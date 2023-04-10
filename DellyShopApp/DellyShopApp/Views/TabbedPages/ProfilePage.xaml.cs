@@ -1,6 +1,7 @@
 ﻿using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.Pages;
 using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,15 +11,38 @@ namespace DellyShopApp.Views.TabbedPages
     public partial class ProfilePage
     {
         public object Element { get; private set; }
-
+        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         public ProfilePage()
         {
+
             InitializeComponent();
+            if (userId == 0)
+            {
+                EditProfile.IsVisible = false;
+                MyOder.IsVisible = false;
+                MyFav.IsVisible = false;
+                LastView.IsVisible = false;
+                Logout.IsVisible = false;
+                Login.IsVisible = true;
+                txt.IsVisible = true;
+                cartimg.IsVisible = true;
+            }
+            else
+            {
+                EditProfile.IsVisible = true;
+                MyOder.IsVisible = true;
+                MyFav.IsVisible = true;
+                LastView.IsVisible = true;
+                Logout.IsVisible = true;
+                Login.IsVisible = false;
+                txt.IsVisible = false;
+                cartimg.IsVisible = false;
+            }
         }
 
         private void OrderInfoClick(object sender, EventArgs e)
         {
-            
+
             if (!(sender is PancakeView stack)) return;
             switch (stack.ClassId)
             {
@@ -50,20 +74,29 @@ namespace DellyShopApp.Views.TabbedPages
                     OpenPage(new SettingsPage());
                     break;
             }
-            
+
         }
 
-        private void OpenPage(Page page)
+        private async void OpenPage(Page page)
         {
-         
-            Navigation.PushAsync(page);
+
+            await Navigation.PushAsync(page);
+
         }
         protected void LogOutClick(object sender, EventArgs args)
         {
             Application.Current.MainPage = new NavigationPage(new MainPage());
+            Xamarin.Essentials.SecureStorage.RemoveAll();
+        }
+        protected void LogInClick(object sender, EventArgs args)
+        {
+            OpenPage(new LoginPage());
         }
 
+        private async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new VenderLoginPage());
 
-
+        }
     }
 }

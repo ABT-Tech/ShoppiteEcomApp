@@ -21,26 +21,44 @@
 
 
         <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
-            <StackLayout Margin="5,10,5,0">
+            <StackLayout Margin="5,10,5,0" WidthRequest="150">
+                <Grid RowSpacing="5" ColumnSpacing="5">
                 <Image Source="{Binding Image}"
                        x:Name="ShopLogo"
-                       WidthRequest="100" 
-                       HeightRequest="100"
-                       HorizontalOptions="Start"/>  
-             <Frame
-                    Margin="0,20,0,10"
-                    CornerRadius="17"
-                    HasShadow="False"
-                    HeightRequest="35"
-                    Style="{DynamicResource FrameStyle}">
-                    <renderers:BorderlessSearchBar
-                        BackgroundColor="white"
-                        CancelButtonColor="Black"
-                        FontFamily="{DynamicResource VerdanaProRegular}"
-                        TextColor="{DynamicResource EntryTextColor}"
-                        Placeholder="Search Item...."
-                        PlaceholderColor="Black"/>
-                </Frame>
+                       WidthRequest="130" 
+                       HeightRequest="130"
+                     HorizontalOptions="Start"/>
+                
+                <Image Source="ShopHigh.png"
+                      VerticalOptions="Start"
+                       WidthRequest="175" 
+                       HeightRequest="175"
+                       HorizontalOptions="End">
+                      <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                    
+                </Grid>
+                
+                  
+         <SearchBar Placeholder="Search items..."
+           CancelButtonColor="Gray"
+           PlaceholderColor="Black"
+           TextColor="Black"
+           TextTransform="Lowercase"
+           FontSize="Medium"
+           TextChanged="SearchBar_TextChanged" />
+                <ListView x:Name="searchResults" IsVisible="False" ItemSelected="searchResults_ItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Title}">
+                            </TextCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>                    
+                </ListView>
+              
+
                 <Label
                     Margin="0"
                     Padding="5,5,0,0"
@@ -55,7 +73,7 @@
                     <customControl:RepeaterView
                         x:Name="CategoryList"
                         Orientation="Horizontal"
-                        Spacing="-5">
+                        Spacing="5">
                         <customControl:RepeaterView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -68,7 +86,7 @@
                                         </StackLayout.GestureRecognizers>
                                         <Grid BackgroundColor="#DC">
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="50" />
+                                                <RowDefinition Height="80" />
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="150" />
@@ -86,8 +104,9 @@
                                             <pancakeView:PancakeView
                                                 Grid.Row="0"
                                                 Grid.Column="0"
-                                                BackgroundGradientEndColor="White"
-                                                BackgroundGradientStartColor="white"
+                                            
+                                                BackgroundGradientEndColor="{DynamicResource DarkFontColor}"
+                                                BackgroundGradientStartColor="White"
                                                 CornerRadius="10"
                                                 HorizontalOptions="FillAndExpand" />
                                             <Label
@@ -95,10 +114,10 @@
                                                 Padding="0,5,0,0"
                                                 FontAttributes="Bold"
                                                 FontFamily="{DynamicResource VerdanaProBold}"
-                                                FontSize="18"
+                                                FontSize="12"
                                                 HorizontalOptions="CenterAndExpand"
                                                 Text="{Binding CategoryName}"
-                                                TextColor="Black"
+                                                TextColor="{DynamicResource LabelTextColor}"
                                                 VerticalOptions="CenterAndExpand" />
                                         </Grid>
 
@@ -145,9 +164,13 @@
                                         Aspect="AspectFill"
                                         Source="{Binding Banner}"                                        
                                         WidthRequest="50"
-                                        HeightRequest="50"/>                                   
+                                        HeightRequest="50"/>
+                                    <forms:CachedImage.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Click_Banner" />
+                                    </forms:CachedImage.GestureRecognizers>
                                 </ContentView>                                
                             </DataTemplate>
+
                           
                         </controls:CarouselView.ItemTemplate>
                     </controls:CarouselView>
@@ -171,7 +194,7 @@
                         FontSize="18"
                         HorizontalOptions="End"
                         Text="{x:Static helpers:AppResources.ViewAll}"
-                        TextColor="Gray"
+                        TextColor="Black"
                         VerticalOptions="Start">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="VireAllTapped" />
@@ -217,7 +240,7 @@
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 Text="{Binding Title}"
                                                 MaxLines="1"
-                                                
+
                                                 LineBreakMode="TailTruncation"
                                                 TextColor="Black"
                                                 VerticalOptions="Start" />
@@ -235,18 +258,18 @@
                                                                             iOS=18}"
                                                     HorizontalOptions="EndAndExpand"
                                                     Text="{Binding OldPrice, StringFormat='{0}₹'}"
-                                                    TextColor="Red"
-                                                    WidthRequest="50"
+                                                    TextColor="Gray"
+                                                    WidthRequest="80"
 
                                                     
                                                     TextDecorations="Strikethrough"
                                                     VerticalOptions="CenterAndExpand" />
                                                 <Label
                                                     FontFamily="{DynamicResource VerdanaProBold}"
-                                                    FontSize="25"
-                                                    HorizontalOptions="EndAndExpand"
+                                                    FontSize="15"
+                                                    HorizontalOptions="End"
                                                     Text="{Binding Price, StringFormat='{0}₹'}"
-                                                    TextColor="Red"
+                                                    TextColor="Black"
                                                     WidthRequest="100"
                                                     VerticalOptions="CenterAndExpand" />
                                             </StackLayout>
@@ -314,10 +337,10 @@
 
                                             <Label
                                                 FontFamily="{DynamicResource VerdanaProBold}"
-                                                FontSize="25"
+                                                FontSize="15"
                                                 HorizontalOptions="EndAndExpand"
                                                 Text="{Binding Price, StringFormat='{0}₹'}"
-                                                TextColor="Red"
+                                                TextColor="Black"
                                                 VerticalOptions="EndAndExpand" />
                                         </StackLayout>
                                     </pancakeView:PancakeView>
@@ -386,10 +409,10 @@
 
                                     <Label
                                         FontFamily="{DynamicResource VerdanaProBold}"
-                                        FontSize="25"
+                                        FontSize="15"
                                         HorizontalOptions="EndAndExpand"
                                         Text="{Binding Price, StringFormat='{0} ₹'}"
-                                        TextColor="Red"
+                                        TextColor="Black"
                                         VerticalOptions="EndAndExpand" />
                                 </StackLayout>
                             </pancakeView:PancakeView>
@@ -397,6 +420,7 @@
                     </controls:FlowListView.FlowColumnTemplate>
                 </controls:FlowListView>
             </StackLayout>
+               
         </ScrollView>
         <controls:PancakeView
             x:Name="BasketLayout"

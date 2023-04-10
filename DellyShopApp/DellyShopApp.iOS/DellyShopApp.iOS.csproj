@@ -153,6 +153,22 @@
     <BundleResource Include="Resources\Fav.png" />
     <BundleResource Include="Resources\red.png" />
     <BundleResource Include="Resources\black.png" />
+    <BundleResource Include="Resources\Address.png" />
+    <BundleResource Include="Resources\zip.png" />
+    <BundleResource Include="Resources\zip1.png" />
+    <BundleResource Include="Resources\zip2.png" />
+    <BundleResource Include="Resources\swipe.png" />
+    <BundleResource Include="Resources\ShopSwitch.png" />
+    <BundleResource Include="Resources\Switch2.png" />
+    <BundleResource Include="Resources\ShopHigh.png" />
+    <BundleResource Include="Resources\basket11.png" />
+    <BundleResource Include="Resources\userimg.png" />
+    <BundleResource Include="Resources\basket00.png" />
+    <BundleResource Include="Resources\vendor.png.jpg" />
+    <BundleResource Include="Resources\pexel.jpg" />
+    <BundleResource Include="Resources\abc.jpg" />
+    <BundleResource Include="Resources\abcd.png" />
+    <BundleResource Include="Resources\abcde.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

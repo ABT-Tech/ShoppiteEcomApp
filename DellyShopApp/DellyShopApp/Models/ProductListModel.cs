@@ -22,7 +22,7 @@ namespace DellyShopApp.Models
 
         private int _rotate;
         internal string orderStatus;
-        internal Guid orderGuid;
+       
         private int _Quantity;
         internal double product;
 
@@ -48,26 +48,24 @@ namespace DellyShopApp.Models
         public string[] ProductList { get; set; }
         public int OldPrice { get; set; }
         public int orderId { get; set; }
-        public Guid OrderGuId { get; internal set; }
-        public DateTime InsertDate { get; internal set; }
+        public Guid OrderGuId { get;  set; }
+        public DateTime InsertDate { get;  set; }
         public int UserId { get; set; }
         public int Quantity { get; set; }
         public ChangeAddress changeAddress { get; set; }
         public OrderCheckOut ordercheckout { get; set; }
-        public object BaseTotalPrice  { get; internal set; }
+        public object BaseTotalPrice  { get;  set; }
+     
 
 
 
 
-        public object Children { get; internal set; }
-        public object RemoveCommand { get; internal set; }
+        public object Children { get;  set; }
+        public object RemoveCommand { get;  set; }
         public int Empty { get; internal set; }
+        public object Name { get; internal set; }
 
-        public static implicit operator ProductListModel(List<ProductListModel> v)
-        {
-            throw new NotImplementedException();
-        }
-
+      
        
     }
 }

@@ -146,6 +146,7 @@ namespace DellyShopApp.Views.CustomView
 
         //Helps keep track of Native Object assignment
         public IntPtr Handle { get; set; }
+        public object AppResources { get; internal set; }
 
         #endregion
     }

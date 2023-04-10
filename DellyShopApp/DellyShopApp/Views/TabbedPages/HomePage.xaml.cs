@@ -1,10 +1,12 @@
 ﻿using Acr.UserDialogs;
 using DellyShopApp.Languages;
 using DellyShopApp.Models;
+using DellyShopApp.Renderers;
 using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.Pages;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -15,17 +17,23 @@ namespace DellyShopApp.Views.TabbedPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage
     {
+        
         //Order product = new Order();
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int orderId = Convert.ToInt32(SecureStorage.GetAsync("orderId").Result);
+        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
+        public string productname = SecureStorage.GetAsync("Productname").Result;
 
-       
-       public Category C { get; private set; }
+        public Category C { get; private set; }
        public object ProcutListModel { get; private set; }
 
         
         private bool x;
         private ProductListModel product;
+        private List<BorderlessSearchBar> borderlessSearchBar;
+
+        public HomePage MainPage { get; }
+        public static object ItemsSource { get; private set; }
 
         public HomePage()
         {
@@ -48,18 +56,20 @@ namespace DellyShopApp.Views.TabbedPages
                 });
             }
             InitializeComponent();
+            borderlessSearchBar = new List<BorderlessSearchBar>();
+           
             ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;
 
             InittHomePage();
         }
         private async void InittHomePage()
         {
-            CategoryList.ItemsSource =  await DataService.GetCategories(orgId); //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId); //
+            CategoryList.ItemsSource =  await DataService.GetCategories(orgId); //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId); 
             CarouselView.ItemsSource =await DataService.GetAllCategories(orgId); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
             BestSellerList.ItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
             PreviousViewedList.ItemsSource = await DataService.GetLastVisitedProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
             MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
-
+            
         }
         private async void ProductDetailClick(object sender, EventArgs e)
         {
@@ -110,12 +120,31 @@ namespace DellyShopApp.Views.TabbedPages
             await Navigation.PushAsync(new CategoryDetailPage(Ca));
         }
 
-        void BorderlessSearchBar_TextChanged(System.Object sender, Xamarin.Forms.TextChangedEventArgs e)
+      
+
+       private async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
         {
-           
+            await Navigation.PushAsync(new MainPage());
         }
-       
-
-
+        private async void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            SearchBar searchBar = (SearchBar)sender;
+            if (searchBar.Text != "")
+            {
+                searchResults.IsVisible = true;
+                searchResults.ItemsSource = await DataService.SearchProducts(orgId, searchBar.Text);
+         
+            }
+            else
+            {
+                searchResults.IsVisible = false;
+            }
+        }
+        private async void searchResults_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var type = sender.GetType();
+            var evnt = (ProductListModel)searchResults.SelectedItem;
+            await Navigation.PushAsync(new ProductDetail(evnt));
+        }
     }
 }
