@@ -17,7 +17,8 @@ namespace DellyShopApp.Views.TabbedPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage
     {
-        
+       
+
         //Order product = new Order();
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int orderId = Convert.ToInt32(SecureStorage.GetAsync("orderId").Result);
@@ -34,7 +35,8 @@ namespace DellyShopApp.Views.TabbedPages
 
         public HomePage MainPage { get; }
         public static object ItemsSource { get; private set; }
-
+     
+        
         public HomePage()
         {
             if (!DataService.Instance.ProcutListModel.Any(x => x.Id == 4))
@@ -55,7 +57,10 @@ namespace DellyShopApp.Views.TabbedPages
                     orderId = 1
                 });
             }
+
             InitializeComponent();
+           
+       
             borderlessSearchBar = new List<BorderlessSearchBar>();
            
             ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;
@@ -64,12 +69,14 @@ namespace DellyShopApp.Views.TabbedPages
         }
         private async void InittHomePage()
         {
-            CategoryList.ItemsSource =  await DataService.GetCategories(orgId); //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId); 
-            CarouselView.ItemsSource =await DataService.GetAllCategories(orgId); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
+            CategoryList.ItemsSource =  await DataService.GetCategories(orgId); //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId);
+            var CarosalList = await DataService.GetAllCategories(orgId);
+            CarouselView.ItemsSource = CarosalList.Where(x => x.Banner != null && x.Banner != "").ToList(); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); 
             BestSellerList.ItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
             PreviousViewedList.ItemsSource = await DataService.GetLastVisitedProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
             MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
-            
+          
+
         }
         private async void ProductDetailClick(object sender, EventArgs e)
         {
@@ -116,7 +123,7 @@ namespace DellyShopApp.Views.TabbedPages
         {
             if (!(sender is ContentView content)) return;
             if (!(content.BindingContext is Category c)) return;
-            Category Ca = DataService.Instance.CatoCategoriesList.Where(x => x.CategoryId == c.CategoryId).FirstOrDefault();
+            Category Ca = DataService.Instance.CatoCategoriesList.Where(x => x.Banner != null && x.Banner != "").FirstOrDefault();
             await Navigation.PushAsync(new CategoryDetailPage(Ca));
         }
 
@@ -124,16 +131,19 @@ namespace DellyShopApp.Views.TabbedPages
 
        private async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
         {
+            
             await Navigation.PushAsync(new MainPage());
         }
         private async void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
+            
             SearchBar searchBar = (SearchBar)sender;
             if (searchBar.Text != "")
             {
                 searchResults.IsVisible = true;
                 searchResults.ItemsSource = await DataService.SearchProducts(orgId, searchBar.Text);
-         
+               
+
             }
             else
             {
@@ -142,9 +152,13 @@ namespace DellyShopApp.Views.TabbedPages
         }
         private async void searchResults_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            
             var type = sender.GetType();
             var evnt = (ProductListModel)searchResults.SelectedItem;
             await Navigation.PushAsync(new ProductDetail(evnt));
+            
         }
+
+        
     }
 }

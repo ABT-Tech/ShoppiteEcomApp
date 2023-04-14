@@ -4,7 +4,7 @@ using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompila
             var login = new Login            {                email = email.Text,                password = pswd.Text,                org_Id = orgId,
                 type = "vendor"
             };
-
+            if (email.Text == null || email.Text == "")            {                await DisplayAlert("Opps", "Please Enter Email", "ok");                return;            }            else if (pswd.Text == null || pswd.Text == "")            {                await DisplayAlert("Opps", "Please Enter Password", "ok");                return;            }
             var userDetail = await DataService.Login(login);
             if (userDetail != null)
             {
@@ -19,7 +19,7 @@ using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompila
             }
 
 
-            await Navigation.PushAsync(new Venderdata());
+               await Navigation.PushAsync(new Venderdata());
 
 
 

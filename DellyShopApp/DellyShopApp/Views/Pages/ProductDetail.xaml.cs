@@ -8,7 +8,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
         private Color _myColor;
         private int clickTotal;
         private readonly List<StartList> _startList = new List<StartList>();        private readonly List<CommentModel> _comments = new List<CommentModel>();        private readonly ProductListModel _products;
-
+        private List<ProductListModel> _productLists = new List<ProductListModel>();
         public HomePage MainPage { get; }
 
         private void RaisePropertyChanged()
@@ -21,8 +21,8 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             //{
             //    product.ProductList = new string[] { product.Image };
             //}
-            _products = product;            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _comments.Add(new CommentModel            {                Name = "Ufuk Sahin",                CommentTime = "12/1/19",                Id = 1,                Rates = _startList            });            _comments.Add(new CommentModel            {                Name = "Hans Goldman",                CommentTime = "11/1/19",                Id = 2,                Rates = _startList.Skip(0).ToList()            });            InitializeComponent();            this.BindingContext = product;
-            MainPage = new HomePage();            starList.ItemsSource = _startList;            //starListglobal.ItemsSource = _startList;            //CommentList.ItemsSource = _comments;
+            _products = product;            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _comments.Add(new CommentModel            {                Name = "Ufuk Sahin",                CommentTime = "12/1/19",                Id = 1,                Rates = _startList            });            _comments.Add(new CommentModel            {                Name = "Hans Goldman",                CommentTime = "11/1/19",                Id = 2,                Rates = _startList.Skip(0).ToList()            });            InitializeComponent();                      this.BindingContext = product;
+            MainPage = new HomePage();            //starList.ItemsSource = _startList;            //starListglobal.ItemsSource = _startList;            //CommentList.ItemsSource = _comments;
             //MainScroll.Scrolled += MainScroll_Scrolled; 
 
             InittProductDetail();        }        private async void InittProductDetail()        {            ProductDetail.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.Id == proId);
@@ -43,9 +43,10 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                 cart.UserId = Convert.ToInt32(UserId);
                 cart.proId = _products.Id;
                 cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
-                
-                await DisplayAlert(AppResources.Success, _products.Title + " " + AppResources.AddedBakset, AppResources.Okay);
                 await DataService.AddToCart(cart);
+                _products.Quantity = Convert.ToInt32(ProductCountLabel.Text);
+                _productLists.Add(_products);
+                await DisplayAlert(AppResources.Success, _products.Title + " " + AppResources.AddedBakset, AppResources.Okay);
             }        }
 
         private async void BuyNow(object sender, EventArgs e)        {            if (UserId == "" || UserId == null)
@@ -54,13 +55,17 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                 await Navigation.PushAsync(new LoginPage());
             }            else
             {
+                _productLists = new List<ProductListModel>();
                 Cart cart = new Cart();
                 cart.orgId = _products.orgId;
                 cart.UserId = Convert.ToInt32(UserId);
                 cart.proId = _products.Id;
                 cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
-                await Navigation.PushAsync(new MyCartPage());
-                await DataService.AddToCart(cart);
+                //await DataService.AddToCart(cart);
+                _products.Quantity = Convert.ToInt32(ProductCountLabel.Text);
+                _productLists.Add(_products);
+                await Navigation.PushAsync(new BasketPage(_productLists));
+                
             }
         }
         private async void Imgtapp(System.Object sender, System.EventArgs e)
