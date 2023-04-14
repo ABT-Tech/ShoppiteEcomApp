@@ -23,7 +23,7 @@ namespace DellyShopApp.Views.Pages
 	     
         }
         private async void RegisteruButtonClick(object sender, EventArgs e)
-	    {
+        {
             var registration = new Registration
             {
                 Username = username.Text,
@@ -38,14 +38,61 @@ namespace DellyShopApp.Views.Pages
                 OrgId = orgId,
 
             };
-            await Navigation.PushAsync(new LoginPage());
+            if (username.Text == null || username.Text == "")
+            {
+               await DisplayAlert("opps..", "Please Enter Your UserName", "Ok");
+                return;
+            }
+            else if (EmailAddress.Text == null || EmailAddress.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your EmailAddress", "Ok");
+                return;
+
+            }
+            else if (Pswd.Text == null || Pswd.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your Password", "Ok");
+                return;
+            }
+            else if (cnfm.Text == null || cfm.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your Conform Password", "Ok");
+                return;
+            }
+            else if (phonenumber.Text == null || phonenumber.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your Phonenumber", "Ok");
+                return;
+            }
+            else if (address.Text == null || address.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your Address", "Ok");
+                return;
+            }
+            else if (statename.Text == null || statename.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your State Name", "Ok");
+                return;
+            }
+            else if (cityname.Text == null || cityname.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your City", "Ok");
+                return;
+            }
+            else if (zipcode.Text == null || zipcode.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your ZipCode", "Ok");
+                return;
+            }   
+        
+            //await Navigation.PushAsync(new LoginPage());
             await DataService.Registration(registration);
             Regex regex = new Regex(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
             bool EmailCheck = regex.IsMatch(EmailAddress.Text.Trim());
 
             if (!EmailCheck)
             {
-                await DisplayAlert("opps..", "Invalid Email Address", "Ok");
+                await DisplayAlert("opps..", "Please Enter Valid Email Address", "Ok");
                 return;
             }
             else if (Pswd.Text != cnfm.Text)
@@ -53,8 +100,9 @@ namespace DellyShopApp.Views.Pages
                await DisplayAlert("opps..", "Confirm Password Not Match", "Ok");
                 return;
             }
-
+          
             else
+            
             {
                 await DisplayAlert("Congrulations", "You are Registered", "Ok");
                 await Navigation.PushAsync(new LoginPage());

@@ -14,6 +14,7 @@ namespace DellyShopApp.Models
         public double Price { get; set; }
         public int Id { get; set; }
         public int orgId { get; set; }
+        public int orderId { get; set; }
         public Guid OrderGuId { get;  set; }
         public int UserId { get; set; }
         public int Quantity { get; set; }      

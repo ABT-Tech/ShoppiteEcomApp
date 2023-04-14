@@ -21,6 +21,7 @@ namespace DellyShopApp.Views.TabbedPages
         //Order product = new Order();
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int orderId = Convert.ToInt32(SecureStorage.GetAsync("orderId").Result);
+         public int CategoryId = Convert.ToInt32(SecureStorage.GetAsync("CategoryId").Result);
 
 
         public Category C { get; private set; }
@@ -32,24 +33,8 @@ namespace DellyShopApp.Views.TabbedPages
 
         public HomePage()
         {
-            if (!DataService.Instance.ProcutListModel.Any(x => x.Id == 4))
-            {
-                DataService.Instance.ProcutListModel.Insert(0, new ProductListModel
-                {
-                    Title = AppResources.ProcutTitle3,
-                    Brand = AppResources.ProductBrand3,
-                    Quantity = 1,
-                    UserId = 1,
-                    Id = 4,
-                    Image = "iphone",
-                    OldPrice = 699,
-                    VisibleItemDelete = false,
-                    ProductList = new string[] { "ip8_1", "ip8_2" },
-                    orgId = 1,
-                    orderId = 1
-                });
-            }
             InitializeComponent();
+            
             ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;
 
             InittHomePage();
@@ -98,8 +83,9 @@ namespace DellyShopApp.Views.TabbedPages
         {
             if (!(sender is ContentView content)) return;
             if (!(content.BindingContext is Category c)) return;
-            Category Ca = DataService.Instance.CatoCategoriesList.Where(x => x.CategoryId == c.CategoryId).FirstOrDefault();
-            await Navigation.PushAsync(new CategoryDetailPage(Ca));
+            Category Ca = DataService.Instance.CatoCategoriesList.Where(x => x.Banner != null && x.Banner != "").FirstOrDefault();
+            await Navigation.PushAsync(new HomeTabbedPage());
+            await Xamarin.Essentials.SecureStorage.SetAsync("CategoryId", c.CategoryId);
         }
 
         private async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)

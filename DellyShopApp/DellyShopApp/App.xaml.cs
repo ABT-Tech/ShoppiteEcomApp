@@ -1,11 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Threading;
+using System.Threading.Tasks;
 using DellyShopApp.Helpers;
 using DellyShopApp.Languages;
+using DellyShopApp.Models;
+using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.Pages;
 using Plugin.FirebasePushNotification;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,10 +21,11 @@ namespace DellyShopApp
 {
     public partial class App
     {
+        public int VendorUserId = Convert.ToInt32(SecureStorage.GetAsync("VendorUserId").Result);
+        public int UserId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         public App(bool hasNotification = false, IDictionary<string, object> notificationData = null)
         {
-            InitializeComponent();
-            
+            InitializeComponent();            
             FlowListView.Init();
             Device.SetFlags(new[] {
                "SwipeView_Experimental",
@@ -38,7 +46,14 @@ namespace DellyShopApp
             //Token event usage sample:
             CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
             {
+                FirebaseToken firebaseToken = new FirebaseToken();
+                firebaseToken.MacID = GetDeviceInfo();
+                firebaseToken.Token = p.Token;
+                firebaseToken.UserID = UserId;
+                SetFirebaseToken(firebaseToken);
                 System.Diagnostics.Debug.WriteLine($"TOKEN : {p.Token}");
+                Xamarin.Essentials.SecureStorage.SetAsync("FirebaseToken",p.Token);
+                Xamarin.Essentials.SecureStorage.SetAsync("MacId", firebaseToken.MacID);
             };
 
             //Push message received event usage sample:
@@ -95,14 +110,40 @@ namespace DellyShopApp
                         NavigationPage navpage = new NavigationPage(loginPage);
                         NavigationPage.SetHasNavigationBar(navpage, false);
                         NavigationPage.SetHasNavigationBar(loginPage, false);
-                        MainPage = navpage;
-                        
+                        MainPage = navpage;                        
+                    }
+                }
+            }            
+            App.Current.MainPage.FlowDirection = Settings.SelectLanguage == "ar" ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+        }     
+        
+        private string GetDeviceInfo()
+        {
+            string mac = string.Empty;
+            string ip = string.Empty;
+
+            foreach (var netInterface in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (netInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 ||
+                    netInterface.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                {
+                    var address = netInterface.GetPhysicalAddress();
+                    mac = BitConverter.ToString(address.GetAddressBytes());
+
+                    IPAddress[] addresses = Dns.GetHostAddresses(Dns.GetHostName());
+                    if (addresses != null && addresses[0] != null)
+                    {
+                        ip = addresses[0].ToString();
+                        break;
                     }
                 }
             }
-            
-            App.Current.MainPage.FlowDirection = Settings.SelectLanguage == "ar" ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
-
+            return mac;
+        }
+        public async void SetFirebaseToken(FirebaseToken firebaseToken) 
+        {
+            await DataService.UpdateFireBaseToken(firebaseToken);
         }
     }
+
 }

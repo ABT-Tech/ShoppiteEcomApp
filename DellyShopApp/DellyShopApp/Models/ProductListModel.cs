@@ -51,7 +51,7 @@ namespace DellyShopApp.Models
         public int Quantity { get; set; }
         public ChangeAddress changeAddress { get; set; }
         public OrderCheckOut ordercheckout { get; set; }
-        public object BaseTotalPrice  { get;  set; }
+        public object TotalPrice  { get;  set; }
         public object Children { get;  set; }
         public object RemoveCommand { get;  set; }
         public int Empty { get;  set; }

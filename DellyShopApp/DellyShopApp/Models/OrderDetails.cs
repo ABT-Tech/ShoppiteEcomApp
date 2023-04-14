@@ -12,5 +12,6 @@ namespace DellyShopApp.Models
         public object TotalPrice { get; set; }
         public int orgId { get; set; }
         public int userId { get; set; }
+        public int orderId { get; set; }
     }
 }

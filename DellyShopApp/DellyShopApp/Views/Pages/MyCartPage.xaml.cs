@@ -2,10 +2,15 @@
 
 namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class MyCartPage
     {
-       List< ProductListModel> productListModel = new List<ProductListModel> ();
+        protected override void OnAppearing()
+        {
+            InittMyCartPage();
+
+        }
+        List< ProductListModel> productListModel = new List<ProductListModel> ();
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
-
+        public int proId = Convert.ToInt32(SecureStorage.GetAsync("Count").Result);
         int MyCartCountLable;
 
         public object Product { get; private set; }
@@ -19,6 +24,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 cartimg.IsVisible = true;
                 txt.IsVisible = true;
                 checkout.IsVisible = false;
+                vendorlogin.IsVisible = true;
             }
             else
             {
@@ -26,7 +32,10 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 cartimg.IsVisible = false;
                 checkout.IsVisible = true;
                 txt.IsVisible = false;
+                vendorlogin.IsVisible = false;
             }
+           
+            
             InittMyCartPage();
         }  
         //public async void CheckUserLogin()
@@ -38,10 +47,31 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         //    }
         //}
         private async void InittMyCartPage()        {
-            productListModel = await DataService.GetAllCartDetails(orgId, userId);
+            productListModel =await DataService.GetAllCartDetails(orgId, userId);
             BasketItems.ItemsSource = productListModel; //DataService.Instance.ProcutListModel;
-        }                    
-        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;
+            var productid = Convert.ToString(productListModel.Count);
+            await Xamarin.Essentials.SecureStorage.SetAsync("Count", productid);
+             int proId = Convert.ToInt32(SecureStorage.GetAsync("Count").Result);
+            if (proId > 0 && userId > 0)
+            {
+                checkout.IsVisible = true;
+                gif.IsVisible = false;
+            }
+            else if (proId == 0 && userId >0)
+            {
+                checkout.IsVisible = false;
+                gif.IsVisible = true;
+            }
+            else
+            {
+                checkout.IsVisible = false;
+                gif.IsVisible = false;
+            }
+        }
+        
+         
+
+private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;
             int Id = DataService.Instance.order.orgId;
             int UserId = DataService.Instance.order.UserId;
             await Navigation.PushAsync(new ProductDetail(item));        }        private async void Button_Clicked(object sender, EventArgs e)        {            await Navigation.PushAsync(new BasketPage(productListModel));        }        private async void PlusClick(object sender, EventArgs e)        {
@@ -61,4 +91,20 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         //}        protected void LogInClick(object sender, EventArgs args)
         {
             Navigation.PushAsync(new LoginPage());
-        }    }}
+        }        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new VendorLoginPage());
+        }
+
+        private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
+        {
+            var deleteitem = new DeleteItem()
+            {
+                userId = userId,
+                orgId = orgId,
+                proId = proId
+            };
+            await DataService.Delete(deleteitem);
+            await DisplayAlert("Yahh !", "Item was Deleted", "Done");
+        }
+    }}

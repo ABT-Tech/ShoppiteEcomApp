@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace DellyShopApp.Models
 {
     public class Login

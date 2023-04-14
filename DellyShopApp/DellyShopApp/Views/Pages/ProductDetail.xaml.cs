@@ -1,13 +1,13 @@
 ﻿using System;using System.Collections.Generic;using System.Linq;using System.Windows.Input;
 using DellyShopApp.Helpers;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;
-using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class ProductDetail    {        public int proId = Convert.ToInt32(SecureStorage.GetAsync("ProId").Result);        public int orderId = Convert.ToInt32(SecureStorage.GetAsync("OrderId").Result);
+using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class ProductDetail    {        public int proId = Convert.ToInt32(SecureStorage.GetAsync("Id").Result);        public int orderId = Convert.ToInt32(SecureStorage.GetAsync("OrderId").Result);
         public int UserId =Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("orgId").Result);
 
         int productCount;        private static IEnumerable<ProductListModel> ItemsSource;
         private readonly Color _myColor;
         private int clickTotal;
-        private readonly List<StartList> _startList = new List<StartList>();        private readonly List<CommentModel> _comments = new List<CommentModel>();        private readonly ProductListModel _products;
+        private readonly List<StartList> _startList = new List<StartList>();        private readonly List<CommentModel> _comments = new List<CommentModel>();        private  List<ProductListModel> _productLists = new List<ProductListModel>();        private  ProductListModel _products;
         private void RaisePropertyChanged()
         {
             throw new NotImplementedException();
@@ -34,8 +34,9 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                 cart.UserId = Convert.ToInt32(UserId);
                 cart.proId = _products.Id;
                 cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
-                await DisplayAlert(AppResources.Success, _products.Title + " " + AppResources.AddedBakset, AppResources.Okay);
                 await DataService.AddToCart(cart);
+                await DisplayAlert(AppResources.Success, _products.Title + " " + AppResources.AddedBakset, AppResources.Okay);
+             
             }
         }
         private async void BuyNow(object sender, EventArgs e)        {            if (UserId == 0 || UserId == null)
@@ -44,21 +45,23 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                 await Navigation.PushAsync(new LoginPage());
             }            else
             {
+                _productLists = new List<ProductListModel>();
                 Cart cart = new Cart();
                 cart.orgId =_products.orgId;
                 cart.UserId = Convert.ToInt32(UserId);
                 cart.proId = _products.Id;
                 cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
-                await Navigation.PushAsync(new MyCartPage());
-                await DataService.AddToCart(cart);
+                //await DataService.AddToCart(cart);
+                _products.Quantity = Convert.ToInt32(ProductCountLabel.Text);
+                _productLists.Add(_products);
+                await Navigation.PushAsync(new BasketPage(_productLists));
             }
         }
         private async void Imgtapp(System.Object sender, System.EventArgs e)
         {
             if(UserId == 0 || UserId == null)
             {
-                await DisplayAlert("Opps !", "Please Login First", "Ok");
-                await Navigation.PushAsync(new LoginPage());
+                await DisplayAlert("Opps !", "Please Login First", "Ok");               
             }
             var img = myImage.Source as FileImageSource;
 
