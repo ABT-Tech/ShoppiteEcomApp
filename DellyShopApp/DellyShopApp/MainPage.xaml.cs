@@ -13,7 +13,7 @@ namespace DellyShopApp
     
     public partial class MainPage
     {
-
+        public int oldorgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public MainPage()
         {
             
@@ -87,11 +87,16 @@ namespace DellyShopApp
 
         private  void TapGestureRecognizer_Tapped(string orgId,string Img)
         {
+            var neworgId = Convert.ToInt32(orgId);
+            if(neworgId != oldorgId)
+            {
+                Xamarin.Essentials.SecureStorage.RemoveAll();
+            }
 
             SecureStorage.SetAsync("OrgId",orgId);
             SecureStorage.SetAsync("ImgId", Img);
             Navigation.PushAsync(new HomeTabbedPage());
-         
+            
         }
       
     }

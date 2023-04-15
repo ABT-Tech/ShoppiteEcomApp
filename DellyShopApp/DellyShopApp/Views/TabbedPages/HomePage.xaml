@@ -10,7 +10,6 @@
     xmlns:font="clr-namespace:DellyShopApp.Helpers;assembly=DellyShopApp"
     xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:helpers="clr-namespace:DellyShopApp.Languages"
-
     xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
     xmlns:proc="clr-namespace:DellyShopApp.Processors"
     xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
@@ -42,8 +41,8 @@
                 </Grid>
                 
                   
-         <SearchBar Placeholder="Search items..."
-           CancelButtonColor="Gray"
+         <renderers:BorderlessSearchBar x:Name="item"
+           Placeholder="Search items..."
            PlaceholderColor="Black"
            TextColor="Black"
            TextTransform="Lowercase"
@@ -129,6 +128,7 @@
                 </ScrollView>
 
                 <pancakeView:PancakeView
+                    x:Name="view"
                     Margin="0,10,0,0"
                     Padding="0"
                     CornerRadius="8"
@@ -160,6 +160,7 @@
                             <DataTemplate>
                                 <ContentView>
                                     <forms:CachedImage
+                              
                                         Margin="0"
                                         Aspect="AspectFill"
                                         Source="{Binding Banner}"                                        

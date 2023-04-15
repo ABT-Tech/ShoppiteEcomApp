@@ -46,11 +46,9 @@ namespace DellyShopApp.Services
         public Registration registration = new Registration();
         public Users_DTO users = new Users_DTO();
         public OrderCheckOut ordercheckout = new OrderCheckOut();
-        public double BaseTotalPrice = 0;
-
-       
-
-        public double TotalPrice = 30;
+        public double TotalPrice = 0;
+        
+      
        
         public static DataService Instance
         {
@@ -186,8 +184,15 @@ namespace DellyShopApp.Services
             {
                 orgId = 1,
                 UserId = 1,
-                Address = "rajkot",
-                Date= "01/01/2000"
+               
+
+
+            });
+            OrderModel.Add(new OrderListModel
+            {
+                orgId = 1,
+                UserId = 1,
+              
 
 
 
@@ -196,34 +201,19 @@ namespace DellyShopApp.Services
             {
                 orgId = 1,
                 UserId = 1,
-                Address= "jamnagar",
-                Date = "01/02/2000"
-
-
-
+               
 
             });
             OrderModel.Add(new OrderListModel
             {
                 orgId = 1,
                 UserId = 1,
-                Address = "morbi",
-                Date = "01/03/2000"
-
-
-
-            });
-            OrderModel.Add(new OrderListModel
-            {
-                orgId = 1,
-                UserId = 1,
-                Address = "ahm",
-                Date = "04/04/2000"
+                
 
 
             });
             orderdetails.ProductLists = OrderModel.ToList();
-            orderdetails.Date = "1/1/1";
+            orderdetails.Date = "01/01/2001";
             orderdetails.Address = "c-807 Rajkot";
             ShopDetails = new List<ShopModel>();
             ShopDetails.Add(new ShopModel
@@ -421,7 +411,7 @@ namespace DellyShopApp.Services
 
             changeAddress.Add(new ChangeAddress
             {
-                AddressId = 1,
+                
                 zipcode = "123",
                 SelectCity = "Rajkot",
                 SelectState = "1",
@@ -698,7 +688,54 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
+        public static async Task<List<VendorsOrder>> GetOrderDetails(int orgId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
 
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Cart/GetOrderDetails?OrgId=" + orgId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<VendorsOrder>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<OrderDetails> GetOrderDetailsByOrderMasterId(int orgId, int OrderMasterId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Cart/GetOrderDetailsByOrderMasterId?OrgId=" + orgId + "&OrderMasterId=" + OrderMasterId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<OrderDetails>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public static async Task<string> AddToCart(Cart cart)
         {
             try

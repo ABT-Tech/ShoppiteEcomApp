@@ -9,6 +9,7 @@ using DellyShopApp.Helpers;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using DellyShopApp.Renderers;
+using System.ComponentModel;
 
 namespace DellyShopApp.Views.Pages.Base
 {
@@ -30,6 +31,11 @@ namespace DellyShopApp.Views.Pages.Base
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(LoginPage));
             mail = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::DellyShopApp.Renderers.BorderlessEntry>(this, "email");
             pass = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::DellyShopApp.Renderers.BorderlessEntry>(this, "pswd");
+        }
+
+        internal void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

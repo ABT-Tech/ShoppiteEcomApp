@@ -17,7 +17,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
 
 
         public MyCartPage()        {
-
+           
             InitializeComponent();
             if(userId == 0)
             {
@@ -25,6 +25,8 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 checkout.IsVisible = false;
                 txt.IsVisible = true;
                 cartimg.IsVisible = true;
+                vendorlogin.IsVisible = true;
+                
             }
             else
             {
@@ -32,15 +34,21 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 checkout.IsVisible = true;
                 txt.IsVisible = false;
                 cartimg.IsVisible = false;
+                vendorlogin.IsVisible = false;
             }
  
             InittMyCartPage();
         }
+       
         
         private async void InittMyCartPage()        {
             productListModel = await DataService.GetAllCartDetails(orgId, userId);
             BasketItems.ItemsSource = productListModel; //DataService.Instance.ProcutListModel;
-        }                    
+        }
+        protected override void OnAppearing()
+        {
+            InittMyCartPage();
+        }
         private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;
             int Id = DataService.Instance.order.orgId;
             int UserId = DataService.Instance.order.UserId;
@@ -63,5 +71,10 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         protected void LogInClick(System.Object sender, System.EventArgs e)
         {
             Navigation.PushAsync(new LoginPage());
+        }
+
+      private async  void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new VenderLoginPage());
         }
     }}
