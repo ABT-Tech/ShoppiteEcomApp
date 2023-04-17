@@ -1,7 +1,7 @@
 ﻿using System;using System.Collections.Generic;using System.Linq;using System.Windows.Input;
 using DellyShopApp.Helpers;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class ProductDetail    {        public int proId = Convert.ToInt32(SecureStorage.GetAsync("Id").Result);        public int orderId = Convert.ToInt32(SecureStorage.GetAsync("OrderId").Result);
-        public int UserId =Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
+        public int UserId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("orgId").Result);
 
         int productCount;        private static IEnumerable<ProductListModel> ItemsSource;

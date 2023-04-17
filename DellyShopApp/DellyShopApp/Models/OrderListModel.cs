@@ -18,6 +18,7 @@ namespace DellyShopApp.Models
         public Guid OrderGuId { get;  set; }
         public int UserId { get; set; }
         public int Quantity { get; set; }      
+        public string orderStatus { get; set; }
     }
 }
 

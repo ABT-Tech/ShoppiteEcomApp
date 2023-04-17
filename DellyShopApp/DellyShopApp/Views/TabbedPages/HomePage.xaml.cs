@@ -20,15 +20,9 @@ namespace DellyShopApp.Views.TabbedPages
 
         //Order product = new Order();
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
-        public int orderId = Convert.ToInt32(SecureStorage.GetAsync("orderId").Result);
-         public int CategoryId = Convert.ToInt32(SecureStorage.GetAsync("CategoryId").Result);
+        public int UserId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
+        List<Category> categories = new List<Category>();
 
-
-        public Category C { get; private set; }
-        public object ProcutListModel { get; private set; }
-
-
-        private bool x;
         private ProductListModel product;
 
         public HomePage()
@@ -41,9 +35,9 @@ namespace DellyShopApp.Views.TabbedPages
         }
         private async void InittHomePage()
         {
-            CategoryList.ItemsSource = await DataService.GetCategories(orgId); //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId); //
-            var CarosalList = await DataService.GetAllCategories(orgId);
-            CarouselView.ItemsSource = CarosalList.Where(x => x.Banner != null && x.Banner!="").ToList(); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
+            categories = await DataService.GetAllCategories(orgId);
+            CategoryList.ItemsSource = categories; //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId); //
+            CarouselView.ItemsSource = categories.Where(x => x.Banner != null && x.Banner!="").ToList(); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
             BestSellerList.ItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
             PreviousViewedList.ItemsSource = await DataService.GetLastVisitedProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
             MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
@@ -83,9 +77,8 @@ namespace DellyShopApp.Views.TabbedPages
         {
             if (!(sender is ContentView content)) return;
             if (!(content.BindingContext is Category c)) return;
-            Category Ca = DataService.Instance.CatoCategoriesList.Where(x => x.Banner != null && x.Banner != "").FirstOrDefault();
-            await Navigation.PushAsync(new HomeTabbedPage());
-            await Xamarin.Essentials.SecureStorage.SetAsync("CategoryId", c.CategoryId);
+            Category Ca = categories.Where(x => x.Banner != null && x.Banner != "").FirstOrDefault();
+            await Navigation.PushAsync(new CategoryDetailPage(Ca));
         }
 
         private async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
@@ -106,9 +99,6 @@ namespace DellyShopApp.Views.TabbedPages
                 searchResults.IsVisible = false;
             }
         }
-
-
-
         private async void searchResults_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var type = sender.GetType();

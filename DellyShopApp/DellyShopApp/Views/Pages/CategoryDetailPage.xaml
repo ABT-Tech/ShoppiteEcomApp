@@ -82,8 +82,8 @@
                             FontAttributes="Bold"
                             FontFamily="{DynamicResource VerdanaProBold}"
                             FontSize="20"
+                            x:Name="StackLabelCategoryName"
                             HorizontalOptions="CenterAndExpand"
-                            Text="{Binding CategoryName}"
                             TextColor="Black"
                             VerticalOptions="CenterAndExpand" />
                     </StackLayout>
@@ -94,7 +94,8 @@
             <pancakeView:PancakeView
                 Margin="10,10,10,0"
                 Padding="0"
-              
+                x:Name="CategoryBannerPancake"
+                IsVisible="True"
                 CornerRadius="8"
                 Elevation="2"
                  BackgroundColor="#f5f5f5"
@@ -131,10 +132,7 @@
                                     FadeAnimationDuration="100"
                                     FadeAnimationEnabled="True"
                                     Source="{Binding Banner}" />
-                                    <forms:CachedImage.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="BannerTab" />
-                                </forms:CachedImage.GestureRecognizers>
-                            </ContentView>
+                                </ContentView>
                         </DataTemplate>
                     </controls:CarouselView.ItemTemplate>
                 </controls:CarouselView>

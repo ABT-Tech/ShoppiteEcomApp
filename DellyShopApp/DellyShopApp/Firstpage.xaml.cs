@@ -10,7 +10,6 @@ namespace DellyShopApp
         public FirstPage()
         {
             InitializeComponent();
-
         }
 
         private void SignUp_Clicked(object sender, EventArgs e)

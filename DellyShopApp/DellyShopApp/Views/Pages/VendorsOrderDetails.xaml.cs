@@ -10,7 +10,7 @@
             lblDate.Text = orderDetails.Date;//DataService.Instance.orderdetails.Date;
             lblAddress.Text = orderDetails.Address;//DataService.Instance.orderdetails.Address;
             DataService.Instance.TotalPrice = 0;
-            foreach (var product in orderListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;                DataService.Instance.TotalPrice += product.Quantity * product.Price;            }            TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";        }
+            foreach (var product in orderListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;            }            TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";            PickerDemo.SelectedItem = orderDetails.ProductLists.FirstOrDefault().orderStatus;        }
 
         private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }
 

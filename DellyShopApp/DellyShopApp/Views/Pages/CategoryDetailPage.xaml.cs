@@ -14,45 +14,33 @@ namespace DellyShopApp.Views.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoryDetailPage
     {
-        public object C { get; private set; }
-        public int CategoryId = Convert.ToInt32(SecureStorage.GetAsync("CategoryId").Result);
-        ActivityIndicator activityIndicator = new ActivityIndicator { IsRunning = true };
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
-
+        public CategoryDetailPage()
+        {
+        }
         public CategoryDetailPage(Category category)
         {
             InitializeComponent();
             if (string.IsNullOrEmpty(category.Banner) )
             {
-                CarouselView.IsVisible = false;
+                CategoryBannerPancake.IsVisible = false;
             }
             else
             {
-                CarouselView.IsVisible = true;
+                CategoryBannerPancake.IsVisible = true;
             }
             InitCategoryPage(category);
         }
        
-        public CategoryDetailPage()
-        {
-        }
-
         public async void InitCategoryPage(Category category) 
         {
+            List<Category> categories = new List<Category>();
+            categories.Add(category);
+            var AllMostSeller = await DataService.GetAllProductsByCategory(orgId,Convert.ToInt32(category.CategoryId));
+            StackLabelCategoryName.Text = category.CategoryName;
             ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result;
-            await Xamarin.Essentials.SecureStorage.SetAsync("CategoryId", category.CategoryId);
-            ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;
-            var AllCarosol = await DataService.GetAllCategories(orgId);
-            //var AllBestSeller = await DataService.GetMostSellerProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
-            //var AllPrevious = await DataService.GetLastVisitedProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
-            var AllMostSeller = await DataService.GetAllProductsByOrganizations(orgId);
-            var CarosalList = await DataService.GetAllCategories(orgId);
-            CarouselView.ItemsSource = CarosalList.Where(x => x.Banner != null && x.Banner != "").ToList();
-            CarouselView.ItemsSource = AllCarosol.Where(x => x.CategoryId == category.CategoryId).ToList();
-            //BestSellerList.ItemsSource = AllBestSeller;
-            //PreviousViewedList.ItemsSource = AllPrevious;
+            CarouselView.ItemsSource = categories;
             MostNews.FlowItemsSource = AllMostSeller;
-            await Xamarin.Essentials.SecureStorage.SetAsync("CategoryId", category.CategoryId);
         }
 
         private async void ClickCategory(object sender, EventArgs e)
@@ -70,15 +58,6 @@ namespace DellyShopApp.Views.Pages
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;
             await Navigation.PushAsync(new ProductDetail(item));
-        }
-
-        private async void BannerTab(object sender, EventArgs e)
-        {
-            if (!(sender is ContentView content)) return;
-            if (!(content.BindingContext is Category c)) return;
-            Category Ca = DataService.Instance.CatoCategoriesList.Where(x => x.Banner != null && x.Banner != "").FirstOrDefault();
-
-            await Navigation.PushAsync(new HomeTabbedPage());
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
