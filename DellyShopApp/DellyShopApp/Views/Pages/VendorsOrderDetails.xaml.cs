@@ -5,16 +5,19 @@
         public int orderId = Convert.ToInt32(SecureStorage.GetAsync("OrderId").Result);
 
         public int OrderMasterId = Convert.ToInt32(SecureStorage.GetAsync("OrderMasterId").Result);        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
-        public string remark = SecureStorage.GetAsync("Remark").Result;        private readonly BasketPageVm _basketVm = new BasketPageVm();
-        private readonly OrderListModel _order;
-       
+        public string remark = SecureStorage.GetAsync("Remark").Result;        
 
 
 
         private Page2 page;        private int OrderID { get; set; }        public VendorsOrderDetails(int orderID)        {            OrderMasterId = orderID;            InitializeComponent();            InittBasketPage();            
             PickerDemo.ItemsSource = new List<string>
             {
-              "Pending",            "Complete",            "Cancelled",            "Cancellation",            "Packaged"            };        }        public VendorsOrderDetails()        {            InitializeComponent();            InittBasketPage();
+            "Pending",            "Delivered",
+            "Cancelled",
+            "Out for Delivery",
+            "Request Cancellation"
+
+            };        }        public VendorsOrderDetails()        {            InitializeComponent();            InittBasketPage();
         }                  
        
         public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {
@@ -27,18 +30,13 @@
             foreach (var product in orderListModel)                       {
                                DataService.Instance.TotalPrice += product.Quantity * product.Price;              //DataService.Instance.TotalPrice += product.Quantity * product.Price;
             }                        TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";
+            PickerDemo.SelectedItem = orderDetails.ProductLists.FirstOrDefault().orderStatus;
            
-        }                private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }               private async void submit_click(object sender, EventArgs e)        {            var orders = new Orders
-            {
-                orgId = orgId,
-                Remark = vendorremark.Text,
-                orderstatus = (string)PickerDemo.SelectedItem,
-                orderId = OrderMasterId
+        }                private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }               private async void submit_click(object sender, EventArgs e)        {
+            var orders = new Orders
+            {                orgId = orgId,                Remark = vendorremark.Text,                orderstatus = (string)PickerDemo.SelectedItem,                orderId = OrderMasterId,                UserId = userId
 
             };
-
-
-
 
             await DataService.Submit(orders);
             await DisplayAlert("Done", "Submited", "Ok");

@@ -1,8 +1,11 @@
 ﻿using DellyShopApp.Models;
 using DellyShopApp.Services;using System;using System.Collections.Generic;using System.Linq;
 using Xamarin.Essentials;
-using Xamarin.Forms;using Xamarin.Forms.Xaml;using static DellyShopApp.Views.Pages.HomeTabbedPage;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class EditProfilePage    {
-        private readonly Registration _registration;        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);        public static string Text = string.Empty;        public EditProfilePage()        {            InitializeComponent();
+using Xamarin.Forms;using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using Xamarin.Forms.Xaml;using static DellyShopApp.Views.Pages.HomeTabbedPage;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class EditProfilePage    {
+        private readonly Registration _registration;        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);        public static string Text = string.Empty;        public EditProfilePage()        {
+            Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
+            InitializeComponent();
             InittEditProfilepage();            
             //int OrgId = DataService.Instance.EditProfile.OrgId;
 

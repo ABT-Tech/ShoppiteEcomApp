@@ -1,6 +1,8 @@
 ﻿using System;
 using DellyShopApp.Models;
 using DellyShopApp.Services;
+using DellyShopApp.Views.CustomView;
+using DellyShopApp.Views.TabbedPages;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,8 +14,10 @@ namespace DellyShopApp.Views.Pages
     {
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
+
         private bool _open = false;
-        
+
+
         public MyOrderPage()
         {
             InitializeComponent();
@@ -21,25 +25,22 @@ namespace DellyShopApp.Views.Pages
         }
         private async void InittMyOrderPage()
         {
-            BasketItems.ItemsSource = await DataService.GetMyOrderDetails(orgId, userId);//DataService.Instance.ProcutListModel;
+
+            BasketItems.ItemsSource = await DataService.GetMyOrderDetails(orgId,userId);//DataService.Instance.vendors;
+
+
+
         }
 
-        private void OpenDetailClick(object sender, EventArgs e)
+
+        private async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
         {
-            if (!(sender is StackLayout stackLayout)) return;
-            if ((stackLayout.BindingContext is ProductListModel pModel))
+            if (!(sender is PancakeView pancake)) return;
+            if (pancake.BindingContext is UserOrder item)
             {
-                pModel.VisibleItemDelete = pModel.VisibleItemDelete == _open;
-                pModel.Rotate = pModel.VisibleItemDelete == _open ? 0 : 90;
+                await Navigation.PushAsync(new UserOrderDetails(item.orderId));
             }
 
-        }
-
-        private async void ProductDetailClick(object sender, EventArgs e)
-        {
-            if (!(sender is StackLayout pancake)) return;
-            if (!(pancake.BindingContext is ProductListModel item)) return;
-            await Navigation.PushAsync(new ProductDetail(item));
         }
     }
 }

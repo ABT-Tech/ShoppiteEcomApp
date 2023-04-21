@@ -23,7 +23,7 @@
 	<key>MinimumOSVersion</key>
 	<string>11.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>DellyShopApp</string>
+	<string>Shooppy</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.XamDesign.DellyShopApp</string>
 	<key>CFBundleVersion</key>
@@ -55,6 +55,6 @@
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 	<key>NSCameraUsageDescription</key>
-<string>We will use your camera to scan the credit card</string>
+	<string>We will use your camera to scan the credit card</string>
 </dict>
 </plist>

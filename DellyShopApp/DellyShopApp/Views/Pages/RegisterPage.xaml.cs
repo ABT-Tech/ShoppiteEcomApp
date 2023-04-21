@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using DellyShopApp.Models;
 using Xamarin.Essentials;
 using DellyShopApp.Services;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace DellyShopApp.Views.Pages
 {
@@ -14,9 +15,10 @@ namespace DellyShopApp.Views.Pages
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public RegisterPage ()
 		{
-		   
 
-            InitializeComponent ();
+            Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
+
+            InitializeComponent();
 		  
 		}
 	    protected override async void OnAppearing()
@@ -91,7 +93,7 @@ namespace DellyShopApp.Views.Pages
 
 
             //await Navigation.PushAsync(new LoginPage());
-            await DataService.Registration(registration);
+           var reg = await DataService.Registration(registration);
 
 
 
@@ -157,11 +159,20 @@ namespace DellyShopApp.Views.Pages
 
             else
             {
-              await  DisplayAlert("Congrulations", "You are Registered", "Ok");
-              await  Navigation.PushAsync(new LoginPage());
+                if (reg == "You are Registered!!")
+                {
+                    await DisplayAlert("Congrulations", reg, "Ok");
+                    await Navigation.PushAsync(new LoginPage());
+                }
+                else
+                {
+                    await DisplayAlert("Sorry", reg, "Ok");
+                    return;
+                }
+
             }
-           
-           
+
+
 
 
 
