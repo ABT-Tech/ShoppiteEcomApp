@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using DellyShopApp.ViewModel;
+﻿using DellyShopApp.ViewModel;
+using System;
 
 namespace DellyShopApp.Models
 {
@@ -21,7 +18,6 @@ namespace DellyShopApp.Models
 
 
         private int _rotate;
-        internal string orderStatus;
         internal Guid orderGuid;
         private int _Quantity;
         internal double product;
@@ -48,6 +44,7 @@ namespace DellyShopApp.Models
         public int orderId { get; set; }
         public Guid OrderGuId { get;  set; }
         public DateTime InsertDate { get;  set; }
+        public DateTime orderDate { get;  set; }
         public int UserId { get; set; }
         public int Quantity { get; set; }
         public ChangeAddress changeAddress { get; set; }
@@ -56,9 +53,14 @@ namespace DellyShopApp.Models
         public object Children { get;  set; }
         public object RemoveCommand { get;  set; }
         public int Empty { get;  set; }
+        public int OrderNumber { get;  set; }
+        public int productQty { get;  set; }
         public string Discription { get; set; }
+        public string orderStatus { get; set; }
+        public bool IsPriceVisible { get; set; }
+        public bool IsOutStock { get; set; }
+        public bool WishlistedProduct { get; set; }
 
-      
     }
 }
 

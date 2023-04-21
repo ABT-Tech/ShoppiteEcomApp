@@ -31,22 +31,30 @@ namespace DellyShopApp.Views.TabbedPages
             
             ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;
 
-            InittHomePage();
+            
         }
         private async void InittHomePage()
         {
+            int? OrgUserID = UserId == 0 ? null : (int?)UserId;
             categories = await DataService.GetAllCategories(orgId);
             CategoryList.ItemsSource = categories; //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId); //
             CarouselView.ItemsSource = categories.Where(x => x.Banner != null && x.Banner!="").ToList(); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
-            BestSellerList.ItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
-            PreviousViewedList.ItemsSource = await DataService.GetLastVisitedProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
-            MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
+            BestSellerList.ItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId,OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
+            PreviousViewedList.ItemsSource = await DataService.GetLastVisitedProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
+            MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
+        }
+        protected override void OnAppearing()
+        {
+            InittHomePage();
+            // InittMyCartPage();
+
         }
         private async void ProductDetailClick(object sender, EventArgs e)
         {
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;
             await Navigation.PushAsync(new ProductDetail(item));
+            //if(item.Quantity  >10 )
         }
 
         private async void ClickCategory(object sender, EventArgs e)

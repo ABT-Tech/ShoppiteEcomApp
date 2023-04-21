@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using Xamarin.Essentials;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
 using static DellyShopApp.Views.Pages.HomeTabbedPage;
 
@@ -15,6 +16,8 @@ namespace DellyShopApp.Views.Pages
         public static string Text = string.Empty;
         public EditProfilePage()
         {
+            Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
+
             InitializeComponent();
             InittEditProfilePage();
         }

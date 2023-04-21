@@ -21,7 +21,8 @@ namespace DellyShopApp.Views.Pages
         }
         private async void InittFavoritePage()
         {
-            BasketItems.ItemsSource = await DataService.GetWishlistByUser(orgId,userId);//DataService.Instance.ProcutListModel;
+            BasketItems.ItemsSource = await DataService.GetWishlistByUser(orgId,userId);//DataService.Instance.ProcutListModel;         
+            
         }
         private async void ClickItem(object sender, EventArgs e)
         {

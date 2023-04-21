@@ -12,14 +12,14 @@ namespace DellyShopApp.Views.TabbedPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage
     {
-        
+        public string userAuth = SecureStorage.GetAsync("Usertype").Result;
         public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         public object Element { get; private set; }
        
         public ProfilePage()
-        {
+        {      
             InitializeComponent();
-            if (userId == 0)
+            if (userId == 0 || userAuth != "Client")
             {
                 EditProfile.IsVisible = false;
                 MyOder.IsVisible = false;

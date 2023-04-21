@@ -227,7 +227,7 @@
                                                 FontSize="10"
                                                 HorizontalOptions="Start"
                                                 Text="{Binding Brand}"
-                                                TextColor="Black"
+                                                TextColor="{DynamicResource DescLabelColor}"
                                                 VerticalOptions="Start" />
                                             <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
                                                 <Label x:Name="oldprice"
@@ -310,7 +310,7 @@
                                                 FontSize="10"
                                                 HorizontalOptions="Start"
                                                 Text="{Binding Brand}"
-                                                TextColor="Black"
+                                                TextColor="{DynamicResource DescLabelColor}"
                                                 VerticalOptions="Start" />
 
                                             <Label
@@ -382,7 +382,7 @@
                                         FontSize="10"
                                         HorizontalOptions="Start"
                                         Text="{Binding Brand}"
-                                        TextColor="Black"
+                                        TextColor="{DynamicResource DescLabelColor}"
                                         VerticalOptions="Start" />
 
                                     <Label

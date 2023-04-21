@@ -16,7 +16,7 @@ using Plugin.PayCards;
 using Xamarin.Forms;
 namespace DellyShopApp.Droid
 {
-    [Activity(Label = "Shoppit", Icon = "@mipmap/Shoppit", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Shoppit", Icon = "@mipmap/shooppy", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         private bool IsNotification = false;
