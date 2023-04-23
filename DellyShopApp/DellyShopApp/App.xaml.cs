@@ -119,26 +119,7 @@ namespace DellyShopApp
         
         private string GetDeviceInfo()
         {
-            string mac = string.Empty;
-            string ip = string.Empty;
-
-            foreach (var netInterface in NetworkInterface.GetAllNetworkInterfaces())
-            {
-                if (netInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 ||
-                    netInterface.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
-                {
-                    var address = netInterface.GetPhysicalAddress();
-                    mac = BitConverter.ToString(address.GetAddressBytes());
-
-                    IPAddress[] addresses = Dns.GetHostAddresses(Dns.GetHostName());
-                    if (addresses != null && addresses[0] != null)
-                    {
-                        ip = addresses[0].ToString();
-                        break;
-                    }
-                }
-            }
-            return mac;
+            return Android.Provider.Settings.Secure.GetString(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.Secure.AndroidId);
         }
         public async void SetFirebaseToken(FirebaseToken firebaseToken) 
         {
