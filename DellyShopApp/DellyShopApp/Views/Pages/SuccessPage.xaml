@@ -97,7 +97,7 @@
 
             <Button
                 Margin="0,0,0,10"
-                BackgroundColor="Chocolate"
+                BackgroundColor="#E59500"
                 
                
                 Clicked="ContinueClick"
@@ -105,9 +105,9 @@
                 FontFamily="{DynamicResource VerdanaProRegular}"
                 FontSize="20"
                 HeightRequest="45"   
-                WidthRequest="200"
+                WidthRequest="300"
                 HorizontalOptions="CenterAndExpand"
-                Text="{x:Static languages:AppResources.HomePage}"
+                Text="Continue Shopping"
                 TextColor="White"
                 VerticalOptions="EndAndExpand">
             <VisualStateManager.VisualStateGroups>
