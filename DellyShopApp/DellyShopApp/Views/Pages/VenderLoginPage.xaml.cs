@@ -1,6 +1,9 @@
 ﻿using System;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using Xamarin.Essentials;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class VenderLoginPage    {
-        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public VenderLoginPage()        {            InitializeComponent();        }        private async void LoginButtonClick(object sender, EventArgs e)        {
+        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public VenderLoginPage()        {
+            Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
+            InitializeComponent();        }        private async void LoginButtonClick(object sender, EventArgs e)        {
             var login = new Login            {                email = email.Text,                password = pswd.Text,                org_Id = orgId,
                 type = "vendor"
             };
@@ -10,7 +13,7 @@ using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompila
             {
                 await Xamarin.Essentials.SecureStorage.SetAsync("UserId", userDetail.UserId.ToString());
                 await Xamarin.Essentials.SecureStorage.SetAsync("Tokan", userDetail.jwt_token.ToString());
-                await DisplayAlert("Yes", "You Have a Login Successfully", "Ok");
+               
             }
             else
             {

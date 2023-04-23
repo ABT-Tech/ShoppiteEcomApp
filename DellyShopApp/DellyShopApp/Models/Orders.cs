@@ -10,6 +10,7 @@ namespace DellyShopApp.Models
         public string Remark { get; set; }
         public string orderstatus { get; set; }
         public int orderId { get; set; }
+        public int UserId { get; set; }
     }
 }
 

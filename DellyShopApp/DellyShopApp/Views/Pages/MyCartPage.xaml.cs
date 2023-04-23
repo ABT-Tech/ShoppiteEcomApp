@@ -2,14 +2,15 @@
 
 namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class MyCartPage
     {
-       List< ProductListModel> productListModel = new List<ProductListModel> ();
+        protected override void OnAppearing()
+        {
+            InittMyCartPage();
+        }
+        List< ProductListModel> productListModel = new List<ProductListModel> ();
+        private readonly ProductListModel _products;
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
-        
-        
-
-
-
+        public string userAuth = SecureStorage.GetAsync("Usertype").Result;
 
         int MyCartCountLable;
 
@@ -19,7 +20,8 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         public MyCartPage()        {
            
             InitializeComponent();
-            if(userId == 0)
+            //if (_products.productQty == 0)            //{            //    //ProductCountLabel.IsVisible = false;            //    //Stocklbl.IsVisible = true;            //    //Addtocartbtn.IsVisible = false;            //    //BuyNowbtn.IsVisible = false;            //    //plusclick.IsVisible = false;            //    //minus.IsVisible = false;            //}
+            if (userId == 0 || userAuth != "Client")
             {
                 Login.IsVisible = true;
                 checkout.IsVisible = false;
@@ -43,19 +45,22 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         
         private async void InittMyCartPage()        {
             productListModel = await DataService.GetAllCartDetails(orgId, userId);
+            foreach (var product in productListModel)            {                if (product.productQty == 0)                {                    product.IsOutStock = true;                    product.IsPriceVisible = false;                }                else
+                {                    product.IsOutStock = false;                    product.IsPriceVisible = true;                }            }
             BasketItems.ItemsSource = productListModel; //DataService.Instance.ProcutListModel;
+            var productid = Convert.ToString(productListModel.Count);            if (productListModel.Count > 0 && (userId > 0 && userAuth == "Client"))            {                checkout.IsVisible = true;                gif.IsVisible = false;                shopping.IsVisible = false;            }            else if (productListModel.Count == 0 && userId > 0 && (userId > 0 && userAuth == "Client"))            {                checkout.IsVisible = false;                gif.IsVisible = true;                shopping.IsVisible = true;            }            else            {                checkout.IsVisible = false;                gif.IsVisible = false;                shopping.IsVisible = false;            }
         }
-        protected override void OnAppearing()
-        {
-            InittMyCartPage();
-        }
+      
         private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;
             int Id = DataService.Instance.order.orgId;
             int UserId = DataService.Instance.order.UserId;
-            await Navigation.PushAsync(new ProductDetail(item));        }        private async void Button_Clicked(object sender, EventArgs e)        {            await Navigation.PushAsync(new BasketPage(productListModel));        }        private async void PlusClick(object sender, EventArgs e)        {
-            Image image = (Image)sender;            StackLayout repaterStack = (StackLayout)image.Parent;            Label MyCartCountLable = (Label)repaterStack.Children[1];            int CurrentQuantity = Convert.ToInt32(MyCartCountLable.Text);            if (CurrentQuantity >= 10) return;            MyCartCountLable.Text = (++CurrentQuantity).ToString();            Label CartSelectedProduct = (Label)repaterStack.Children[2];
+            await Navigation.PushAsync(new ProductDetail(item));        }        private async void Button_Clicked(object sender, EventArgs e)        {
+            var prodItems = productListModel;            prodItems.RemoveAll(x => x.IsOutStock == true);            await Navigation.PushAsync(new BasketPage(prodItems));        }        private async void PlusClick(object sender, EventArgs e)        {
+            Image image = (Image)sender;            StackLayout repaterStack = (StackLayout)image.Parent;            Label MyCartCountLable = (Label)repaterStack.Children[1];            int CurrentQuantity = Convert.ToInt32(MyCartCountLable.Text);
+            //if (CurrentQuantity >= 10) return;            //MyCartCountLable.Text = (++CurrentQuantity).ToString();            Label CartSelectedProduct = (Label)repaterStack.Children[2];
             var products = productListModel.Where(x => x.Id == Convert.ToInt32(CartSelectedProduct.Text)).FirstOrDefault();
-            products.Quantity = CurrentQuantity;        
+            products.Quantity = CurrentQuantity;
+            if (products.productQty >= 10)            {                if (CurrentQuantity <= 9)                {                    MyCartCountLable.Text = (++CurrentQuantity).ToString();                }            }            else            {                if (CurrentQuantity < products.productQty)                {                    MyCartCountLable.Text = (++CurrentQuantity).ToString();                }            }
         }        private async void MinusClick(object sender, EventArgs e)        { 
             Image image = (Image)sender;            StackLayout repaterStack = (StackLayout)image.Parent;            Label MyCartCountLable = (Label)repaterStack.Children[1];            int CurrentQuantity = Convert.ToInt32(MyCartCountLable.Text);            Label CartSelectedProduct = (Label)repaterStack.Children[2];            if (CurrentQuantity == 1) return;
             MyCartCountLable.Text = (--CurrentQuantity).ToString();
@@ -76,5 +81,21 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
       private async  void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
         {
             await Navigation.PushAsync(new VenderLoginPage());
+        }
+
+       private async void TapGestureRecognizer_Tapped_1(System.Object sender, System.EventArgs e)
+        {
+            {
+                Image image = (Image)sender;
+                if (!(image.Parent.Parent.Parent.Parent.Parent is PancakeView pancake)) return;
+                if (!(pancake.BindingContext is ProductListModel item)) return;
+                await DataService.RemoveFromCart(userId, orgId, item.Id);
+                await DisplayAlert("Sucess !", "Item was Deleted", "Done");
+                InittMyCartPage();
+            }
+        }
+        private async void TapGestureRecognizer_Tapped_2(System.Object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new HomeTabbedPage());
         }
     }}

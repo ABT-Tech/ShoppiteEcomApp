@@ -94,8 +94,8 @@
                                             <forms:CachedImage
                                                 Grid.Row="0"
                                                 Grid.Column="0"
-                                                Aspect="AspectFill"
-                                                Source="{Binding Image}">
+                                                Aspect="AspectFill">
+                                               
                                                 <Image.GestureRecognizers>
                                                     <TapGestureRecognizer Tapped="ClickCategory" />
                                                 </Image.GestureRecognizers>
@@ -195,7 +195,7 @@
                         FontSize="18"
                         HorizontalOptions="End"
                         Text="{x:Static helpers:AppResources.ViewAll}"
-                        TextColor="Black"
+                        TextColor="Gray"
                         VerticalOptions="Start">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="VireAllTapped" />
@@ -235,6 +235,7 @@
                                             <forms:CachedImage
                                                 Aspect="AspectFill"
                                                 HeightRequest="150"
+                          
                                
                                                 Source="{Binding Image}" />
                                             <Label
@@ -250,7 +251,7 @@
                                                 FontSize="10"
                                                 HorizontalOptions="Start"
                                                 Text="{Binding Brand}"
-                                                TextColor="Black"
+                                                TextColor="{DynamicResource DescLabelColor}"
                                                 VerticalOptions="Start" />
                                             <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
                                                 <Label
@@ -258,6 +259,7 @@
                                                     FontSize="{x:OnPlatform Android=13,
                                                                             iOS=18}"
                                                     HorizontalOptions="EndAndExpand"
+                                                    IsVisible="{Binding OldPrice}"
                                                     Text="{Binding OldPrice, StringFormat='{0}₹'}"
                                                     TextColor="Gray"
                                                     WidthRequest="80"
@@ -333,7 +335,7 @@
                                                 FontSize="10"
                                                 HorizontalOptions="Start"
                                                 Text="{Binding Brand}"
-                                                TextColor="Black"
+                                                TextColor="{DynamicResource DescLabelColor}"
                                                 VerticalOptions="Start" />
 
                                             <Label
@@ -405,7 +407,7 @@
                                         FontSize="10"
                                         HorizontalOptions="Start"
                                         Text="{Binding Brand}"
-                                        TextColor="Black"
+                                        TextColor="{DynamicResource DescLabelColor}"
                                         VerticalOptions="Start" />
 
                                     <Label

@@ -12,11 +12,12 @@ namespace DellyShopApp.Views.TabbedPages
     {
         public object Element { get; private set; }
         public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
+        public string userAuth = SecureStorage.GetAsync("Usertype").Result;
         public ProfilePage()
         {
 
             InitializeComponent();
-            if (userId == 0)
+            if (userId == 0 || userAuth != "Client")
             {
                 EditProfile.IsVisible = false;
                 MyOder.IsVisible = false;
