@@ -90,30 +90,28 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;
             int Id = DataService.Instance.order.orgId;
             int UserId = DataService.Instance.order.UserId;
-            await Navigation.PushAsync(new ProductDetail(item));        }        private async void Button_Clicked(object sender, EventArgs e)        {            var prodItems =  productListModel;            prodItems.RemoveAll(x => x.IsOutStock == true);            await Navigation.PushAsync(new BasketPage(prodItems));        }        private async void PlusClick(object sender, EventArgs e)        {
+            await Navigation.PushAsync(new ProductDetail(item));        }        private async void Button_Clicked(object sender, EventArgs e)        {            var prodItems =  productListModel;            prodItems.RemoveAll(x => x.IsOutStock == true);            await Navigation.PushAsync(new BasketPage(prodItems));        }        private void PlusClick(object sender, EventArgs e)        {
             Image image = (Image)sender;            StackLayout repaterStack = (StackLayout)image.Parent;            Label MyCartCountLable = (Label)repaterStack.Children[1];            int CurrentQuantity  = Convert.ToInt32(MyCartCountLable.Text);
             //if (CurrentQuantity >= 10) return;
            
            // MyCartCountLable.Text = (++CurrentQuantity).ToString();            Label CartSelectedProduct = (Label)repaterStack.Children[2];
             var products = productListModel.Where(x => x.Id == Convert.ToInt32(CartSelectedProduct.Text)).FirstOrDefault();
-            products.Quantity = CurrentQuantity;
+            products.Quantity = ++CurrentQuantity;
             if (products.productQty >= 10)
             {
-                if (CurrentQuantity <= 9)
+                if (CurrentQuantity <= 10)
                 {
-                    MyCartCountLable.Text = (++CurrentQuantity).ToString();
+                    MyCartCountLable.Text = (CurrentQuantity).ToString();
                 }
             }
             else
             {
                 if (CurrentQuantity < products.productQty)
                 {
-                    MyCartCountLable.Text = (++CurrentQuantity).ToString();
+                    MyCartCountLable.Text = (CurrentQuantity).ToString();
                 }
             }
-
-
-        }        private async void MinusClick(object sender, EventArgs e)        { 
+        }        private  void MinusClick(object sender, EventArgs e)        { 
             Image image = (Image)sender;            StackLayout repaterStack = (StackLayout)image.Parent;            Label MyCartCountLable = (Label)repaterStack.Children[1];            int CurrentQuantity = Convert.ToInt32(MyCartCountLable.Text);            Label CartSelectedProduct = (Label)repaterStack.Children[2];            if (CurrentQuantity == 1) return;
             MyCartCountLable.Text = (--CurrentQuantity).ToString();
             var products = productListModel.Where(x => x.Id == Convert.ToInt32(CartSelectedProduct.Text)).FirstOrDefault();
