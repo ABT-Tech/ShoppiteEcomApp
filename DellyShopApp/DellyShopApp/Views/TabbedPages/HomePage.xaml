@@ -212,7 +212,7 @@
                                             <forms:CachedImage
                                                 Aspect="AspectFill"
                                                 HeightRequest="150"
-                               
+                                                Margin="5"
                                                 Source="{Binding Image}" />
                                             <Label
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
@@ -232,23 +232,22 @@
                                             <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
                                                 <Label x:Name="oldprice"
                                                     FontFamily="{DynamicResource VerdanaProBold}"
-                                                    FontSize="{x:OnPlatform Android=13,
+                                                    FontSize="{x:OnPlatform Android=12,
                                                                             iOS=18}"
                                                     HorizontalOptions="EndAndExpand"
                                                        IsVisible="{Binding OldPrice}"
-                                                    Text="{Binding  OldPrice , StringFormat='{0}₹'}"
-                                                      
+                                                    Text="{Binding  OldPrice , StringFormat='{0}₹'}"                                                      
                                                     TextColor="Gray"
-                                                    WidthRequest="60"                                                    
+                                                    WidthRequest="80"                                                    
                                                     TextDecorations="Strikethrough"
                                                     VerticalOptions="CenterAndExpand" />
                                                 <Label
                                                     FontFamily="{DynamicResource VerdanaProBold}"
-                                                    FontSize="15"
+                                                    FontSize="13"
                                                     HorizontalOptions="End"
                                                     Text="{Binding Price, StringFormat='{0}₹'}"
                                                     TextColor="black"
-                                                    WidthRequest="100"
+                                                    WidthRequest="80"
                                                     VerticalOptions="Center" />
                                             </StackLayout>
                                         </StackLayout>
@@ -296,6 +295,7 @@
                                             <forms:CachedImage
                                                 Aspect="AspectFill"
                                                 HeightRequest="150"
+                                                Margin="5"
                                                 Source="{Binding Image}" />
                                             <Label
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
@@ -369,6 +369,7 @@
                                     <forms:CachedImage
                                         Aspect="AspectFit"
                                         HeightRequest="150"
+                                        Margin="3"
                                         Source="{Binding Image}" />
                                     <Label
                                         FontFamily="{DynamicResource VerdanaProRegular}"
