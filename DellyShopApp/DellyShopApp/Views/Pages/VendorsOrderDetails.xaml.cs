@@ -1,11 +1,26 @@
-﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.ViewModel;using DellyShopApp.Views.ModalPages;using DellyShopApp.Views.Pages;using System;using System.Collections.Generic;using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class VendorsOrderDetails    {
+﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.ViewModel;using DellyShopApp.Views.ModalPages;using DellyShopApp.Views.Pages;using Plugin.Connectivity;
+using System;using System.Collections.Generic;using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class VendorsOrderDetails    {
                List<OrderListModel> orderListModel = new List<OrderListModel>();        List<ProductListModel> productListModel = new List<ProductListModel>();        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        //public int orderId = Convert.ToInt32(SecureStorage.GetAsync("orderId").Result);        public int OrderMasterId = Convert.ToInt32(SecureStorage.GetAsync("OrderMasterId").Result);
         public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);        public string remark = SecureStorage.GetAsync("Remark").Result;        private  BasketPageVm _basketVm = new BasketPageVm();        private  OrderListModel _order;        private Page2 page;        private List<OrderListModel> Product { get; set; }        private List<ProductListModel> product { get; set; }        public VendorsOrderDetails(int orderId)        {
             OrderMasterId = orderId;
-            InitializeComponent();            InittBasketPage();            this.BindingContext = product;
+            InitializeComponent();            if (ChechConnectivity())
+            {
+                InittBasketPage();
+            }            this.BindingContext = product;
             PickerDemo.ItemsSource = new List<string>
              {                "Pending",                "Delivered",                "Cancelled",                "Out for Delivery",                "Request Cancellition"            };        }
-
+        private bool ChechConnectivity()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                return true;
+            }
+            else
+            {
+                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
+                return false;
+            }
+        }
         public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {            var orderDetails = await DataService.GetOrderDetailsByOrderMasterId(orgId, OrderMasterId);            orderListModel = orderDetails.ProductLists.ToList();            BasketItems.ItemsSource = orderDetails.ProductLists;//DataService.Instance.orderdetails.ProductLists;
             lblDate.Text = orderDetails.Date;//DataService.Instance.orderdetails.Date;
             lblAddress.Text = orderDetails.Address;//DataService.Instance.orderdetails.Address;

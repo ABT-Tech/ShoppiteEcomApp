@@ -8,10 +8,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
         int productCount = 1 ;        private static IEnumerable<ProductListModel> ItemsSource;
        
         private readonly List<StartList> _startList = new List<StartList>();        private readonly List<CommentModel> _comments = new List<CommentModel>();        private  List<ProductListModel> _productLists = new List<ProductListModel>();        private  ProductListModel _products;
-        private void RaisePropertyChanged()
-        {
-            throw new NotImplementedException();
-        }
+       
         public ProductDetail(ProductListModel product)        {
             //if (product.ProductList.Length == 0 || (product.ProductList.Length == 1 && string.IsNullOrEmpty(product.ProductList[0])) )
             //{
@@ -36,7 +33,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                 myImage.Source = "black.png";
             }
 
-            this.BindingContext = product;            starList.ItemsSource = _startList;            //this.BindingContext = product.Quantity;                        //starListglobal.ItemsSource = _startList;            //CommentList.ItemsSource = _comments;
+            this.BindingContext = product;            //starList.ItemsSource = _startList;            //this.BindingContext = product.Quantity;                        //starListglobal.ItemsSource = _startList;            //CommentList.ItemsSource = _comments;
             //MainScroll.Scrolled += MainScroll_Scrolled;           
                    }       
         public ProductDetail()        {        }        private void PlusClick(object sender, EventArgs e)        {            if (_products.Quantity >= 10)

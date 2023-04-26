@@ -9,6 +9,7 @@ using Acr.UserDialogs;
 using static DellyShopApp.Views.ListViewData;
 using System.Net.NetworkInformation;
 using System.Net;
+using Plugin.Connectivity;
 
 namespace DellyShopApp
 {
@@ -16,15 +17,20 @@ namespace DellyShopApp
     public partial class MainPage
     {
         public int oldorgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+
         public MainPage()
         {
             GetDeviceInfo();
             InitializeComponent();
-            InittMainPage();
-
+            if (ChechConnectivity())
+            {
+                InittMainPage();
+            }
         }
+        
         private async void InittMainPage()
         {
+           
             this.BindingContext = this;
             var AllOrganizations = await DataService.GetAllOrganizations(); //DataService.Instance.ShopDetails;
             float rows = (float)AllOrganizations.Count / 2;
@@ -77,9 +83,22 @@ namespace DellyShopApp
                     shop.Children.Add(Orglabel, columnIndex, rowIndex);
                 }
             }
+            
             //shop.ItemsSource = DataService.Instance.ShopDetails;
         }
 
+        private bool ChechConnectivity()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                return true;
+            }
+            else
+            {
+                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
+                return false;
+            }
+        }
 
         private void TapGestureRecognizer_Tapped(string orgId, string Img)
         {
