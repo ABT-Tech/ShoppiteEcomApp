@@ -19,7 +19,7 @@
                 <Image Source="mainlogo2.png" HorizontalOptions="Center"
                        VerticalOptions="Start"/>
             </StackLayout>
-          
+            
             <Grid  BackgroundColor="#f5f5f5" x:Name="shop">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>

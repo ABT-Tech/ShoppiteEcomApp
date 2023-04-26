@@ -11,6 +11,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.WindowsSpecific;
+using Plugin.Connectivity;
 
 namespace DellyShopApp.Views.Pages
 {
@@ -31,7 +32,22 @@ namespace DellyShopApp.Views.Pages
         public Venderdata()
         {
             InitializeComponent();
-            InittMyOrderPage();
+            if (ChechConnectivity())
+            {
+                InittMyOrderPage();
+            }
+        }
+        private bool ChechConnectivity()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                return true;
+            }
+            else
+            {
+                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
+                return false;
+            }
         }
         private async void InittMyOrderPage()
         {
