@@ -1156,6 +1156,31 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
+        public static async Task<string> WriteToFile(string Message)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Logger/WriteToFile?Message=" + Message);
+
+                await response.Content.ReadAsStringAsync();
+                return "Success";
+            }
+            catch (Exception ex)
+
+            {
+                throw;
+            }
+        }
     }
 }
 
