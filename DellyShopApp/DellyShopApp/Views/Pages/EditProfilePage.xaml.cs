@@ -1,4 +1,5 @@
 ﻿using DellyShopApp.Services;
+using Plugin.Connectivity;
 using System;
 using System.Linq;
 using Xamarin.Essentials;
@@ -19,7 +20,22 @@ namespace DellyShopApp.Views.Pages
             Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
 
             InitializeComponent();
-            InittEditProfilePage();
+            if (ChechConnectivity())
+            {
+                InittEditProfilePage();
+            }
+        }
+        private bool ChechConnectivity()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                return true;
+            }
+            else
+            {
+                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
+                return false;
+            }
         }
         private async void InittEditProfilePage()
         {

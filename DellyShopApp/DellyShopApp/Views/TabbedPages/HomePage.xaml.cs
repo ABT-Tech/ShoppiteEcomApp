@@ -4,6 +4,7 @@ using DellyShopApp.Models;
 using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.Pages;
+using Plugin.Connectivity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,9 +30,7 @@ namespace DellyShopApp.Views.TabbedPages
         {
             InitializeComponent();
             
-            ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;
-
-            
+            ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;            
         }
         private async void InittHomePage()
         {
@@ -45,9 +44,23 @@ namespace DellyShopApp.Views.TabbedPages
         }
         protected override void OnAppearing()
         {
-            InittHomePage();
-            // InittMyCartPage();
+            if (ChechConnectivity())
+            {
+                InittHomePage();
+            }         
 
+        }
+        private bool ChechConnectivity()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                return true;
+            }
+            else
+            {
+                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
+                return false;
+            }
         }
         private async void ProductDetailClick(object sender, EventArgs e)
         {
