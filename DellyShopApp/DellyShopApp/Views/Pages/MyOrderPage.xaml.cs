@@ -3,6 +3,7 @@ using DellyShopApp.Models;
 using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.TabbedPages;
+using Plugin.Connectivity;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,7 +22,23 @@ namespace DellyShopApp.Views.Pages
         public MyOrderPage()
         {
             InitializeComponent();
-            InittMyOrderPage();
+            if (ChechConnectivity())
+            {
+                InittMyOrderPage();
+            }
+           
+        }
+        private bool ChechConnectivity()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                return true;
+            }
+            else
+            {
+                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
+                return false;
+            }
         }
         private async void InittMyOrderPage()
         {

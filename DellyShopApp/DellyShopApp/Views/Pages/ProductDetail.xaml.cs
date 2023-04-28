@@ -14,6 +14,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             //    product.ProductList = new string[] { product.Image };
             //}
             _products = product;            //_startList.Add(new StartList            //{            //    StarImg = FontAwesomeIcons.Star            //});            //_startList.Add(new StartList            //{            //    StarImg = FontAwesomeIcons.Star            //});            //_startList.Add(new StartList            //{            //    StarImg = FontAwesomeIcons.Star            //});            //_startList.Add(new StartList            //{            //    StarImg = FontAwesomeIcons.Star            //});            //_startList.Add(new StartList            //{            //    StarImg = FontAwesomeIcons.Star            //});            //_comments.Add(new CommentModel            //{            //    Name = "Ufuk Sahin",            //    CommentTime = "12/1/19",            //    Id = 1,            //    Rates = _startList            //});            //_comments.Add(new CommentModel            //{            //    Name = "Hans Goldman",            //    CommentTime = "11/1/19",            //    Id = 2,            //    Rates = _startList.Skip(0).ToList()            //});            InitializeComponent();
+
             if (_products.Quantity <= 0)            {                ProductCountLabel.IsVisible = false;                Stocklbl.IsVisible = true;                Addtocartbtn.IsVisible = false;                BuyNowbtn.IsVisible = false;                plusimg.IsVisible = false;                minusimg.IsVisible = false;            }
             if(_products.WishlistedProduct == true)
             {
@@ -29,7 +30,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             MainPage = new HomePage();            //starList.ItemsSource = _startList;            //starListglobal.ItemsSource = _startList;            //CommentList.ItemsSource = _comments;
             //MainScroll.Scrolled += MainScroll_Scrolled; 
 
-            InittProductDetail();        }        private async void InittProductDetail()        {            ProductDetail.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.Id == proId);
+            InittProductDetail();        }        private async void InittProductDetail()        {            ProductDetail.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.Id == proId);
 
         }
 
@@ -124,6 +125,8 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             }
 
         }
+
+    
     }
 
 }

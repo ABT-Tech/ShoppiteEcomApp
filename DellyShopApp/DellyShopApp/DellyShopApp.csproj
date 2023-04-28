@@ -28,6 +28,7 @@
     <PackageReference Include="PayPal.Forms" Version="2.18.6" />
     <PackageReference Include="Plugin.PayCards" Version="1.1.1" />
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +40,7 @@
     <None Remove="Themes\LottieLogo1.json" />
     <None Remove="Themes\clock.json" />
     <None Remove="Resources\clock.json" />
+    <None Remove="Xam.Plugin.Connectivity" />
   </ItemGroup>
   <ItemGroup>
     <None Update="App.xaml">
