@@ -1,4 +1,21 @@
-﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.ViewModel;using DellyShopApp.Views.CustomView;using DellyShopApp.Views.ModalPages;using DellyShopApp.Views.Pages;using PayPal.Forms;using PayPal.Forms.Abstractions;using System;using System.Collections.Generic;using System.Diagnostics;using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class BasketPage    {        List<ProductListModel> productListModel = new List<ProductListModel>();        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);               private readonly BasketPageVm _basketVm = new BasketPageVm();        private int _quantity;        private Page2 page;        private List<ProductListModel> Product { get; set; }        public BasketPage(List<ProductListModel> product)        {            this.Product = product;            InitializeComponent();            InittBasketPage();            this.BindingContext = product;        }        public BasketPage(Page2 page)        {            this.page = page;        }        public BasketPage()
+﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.ViewModel;using DellyShopApp.Views.CustomView;using DellyShopApp.Views.ModalPages;using DellyShopApp.Views.Pages;using PayPal.Forms;using PayPal.Forms.Abstractions;using Plugin.Connectivity;
+using System;using System.Collections.Generic;using System.Diagnostics;using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class BasketPage    {        List<ProductListModel> productListModel = new List<ProductListModel>();        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);               private readonly BasketPageVm _basketVm = new BasketPageVm();        private int _quantity;        private Page2 page;        private List<ProductListModel> Product { get; set; }        public BasketPage(List<ProductListModel> product)        {            this.Product = product;            InitializeComponent();
+            if (ChechConnectivity())
+            {
+                InittBasketPage();
+            }                        this.BindingContext = product;        }
+        private bool ChechConnectivity()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                return true;
+            }
+            else
+            {
+                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
+                return false;
+            }
+        }        public BasketPage(Page2 page)        {            this.page = page;        }        public BasketPage()
         {
 
         }               public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {            productListModel = this.Product;            BasketItems.ItemsSource = this.Product;//await DataService.GetAllCartDetails(orgId, userId);//DataService.Instance.ProcutListModel;

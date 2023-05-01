@@ -19,8 +19,8 @@
                 <Image Source="mainlogo2.png" HorizontalOptions="Center"
                        VerticalOptions="Start"/>
             </StackLayout>
-          
-            <Grid  BackgroundColor="#f5f5f5" x:Name="shop">
+          <Label x:Name="networkstate" IsVisible="true" TextColor="Red" FontSize="25" />
+            <Grid  BackgroundColor="#f5f5f5" x:Name="shop" IsVisible="true">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>

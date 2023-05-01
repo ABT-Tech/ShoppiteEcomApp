@@ -7,6 +7,7 @@ using Acr.UserDialogs;
 using static DellyShopApp.Views.ListViewData;
 using System.Net.NetworkInformation;
 using System.Net;
+using Plugin.Connectivity;
 
 namespace DellyShopApp
 {
@@ -18,8 +19,23 @@ namespace DellyShopApp
         {
             
             InitializeComponent();
-            InittMainPage();
+            if (ChechConnectivity())
+            {
+                InittMainPage();
+            }
            
+        }
+        private bool ChechConnectivity()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                return true;
+            }
+            else
+            {
+                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
+                return false;
+            }
         }
         private async void InittMainPage()
         {

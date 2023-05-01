@@ -1,7 +1,24 @@
-﻿using System;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;using Xamarin.Essentials;
+﻿using System;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;using Plugin.Connectivity;
+using Xamarin.Essentials;
 using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class LastViewPage    {
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public LastViewPage()        {            InitializeComponent();
-            InittLastViewPage();
+            if (ChechConnectivity())
+            {
+                InittLastViewPage();
+
+            }
+        }
+        private bool ChechConnectivity()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                return true;
+            }
+            else
+            {
+                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
+                return false;
+            }
         }
         private async void InittLastViewPage()
         {

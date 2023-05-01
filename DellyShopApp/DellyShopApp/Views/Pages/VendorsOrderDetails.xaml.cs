@@ -1,4 +1,5 @@
-﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.ViewModel;using DellyShopApp.Views.CustomView;using DellyShopApp.Views.ModalPages;using DellyShopApp.Views.Pages;using PayPal.Forms;using PayPal.Forms.Abstractions;using System;using System.Collections.Generic;using System.Diagnostics;using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class VendorsOrderDetails    {        List<OrderListModel> orderListModel = new List<OrderListModel>();
+﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.ViewModel;using DellyShopApp.Views.CustomView;using DellyShopApp.Views.ModalPages;using DellyShopApp.Views.Pages;using PayPal.Forms;using PayPal.Forms.Abstractions;using Plugin.Connectivity;
+using System;using System.Collections.Generic;using System.Diagnostics;using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class VendorsOrderDetails    {        List<OrderListModel> orderListModel = new List<OrderListModel>();
      
 
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
@@ -9,7 +10,11 @@
 
 
 
-        private Page2 page;        private int OrderID { get; set; }        public VendorsOrderDetails(int orderID)        {            OrderMasterId = orderID;            InitializeComponent();            InittBasketPage();            
+        private Page2 page;        private int OrderID { get; set; }        public VendorsOrderDetails(int orderID)        {            OrderMasterId = orderID;            InitializeComponent();
+            if (ChechConnectivity())
+            {
+                InittBasketPage();
+            }            
             PickerDemo.ItemsSource = new List<string>
             {
             "Pending",            "Delivered",
@@ -17,7 +22,19 @@
             "Out for Delivery",
             "Request Cancellation"
 
-            };        }        public VendorsOrderDetails()        {            InitializeComponent();            InittBasketPage();
+            };        }
+        private bool ChechConnectivity()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                return true;
+            }
+            else
+            {
+                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
+                return false;
+            }
+        }        public VendorsOrderDetails()        {            InitializeComponent();            InittBasketPage();
         }                  
        
         public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {
