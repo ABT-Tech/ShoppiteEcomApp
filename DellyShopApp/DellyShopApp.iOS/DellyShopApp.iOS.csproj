@@ -126,28 +126,15 @@
     <Compile Include="Rednerers\ShapeUtils.cs" />
     <BundleResource Include="Resources\BgImage.png" />
     <Compile Include="AppDelegate.cs" />
-    <BundleResource Include="Resources\Grocery_Store.png" />
-    <BundleResource Include="Resources\Pet_Store.png" />
-    <BundleResource Include="Resources\Shoes_Store.png" />
-    <BundleResource Include="Resources\Coffee_store.png" />
-    <BundleResource Include="Resources\Bakery_Store.png" />
-    <BundleResource Include="Resources\Bakery_Store 2.png" />
-    <BundleResource Include="Resources\Book_Store.png" />
-    <BundleResource Include="Resources\Book_Store 2.png" />
     <None Include="DellyShop.iOS.csproj" />
     <None Include="DellyShopApp.iOS.sln" />
-    <BundleResource Include="Resources\Shoes.jpeg" />
     <BundleResource Include="Resources\images.jpeg" />
     <BundleResource Include="Resources\loko.jpg" />
     <BundleResource Include="Resources\logo.png" />
-    <BundleResource Include="Resources\Fruit_Store.png" />
-    <BundleResource Include="Resources\Cloth_Store.png" />
-    <BundleResource Include="Resources\Hardware_Store.png" />
     <BundleResource Include="Resources\whitehearticon3.png.webp" />
     <BundleResource Include="Resources\whitehearticon3.webp" />
     <BundleResource Include="Resources\hearts.png" />
     <BundleResource Include="Resources\images.png.jpeg" />
-    <BundleResource Include="Resources\images 2.jpeg" />
     <BundleResource Include="Resources\Heart.png" />
     <BundleResource Include="Resources\UnFav.png" />
     <BundleResource Include="Resources\Fav.png" />
@@ -389,76 +376,10 @@
     <BundleResource Include="Resources\Basket%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\shoesCategory.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\electronicCategory.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\clothingCategory.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\shoes.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\elecronics.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\clothing.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\shoesblack.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\shoesyellow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\iphone.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\shoesBlack%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\shoesBlack%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\shoesblack2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bestShoes.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bestShoes%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bestShoes%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bestofYear%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bestofYear%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bestofYear.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\grazy1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\garzy2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\garzy2%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\garzy2%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\grazy1%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\grazy1%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\masterCard%402x.png" />
@@ -635,46 +556,7 @@
     <BundleResource Include="Resources\creditCardIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ip8_1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\red1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\red1%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\red1%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ip8_1%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ip8_1%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ip8_2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ip8_2%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\py_1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\py_1%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\py_1%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ip8_2%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\pp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Profile.png" />

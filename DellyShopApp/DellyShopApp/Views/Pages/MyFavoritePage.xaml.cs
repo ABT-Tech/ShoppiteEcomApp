@@ -1,6 +1,7 @@
 ﻿using DellyShopApp.Models;
 using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
+using Plugin.Connectivity;
 using System;
 using Xamarin.Essentials;
 using Xamarin.Forms.Xaml;
@@ -16,12 +17,28 @@ namespace DellyShopApp.Views.Pages
 
         {
             InitializeComponent();
-            InittFavoritePage();
+            if (ChechConnectivity())
+            {
+                InittFavoritePage();
+            }
            
+        }
+        private bool ChechConnectivity()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                return true;
+            }
+            else
+            {
+                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
+                return false;
+            }
         }
         private async void InittFavoritePage()
         {
-            BasketItems.ItemsSource = await DataService.GetWishlistByUser(orgId,userId);//DataService.Instance.ProcutListModel;
+            BasketItems.ItemsSource = await DataService.GetWishlistByUser(orgId,userId);//DataService.Instance.ProcutListModel;         
+            
         }
         private async void ClickItem(object sender, EventArgs e)
         {

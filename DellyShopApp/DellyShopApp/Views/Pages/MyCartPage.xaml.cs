@@ -7,24 +7,27 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             InittMyCartPage();
 
         }
-        List< ProductListModel> productListModel = new List<ProductListModel> ();
+        List<ProductListModel> productListModel = new List<ProductListModel>();
+        private readonly ProductListModel _products;
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
-        public int proId = Convert.ToInt32(SecureStorage.GetAsync("Count").Result);
+        public string userAuth = SecureStorage.GetAsync("Usertype").Result;
         int MyCartCountLable;
 
         public object Product { get; private set; }
 
         public MyCartPage()        {
-            
+
+
             InitializeComponent();
-            if(userId == 0)
+            if (userId == 0 || userAuth != "Client")
             {
                 Login.IsVisible = true;
                 cartimg.IsVisible = true;
                 txt.IsVisible = true;
                 checkout.IsVisible = false;
                 vendorlogin.IsVisible = true;
+                
             }
             else
             {
@@ -32,7 +35,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 cartimg.IsVisible = false;
                 checkout.IsVisible = true;
                 txt.IsVisible = false;
-                vendorlogin.IsVisible = false;
+                vendorlogin.IsVisible = false;                
             }
            
             
@@ -48,37 +51,67 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         //}
         private async void InittMyCartPage()        {
             productListModel =await DataService.GetAllCartDetails(orgId, userId);
+            foreach (var product in productListModel)
+            {
+                if (product.productQty == 0)
+                {
+                    product.IsOutStock = true;
+                    product.IsPriceVisible = false;
+                }
+                else 
+                {
+                    product.IsOutStock = false;
+                    product.IsPriceVisible = true;
+                }
+            }
             BasketItems.ItemsSource = productListModel; //DataService.Instance.ProcutListModel;
             var productid = Convert.ToString(productListModel.Count);
-            await Xamarin.Essentials.SecureStorage.SetAsync("Count", productid);
-             int proId = Convert.ToInt32(SecureStorage.GetAsync("Count").Result);
-            if (proId > 0 && userId > 0)
+            
+           
+            if (productListModel.Count > 0 && (userId > 0 && userAuth == "Client"))
             {
                 checkout.IsVisible = true;
                 gif.IsVisible = false;
+                shopping.IsVisible = false;
             }
-            else if (proId == 0 && userId >0)
+            else if (productListModel.Count == 0 && (userId > 0 && userAuth == "Client"))
             {
                 checkout.IsVisible = false;
                 gif.IsVisible = true;
+                shopping.IsVisible = true;
             }
             else
             {
                 checkout.IsVisible = false;
                 gif.IsVisible = false;
+                shopping.IsVisible = false;
             }
         }
-        
-         
-
-private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;
+        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;
             int Id = DataService.Instance.order.orgId;
             int UserId = DataService.Instance.order.UserId;
-            await Navigation.PushAsync(new ProductDetail(item));        }        private async void Button_Clicked(object sender, EventArgs e)        {            await Navigation.PushAsync(new BasketPage(productListModel));        }        private async void PlusClick(object sender, EventArgs e)        {
-            Image image = (Image)sender;            StackLayout repaterStack = (StackLayout)image.Parent;            Label MyCartCountLable = (Label)repaterStack.Children[1];            int CurrentQuantity = Convert.ToInt32(MyCartCountLable.Text);            if (CurrentQuantity >= 10) return;            MyCartCountLable.Text = (++CurrentQuantity).ToString();            Label CartSelectedProduct = (Label)repaterStack.Children[2];
+            await Navigation.PushAsync(new ProductDetail(item));        }        private async void Button_Clicked(object sender, EventArgs e)        {            var prodItems =  productListModel;            prodItems.RemoveAll(x => x.IsOutStock == true);            await Navigation.PushAsync(new BasketPage(prodItems));        }        private void PlusClick(object sender, EventArgs e)        {
+            Image image = (Image)sender;            StackLayout repaterStack = (StackLayout)image.Parent;            Label MyCartCountLable = (Label)repaterStack.Children[1];            int CurrentQuantity  = Convert.ToInt32(MyCartCountLable.Text);
+            //if (CurrentQuantity >= 10) return;
+           
+           // MyCartCountLable.Text = (++CurrentQuantity).ToString();            Label CartSelectedProduct = (Label)repaterStack.Children[2];
             var products = productListModel.Where(x => x.Id == Convert.ToInt32(CartSelectedProduct.Text)).FirstOrDefault();
-            products.Quantity = CurrentQuantity;        
-        }        private async void MinusClick(object sender, EventArgs e)        { 
+            products.Quantity = ++CurrentQuantity;
+            if (products.productQty >= 10)
+            {
+                if (CurrentQuantity <= 10)
+                {
+                    MyCartCountLable.Text = (CurrentQuantity).ToString();
+                }
+            }
+            else
+            {
+                if (CurrentQuantity < products.productQty)
+                {
+                    MyCartCountLable.Text = (CurrentQuantity).ToString();
+                }
+            }
+        }        private  void MinusClick(object sender, EventArgs e)        { 
             Image image = (Image)sender;            StackLayout repaterStack = (StackLayout)image.Parent;            Label MyCartCountLable = (Label)repaterStack.Children[1];            int CurrentQuantity = Convert.ToInt32(MyCartCountLable.Text);            Label CartSelectedProduct = (Label)repaterStack.Children[2];            if (CurrentQuantity == 1) return;
             MyCartCountLable.Text = (--CurrentQuantity).ToString();
             var products = productListModel.Where(x => x.Id == Convert.ToInt32(CartSelectedProduct.Text)).FirstOrDefault();
@@ -98,13 +131,16 @@ private async void ClickItem(object sender, EventArgs e)        {            i
 
         private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
         {
-            var deleteitem = new DeleteItem()
-            {
-                userId = userId,
-                orgId = orgId,
-                proId = proId
-            };
-            await DataService.Delete(deleteitem);
-            await DisplayAlert("Yahh !", "Item was Deleted", "Done");
+            Image image = (Image)sender;
+            if (!(image.Parent.Parent.Parent.Parent.Parent is PancakeView pancake)) return;
+            if (!(pancake.BindingContext is ProductListModel item)) return;
+            await DataService.RemoveFromCart(userId, orgId, item.Id);
+            await DisplayAlert("Sucess", "Item was Deleted", "Done");
+            InittMyCartPage();
+        }
+
+        private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new HomeTabbedPage());
         }
     }}

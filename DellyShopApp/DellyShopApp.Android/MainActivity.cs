@@ -16,7 +16,7 @@ using Plugin.PayCards;
 using Xamarin.Forms;
 namespace DellyShopApp.Droid
 {
-    [Activity(Label = "Shoppit", Icon = "@mipmap/Shoppit", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Shoppit", Icon = "@mipmap/shooppy", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         private bool IsNotification = false;
@@ -63,7 +63,7 @@ namespace DellyShopApp.Droid
                 LoadApplication(new App());
             //Activate after adding the Google-Service.json file.
             //https://github.com/CrossGeeks/FirebasePushNotificationPlugin/blob/master/docs/GettingStarted.md
-            FirebasePushNotificationManager.ProcessIntent(this, Intent);
+           // FirebasePushNotificationManager.ProcessIntent(this, Intent);
             CrossFirebasePushNotification.Current.OnNotificationOpened += (s, p) =>
             {
                 System.Diagnostics.Debug.WriteLine("NOTIFICATION Opened", p.Data);
@@ -72,13 +72,13 @@ namespace DellyShopApp.Droid
                 LoadApplication(new App(IsNotification, NotificationData));
             };
         }
-        protected override void OnNewIntent(Intent intent)
-        {
-            //Activate after adding the Google-Service.json file.
-            //https://github.com/CrossGeeks/FirebasePushNotificationPlugin/blob/master/docs/GettingStarted.md
-            base.OnNewIntent(intent);
-            //FirebasePushNotificationManager.ProcessIntent(this, intent);
-        }
+        //protected override void OnNewIntent(Intent intent)
+        //{
+        //    //Activate after adding the Google-Service.json file.
+        //    //https://github.com/CrossGeeks/FirebasePushNotificationPlugin/blob/master/docs/GettingStarted.md
+        //    base.OnNewIntent(intent);
+        //    //FirebasePushNotificationManager.ProcessIntent(this, intent);
+        //}
         /// <summary>
         /// Global try catch 
         /// </summary>

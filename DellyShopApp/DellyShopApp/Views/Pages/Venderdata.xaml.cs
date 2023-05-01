@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Windows.Input;
 using DellyShopApp.Models;
 using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
@@ -8,12 +9,19 @@ using DellyShopApp.Views.TabbedPages;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.WindowsSpecific;
+using Plugin.Connectivity;
 
 namespace DellyShopApp.Views.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Venderdata
     {
+        protected override void OnAppearing()
+        {
+          
+        }
 
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         //public int orderId = Convert.ToInt32(SecureStorage.GetAsync("OrderId").Result);
@@ -24,10 +32,26 @@ namespace DellyShopApp.Views.Pages
         public Venderdata()
         {
             InitializeComponent();
-            InittMyOrderPage();
+            if (ChechConnectivity())
+            {
+                InittMyOrderPage();
+            }
+        }
+        private bool ChechConnectivity()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                return true;
+            }
+            else
+            {
+                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
+                return false;
+            }
         }
         private async void InittMyOrderPage()
         {
+           
             BasketItems.ItemsSource = await DataService.GetOrderDetails(orgId);
         }
 
@@ -37,10 +61,7 @@ namespace DellyShopApp.Views.Pages
             if (pancake.BindingContext is VendorsOrder item)
             {
                 await Navigation.PushAsync(new VendorsOrderDetails(item.orderId));
-            }
-           
-        }
-
-     
+            }           
+        }     
     }
 }

@@ -17,6 +17,7 @@
 	 <PackageReference Include="FirebaseAdmin" Version="2.3.0" />
 	 <PackageReference Include="Microsoft.Azure.Management.Network" Version="26.0.0" />
 	 <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
+	 <PackageReference Include="Xam.Plugin.Connectivity" Version="4.0.0.190-beta" />
 	 <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
@@ -189,6 +190,12 @@
       <DependentUpon>AppResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Views\Pages\ForgetPasswordPage.xaml.cs">
+      <DependentUpon>ForgetPasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Pages\UserOrderDetails.xaml.cs">
+      <DependentUpon>UserOrderDetails.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Pages\VendorsFirstPage.xaml.cs">
       <DependentUpon>VendorsFirstPage.xaml</DependentUpon>

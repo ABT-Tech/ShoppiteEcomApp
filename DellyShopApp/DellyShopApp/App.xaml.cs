@@ -103,42 +103,30 @@ namespace DellyShopApp
             {
                 foreach (var data in notificationData)
                 {
-                    if (data.Key == "LoginPage")
+                    if (data.Key == "OrgId")
                     {
-                        LoginPage loginPage = new LoginPage();
-                        MainPage = new NavigationPage(new LoginPage());
-                        NavigationPage navpage = new NavigationPage(loginPage);
-                        NavigationPage.SetHasNavigationBar(navpage, false);
-                        NavigationPage.SetHasNavigationBar(loginPage, false);
-                        MainPage = navpage;                        
+                        SecureStorage.SetAsync("OrgId", data.Value.ToString());
+                    }
+                    if (data.Key == "Logo")
+                    {
+                        SecureStorage.SetAsync("Logo", data.Value.ToString());
                     }
                 }
+
+                HomeTabbedPage navigation = new HomeTabbedPage();
+                MainPage = new NavigationPage(new HomeTabbedPage());
+                NavigationPage navpage = new NavigationPage(navigation);
+                NavigationPage.SetHasNavigationBar(navpage, false);
+                NavigationPage.SetHasNavigationBar(navigation, false);
+                MainPage = navpage;
+
             }            
             App.Current.MainPage.FlowDirection = Settings.SelectLanguage == "ar" ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
         }     
         
         private string GetDeviceInfo()
         {
-            string mac = string.Empty;
-            string ip = string.Empty;
-
-            foreach (var netInterface in NetworkInterface.GetAllNetworkInterfaces())
-            {
-                if (netInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 ||
-                    netInterface.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
-                {
-                    var address = netInterface.GetPhysicalAddress();
-                    mac = BitConverter.ToString(address.GetAddressBytes());
-
-                    IPAddress[] addresses = Dns.GetHostAddresses(Dns.GetHostName());
-                    if (addresses != null && addresses[0] != null)
-                    {
-                        ip = addresses[0].ToString();
-                        break;
-                    }
-                }
-            }
-            return mac;
+            return Android.Provider.Settings.Secure.GetString(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.Secure.AndroidId);
         }
         public async void SetFirebaseToken(FirebaseToken firebaseToken) 
         {
