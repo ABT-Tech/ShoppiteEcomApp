@@ -1,4 +1,5 @@
-﻿using System;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using Xamarin.Essentials;
+﻿using System;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.TabbedPages;
+using Xamarin.Essentials;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class VenderLoginPage    {
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public VenderLoginPage()        {
@@ -22,7 +23,7 @@ using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompila
             }
 
 
-               await Navigation.PushAsync(new Venderdata());
+               await Navigation.PushAsync(new VendorsFirstPage());
 
 
 

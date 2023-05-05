@@ -136,6 +136,8 @@
     <BundleResource Include="Resources\basket12.png" />
     <BundleResource Include="Resources\mainlogo2.png" />
     <BundleResource Include="Resources\icon.png" />
+    <BundleResource Include="Resources\Green.jpeg" />
+    <BundleResource Include="Resources\Red.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">

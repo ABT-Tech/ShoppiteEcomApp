@@ -39,6 +39,8 @@ namespace DellyShopApp.Services
         public List<CategoryDetailPage> Details = new List<CategoryDetailPage>();
         public List<VendorsOrder> vendors = new List<VendorsOrder>();
         public List<UserOrder> user = new List<UserOrder>();
+        public List<Report> report = new List<Report>();
+        public List<CustomerInfo> customerInfo = new List<CustomerInfo>();
         public OrderDetails orderdetails = new OrderDetails();
         public OrgData ObjOrgData = new OrgData();
         public Cart cart = new Cart();
@@ -81,9 +83,128 @@ namespace DellyShopApp.Services
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-       
+        public DataService()
+        {
+            report.Add(new Report
+            {
+                UserName = "Pankhaniya Parthik",
+                Date = "16/10/2022",
+                TtlOrder = 40,
+                orgId = 1,
+                userId = 1
 
-      
+            });
+            report.Add(new Report
+            {
+                UserName = "Madhav Suba",
+                Date = "28/02/2022",
+                TtlOrder = 70,
+                orgId = 1,
+                userId = 2
+            });
+            report.Add(new Report
+            {
+                UserName = "Mansuri lookman",
+                Date = "20/07/2022",
+                TtlOrder = 130,
+                orgId = 1,
+                userId = 3
+            });
+            customerInfo.Add(new CustomerInfo
+            {
+                Username = "abcd",
+                Email = "abc@gmail.com",
+                icon = "Red.jpeg",
+                orgId = 1,
+                userId = 1
+            });
+            customerInfo.Add(new CustomerInfo
+            {
+                Username = "xyz",
+                Email = "xyz@gmail.com",
+                icon = "Green.jpeg",
+                orgId = 1,
+                userId = 2
+
+            });
+            customerInfo.Add(new CustomerInfo
+            {
+                Username = "opq",
+                Email = "opq@gmail.com",
+                icon = "Green.jpeg",
+                orgId = 1,
+                userId = 3
+
+            });
+            customerInfo.Add(new CustomerInfo
+            {
+                Username = "opq",
+                Email = "opq@gmail.com",
+                icon = "Green.jpeg",
+                orgId = 1,
+                userId = 4
+
+            });
+            customerInfo.Add(new CustomerInfo
+            {
+                Username = "Suba Madhav",
+                Email = "madhav123@gmail.com",
+                icon = "Green.jpeg",
+                orgId =1,
+                userId =5
+            });
+
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle,
+                Brand = AppResources.ProductBrand,
+                Id = 1,
+                Image = "shoesBlack",
+                Price = 362,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "red1", "shoesBlack" },
+                OldPrice = 570,
+                orgId = 1,
+                Quantity = 1,
+                orderId = 1,
+
+
+            });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle1,
+                Brand = AppResources.ProductBrand1,
+                Id = 2,
+                Image = "grazy1",
+                Price = 150,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "garzy2", "grazy1" },
+                OldPrice = 270,
+                orgId = 1,
+                Quantity = 1,
+                orderId = 1
+
+            });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle2,
+                Brand = AppResources.ProductBrand2,
+                Id = 3,
+                Image = "shoesyellow",
+                Price = 299,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "py_1", "shoesyellow" },
+                OldPrice = 400,
+                orgId = 2,
+                Quantity = 1,
+                orderId = 1
+
+            });
+
+        }
+
+
+
 
         public static async Task<List<Category>> GetCategories(int orgId)
         {
