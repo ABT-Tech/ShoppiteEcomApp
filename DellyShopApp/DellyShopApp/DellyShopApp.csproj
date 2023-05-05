@@ -113,9 +113,6 @@
     <EmbeddedResource Update="FirstPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ListViewData.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\Pages\CategoryDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -193,6 +190,15 @@
     </Compile>
     <Compile Update="Views\Pages\ForgetPasswordPage.xaml.cs">
       <DependentUpon>ForgetPasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Pages\CustomerReport.xaml.cs">
+      <DependentUpon>CustomerReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Pages\CustomerListPage.xaml.cs">
+      <DependentUpon>CustomerListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Pages\ProductStockPage.xaml.cs">
+      <DependentUpon>ProductStockPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Pages\UserOrderDetails.xaml.cs">
       <DependentUpon>UserOrderDetails.xaml</DependentUpon>

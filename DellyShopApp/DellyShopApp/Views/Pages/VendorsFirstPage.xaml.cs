@@ -32,28 +32,16 @@ namespace DellyShopApp.Views.TabbedPages
                         break;
 
                     case "MyOder":
-                        OpenPage(new MyOrderPage());
+                        OpenPage(new CustomerReport());
                         break;
 
                     case "MyFav":
-                        OpenPage(new MyFavoritePage());
+                        OpenPage(new CustomerListPage());
                         break;
 
                     case "LastView":
-                        OpenPage(new LastViewPage());
-                        break;
-
-                    case "MyComments":
-                        OpenPage(new MyCommentsPage());
-                        break;
-
-                    case "Notifications":
-                        OpenPage(new NotificationPage());
-                        break;
-
-                    case "Settings":
-                        OpenPage(new SettingsPage());
-                        break;
+                        OpenPage(new ProductStockPage());
+                        break;                   
                 }
         }
 
