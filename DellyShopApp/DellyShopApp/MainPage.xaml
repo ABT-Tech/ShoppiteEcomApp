@@ -29,8 +29,6 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                
-              
             </Grid>
         </StackLayout>
     </ScrollView>

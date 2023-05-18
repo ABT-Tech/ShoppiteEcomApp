@@ -5,6 +5,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:base="clr-namespace:DellyShopApp.Views.Pages.Base;assembly=DellyShopApp"
+    xmlns:suave="clr-namespace:SuaveControls.DynamicStackLayout;assembly=SuaveControls.DynamicStackLayout"
     xmlns:controls="clr-namespace:DellyShopApp.Views.CustomView"
     xmlns:customControl="clr-namespace:DellyShopApp.CustomControl;assembly=DellyShopApp"
     xmlns:font="clr-namespace:DellyShopApp.Helpers;assembly=DellyShopApp"
@@ -16,18 +17,17 @@
     BackgroundColor="#f5f5f5"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
+
     <Grid>
-
-
+        
         <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
-            <StackLayout Margin="5,10,5,0" WidthRequest="150">
+            <StackLayout Margin="5,10,5,0" WidthRequest="150" x:Name="HomeMainStack">
                 <Grid RowSpacing="5" ColumnSpacing="5">
                 <Image Source="{Binding Image}"
                        x:Name="ShopLogo"
                        WidthRequest="130" 
                        HeightRequest="130"
                      HorizontalOptions="Start"/>
-                
                 <Image Source="ShopHigh.png"
                       VerticalOptions="Start"
                        WidthRequest="175" 
@@ -36,11 +36,9 @@
                       <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                     </Image.GestureRecognizers>
-                </Image>
-                    
+                </Image> 
                 </Grid>
-                
-                  
+              
          <renderers:BorderlessSearchBar x:Name="item"
            Placeholder="Search items..."
            PlaceholderColor="Black"
@@ -48,7 +46,7 @@
            TextTransform="Lowercase"
            FontSize="Medium"
            TextChanged="SearchBar_TextChanged" />
-                <ListView x:Name="searchResults" IsVisible="False" ItemSelected="searchResults_ItemSelected">
+                <ListView  x:Name="searchResults" IsVisible="False" ItemSelected="searchResults_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell Text="{Binding Title}">
@@ -56,8 +54,6 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>                    
                 </ListView>
-              
-
                 <Label
                     Margin="0"
                     Padding="5,5,0,0"
@@ -95,7 +91,6 @@
                                                 Grid.Row="0"
                                                 Grid.Column="0"
                                                 Aspect="AspectFill">
-                                               
                                                 <Image.GestureRecognizers>
                                                     <TapGestureRecognizer Tapped="ClickCategory" />
                                                 </Image.GestureRecognizers>
@@ -103,7 +98,6 @@
                                             <pancakeView:PancakeView
                                                 Grid.Row="0"
                                                 Grid.Column="0"
-                                            
                                                 BackgroundGradientEndColor="{DynamicResource DarkFontColor}"
                                                 BackgroundGradientStartColor="White"
                                                 CornerRadius="10"
@@ -119,14 +113,12 @@
                                                 TextColor="{DynamicResource LabelTextColor}"
                                                 VerticalOptions="CenterAndExpand" />
                                         </Grid>
-
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
                         </customControl:RepeaterView.ItemTemplate>
                     </customControl:RepeaterView>
                 </ScrollView>
-
                 <pancakeView:PancakeView
                     x:Name="view"
                     Margin="0,10,0,0"
@@ -135,14 +127,12 @@
                     Elevation="2"
                     BackgroundColor="#f5f5f5"
                     HasShadow="False">
-
                     <controls:CarouselView
                         x:Name="CarouselView"
                         Margin="0,0,0,0"
                         BackgroundColor="#f5f5f5"
                         HeightRequest="{x:OnIdiom Tablet=350,
                                                   Phone=200}"
-                       
                         SelectedIndex="0"
                         WidthRequest="300">
                         <x:Arguments>
@@ -160,7 +150,7 @@
                             <DataTemplate>
                                 <ContentView>
                                     <forms:CachedImage
-                              
+ 
                                         Margin="0"
                                         Aspect="AspectFill"
                                         Source="{Binding Banner}"                                        
@@ -170,12 +160,11 @@
                                         <TapGestureRecognizer Tapped="Click_Banner" />
                                     </forms:CachedImage.GestureRecognizers>
                                 </ContentView>                                
-                            </DataTemplate>
-
-                          
+                            </DataTemplate> 
                         </controls:CarouselView.ItemTemplate>
                     </controls:CarouselView>
                 </pancakeView:PancakeView>
+          
                 <StackLayout Orientation="Horizontal">
                     <Label
                         Margin="0,10,0,0"
@@ -220,13 +209,11 @@
                                         HeightRequest="250"
                                         HorizontalOptions="StartAndExpand"
                                         VerticalOptions="StartAndExpand"
-                                       
                                         WidthRequest="{x:OnIdiom Tablet=150,
                                                                  Phone=130}">
                                         <pancakeView:PancakeView.GestureRecognizers>
                                             <DragGestureRecognizer
                                                 CanDrag="True"
-                                                
                                                 DragStarting="DragGestureRecognizer_DragStarting"
                                                 DropCompleted="DragGestureRecognizer_DropCompleted" />
                                             <TapGestureRecognizer Tapped="ProductDetailClick" />
@@ -241,7 +228,6 @@
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 Text="{Binding Title}"
                                                 MaxLines="1"
-
                                                 LineBreakMode="TailTruncation"
                                                 TextColor="Black"
                                                 VerticalOptions="Start" />
@@ -262,8 +248,6 @@
                                                     Text="{Binding OldPrice, StringFormat='{0}₹'}"
                                                     TextColor="Gray"
                                                     WidthRequest="100"
-
-                                                    
                                                     TextDecorations="Strikethrough"
                                                     VerticalOptions="CenterAndExpand" />
                                                 <Label
@@ -312,7 +296,6 @@
                                         VerticalOptions="StartAndExpand"
                                         WidthRequest="{x:OnIdiom Tablet=150,
                                                                  Phone=130}">
-                                       
                                         <pancakeView:PancakeView.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="ProductDetailClick" />
                                         </pancakeView:PancakeView.GestureRecognizers>
@@ -321,11 +304,13 @@
                                                 Aspect="AspectFill"
                                                 HeightRequest="150"
                                                 Margin="5"
-                                                Source="{Binding Image}" />
+                                                Source="{Binding Image}"/>
+                                                
+                                                              
+  
                                             <Label
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 Text="{Binding Title}"
-                                               
                                                 TextColor="{DynamicResource WhiteDarkFontColor}"
                                                 VerticalOptions="Start"
                                                 LineBreakMode="TailTruncation"
@@ -337,7 +322,6 @@
                                                 Text="{Binding Brand}"
                                                 TextColor="{DynamicResource DescLabelColor}"
                                                 VerticalOptions="Start" />
-
                                             <Label
                                                 FontFamily="{DynamicResource VerdanaProBold}"
                                                 FontSize="15"
@@ -353,7 +337,6 @@
                     </customControl:RepeaterView>
                 </ScrollView>
                 <Label
-                    
                     Margin="0,10,0,0"
                     Padding="5,5,0,0"
                     FontAttributes="Bold"
@@ -409,7 +392,6 @@
                                         Text="{Binding Brand}"
                                         TextColor="{DynamicResource DescLabelColor}"
                                         VerticalOptions="Start" />
-
                                     <Label
                                         FontFamily="{DynamicResource VerdanaProBold}"
                                         FontSize="15"
@@ -422,9 +404,9 @@
                         </DataTemplate>
                     </controls:FlowListView.FlowColumnTemplate>
                 </controls:FlowListView>
-            </StackLayout>
-               
+            </StackLayout>  
         </ScrollView>
+                 
         <controls:PancakeView
             x:Name="BasketLayout"
             IsVisible="false"

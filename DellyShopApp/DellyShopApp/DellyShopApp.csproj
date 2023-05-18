@@ -29,6 +29,9 @@
     <PackageReference Include="Plugin.PayCards" Version="1.1.1" />
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
+    <PackageReference Include="DynamicStackLayout" Version="2017.12.4" />
+    <PackageReference Include="Prism.Unity.Forms" Version="8.1.97" />
+    <PackageReference Include="YmChat" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +44,9 @@
     <None Remove="Themes\clock.json" />
     <None Remove="Resources\clock.json" />
     <None Remove="Xam.Plugin.Connectivity" />
+    <None Remove="DynamicStackLayout" />
+    <None Remove="Prism.Unity.Forms" />
+    <None Remove="YmChat" />
   </ItemGroup>
   <ItemGroup>
     <None Update="App.xaml">

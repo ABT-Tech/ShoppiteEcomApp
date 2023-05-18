@@ -78,7 +78,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             Navigation.PushAsync(new LoginPage());
         }
 
-      private async  void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+      private async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
         {
             await Navigation.PushAsync(new VenderLoginPage());
         }

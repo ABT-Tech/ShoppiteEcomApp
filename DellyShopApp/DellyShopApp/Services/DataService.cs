@@ -27,7 +27,6 @@ namespace DellyShopApp.Services
         public ObservableCollection<ProductListModel> BasketModel = new ObservableCollection<ProductListModel>();
         public ObservableCollection<OrderListModel> OrderModel = new ObservableCollection<OrderListModel>();
 
-
         public List<Category> CatoCategoriesList = new List<Category>();
         public List<Category> Carousel = new List<Category>();
         public List<StartList> StartList = new List<StartList>();
@@ -41,6 +40,7 @@ namespace DellyShopApp.Services
         public List<UserOrder> user = new List<UserOrder>();
         public List<Report> report = new List<Report>();
         public List<CustomerInfo> customerInfo = new List<CustomerInfo>();
+        public List<Products> products = new List<Products>();      
         public OrderDetails orderdetails = new OrderDetails();
         public OrgData ObjOrgData = new OrgData();
         public Cart cart = new Cart();
@@ -50,9 +50,7 @@ namespace DellyShopApp.Services
         public Users_DTO users = new Users_DTO();
         public OrderCheckOut ordercheckout = new OrderCheckOut();
         public double TotalPrice = 0;
-        
-      
-       
+
         public static DataService Instance
         {
             get
@@ -116,7 +114,8 @@ namespace DellyShopApp.Services
                 Email = "abc@gmail.com",
                 icon = "Red.jpeg",
                 orgId = 1,
-                userId = 1
+                userId = 1,
+                Active = false
             });
             customerInfo.Add(new CustomerInfo
             {
@@ -124,25 +123,18 @@ namespace DellyShopApp.Services
                 Email = "xyz@gmail.com",
                 icon = "Green.jpeg",
                 orgId = 1,
-                userId = 2
+                userId = 2,
+                Active = true
 
-            });
+            }); 
             customerInfo.Add(new CustomerInfo
             {
                 Username = "opq",
                 Email = "opq@gmail.com",
                 icon = "Green.jpeg",
                 orgId = 1,
-                userId = 3
-
-            });
-            customerInfo.Add(new CustomerInfo
-            {
-                Username = "opq",
-                Email = "opq@gmail.com",
-                icon = "Green.jpeg",
-                orgId = 1,
-                userId = 4
+                userId = 4,
+                Active = true
 
             });
             customerInfo.Add(new CustomerInfo
@@ -151,39 +143,36 @@ namespace DellyShopApp.Services
                 Email = "madhav123@gmail.com",
                 icon = "Green.jpeg",
                 orgId =1,
-                userId =5
+                userId =5,
+                Active = true
             });
-
-            ProcutListModel.Add(new ProductListModel
+            customerInfo.Add(new CustomerInfo
             {
-                Title = AppResources.ProcutTitle,
-                Brand = AppResources.ProductBrand,
-                Id = 1,
-                Image = "shoesBlack",
-                Price = 362,
-                VisibleItemDelete = false,
-                ProductList = new string[] { "red1", "shoesBlack" },
-                OldPrice = 570,
+                Username = "Suba Madhav",
+                Email = "madhav123@gmail.com",
+                icon = "Green.jpeg",
                 orgId = 1,
-                Quantity = 1,
-                orderId = 1,
-
+                userId = 5,
+                Active = true
+            });
+            customerInfo.Add(new CustomerInfo
+            {
+                Username = "opq",
+                Email = "opq@gmail.com",
+                icon = "Green.jpeg",
+                orgId = 1,
+                userId = 4,
+                Active = true
 
             });
-            ProcutListModel.Add(new ProductListModel
+            customerInfo.Add(new CustomerInfo
             {
-                Title = AppResources.ProcutTitle1,
-                Brand = AppResources.ProductBrand1,
-                Id = 2,
-                Image = "grazy1",
-                Price = 150,
-                VisibleItemDelete = false,
-                ProductList = new string[] { "garzy2", "grazy1" },
-                OldPrice = 270,
+                Username = "abcd",
+                Email = "abc@gmail.com",
+                icon = "Red.jpeg",
                 orgId = 1,
-                Quantity = 1,
-                orderId = 1
-
+                userId = 1,
+                Active = false
             });
             ProcutListModel.Add(new ProductListModel
             {
@@ -200,12 +189,40 @@ namespace DellyShopApp.Services
                 orderId = 1
 
             });
-
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle1,
+                Brand = AppResources.ProductBrand1,
+                Id = 2,
+                Image = "grazy1",
+                Price = 150,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "garzy2", "grazy1" },
+                OldPrice = 270
+            });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle,
+                Brand = AppResources.ProductBrand,
+                Id = 1,
+                Image = "shoesBlack",
+                Price = 362,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "red1", "shoesBlack" },
+                OldPrice = 570
+            });
+            products.Add(new Products
+            {
+                Status = "Best Deals",
+                all = "ViewAll",
+                ProductLists = ProcutListModel.ToList()
+            });
+            products.Add(new Products
+            {
+                Status = "Top Deals",
+                ProductLists = ProcutListModel.ToList()
+            });
         }
-
-
-
-
         public static async Task<List<Category>> GetCategories(int orgId)
         {
             try
