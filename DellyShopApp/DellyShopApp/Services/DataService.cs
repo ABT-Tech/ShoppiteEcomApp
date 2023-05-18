@@ -38,6 +38,7 @@ namespace DellyShopApp.Services
         public List<CategoryDetailPage> Details = new List<CategoryDetailPage>();
         public List<CustomerInfo> customerInfo = new List<CustomerInfo>();
         public List<Report> report = new List<Report>();
+        public List<Products> products = new List<Products>();
         public List<VendorsOrder> vendors = new List<VendorsOrder>();
         public OrderDetails orderdetails = new OrderDetails();
         public OrgData ObjOrgData = new OrgData();
@@ -82,18 +83,20 @@ namespace DellyShopApp.Services
             {
                 Username = "abcd",
                 Email = "abc@gmail.com",
-                icon = "Red1.jpeg",                
+                icon = "Red1.jpeg", 
+                Active =false
             }); customerInfo.Add(new CustomerInfo
             {
                 Username = "xyz",
                 Email = "xyz@gmail.com",
-                icon = "Green.jpeg"
-
+                icon = "Green.jpeg",
+                Active = true
             }); customerInfo.Add(new CustomerInfo
             {
                 Username = "opq",
                 Email = "opq@gmail.com",
-                icon = "Green.jpeg"
+                icon = "Green.jpeg",
+                Active = true
 
             });
             customerInfo.Add(new CustomerInfo
@@ -101,17 +104,20 @@ namespace DellyShopApp.Services
                 Username = "abcd",
                 Email = "abc@gmail.com",
                 icon = "Red1.jpeg",
+                Active = false
             }); customerInfo.Add(new CustomerInfo
             {
                 Username = "xyz",
                 Email = "xyz@gmail.com",
-                icon = "Green.jpeg"
+                icon = "Green.jpeg",
+                Active = true
 
             }); customerInfo.Add(new CustomerInfo
             {
                 Username = "opq",
                 Email = "opq@gmail.com",
-                icon = "Green.jpeg"
+                icon = "Green.jpeg",
+                Active = true
 
             });
             customerInfo.Add(new CustomerInfo
@@ -119,17 +125,20 @@ namespace DellyShopApp.Services
                 Username = "abcd",
                 Email = "abc@gmail.com",
                 icon = "Red1.jpeg",
+                Active = false
             }); customerInfo.Add(new CustomerInfo
             {
                 Username = "xyz",
                 Email = "xyz@gmail.com",
-                icon = "Green.jpeg"
+                icon = "Green.jpeg",
+                Active = true
 
             }); customerInfo.Add(new CustomerInfo
             {
                 Username = "opq",
                 Email = "opq@gmail.com",
-                icon = "Green.jpeg"
+                icon = "Green.jpeg",
+                Active = true
 
             });
             report.Add(new Report
@@ -150,13 +159,16 @@ namespace DellyShopApp.Services
                 Date = "20/07/2022",
                 TtlOrder = 130,
             });
+
             
+
+
             ProcutListModel.Add(new ProductListModel
             {
                 Title = AppResources.ProcutTitle,
                 Brand = AppResources.ProductBrand,
                 Id = 1,
-                Image = "shoesBlack",
+                Image = "Block.png",
                 Price = 362,
                 VisibleItemDelete = false,
                 ProductList = new string[] { "red1", "shoesBlack" },
@@ -172,7 +184,7 @@ namespace DellyShopApp.Services
                 Title = AppResources.ProcutTitle1,
                 Brand = AppResources.ProductBrand1,
                 Id = 2,
-                Image = "grazy1",
+                Image = "Block.png",
                 Price = 150,
                 VisibleItemDelete = false,
                 ProductList = new string[] { "garzy2", "grazy1" },
@@ -187,7 +199,7 @@ namespace DellyShopApp.Services
                 Title = AppResources.ProcutTitle2,
                 Brand = AppResources.ProductBrand2,
                 Id = 3,
-                Image = "shoesyellow",
+                Image = "Block.png",
                 Price = 299,
                 VisibleItemDelete = false,
                 ProductList = new string[] { "py_1", "shoesyellow" },
@@ -198,6 +210,17 @@ namespace DellyShopApp.Services
 
             });
 
+            products.Add(new Products
+            {
+                Stutus = "Best Deals",
+                all = "view all",
+                productListModel = ProcutListModel.ToList()
+            });
+            products.Add(new Products
+            {
+                Stutus = "Top Deals",
+                productListModel = ProcutListModel.ToList()
+            });
 
             StartList.Add(new StartList
             {

@@ -11,10 +11,13 @@ using DellyShopApp.Models;
 using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.Pages;
+using DellyShopApp.Views.TabbedPages;
 using Plugin.FirebasePushNotification;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
+
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace DellyShopApp
@@ -25,7 +28,7 @@ namespace DellyShopApp
         public int UserId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         public App(bool hasNotification = false, IDictionary<string, object> notificationData = null)
         {
-            InitializeComponent();            
+            InitializeComponent();
             FlowListView.Init();
             Device.SetFlags(new[] {
                "SwipeView_Experimental",
@@ -98,6 +101,7 @@ namespace DellyShopApp
                 NavigationPage.SetHasNavigationBar(navpage, false);
                 NavigationPage.SetHasNavigationBar(navigation, false);
                 MainPage = navpage;
+
             }
             else
             {
@@ -122,8 +126,12 @@ namespace DellyShopApp
 
             }            
             App.Current.MainPage.FlowDirection = Settings.SelectLanguage == "ar" ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
-        }     
-        
+        }
+        //public App(IYmChat iymchat)
+        //{
+        //    InitializeComponent();
+        //    MainPage = new MainPage(iymchat);
+        //}
         private string GetDeviceInfo()
         {
             return Android.Provider.Settings.Secure.GetString(Android.App.Application.Context.ContentResolver, Android.Provider.Settings.Secure.AndroidId);
