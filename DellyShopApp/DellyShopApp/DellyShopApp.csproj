@@ -16,6 +16,7 @@
 	 <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
 	 <PackageReference Include="FirebaseAdmin" Version="2.3.0" />
 	 <PackageReference Include="Microsoft.Azure.Management.Network" Version="26.0.0" />
+	 <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1004" />
 	 <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
 	 <PackageReference Include="Xam.Plugin.Connectivity" Version="4.0.0.190-beta" />
 	 <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
@@ -123,6 +124,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Pages\EditProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Pages\LargeTextLabel.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Pages\LastViewPage.xaml">
