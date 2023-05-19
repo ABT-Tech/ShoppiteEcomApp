@@ -111,6 +111,7 @@ namespace DellyShopApp
 
             SecureStorage.SetAsync("OrgId",orgId);
             SecureStorage.SetAsync("ImgId", Img);
+
             Navigation.PushAsync(new HomeTabbedPage());
             
         }
