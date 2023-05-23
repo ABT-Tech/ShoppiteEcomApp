@@ -3,6 +3,7 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
             if (ChechConnectivity())
             {
                 InittBasketPage();
+                
             }                        this.BindingContext = product;                   }
         private bool ChechConnectivity()
         {
@@ -68,6 +69,21 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
         /// <summary>        /// Delete Visible Settings        /// </summary>        /// <param name="sender"></param>        /// <param name="e"></param>        private void UndeleteI(object sender, SwipedEventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (pancake.BindingContext is ProductListModel item)            {                item.VisibleItemDelete = false;                VisibleDelete(item.Id);            }        }        private void VisibleDelete(int id)        {            var items = _basketVm.ProcutListModel.Where(x => x.Id != id);            foreach (var item in items)            {                item.VisibleItemDelete = false;            }        }        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));        }        async void ContinueWithPaypal(System.Object sender, System.EventArgs e)        {
             //Single Item
             var result = await CrossPayPalManager.Current.Buy(new PayPalItem("Test Product", new Decimal(12.50), "USD"), new Decimal(0));            if (result.Status == PayPalStatus.Cancelled)            {                Debug.WriteLine("Cancelled");            }            else if (result.Status == PayPalStatus.Error)            {                Debug.WriteLine(result.ErrorMessage);            }            else if (result.Status == PayPalStatus.Successful)            {                Debug.WriteLine(result.ServerResponse.Response.Id);            }
+            //void TapGestureRecognizer_Tapped_1(System.Object sender, System.EventArgs e)
+            //{
+
+            //}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -160,4 +176,15 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
             #endregion
             #region Obtain a Client Metadata ID            //Print Client Metadata Id
                                                             //Debug.WriteLine(CrossPayPalManager.Current.ClientMetadataId);
-            #endregion        }    }}
+            #endregion        }
+
+       //private async void TapGestureRecognizer_Tapped_1(System.Object sender, System.EventArgs e)
+       // {
+       //     OrderCheckOut orderCheckOut = new OrderCheckOut();
+       //     orderCheckOut.Address = (ChangeAddress)AddressPicker.SelectedItem;
+       //     AddressPicker.ItemsSource = await DataService.GetAddressByUserId(orgId, userId);
+       // }
+
+
+
+    }}
