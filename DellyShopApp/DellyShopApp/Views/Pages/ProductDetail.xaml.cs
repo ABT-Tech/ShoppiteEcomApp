@@ -50,7 +50,7 @@
             //    Rates = _startList.Skip(0).ToList()
             //});
             InitializeComponent();
- 
+
             if (_products.Quantity <= 0)            {                ProductCountLabel.IsVisible = false;                Stocklbl.IsVisible = true;                Addtocartbtn.IsVisible = false;                BuyNowbtn.IsVisible = false;                plusimg.IsVisible = false;                minusimg.IsVisible = false;            }
             if (_products.WishlistedProduct == true)
             {

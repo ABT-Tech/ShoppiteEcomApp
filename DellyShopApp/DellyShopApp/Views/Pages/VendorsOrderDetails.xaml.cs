@@ -63,5 +63,11 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
         private async void Log_outclick(object sender, EventArgs e)        {            await Navigation.PushAsync(new MainPage());
             Xamarin.Essentials.SecureStorage.RemoveAll();        }
 
+        
+
+      async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        {
+            
+        }
     }
 }
