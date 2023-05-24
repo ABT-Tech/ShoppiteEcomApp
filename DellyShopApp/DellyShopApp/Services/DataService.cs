@@ -75,7 +75,8 @@ namespace DellyShopApp.Services
             GC.SuppressFinalize(this);
         }
         public DataService()
-        {          
+        {    
+            
 
             StartList.Add(new StartList
             {

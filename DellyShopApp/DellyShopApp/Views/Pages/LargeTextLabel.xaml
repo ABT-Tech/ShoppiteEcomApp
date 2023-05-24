@@ -9,15 +9,7 @@
 
     <ContentView.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <Label x:Name="customLabel" Text="{Binding Description}" />
-            <Label
-                x:Name="lblReadMore"
-                FontSize="18"
-                TextColor="#1a0fa9">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-                </Label.GestureRecognizers>
-            </Label>
+          
         </StackLayout>
     </ContentView.Content>
 </ContentView>
