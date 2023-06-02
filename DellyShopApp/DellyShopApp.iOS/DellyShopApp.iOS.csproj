@@ -139,6 +139,51 @@
     <BundleResource Include="Resources\Green.jpeg" />
     <BundleResource Include="Resources\Red.jpeg" />
     <BundleResource Include="Resources\chat.png" />
+    <BundleResource Include="Resources\sari1.jpg" />
+    <BundleResource Include="Resources\footwear.jpg" />
+    <BundleResource Include="Resources\beauty.jpg" />
+    <BundleResource Include="Resources\electronics.png" />
+    <BundleResource Include="Resources\fashion.png" />
+    <BundleResource Include="Resources\grocery.png" />
+    <BundleResource Include="Resources\home.jpg" />
+    <BundleResource Include="Resources\mobile.png" />
+    <BundleResource Include="Resources\toys.png" />
+    <BundleResource Include="Resources\tshirt.webp" />
+    <BundleResource Include="Resources\kurtas.webp" />
+    <BundleResource Include="Resources\handbag.webp" />
+    <BundleResource Include="Resources\kkkk.webp" />
+    <BundleResource Include="Resources\images1.jpeg" />
+    <BundleResource Include="Resources\bbbb.png" />
+    <BundleResource Include="Resources\Unknown.jpeg" />
+    <BundleResource Include="Resources\images.jpeg" />
+    <BundleResource Include="Resources\flip.webp" />
+    <BundleResource Include="Resources\jeans.webp" />
+    <BundleResource Include="Resources\siyaram.jpeg" />
+    <BundleResource Include="Resources\beardo.jpg" />
+    <BundleResource Include="Resources\fff.jpeg" />
+    <BundleResource Include="Resources\gold.jpg" />
+    <BundleResource Include="Resources\vacation.webp" />
+    <BundleResource Include="Resources\off.png" />
+    <BundleResource Include="Resources\virat.jpg" />
+    <BundleResource Include="Resources\boy.webp" />
+    <BundleResource Include="Resources\blazer.jpg" />
+    <BundleResource Include="Resources\night.jpg" />
+    <BundleResource Include="Resources\sharee.png" />
+    <BundleResource Include="Resources\shirt.jpg" />
+    <BundleResource Include="Resources\shoes.jpg" />
+    <BundleResource Include="Resources\tshirt.jpg" />
+    <BundleResource Include="Resources\lal1.png" />
+    <BundleResource Include="Resources\kalo1.png" />
+    <BundleResource Include="Resources\apple.png" />
+    <BundleResource Include="Resources\jaguar.png" />
+    <BundleResource Include="Resources\puma.png" />
+    <BundleResource Include="Resources\mobile.gif" />
+    <BundleResource Include="Resources\vivo.gif" />
+    <BundleResource Include="Resources\kapada.gif" />
+    <BundleResource Include="Resources\kapada1.gif" />
+    <BundleResource Include="Resources\kapada3.gif" />
+    <BundleResource Include="Resources\kapada2.gif" />
+    <BundleResource Include="Resources\gift.gif" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -268,6 +313,12 @@
     </PackageReference>
     <PackageReference Include="YmChat">
       <Version>2.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.CommunityToolkit">
+      <Version>2.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.Badge">
+      <Version>2.3.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

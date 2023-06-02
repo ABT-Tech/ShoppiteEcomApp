@@ -28,6 +28,8 @@ namespace DellyShopApp.Services
         public ObservableCollection<OrderListModel> OrderModel = new ObservableCollection<OrderListModel>();
 
         public List<Category> CatoCategoriesList = new List<Category>();
+        public List<Category1> CatoCategoriesList1 = new List<Category1>();
+        public List<companylogo> BrandLogos = new List<companylogo>();
         public List<Category> Carousel = new List<Category>();
         public List<StartList> StartList = new List<StartList>();
         public List<Category> CatoCategoriesDetail = new List<Category>();
@@ -83,6 +85,129 @@ namespace DellyShopApp.Services
         }
         public DataService()
         {
+            BrandLogos.Add(new companylogo
+            {
+                Categoryicon = "apple.png"
+            });
+            BrandLogos.Add(new companylogo
+            {
+                Categoryicon = "puma.png"
+            });
+            BrandLogos.Add(new companylogo
+            {
+                Categoryicon = "jaguar.png"
+            });
+            //Carousel.Add(new Category
+            //{
+            //    Banner = "vacation.webp"
+            //});
+            //Carousel.Add(new Category
+            //{
+            //    Banner = "beardo.jpg"
+            //});
+            //Carousel.Add(new Category
+            //{
+            //    Banner = "fff.jpeg"
+            //});
+            //Carousel.Add(new Category
+            //{
+            //    Banner = "gold.jpg"
+            //});
+            //Carousel.Add(new Category
+            //{
+            //    Banner = "mobile.gif"
+            //});
+            //Carousel.Add(new Category
+            //{
+            //    Banner = "vivo.gif"
+            //});
+           
+            Carousel.Add(new Category
+            {
+                Banner = "kapada.gif"
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "kapada1.gif"
+            });
+
+            Carousel.Add(new Category
+            {
+                Banner = "kapada3.gif"
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "INFANT ESSENTIALS",
+                Categoryicon = "boy.webp",
+
+
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "T-SHIRT",
+                Categoryicon = "tshirt.webp",
+                
+                
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "KURTA SETS",
+                Categoryicon = "kurtas.webp",
+
+
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "HANDBAGS",
+                Categoryicon = "handbag.webp",
+
+
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "KURTAS",
+                Categoryicon = "kkkk.webp",
+
+
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "JEANS",
+                Categoryicon = "jeans.webp",
+
+
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "FLIP-FLOP",
+                Categoryicon = "flip.webp",
+
+
+            });
+            CatoCategoriesList1.Add(new Category1
+            {
+                Categoryicon = "blazer.jpg"
+            });
+            CatoCategoriesList1.Add(new Category1
+            {
+                Categoryicon = "night.jpg"
+            });
+            CatoCategoriesList1.Add(new Category1
+            {
+                Categoryicon = "sharee.png"
+            });
+            CatoCategoriesList1.Add(new Category1
+            {
+                Categoryicon = "shirt.jpg"
+            });
+            CatoCategoriesList1.Add(new Category1
+            {
+                Categoryicon = "shoes.jpg"
+            });
+            CatoCategoriesList1.Add(new Category1
+            {
+                Categoryicon = "tshirt.jpg"
+            });
             report.Add(new Report
             {
                 UserName = "Pankhaniya Parthik",
@@ -222,6 +347,8 @@ namespace DellyShopApp.Services
                 Status = "Top Deals",
                 ProductLists = ProcutListModel.ToList()
             });
+
+
         }
         public static async Task<List<Category>> GetCategories(int orgId)
         {

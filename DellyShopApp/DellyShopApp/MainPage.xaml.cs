@@ -77,7 +77,8 @@ namespace DellyShopApp
                         VerticalOptions = LayoutOptions.Center,
                         HorizontalOptions = LayoutOptions.Center,
                         HeightRequest = 200,
-                        WidthRequest = 200
+                        WidthRequest = 200,
+                        Aspect = Aspect.AspectFit
                         
                         
 

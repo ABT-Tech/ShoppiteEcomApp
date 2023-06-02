@@ -60,6 +60,7 @@ namespace DellyShopApp.Models
         public OrderCheckOut ordercheckout { get; set; }
         public bool IsPriceVisible { get; set; }
         public bool IsOutStock { get; set; }
+        public bool Isimage { get; set; }
         public bool WishlistedProduct { get; set; }
 
 

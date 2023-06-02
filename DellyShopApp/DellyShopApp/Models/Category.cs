@@ -9,6 +9,8 @@ namespace DellyShopApp.Models
         public string Banner { get; set; }
         public string CategoryName { get; set; }
         public string CategoryId { get; set; }
+        public string Categoryicon { get; set; }
+        public string Categoryicoe { get; set; }
         public int orgID { get; set; }
         
     }
