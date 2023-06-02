@@ -13,19 +13,23 @@
 
   <ItemGroup>
 	 <PackageReference Include="Acr.UserDialogs" Version="8.1.0-alpha-0009" />
+	 <PackageReference Include="CarouselView.FormsPlugin" Version="6.0.0" />
 	 <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
 	 <PackageReference Include="DynamicStackLayout" Version="2017.12.4" />
 	 <PackageReference Include="FirebaseAdmin" Version="2.3.0" />
+	 <PackageReference Include="LiveXAML" Version="2.1.73" />
 	 <PackageReference Include="Microsoft.Azure.Management.Network" Version="26.0.0" />
+	 <PackageReference Include="Plugin.Badge" Version="2.3.1" />
 	 <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
 	 <PackageReference Include="Xam.Plugin.Connectivity" Version="4.0.0.190-beta" />
 	 <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
+	 <PackageReference Include="Xamarin.CommunityToolkit" Version="1.1.0" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.2012" />
     <PackageReference Include="XamarinFastEntry.Behaviors" Version="1.1.1" />
     <PackageReference Include="Plugin.Multilingual" Version="1.0.2" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
     <PackageReference Include="Plugin.FirebasePushNotification" Version="3.3.10" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="PayPal.Forms" Version="2.18.6" />
@@ -188,6 +192,9 @@
       <DependentUpon>AppResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Views\Pages\TopDeals.xaml.cs">
+      <DependentUpon>TopDeals.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Pages\ForgetPasswordPage.xaml.cs">
       <DependentUpon>ForgetPasswordPage.xaml</DependentUpon>

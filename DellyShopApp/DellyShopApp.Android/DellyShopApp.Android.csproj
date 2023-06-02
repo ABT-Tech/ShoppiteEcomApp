@@ -55,6 +55,9 @@
     <PackageReference Include="Acr.UserDialogs">
       <Version>8.1.0-alpha-0009</Version>
     </PackageReference>
+    <PackageReference Include="CarouselView.FormsPlugin">
+      <Version>6.0.0</Version>
+    </PackageReference>
     <PackageReference Include="Com.Airbnb.Android.Lottie">
       <Version>4.2.2</Version>
     </PackageReference>
@@ -63,6 +66,12 @@
     </PackageReference>
     <PackageReference Include="DynamicStackLayout">
       <Version>2017.12.4</Version>
+    </PackageReference>
+    <PackageReference Include="LiveXAML">
+      <Version>2.1.73</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.Badge">
+      <Version>2.3.1</Version>
     </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup">
       <Version>2.1.0</Version>
@@ -89,7 +98,7 @@
       <Version>28.0.0.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.CommunityToolkit">
-      <Version>2.0.5</Version>
+      <Version>2.0.6</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading">
       <Version>2.4.11.982</Version>
@@ -102,6 +111,9 @@
     <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
+    <PackageReference Include="Xamarin.Forms.CarouselView">
+      <Version>2.3.0-pre2</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms.Visual.Material">
       <Version>5.0.0.2578</Version>
     </PackageReference>
@@ -754,6 +766,69 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\chat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\aa.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ee.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\dd.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cc.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\bb.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\a6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\a5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\a4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\a3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\a2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\a1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\sharee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\shirt.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\night.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\tshirt.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\blazer.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\shoes.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\apple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\jaguar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\puma.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\order.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- <Target Name="_ResolveSatellitePaths" DependsOnTargets="_ResolveAssemblies">

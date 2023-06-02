@@ -66,6 +66,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             }
             BasketItems.ItemsSource = productListModel; //DataService.Instance.ProcutListModel;
             var productid = Convert.ToString(productListModel.Count);
+
             
            
             if (productListModel.Count > 0 && (userId > 0 && userAuth == "Client"))

@@ -20,6 +20,8 @@ namespace DellyShopApp.Views.TabbedPages
     public partial class HomePage
     {
         //Order product = new Order();
+        public string userAuth = SecureStorage.GetAsync("Usertype").Result;
+
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int UserId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         List<Category> categories = new List<Category>();
@@ -35,115 +37,138 @@ namespace DellyShopApp.Views.TabbedPages
         {
             int? OrgUserID = UserId == 0 ? null : (int?)UserId;
             categories = await DataService.GetAllCategories(orgId);
-            CategoryList.ItemsSource = categories; //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId); //
-            CarouselView.ItemsSource = categories.Where(x => x.Banner != null && x.Banner!="").ToList(); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
+            CategoryList.ItemsSource = DataService.Instance.CatoCategoriesList; //
+            //var images = DataService.Instance.BrandLogos;
+            //MainCarouselView.ItemsSource = images; //
+            //Device.StartTimer(TimeSpan.FromSeconds(3), (Func<bool>)(() =>
+            //{
+            //    MainCarouselView.Position = (MainCarouselView.Position + 1) % images.Count;
+            //    return true;
+            //}));
+            CategoryList1.ItemsSource = DataService.Instance.CatoCategoriesList2nd; //
+            var SecBanner = DataService.Instance.Carousel;
+            CarouselView1.ItemsSource = SecBanner;
+            Device.StartTimer(TimeSpan.FromSeconds(3), (Func<bool>)(() =>
+            {
+                CarouselView1.Position = (CarouselView1.Position + 1) % SecBanner.Count;
+                return true;
+            }));
+            var carouselview = categories.Where(x => x.Banner != null && x.Banner != "").ToList();
+            CarouselView.ItemsSource = carouselview;//DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
+            Device.StartTimer(TimeSpan.FromSeconds(4), (Func<bool>)(() =>
+            {
+                CarouselView.Position = (CarouselView.Position + 1) % carouselview.Count;
+                return true;
+            }));
             BestSellerList.ItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId,OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
             PreviousViewedList.ItemsSource = await DataService.GetLastVisitedProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
             MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
             var products = DataService.Instance.products;
-            foreach (var pro in products)
-            {
-                var label = new Label
-                {
-                    Text = pro.Stutus,
-                    Margin = 10,
-                    Padding = 5,
-                    FontAttributes = FontAttributes.Bold,
-                    FontFamily = "{DynamicResource VerdanaProBold}",
-                    FontSize = 18,
-                    TextColor = Color.Black,
-                    VerticalOptions = LayoutOptions.Start,
-                    HorizontalOptions = LayoutOptions.StartAndExpand
-                };
-                var label2 = new Label
-                {
-                    Text = pro.all,
-                    Margin = 10,
-                    Padding = 5,
-                    FontAttributes = FontAttributes.Bold,
-                    FontFamily = "{DynamicResource VerdanaProBold}",
-                    FontSize = 16,
-                    TextColor = Color.Gray,
-                    VerticalOptions = LayoutOptions.Start,
-                    HorizontalOptions = LayoutOptions.End
-                };
 
-                var stacklayout = new StackLayout();
-                stacklayout.Children.Add(label);
-                stacklayout.Children.Add(label2);
-                var pancake = new PancakeView();
+          
+            //foreach (var pro in products)
+            //{
+            //    var label = new Label
+            //    {
+            //        Text = pro.Stutus,
+            //        Margin = 10,
+            //        Padding = 5,
+            //        FontAttributes = FontAttributes.Bold,
+            //        FontFamily = "{DynamicResource VerdanaProBold}",
+            //        FontSize = 18,
+            //        TextColor = Color.Black,
+            //        VerticalOptions = LayoutOptions.Start,
+            //        HorizontalOptions = LayoutOptions.StartAndExpand
+            //    };
+            //    var label2 = new Label
+            //    {
+            //        Text = pro.all,
+            //        Margin = 10,
+            //        Padding = 5,
+            //        FontAttributes = FontAttributes.Bold,
+            //        FontFamily = "{DynamicResource VerdanaProBold}",
+            //        FontSize = 16,
+            //        TextColor = Color.Gray,
+            //        VerticalOptions = LayoutOptions.Start,
+            //        HorizontalOptions = LayoutOptions.End
+            //    };
 
-                var stacklayout1 = new StackLayout();
-                foreach (var prolist in pro.productListModel)
-                {
-                    var image = new Image
-                    {
-                        Source = prolist.Image,
-                        Aspect = Aspect.AspectFill,
-                        HeightRequest = 100,
-                        WidthRequest = 100,
-                        Margin = 5
-                    };
-                    var label3 = new Label
-                    {
-                        Text = prolist.Title,
-                        FontFamily = "{ DynamicResource VerdanaProRegular }",
-                        MaxLines = 1,
-                        LineBreakMode = LineBreakMode.TailTruncation,
-                        TextColor = Color.Black,
-                        VerticalOptions = LayoutOptions.End
-                    };
-                    var label4 = new Label
-                    {
-                        Text = prolist.Brand,
-                        FontFamily = "{DynamicResource VerdanaProRegular}",
-                        FontSize = 10,
-                        HorizontalOptions = LayoutOptions.Start,
-                        VerticalOptions = LayoutOptions.End,
-                        TextColor = Color.Black
-                    };
-                    var label5 = new Label
-                    {
-                        Text = prolist.OldPrice.ToString() + " ₹",
-                        FontFamily = "{DynamicResource VerdanaProBold}",
-                        FontSize = 18,
-                        HorizontalOptions = LayoutOptions.EndAndExpand,
-                        TextColor = Color.Gray,
-                        WidthRequest = 80,
-                        TextDecorations = TextDecorations.Strikethrough,
-                        VerticalOptions = LayoutOptions.End
-                    };
-                    var label6 = new Label
-                    {
-                        Text = prolist.Price.ToString() + " ₹",
-                        FontFamily = "{DynamicResource VerdanaProBold}",
-                        FontSize = 13,
-                        HorizontalOptions = LayoutOptions.End,
-                        TextColor = Color.Black,
-                        WidthRequest = 80,
-                        VerticalOptions = LayoutOptions.End
-                    };
-                    stacklayout1.Children.Add(image);
-                    stacklayout1.Children.Add(label3);
-                    stacklayout1.Children.Add(label4);
-                    stacklayout1.Children.Add(label5);
-                    stacklayout1.Children.Add(label6);
-                    
-                }
+            //    var stacklayout = new StackLayout();
+            //    stacklayout.Children.Add(label);
+            //    stacklayout.Children.Add(label2);
+            //    var pancake = new PancakeView();
 
-                // ////HomeMainStack
-                // var scrollview = new ScrollView();
-                //var repeterview = new CustomControl.RepeaterView();
-                //repeterview.ItemTemplate = new DataTemplate();
-                // ////repeterview.ItemTemplate.
-                // ////repeterview.Children.Add(Image);
-                //repeterview.ItemsSource = pro.productListModel;
-                HomeMainStack.Children.Add(stacklayout);
-                stacklayout.Orientation = StackOrientation.Horizontal;
-                //HomeMainStack.Children.Add(repeterview);
-                HomeMainStack.Children.Add(stacklayout1);
-                
-            }
+            //    var stacklayout1 = new StackLayout();
+            //    foreach (var prolist in pro.productListModel)
+            //    {
+            //        var image = new Image
+            //        {
+            //            Source = prolist.Image,
+            //            Aspect = Aspect.AspectFill,
+            //            HeightRequest = 100,
+            //            WidthRequest = 100,
+            //            Margin = 5
+            //        };
+            //        var label3 = new Label
+            //        {
+            //            Text = prolist.Title,
+            //            FontFamily = "{ DynamicResource VerdanaProRegular }",
+            //            MaxLines = 1,
+            //            LineBreakMode = LineBreakMode.TailTruncation,
+            //            TextColor = Color.Black,
+            //            VerticalOptions = LayoutOptions.End
+            //        };
+            //        var label4 = new Label
+            //        {
+            //            Text = prolist.Brand,
+            //            FontFamily = "{DynamicResource VerdanaProRegular}",
+            //            FontSize = 10,
+            //            HorizontalOptions = LayoutOptions.Start,
+            //            VerticalOptions = LayoutOptions.End,
+            //            TextColor = Color.Black
+            //        };
+            //        var label5 = new Label
+            //        {
+            //            Text = prolist.OldPrice.ToString() + " ₹",
+            //            FontFamily = "{DynamicResource VerdanaProBold}",
+            //            FontSize = 18,
+            //            HorizontalOptions = LayoutOptions.EndAndExpand,
+            //            TextColor = Color.Gray,
+            //            WidthRequest = 80,
+            //            TextDecorations = TextDecorations.Strikethrough,
+            //            VerticalOptions = LayoutOptions.End
+            //        };
+            //        var label6 = new Label
+            //        {
+            //            Text = prolist.Price.ToString() + " ₹",
+            //            FontFamily = "{DynamicResource VerdanaProBold}",
+            //            FontSize = 13,
+            //            HorizontalOptions = LayoutOptions.End,
+            //            TextColor = Color.Black,
+            //            WidthRequest = 80,
+            //            VerticalOptions = LayoutOptions.End
+            //        };
+            //        stacklayout1.Children.Add(image);
+            //        stacklayout1.Children.Add(label3);
+            //        stacklayout1.Children.Add(label4);
+            //        stacklayout1.Children.Add(label5);
+            //        stacklayout1.Children.Add(label6);
+
+            //    }
+
+            //    // ////HomeMainStack
+            //    // var scrollview = new ScrollView();
+            //    //var repeterview = new CustomControl.RepeaterView();
+            //    //repeterview.ItemTemplate = new DataTemplate();
+            //    // ////repeterview.ItemTemplate.
+            //    // ////repeterview.Children.Add(Image);
+            //    //repeterview.ItemsSource = pro.productListModel;
+            //    HomeMainStack.Children.Add(stacklayout);
+            //    stacklayout.Orientation = StackOrientation.Horizontal;
+            //    //HomeMainStack.Children.Add(repeterview);
+            //    HomeMainStack.Children.Add(stacklayout1);
+
+            //}
 
             //var alldate = DataService.Instance.products; //.Where(x => x.orgId == orgId);
             //float rows = (float)alldate.Count / 2;
@@ -285,7 +310,7 @@ namespace DellyShopApp.Views.TabbedPages
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;
             await Navigation.PushAsync(new ProductDetail(item));
-            //if(item.Quantity  >10 )
+          
         }
 
         private async void ClickCategory(object sender, EventArgs e)
@@ -298,14 +323,36 @@ namespace DellyShopApp.Views.TabbedPages
         {
             await Navigation.PushAsync(new BestSellerPage());
         }
+        async void VireAllTapped1(System.Object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new TopDeals());
+        }
         void DragGestureRecognizer_DropCompleted(System.Object sender, Xamarin.Forms.DropCompletedEventArgs e)
         {
             BasketLayout.IsVisible = false;
         }
-        void DropBasketITem(System.Object sender, Xamarin.Forms.DropEventArgs e)
+        async void DropBasketITem(System.Object sender, Xamarin.Forms.DropEventArgs e)
         {
             if (!DataService.Instance.BasketModel.Contains(product))
                 DataService.Instance.BasketModel.Add(product);
+            if (UserId == 0 || UserId == null || userAuth != "Client")
+            {
+                await DisplayAlert("Opps", "Please Login First!!", "Ok");
+                await Navigation.PushAsync(new LoginPage());
+            }
+            else
+            {
+                Cart cart = new Cart();
+                cart.orgId = product.orgId;
+                cart.UserId = Convert.ToInt32(UserId);
+                cart.proId = product.Id;
+                cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
+                await DataService.AddToCart(cart);
+                await DisplayAlert(AppResources.Success, product.Title + " " + AppResources.AddedBakset, AppResources.Okay);
+                var productId = Convert.ToString(product.Id);
+                //await Xamarin.Essentials.SecureStorage.SetAsync("ProId", productId);
+
+            }
         }
         void DragGestureRecognizer_DragStarting(System.Object sender, Xamarin.Forms.DragStartingEventArgs e)
         {
@@ -343,6 +390,13 @@ namespace DellyShopApp.Views.TabbedPages
             var type = sender.GetType();
             var evnt = (ProductListModel)searchResults.SelectedItem;
             await Navigation.PushAsync(new ProductDetail(evnt));
+        }
+
+        private async void ImageButton_Clicked(object sender, EventArgs e)
+        {
+            if (!(sender is ImageButton stack)) return;
+            if (!(stack.BindingContext is Category ca)) return;
+            await Navigation.PushAsync(new CategoryDetailPage(ca));
         }
     }
 }

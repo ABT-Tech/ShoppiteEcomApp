@@ -28,6 +28,8 @@ namespace DellyShopApp.Services
         public ObservableCollection<OrderListModel> OrderModel = new ObservableCollection<OrderListModel>();
 
         public List<Category> CatoCategoriesList = new List<Category>();
+        public List<BrandLogo> BrandLogos = new List<BrandLogo>();
+        public List<Category2nd> CatoCategoriesList2nd = new List<Category2nd>();
         public List<Category> Carousel = new List<Category>();
         public List<StartList> StartList = new List<StartList>();
         public List<Category> CatoCategoriesDetail = new List<Category>();
@@ -43,6 +45,7 @@ namespace DellyShopApp.Services
         public OrderDetails orderdetails = new OrderDetails();
         public OrgData ObjOrgData = new OrgData();
         public Cart cart = new Cart();
+        public BadgeCounter badgeCounter = new BadgeCounter();
         public Order order = new Order();
         public Login login = new Login();
         public Registration registration = new Registration();      
@@ -79,6 +82,90 @@ namespace DellyShopApp.Services
         }
         public DataService()
         {
+            badgeCounter.count = 1;
+
+            BrandLogos.Add(new BrandLogo
+            {
+                Categoryicon = "apple.png"
+            }) ;
+            BrandLogos.Add(new BrandLogo
+            {
+                Categoryicon = "puma.png"
+            });
+            BrandLogos.Add(new BrandLogo
+            {
+                Categoryicon = "jaguar.png"
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "T-SHIRT",
+                Categoryicon = "aa.jpg",
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "Shirt",
+                Categoryicon = "bb.jpg",
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "Teen ware",
+                Categoryicon = "cc.jpg",
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "Kurta set",
+                Categoryicon = "dd.jpg",
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "Saree",
+                Categoryicon = "ee.jpg",
+            });
+            CatoCategoriesList2nd.Add(new Category2nd
+            {
+                Categoryicon = "blazer.jpg",
+            });
+            CatoCategoriesList2nd.Add(new Category2nd
+            {
+                Categoryicon = "shirt.jpg",
+            });
+            CatoCategoriesList2nd.Add(new Category2nd
+            {
+                Categoryicon = "tshirt.jpg",
+            });
+            CatoCategoriesList2nd.Add(new Category2nd
+            {
+                Categoryicon = "night.jpg",
+            });
+            CatoCategoriesList2nd.Add(new Category2nd
+            {
+                Categoryicon = "sharee.jpg",
+            });
+           
+            Carousel.Add(new Category
+            {
+                Banner = "a1"
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "a2"
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "a3"
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "a4"
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "a6"
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "a5"
+            });
             customerInfo.Add(new CustomerInfo
             {
                 Username = "abcd",
@@ -209,6 +296,7 @@ namespace DellyShopApp.Services
                 orderId = 1
 
             });
+            
 
             products.Add(new Products
             {

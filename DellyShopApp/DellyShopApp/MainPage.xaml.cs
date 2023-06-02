@@ -9,6 +9,7 @@ using Acr.UserDialogs;
 using System.Net.NetworkInformation;
 using System.Net;
 using Plugin.Connectivity;
+using System.Threading.Tasks;
 
 namespace DellyShopApp
 {
@@ -16,7 +17,7 @@ namespace DellyShopApp
     public partial class MainPage
     {
         public int oldorgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
-
+        public Command TouchCommand { get; }
         public MainPage()
         {
             GetDeviceInfo();
@@ -75,8 +76,15 @@ namespace DellyShopApp
                     };
                     image.GestureRecognizers.Add(new TapGestureRecognizer
                     {
-                        Command = new Command(() => TapGestureRecognizer_Tapped(Orglabel.Text, product.Image.ToString())),
-                    });
+                        Command = new Command(() => TapGestureRecognizer_Tapped(Orglabel.Text, product.Image.ToString()
+                       /* product.Image = Xamarin.CommunityToolkit.Effects.TouchEffect.GetPressedScale*/)),
+
+
+                    }) ;
+                    //image.GestureRecognizers.Add(new TapGestureRecognizer 
+                    //{
+                    //    Command = new Command(() => TapGestureRecognizer_Tapped(Xamarin.CommunityToolkit.Effects.TouchEffect.GetNativeAnimation.product.Image))
+                    //});
                     shop.Children.Add(image, columnIndex, rowIndex);
                     shop.Children.Add(label, columnIndex, rowIndex);
                     shop.Children.Add(Orglabel, columnIndex, rowIndex);
@@ -110,7 +118,15 @@ namespace DellyShopApp
             SecureStorage.SetAsync("OrgId", orgId);
             SecureStorage.SetAsync("ImgId", Img);
             Navigation.PushAsync(new HomeTabbedPage());
+           // StartAnimation();
         }
+        //private async void StartAnimation()
+        //{
+        //    await Task.Delay(200);
+        //    await Imagebtn.FadeTo(0, 250);
+        //    await Task.Delay(200);
+        //    await Imagebtn.FadeTo(1, 250);
+        //}
         private string GetDeviceInfo()
         {
             string mac = string.Empty;

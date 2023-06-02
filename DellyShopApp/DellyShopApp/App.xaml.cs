@@ -140,6 +140,7 @@ namespace DellyShopApp
         {
             await DataService.UpdateFireBaseToken(firebaseToken);
         }
+
     }
 
 }
