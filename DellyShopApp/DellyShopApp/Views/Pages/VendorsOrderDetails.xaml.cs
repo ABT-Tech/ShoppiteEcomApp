@@ -1,5 +1,6 @@
 ﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.ViewModel;using DellyShopApp.Views.CustomView;using DellyShopApp.Views.ModalPages;using DellyShopApp.Views.Pages;using PayPal.Forms;using PayPal.Forms.Abstractions;using Plugin.Connectivity;
-using System;using System.Collections.Generic;using System.Diagnostics;using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class VendorsOrderDetails    {        List<OrderListModel> orderListModel = new List<OrderListModel>();
+using System;using System.Collections.Generic;using System.Diagnostics;using System.Linq;using System.Threading.Tasks;
+using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class VendorsOrderDetails    {        List<OrderListModel> orderListModel = new List<OrderListModel>();
      
 
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
@@ -62,6 +63,11 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
         private async void Log_outclick(object sender, EventArgs e)        {            await Navigation.PushAsync(new MainPage());
             Xamarin.Essentials.SecureStorage.RemoveAll();        }
 
+        
 
+      async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        {
+            
+        }
     }
 }

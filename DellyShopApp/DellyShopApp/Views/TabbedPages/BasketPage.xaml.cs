@@ -3,7 +3,7 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
             if (ChechConnectivity())
             {
                 InittBasketPage();
-            }                        this.BindingContext = product;        }
+            }                        this.BindingContext = product;                   }
         private bool ChechConnectivity()
         {
             if (CrossConnectivity.Current.IsConnected)
@@ -21,7 +21,8 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
         }               public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {            productListModel = this.Product;            BasketItems.ItemsSource = this.Product;//await DataService.GetAllCartDetails(orgId, userId);//DataService.Instance.ProcutListModel;
             AddressPicker.ItemsSource = await DataService.GetAddressByUserId(orgId, userId); //DataService.Instance.changeAddress;
             //productListModel = await DataService.GetAllCartDetails(orgId, userId);
-            BasketItems.ItemsSource = productListModel;        }        protected override async void OnAppearing()        {            base.OnAppearing();            this.BindingContext = Product;            BasketItems.ItemsSource = productListModel;//await DataService.GetAllCartDetails(orgId, userId);
+            BasketItems.ItemsSource = productListModel;
+                  }        protected override async void OnAppearing()        {            base.OnAppearing();            this.BindingContext = Product;            BasketItems.ItemsSource = productListModel;//await DataService.GetAllCartDetails(orgId, userId);
            DataService.Instance.TotalPrice = 0;                       foreach (var product in productListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;                //DataService.Instance.TotalPrice += product.Quantity * product.Price;
 
                 //return;
