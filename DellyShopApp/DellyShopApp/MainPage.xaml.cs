@@ -131,7 +131,6 @@ namespace DellyShopApp
         {
             string mac = string.Empty;
             string ip = string.Empty;
-
             foreach (var netInterface in NetworkInterface.GetAllNetworkInterfaces())
             {
                 if (netInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 ||      

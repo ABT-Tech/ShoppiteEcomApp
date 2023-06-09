@@ -8,7 +8,8 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
         int productCount = 1 ;        private static IEnumerable<ProductListModel> ItemsSource;
        
         private readonly List<StartList> _startList = new List<StartList>();        private readonly List<CommentModel> _comments = new List<CommentModel>();        private  List<ProductListModel> _productLists = new List<ProductListModel>();        private  ProductListModel _products;
-       
+        
+
         public ProductDetail(ProductListModel product)        {
             //if (product.ProductList.Length == 0 || (product.ProductList.Length == 1 && string.IsNullOrEmpty(product.ProductList[0])) )
             //{
@@ -117,6 +118,11 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                     await DataService.MyFavourite(favourite);
                 }
             }
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+
         }
     }
 }
