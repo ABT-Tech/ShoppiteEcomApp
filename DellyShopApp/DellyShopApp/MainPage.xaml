@@ -13,6 +13,7 @@
     BackgroundColor="#f5f5f5"
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
+  
     <ScrollView>
         <StackLayout Margin="15,10,15,0">
             <StackLayout Spacing="0">

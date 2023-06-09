@@ -27,14 +27,27 @@ namespace DellyShopApp.Views.TabbedPages
         List<Category> categories = new List<Category>();
         public List<Products> ProductDetails { get; set; }
         private ProductListModel product;
-
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (ChechConnectivity())
+            {
+                InittHomePage();
+            }
+            if (BindingContext == null)
+            {
+                BindingContext = new ProductListModel();
+            }
+        }
         public HomePage()
         {
             InitializeComponent();            
-            ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;            
+            ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;
+           
         }
         private async void InittHomePage()
         {
+           
             int? OrgUserID = UserId == 0 ? null : (int?)UserId;
             categories = await DataService.GetAllCategories(orgId);
             CategoryList.ItemsSource = DataService.Instance.CatoCategoriesList; //
@@ -285,14 +298,7 @@ namespace DellyShopApp.Views.TabbedPages
             //}
 
         }
-        protected override void OnAppearing()
-        {
-            if (ChechConnectivity())
-            {
-                InittHomePage();
-            }         
-
-        }
+      
         private bool ChechConnectivity()
         {
             if (CrossConnectivity.Current.IsConnected)
@@ -333,6 +339,7 @@ namespace DellyShopApp.Views.TabbedPages
         }
         async void DropBasketITem(System.Object sender, Xamarin.Forms.DropEventArgs e)
         {
+
             if (!DataService.Instance.BasketModel.Contains(product))
                 DataService.Instance.BasketModel.Add(product);
             if (UserId == 0 || UserId == null || userAuth != "Client")
@@ -342,16 +349,22 @@ namespace DellyShopApp.Views.TabbedPages
             }
             else
             {
-                Cart cart = new Cart();
-                cart.orgId = product.orgId;
-                cart.UserId = Convert.ToInt32(UserId);
-                cart.proId = product.Id;
-                cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
-                await DataService.AddToCart(cart);
-                await DisplayAlert(AppResources.Success, product.Title + " " + AppResources.AddedBakset, AppResources.Okay);
-                var productId = Convert.ToString(product.Id);
-                //await Xamarin.Essentials.SecureStorage.SetAsync("ProId", productId);
-
+                if (product.Quantity <= 0)
+                {
+                    await DisplayAlert("Opps", "Product Out Of Stock", "Ok");
+                }
+                else
+                {
+                    Cart cart = new Cart();
+                    cart.orgId = product.orgId;
+                    cart.UserId = Convert.ToInt32(UserId);
+                    cart.proId = product.Id;
+                    cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
+                    await DataService.AddToCart(cart);
+                    await DisplayAlert(AppResources.Success, product.Title + " " + AppResources.AddedBakset, AppResources.Okay);
+                    var productId = Convert.ToString(product.Id);
+                    //await Xamarin.Essentials.SecureStorage.SetAsync("ProId", productId);
+                }
             }
         }
         void DragGestureRecognizer_DragStarting(System.Object sender, Xamarin.Forms.DragStartingEventArgs e)
@@ -397,6 +410,12 @@ namespace DellyShopApp.Views.TabbedPages
             if (!(sender is ImageButton stack)) return;
             if (!(stack.BindingContext is Category ca)) return;
             await Navigation.PushAsync(new CategoryDetailPage(ca));
+        }
+
+        private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
+        {
+          
+            Navigation.PushAsync(new MainPage());
         }
     }
 }

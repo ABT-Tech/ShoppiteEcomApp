@@ -47,7 +47,7 @@
             HorizontalOptions="CenterAndExpand"
             LineBreakMode="TailTruncation"
             Text="{Binding Title}"
-            TextColor="{DynamicResource IconBgColor}"
+            TextColor="#FF4848"
             VerticalOptions="CenterAndExpand"
             VerticalTextAlignment="Center" />
 

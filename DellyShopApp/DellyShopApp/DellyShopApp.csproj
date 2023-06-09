@@ -17,15 +17,19 @@
 	 <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
 	 <PackageReference Include="DynamicStackLayout" Version="2017.12.4" />
 	 <PackageReference Include="FirebaseAdmin" Version="2.3.0" />
+	 <PackageReference Include="FreshMvvm" Version="3.0.0" />
 	 <PackageReference Include="LiveXAML" Version="2.1.73" />
 	 <PackageReference Include="Microsoft.Azure.Management.Network" Version="26.0.0" />
 	 <PackageReference Include="Plugin.Badge" Version="2.3.1" />
+	 <PackageReference Include="Prism.Core" Version="8.1.97" />
 	 <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
+	 <PackageReference Include="SkiaSharp" Version="2.88.3" />
 	 <PackageReference Include="Xam.Plugin.Connectivity" Version="4.0.0.190-beta" />
 	 <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
 	 <PackageReference Include="Xamarin.CommunityToolkit" Version="1.1.0" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms.EasyLoading" Version="1.0.3" />
     <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.2012" />
     <PackageReference Include="XamarinFastEntry.Behaviors" Version="1.1.1" />
     <PackageReference Include="Plugin.Multilingual" Version="1.0.2" />
@@ -115,6 +119,12 @@
     <EmbeddedResource Include="Resources\clock.json" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="CustomControl\CustomLabel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CustomControl\LoadingIndicator.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="FirstPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -185,6 +195,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="CustomControl\CustomLabel.xaml.cs">
+      <DependentUpon>CustomLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="CustomControl\LoadingIndicator.xaml.cs">
+      <DependentUpon>LoadingIndicator.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Languages\AppResources.ar.Designer.cs">
       <DependentUpon>AppResources.ar.resx</DependentUpon>
     </Compile>

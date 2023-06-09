@@ -73,18 +73,24 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             {
                 checkout.IsVisible = true;
                 gif.IsVisible = false;
+                gif1.IsVisible = false;
+                gif2.IsVisible = false;
                 shopping.IsVisible = false;
             }
             else if (productListModel.Count == 0 && (userId > 0 && userAuth == "Client"))
             {
                 checkout.IsVisible = false;
                 gif.IsVisible = true;
+                gif1.IsVisible = true;
+                gif2.IsVisible = true;
                 shopping.IsVisible = true;
             }
             else
             {
                 checkout.IsVisible = false;
                 gif.IsVisible = false;
+                gif1.IsVisible = false;
+                gif2.IsVisible = false;
                 shopping.IsVisible = false;
             }
         }

@@ -58,6 +58,8 @@ namespace DellyShopApp
                         TextColor = Color.Chocolate,
                         FontAttributes = FontAttributes.Bold,
                         FontSize = 20,
+                        LineBreakMode = LineBreakMode.TailTruncation,
+                        MaxLines = 1
                     };
                     var image = new Image
                     {
@@ -117,6 +119,7 @@ namespace DellyShopApp
             }
             SecureStorage.SetAsync("OrgId", orgId);
             SecureStorage.SetAsync("ImgId", Img);
+
             Navigation.PushAsync(new HomeTabbedPage());
            // StartAnimation();
         }

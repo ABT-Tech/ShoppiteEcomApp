@@ -20,6 +20,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             {
                 ProductCountLabel.IsVisible = false;
                 Stocklbl.IsVisible = true;
+                stock.IsVisible = false;
                 Addtocartbtn.IsVisible = false;
                 BuyNowbtn.IsVisible = false;
                 plusimg.IsVisible = false;
@@ -33,10 +34,14 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             {
                 myImage.Source = "black.png";
             }
-
+            InittProductDetail();
             this.BindingContext = product;            //starList.ItemsSource = _startList;            //this.BindingContext = product.Quantity;                        //starListglobal.ItemsSource = _startList;            //CommentList.ItemsSource = _comments;
             //MainScroll.Scrolled += MainScroll_Scrolled;           
-                   }       
+                   }        private  void InittProductDetail()
+        {
+            PreviousViewedList.ItemsSource = DataService.Instance.ProcutListModel; //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
+
+        }
         public ProductDetail()        {        }        private void PlusClick(object sender, EventArgs e)        {            if (_products.Quantity >= 10)
             {
                 if (productCount <= 9)
@@ -67,6 +72,8 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                 await DataService.AddToCart(cart);
                 await DisplayAlert(AppResources.Success, _products.Title + " " + AppResources.AddedBakset, AppResources.Okay);
                 var productId = Convert.ToString(_products.Id);
+                gotocart.IsVisible = true;
+                Addtocartbtn.IsVisible = false;
                 //await Xamarin.Essentials.SecureStorage.SetAsync("ProId", productId);
              
             }
@@ -120,8 +127,17 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             }
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private void gotocart_Clicked(object sender, EventArgs e)
         {
+            Navigation.PushAsync(new MyCartPage());
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+
+            if (!(sender is PancakeView pancake)) return;
+            if (!(pancake.BindingContext is ProductListModel item)) return;
+            await Navigation.PushAsync(new ProductDetail(item));
 
         }
     }
