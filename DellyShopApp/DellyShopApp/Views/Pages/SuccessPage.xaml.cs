@@ -19,4 +19,6 @@ using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pag
             //BasketItems.ItemsSource = DataService.Instance.ProcutListModel;
         }        private async void ContinueClick(object sender, EventArgs e)        {
             //.Current.MainPage = new HomeTabbedPage();
-            Application.Current.MainPage = new NavigationPage(new HomeTabbedPage());        }    }}
+           Application.Current.MainPage = new NavigationPage(new HomeTabbedPage());
+            //Device.OpenUri(new Uri("https://shooppy.in/"));
+        }    }}

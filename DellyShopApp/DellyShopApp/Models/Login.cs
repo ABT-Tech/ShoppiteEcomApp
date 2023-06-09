@@ -9,3 +9,4 @@ namespace DellyShopApp.Models
         public string type { get; set; }
     }
 }
+

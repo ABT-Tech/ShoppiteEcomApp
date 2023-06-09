@@ -65,7 +65,7 @@ namespace DellyShopApp
                         HorizontalOptions = LayoutOptions.Center,
                         TextColor = Color.Chocolate,
                         FontAttributes = FontAttributes.Bold,
-                        FontSize = 20,
+                        FontSize = 18,
                         
 
                     };

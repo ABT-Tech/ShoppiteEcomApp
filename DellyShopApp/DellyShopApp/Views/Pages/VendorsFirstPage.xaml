@@ -45,7 +45,7 @@
                                             FontFamily="{DynamicResource MaterialFontFamily}"
                                             Glyph="{x:Static font:FontAwesomeIcons.Box}"
                                             Size="25"
-                                            Color="{DynamicResource IconBgColor}" />
+                                            Color="#00c58a" />
                             </Image.Source>
                         </Image>
 
@@ -93,7 +93,7 @@
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.SearchStock}"
                                     Size="25"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="#00c58a" />
                             </Image.Source>
                         </Image>
                         <Label
@@ -138,7 +138,7 @@
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.People}"
                                     Size="25"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="#00c58a" />
                             </Image.Source>
                         </Image>
                         <Label
@@ -183,7 +183,7 @@
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.FileSpreadsheet}"
                                     Size="25"
-                                    Color="{DynamicResource IconBgColor}" />
+                                    Color="#00c58a" />
                             </Image.Source>
                         </Image>
                         <Label
@@ -231,7 +231,7 @@
                                 FontFamily="{DynamicResource MaterialFontFamily}"
                                 Glyph="{x:Static font:FontAwesomeIcons.Exit}"
                                 Size="30"
-                                Color="{DynamicResource IconBgColor}" />
+                                Color="#00c58a" />
                             </Image.Source>
                         </Image>
                         <Label

@@ -34,6 +34,10 @@
     <PackageReference Include="YmChat" Version="2.2.0" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.6" />
     <PackageReference Include="Plugin.Badge" Version="2.3.1" />
+    <PackageReference Include="PushSharp" Version="4.0.10" />
+    <PackageReference Include="Xamarin.Forms.Skeleton" Version="2.0.0" />
+    <PackageReference Include="FreshMvvm" Version="3.0.0" />
+    <PackageReference Include="Xamarin.Forms.EasyLoading" Version="1.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +55,11 @@
     <None Remove="YmChat" />
     <None Remove="Xamarin.CommunityToolkit" />
     <None Remove="Plugin.Badge" />
+    <None Remove="PushSharp" />
+    <None Remove="Animations\" />
+    <None Remove="Xamarin.Forms.Skeleton" />
+    <None Remove="FreshMvvm" />
+    <None Remove="Xamarin.Forms.EasyLoading" />
   </ItemGroup>
   <ItemGroup>
     <None Update="App.xaml">
@@ -87,9 +96,6 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Views\Pages\MyFavoritePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\Pages\ProductDetail.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Views\Pages\RegisterPage.xaml">
@@ -138,9 +144,6 @@
     <EmbeddedResource Update="Views\Pages\LastViewPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Pages\MyCartPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\Pages\NotificationDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -184,6 +187,7 @@
     <Folder Include="Services\" />
     <Folder Include="Views\Pages\Base\" />
     <Folder Include="Themes\" />
+    <Folder Include="Animations\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Android">

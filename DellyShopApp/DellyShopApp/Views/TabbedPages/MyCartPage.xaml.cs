@@ -1,6 +1,7 @@
 ﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;using DellyShopApp.Views.TabbedPages;using System;using System.Collections.Generic;using System.Linq;using System.Text;using System.Threading.Tasks;using DellyShopApp.ViewModel;using Xamarin.Forms;using Xamarin.Forms.Xaml;using Xamarin.Essentials;
+using DellyShopApp.Views.Pages;
 
-namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class MyCartPage
+namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class MyCartPage
     {
         protected override void OnAppearing()
         {
@@ -97,5 +98,10 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         private async void TapGestureRecognizer_Tapped_2(System.Object sender, System.EventArgs e)
         {
             await Navigation.PushAsync(new HomeTabbedPage());
+        }
+
+        void TapGestureRecognizer_Tapped_3(System.Object sender, System.EventArgs e)
+        {
+
         }
     }}

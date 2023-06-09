@@ -65,7 +65,7 @@ namespace DellyShopApp.Views.Pages
                 await DisplayAlert("opps..", "Please Enter Your Conform Password", "Ok");
                 return;
             }
-            else if (number.Text == null || number.Text == "")
+            else if (number.Text == null || number.Text == "" || number.Text.Length<10)
             {
                 await DisplayAlert("opps..", "Please Enter Your Phonenumber", "Ok");
                 return;
@@ -85,7 +85,7 @@ namespace DellyShopApp.Views.Pages
                 await DisplayAlert("opps..", "Please Enter Your City", "Ok");
                 return;
             }
-            else if (zipcode.Text == null || zipcode.Text == "")
+            else if (zipcode.Text == null || zipcode.Text == "" || number.Text.Length<6)
             {
                 await DisplayAlert("opps..", "Please Enter Your ZipCode", "Ok");
                 return;

@@ -121,7 +121,12 @@ namespace DellyShopApp.Services
             //{
             //    Banner = "vivo.gif"
             //});
-           
+
+            Carousel.Add(new Category
+            {
+                Banner = "discount.gif"
+            });
+
             Carousel.Add(new Category
             {
                 Banner = "kapada.gif"
@@ -135,13 +140,7 @@ namespace DellyShopApp.Services
             {
                 Banner = "kapada3.gif"
             });
-            CatoCategoriesList.Add(new Category
-            {
-                CategoryName = "INFANT ESSENTIALS",
-                Categoryicon = "boy.webp",
-
-
-            });
+            
             CatoCategoriesList.Add(new Category
             {
                 CategoryName = "T-SHIRT",
