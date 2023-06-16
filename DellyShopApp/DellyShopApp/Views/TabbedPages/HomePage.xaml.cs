@@ -10,6 +10,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -30,6 +31,7 @@ namespace DellyShopApp.Views.TabbedPages
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
             if (ChechConnectivity())
             {
                 InittHomePage();
@@ -38,6 +40,7 @@ namespace DellyShopApp.Views.TabbedPages
             {
                 BindingContext = new ProductListModel();
             }
+            Loader();
         }
         public HomePage()
         {
@@ -313,9 +316,17 @@ namespace DellyShopApp.Views.TabbedPages
         }
         private async void ProductDetailClick(object sender, EventArgs e)
         {
+
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;
-            await Navigation.PushAsync(new ProductDetail(item));
+            var t = Task.Run(() =>
+            {
+                // Do some work on a background thread, allowing the UI to remain responsive
+                Xamarin.Forms.Device.BeginInvokeOnMainThread(() => {
+                    Navigation.PushAsync(new ProductDetail(item));
+                });
+            });
+            //await Navigation.PushAsync(new ProductDetail(item));
           
         }
 
@@ -344,7 +355,7 @@ namespace DellyShopApp.Views.TabbedPages
                 DataService.Instance.BasketModel.Add(product);
             if (UserId == 0 || UserId == null || userAuth != "Client")
             {
-                await DisplayAlert("Opps", "Please Login First!!", "Ok");
+                await DisplayAlert("Login", "To Continue Shopping Please Sign in", "Ok");
                 await Navigation.PushAsync(new LoginPage());
             }
             else
@@ -416,6 +427,14 @@ namespace DellyShopApp.Views.TabbedPages
         {
           
             Navigation.PushAsync(new MainPage());
+        }
+        public async void Loader()
+        {
+            ai.IsRunning = true;
+            aiLayout.IsVisible = true;
+            await Task.Delay(2000);
+            aiLayout.IsVisible = false;
+            ai.IsRunning = false;
         }
     }
 }

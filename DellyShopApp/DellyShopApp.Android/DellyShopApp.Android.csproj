@@ -869,7 +869,51 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Emt.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cartempty.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ecms.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\RedHeart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Share.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Cartbag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\shose.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\shose2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\shose1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cartgif.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cartgif1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cartgif2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\UnknownUser.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionDellyShopAppAndroidHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionDellyShopAppAndroidHideInfoBar="True" />
+    </VisualStudio>
+  </ProjectExtensions>
   <!-- <Target Name="_ResolveSatellitePaths" DependsOnTargets="_ResolveAssemblies">
     <ResolveAssemblyReference AllowedAssemblyExtensions="$(AllowedReferenceAssemblyFileExtensions)" AssemblyFiles="@(ResolvedUserAssemblies)" AutoUnify="$(AutoUnifyAssemblyReferences)" FindDependencies="True" FindRelatedFiles="False" FindSatellites="True" SearchPaths="$(AssemblySearchPaths)" TargetFrameworkMoniker="$(TargetFrameworkMoniker)" TargetFrameworkMonikerDisplayName="$(TargetFrameworkMonikerDisplayName)" TargetFrameworkDirectories="$(TargetFrameworkDirectory)">
       <Output TaskParameter="SatelliteFiles" ItemName="_AndroidResolvedSatellitePaths" />

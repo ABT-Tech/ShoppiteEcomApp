@@ -17,9 +17,10 @@
     BackgroundColor="#f5f5f5" 
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
+    <AbsoluteLayout>
+       
 
-
-    <Grid ll:LoadingLayout.IsLoading="{Binding IsFullscreenLoading}">
+        <Grid ll:LoadingLayout.IsLoading="{Binding IsFullscreenLoading}">
         <ll:LoadingLayout.LoadingTemplate>
             <DataTemplate>
                 <Grid BackgroundColor="White">                      
@@ -38,12 +39,11 @@
                                TextFontSize="20" />-->
 
         <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
-            
-                <StackLayout Margin="5,10,5,0" x:Name="HomeMainStack">     
-                    
-    
+           
+                <StackLayout Margin="5,10,5,0" x:Name="HomeMainStack">
 
-                <Grid RowSpacing="5" ColumnSpacing="5" >                        <Image Source="{Binding Image}"                       x:Name="ShopLogo"                       WidthRequest="130"                        HeightRequest="130"                     HorizontalOptions="Start"/>                        <Image Source="ShopTHigh.png"                       VerticalOptions="EndAndExpand"                       WidthRequest="130"                        HeightRequest="130"                       HorizontalOptions="End">                            <Image.GestureRecognizers>                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>                            </Image.GestureRecognizers>                        </Image>                    </Grid>
+
+                    <Grid RowSpacing="5" ColumnSpacing="5" >                        <Image Source="{Binding Image}"                       x:Name="ShopLogo"                       WidthRequest="130"                        HeightRequest="130"                     HorizontalOptions="Start"/>                        <Image Source="ShopTHigh.png"                       VerticalOptions="EndAndExpand"                       WidthRequest="130"                        HeightRequest="130"                       HorizontalOptions="End">                            <Image.GestureRecognizers>                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>                            </Image.GestureRecognizers>                        </Image>                    </Grid>
                     <Label 
                     Margin="0"
                     Padding="5,5,0,0"
@@ -52,12 +52,12 @@
                     FontSize="22"
                     HorizontalOptions="Start"
                     Text="{x:Static helpers:AppResources.Categories}"
-                    TextColor="{DynamicResource TitleLabelColor}"
+                    TextColor="Black"
                     VerticalOptions="Start" />
 
                     <ScrollView Orientation="Horizontal" Style="{DynamicResource ScrollViewStyle}">
                         <customControl:RepeaterView
-                        x:Name="CategoryList"
+                        x:Name="CategoryList" 
                         Orientation="Horizontal"
                         Spacing="5">
                             <customControl:RepeaterView.ItemTemplate>
@@ -79,14 +79,14 @@
                                                 </Grid.ColumnDefinitions>
 
                                                 <forms:CachedImage 
-                                                Grid.Row="0"
+                                                Grid.Row="0" 
                                                 Grid.Column="0"
                                                 Aspect="AspectFill">
                                                     <Image.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="ClickCategory" />
                                                     </Image.GestureRecognizers>
                                                 </forms:CachedImage>
-                                                <StackLayout Margin="5" HorizontalOptions="StartAndExpand">                                                    <ImageButton xct:TouchEffect.AnimationDuration="250"                                                               xct:TouchEffect.PressedScale="1.25"                                                               xct:TouchEffect.PressedOpacity="0.6"                                                    HorizontalOptions="Center"                                                    Source="{Binding Categoryicon}"                                                    Margin="5"                                                    WidthRequest="100"                                                    Clicked="ImageButton_Clicked"                                                    HeightRequest="100"                                                    FlexLayout.AlignSelf="Center"                                                    FlexLayout.Grow="1"                                                    Aspect="AspectFit"                                                                          BackgroundColor="Transparent"/>                                                </StackLayout>
+                                                <StackLayout Margin="5" HorizontalOptions="StartAndExpand">                                                    <ImageButton xct:TouchEffect.AnimationDuration="250"                                                               xct:TouchEffect.PressedScale="1.25"                                                               xct:TouchEffect.PressedOpacity="0.6"                                                    HorizontalOptions="Center"                                                    Source="{Binding Categoryicon}"                                                    Margin="5"                                                     WidthRequest="100"                                                    Clicked="ImageButton_Clicked"                                                    HeightRequest="100"                                                    FlexLayout.AlignSelf="Center"                                                    FlexLayout.Grow="1"                                                    Aspect="AspectFit"                                                                          BackgroundColor="Transparent"/>                                                </StackLayout>
                                             </Grid>
                                         </StackLayout>
                                     </ViewCell>
@@ -99,22 +99,22 @@
            CancelButtonColor="Gray"
            PlaceholderColor="Black"
            TextColor="Black" BackgroundColor="White"
-                   
+                 
            TextTransform="Lowercase"
            FontSize="Medium"
            TextChanged="SearchBar_TextChanged" />
                     <ListView x:Name="searchResults" IsVisible="False" ItemSelected="searchResults_ItemSelected">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <TextCell Text="{Binding Title}">
+                                <TextCell Text="{Binding Title}" TextColor="Black">
                                 </TextCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                            
+
                     <pancakeView:PancakeView
                     Margin="0,10,0,0"
-                    Padding="0"
+                    Padding="0" 
                     x:Name="view"
                     CornerRadius="8"
                     Elevation="2"
@@ -144,7 +144,7 @@
                                 <DataTemplate>
                                     <ContentView>
                                         <forms:CachedImage
-                                        Margin="0"
+                                        Margin="0" 
                                         Aspect="Fill"
                                         Source="{Binding Banner}"                                        
                                         WidthRequest="200"
@@ -185,10 +185,10 @@
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
-                    
+
                     <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
-                        
-                        <customControl:RepeaterView
+
+                        <customControl:RepeaterView 
                         x:Name="BestSellerList"
                         Orientation="Horizontal"
                         Spacing="-5">
@@ -228,33 +228,37 @@
                                                 LineBreakMode="TailTruncation"
                                                 TextColor="Black"
                                                 VerticalOptions="Start" />
-                                                <Label
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 FontSize="10"
                                                 HorizontalOptions="Start"
                                                 Text="{Binding Brand}"
                                                 TextColor="{DynamicResource DescLabelColor}"
                                                 VerticalOptions="Start" />
+                                                    <Label FontAttributes="Bold"                                                       FontSize="13" Margin="0,0,5,0"                                                      HorizontalOptions="EndAndExpand"                                                      Text="10% OFF"    VerticalOptions="StartAndExpand"                                                            FontFamily="{DynamicResource VerdanaProRegular}"                                                       TextColor="Red"/>
+                                                </StackLayout>
                                                 <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
-                                                    <Label x:Name="oldprice"
-                                                    FontFamily="{DynamicResource VerdanaProBold}"
-                                                    FontSize="{x:OnPlatform Android=12,
-                                                                            iOS=18}"
-                                                    HorizontalOptions="EndAndExpand"
-                                                       IsVisible="{Binding OldPrice}"
-                                                    Text="{Binding  OldPrice , StringFormat='{0}₹'}"                                                      
-                                                    TextColor="Red"
-                                                    WidthRequest="80"                                                    
-                                                    TextDecorations="Strikethrough"
-                                                    VerticalOptions="CenterAndExpand" />
+
                                                     <Label
                                                     FontFamily="{DynamicResource VerdanaProBold}"
                                                     FontSize="13"
-                                                    HorizontalOptions="End"
-                                                    Text="{Binding Price, StringFormat='{0}₹'}"
+                                                    HorizontalOptions="StartAndExpand"
+                                                    Text="{Binding Price, StringFormat='{0} ₹'}"
                                                     TextColor="black"
                                                     WidthRequest="80"
                                                     VerticalOptions="Center" />
+                                                    <Label x:Name="oldprice"
+                                                    FontFamily="{DynamicResource VerdanaProBold}"
+                                                    FontSize="{x:OnPlatform Android=11,
+                                                                            iOS=18}"
+                                                    HorizontalOptions="EndAndExpand"
+                                                       IsVisible="{Binding OldPrice}"
+                                                    Text="{Binding  OldPrice , StringFormat='{0} ₹'}"                                                      
+                                                    TextColor="Gray" HorizontalTextAlignment="End"
+                                                    WidthRequest="80"                                                    
+                                                    TextDecorations="Strikethrough"
+                                                    VerticalOptions="CenterAndExpand" />
                                                 </StackLayout>
                                             </StackLayout>
                                         </pancakeView:PancakeView>
@@ -280,7 +284,7 @@
                         Spacing="-5">
                             <customControl:RepeaterView.ItemTemplate>
                                 <DataTemplate>
-                                    <ViewCell>
+                                    <ViewCell >
                                         <pancakeView:PancakeView  xct:TouchEffect.AnimationDuration="250"                                                              xct:TouchEffect.PressedScale="1.25"                                                              xct:TouchEffect.PressedOpacity="0.6"
                                         Elevation="2"
                                                               BackgroundColor="#f5f5f5"
@@ -385,8 +389,8 @@
                                                 <Label
                                                 FontFamily="{DynamicResource VerdanaProBold}"
                                                 FontSize="15"
-                                                HorizontalOptions="EndAndExpand"
-                                                Text="{Binding Price, StringFormat='{0}₹'}"
+                                                HorizontalOptions="Start"
+                                                Text="{Binding Price, StringFormat='{0} ₹'}"
                                                 TextColor="Black"
                                                 VerticalOptions="EndAndExpand" />
                                             </StackLayout>
@@ -480,12 +484,12 @@
                 </StackLayout>-->
 
                 </StackLayout>
-            </ScrollView>
+        </ScrollView>
             <Label IsVisible="false"                            x:Name="ProductCountLabel"                            FontFamily="{DynamicResource VerdanaProLight}"                            FontSize="44"                            HorizontalOptions="End"                            Text="1"                            TextColor="{DynamicResource WhiteDarkFontColor}"                            VerticalOptions="CenterAndExpand" />
             <controls:PancakeView
             x:Name="BasketLayout"
             IsVisible="false"
-            BackgroundColor="#00c58a"
+            BackgroundColor="#ff002c"
             CornerRadius="40"
             Elevation="3"
             Margin="10"
@@ -511,6 +515,19 @@
                     </Image.Source>
                 </Image>
             </controls:PancakeView>
-    </Grid>   
-
+    </Grid>
+        <StackLayout
+        x:Name="aiLayout"
+        IsVisible="False" 
+        AbsoluteLayout.LayoutBounds="0,0,1,1"
+        AbsoluteLayout.LayoutFlags="All"
+        BackgroundColor="White" Opacity="0.7">
+            <ActivityIndicator 
+            x:Name="ai"
+            IsRunning="False"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            Color="#ff002c"/>
+        </StackLayout>
+    </AbsoluteLayout>
 </base:BasePage>

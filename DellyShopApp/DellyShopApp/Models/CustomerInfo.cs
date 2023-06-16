@@ -12,5 +12,6 @@ namespace DellyShopApp.Models
         public int orgId { get; set; }
         public int userId { get; set; }
         public bool Active { get; set; }
+        public string Status { get; set; }
     }
 }

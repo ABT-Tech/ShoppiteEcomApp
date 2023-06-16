@@ -28,11 +28,11 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             }
             if (_products.WishlistedProduct == true)
             {
-                myImage.Source = "red.png";
+                myImage.Source = "Redheart.png";
             }
             else
             {
-                myImage.Source = "black.png";
+                myImage.Source = "Heart.png";
             }
             InittProductDetail();
             this.BindingContext = product;            //starList.ItemsSource = _startList;            //this.BindingContext = product.Quantity;                        //starListglobal.ItemsSource = _startList;            //CommentList.ItemsSource = _comments;
@@ -60,7 +60,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
         async void AddBasketButton(object sender, EventArgs e)        {
             if (UserId == 0 || UserId == null || userAuth != "Client")
             {
-                await DisplayAlert("Opps", "Please Login First!!", "Ok");
+                await DisplayAlert("Login", "To Continue Shopping Please Sign in", "Ok");
                 await Navigation.PushAsync(new LoginPage());
             }            else
             {
@@ -80,7 +80,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
         }
         private async void BuyNow(object sender, EventArgs e)        {            if (UserId == 0 || UserId == null || userAuth != "Client")
             {
-                await DisplayAlert("Opps !", "Please Login First", "Ok");
+                await DisplayAlert("Login", "To Continue Shopping Please Sign in", "Ok");
                 await Navigation.PushAsync(new LoginPage());
             }            else
             {
@@ -99,15 +99,15 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
         {
             if (UserId == 0 || UserId == null || userAuth != "Client")
             {
-                await DisplayAlert("Opps !", "Please Login First", "Ok");
+                await DisplayAlert("Login", "To Continue Shopping Please Sign in", "Ok");
             }
             else
             {
                 var img = myImage.Source as FileImageSource;
                
-                if (img.File == "red.png")
+                if (img.File == "RedHeart.png")
                 {
-                    myImage.Source = "black.png";
+                    myImage.Source = "Heart.png";
                     Favourite favourite = new Favourite();
                     favourite.orgId = _products.orgId;
                     favourite.UserId = Convert.ToInt32(UserId);
@@ -117,7 +117,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                
                 else
                 {
-                    myImage.Source = "red.png";
+                    myImage.Source = "RedHeart.png";
                     Favourite favourite = new Favourite();
                     favourite.orgId = _products.orgId;
                     favourite.UserId = Convert.ToInt32(UserId);
@@ -129,16 +129,36 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
 
         private void gotocart_Clicked(object sender, EventArgs e)
         {
+
             Navigation.PushAsync(new MyCartPage());
         }
 
-        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private async void ProductDetailClick(object sender, EventArgs e)
         {
 
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;
             await Navigation.PushAsync(new ProductDetail(item));
 
+        }
+
+        private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
+
+        private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
+        {
+            Share.RequestAsync(new ShareTextRequest
+            {
+                Subject = "Shooppy",
+                Uri = "https://shooppy.in"
+            });
+        }
+
+        private void TapGestureRecognizer_Tapped_3(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MyCartPage());
         }
     }
 }

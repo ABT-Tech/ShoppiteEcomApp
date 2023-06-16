@@ -2,10 +2,10 @@
 
 namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class MyCartPage
     {
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             InittMyCartPage();
-
+            Loader();
         }
         List<ProductListModel> productListModel = new List<ProductListModel>();
         private readonly ProductListModel _products;
@@ -24,9 +24,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             {
                 Login.IsVisible = true;
                 cartimg.IsVisible = true;
-                txt.IsVisible = true;
                 checkout.IsVisible = false;
-                vendorlogin.IsVisible = true;
                 
             }
             else
@@ -34,8 +32,6 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 Login.IsVisible = false;
                 cartimg.IsVisible = false;
                 checkout.IsVisible = true;
-                txt.IsVisible = false;
-                vendorlogin.IsVisible = false;                
             }
            
             
@@ -73,24 +69,18 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             {
                 checkout.IsVisible = true;
                 gif.IsVisible = false;
-                gif1.IsVisible = false;
-                gif2.IsVisible = false;
                 shopping.IsVisible = false;
             }
             else if (productListModel.Count == 0 && (userId > 0 && userAuth == "Client"))
             {
                 checkout.IsVisible = false;
                 gif.IsVisible = true;
-                gif1.IsVisible = true;
-                gif2.IsVisible = true;
                 shopping.IsVisible = true;
             }
             else
             {
                 checkout.IsVisible = false;
                 gif.IsVisible = false;
-                gif1.IsVisible = false;
-                gif2.IsVisible = false;
                 shopping.IsVisible = false;
             }
         }
@@ -149,5 +139,13 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
         {
             Navigation.PushAsync(new HomeTabbedPage());
+        }
+        public async void Loader()
+        {
+            ai.IsRunning = true;
+            aiLayout.IsVisible = true;
+            await Task.Delay(1500);
+            aiLayout.IsVisible = false;
+            ai.IsRunning = false;
         }
     }}
