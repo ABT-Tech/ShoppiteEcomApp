@@ -11,6 +11,10 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <ConsolePause>true</ConsolePause>
+    <LangVersion>Default</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
 	 <PackageReference Include="Acr.UserDialogs" Version="8.1.0-alpha-0009" />
 	 <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
@@ -38,6 +42,8 @@
     <PackageReference Include="Xamarin.Forms.Skeleton" Version="2.0.0" />
     <PackageReference Include="FreshMvvm" Version="3.0.0" />
     <PackageReference Include="Xamarin.Forms.EasyLoading" Version="1.0.3" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
+    <PackageReference Include="Intersoft.Crosslight.Services.Barcode" Version="6.0.5000.975" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,16 +61,18 @@
     <None Remove="YmChat" />
     <None Remove="Xamarin.CommunityToolkit" />
     <None Remove="Plugin.Badge" />
-    <None Remove="PushSharp" />
     <None Remove="Animations\" />
     <None Remove="Xamarin.Forms.Skeleton" />
     <None Remove="FreshMvvm" />
     <None Remove="Xamarin.Forms.EasyLoading" />
+    <None Remove="GoogleService-Info.plist" />
+    <None Remove="System.Runtime" />
+    <None Remove="Intersoft.Crosslight.Services.Barcode" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
+    <None Include="DellyShopApp.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
@@ -209,6 +217,14 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Pages\VendorsOrderDetails %28copy%29.xaml.cs">
       <DependentUpon>VendorsOrderDetails %28copy%29.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="MainPage %28copy%29.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Helpers\FontAwesomeIcons.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </Compile>
   </ItemGroup>
 </Project>

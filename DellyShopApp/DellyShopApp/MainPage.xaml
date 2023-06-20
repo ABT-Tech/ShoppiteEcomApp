@@ -14,6 +14,7 @@
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <ScrollView>
+
         <StackLayout Margin="15,10,15,0">
             <StackLayout Spacing="0">
                 <Image Source="mainlogo2.png" HorizontalOptions="Center"

@@ -1,4 +1,6 @@
-﻿using System;using System.Collections.Generic;using System.Linq;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class Imagepage    {        public int proId = Convert.ToInt32(SecureStorage.GetAsync("ProId").Result);        public int orderId = Convert.ToInt32(SecureStorage.GetAsync("OrderId").Result);
+﻿using System;using System.Collections.Generic;using System.Linq;using System.Net;
+using System.Net.NetworkInformation;
+using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class Imagepage    {        public int proId = Convert.ToInt32(SecureStorage.GetAsync("ProId").Result);        public int orderId = Convert.ToInt32(SecureStorage.GetAsync("OrderId").Result);
         public string UserId = SecureStorage.GetAsync("UserId").Result;
         public string userAuth = SecureStorage.GetAsync("Usertype").Result;
         
@@ -180,5 +182,7 @@
         {
             await Navigation.PushAsync(new HomePage());
         }
+
     }
+  
 }

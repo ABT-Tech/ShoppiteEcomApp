@@ -8,6 +8,7 @@ using static DellyShopApp.Views.ListViewData;
 using System.Net.NetworkInformation;
 using System.Net;
 using Plugin.Connectivity;
+using Plugin.FirebasePushNotification;
 
 namespace DellyShopApp
 {
@@ -19,12 +20,19 @@ namespace DellyShopApp
         {
             
             InitializeComponent();
+            CrossFirebasePushNotification.Current.OnNotificationReceived += Current_OnNotificationReceived;
             if (ChechConnectivity())
             {
                 InittMainPage();
             }
            
         }
+
+        private void Current_OnNotificationReceived(object source, FirebasePushNotificationDataEventArgs e)
+        {
+            DisplayAlert("Notification", $"Data:{e.Data["myData"]}", "Ok");
+        }
+
         private bool ChechConnectivity()
         {
             if (CrossConnectivity.Current.IsConnected)
@@ -104,6 +112,7 @@ namespace DellyShopApp
 
         private  void TapGestureRecognizer_Tapped(string orgId,string Img)
         {
+
             var neworgId = Convert.ToInt32(orgId);
             if(neworgId != oldorgId)
             {

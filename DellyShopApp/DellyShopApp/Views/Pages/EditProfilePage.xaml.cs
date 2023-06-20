@@ -35,7 +35,7 @@ using Xamarin.Forms.Xaml;using static DellyShopApp.Views.Pages.HomeTabbedPage;
             var getUser = getuserData.FirstOrDefault();
             UserName.Text = getUser.ChangeUsername;            EmailAddress.Text =  getUser.ChangeEmail;
             number.Text = getUser.ChangeContactNumber;            address.Text =  getUser.ChangeAddress;            statename.Text =  getUser.ChangeState;            cityname.Text =  getUser.Changecity;            zipcode.Text =  getUser.ChangeZipcode;        }
-        protected override void OnAppearing()        {            base.OnAppearing();        }        private async void Button_Clicked(System.Object sender, System.EventArgs e)   {
+        protected override void OnAppearing()        {            base.OnAppearing();        }        private async void Button_Clicked(System.Object sender, System.EventArgs e)        {
 
 
             var changeUserData = new ChangeUserData

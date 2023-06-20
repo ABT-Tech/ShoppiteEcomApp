@@ -35,6 +35,7 @@ namespace DellyShopApp.Services
         public List<Category> CatoCategoriesDetail = new List<Category>();
         public List<CommentModel> CommentList = new List<CommentModel>();
         public List<ShopModel> ShopDetails = new List<ShopModel>();
+        public List<Cartnumbercount> cartnumbercounts = new List<Cartnumbercount>();
         public ChangeUserData EditProfile = new ChangeUserData();
         public List<ChangeAddress> changeAddress = new List<ChangeAddress>();
         public List<CategoryDetailPage> Details = new List<CategoryDetailPage>();
@@ -622,6 +623,35 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
+        //public static async Task<string> UpdateProductDetail(ProductListModel product)
+        //{
+        //    try
+        //    {
+        //        //await TokenValidator.CheckTokenValidity();
+
+        //        //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+        //        //    "bearer", Preferences.Get("accessToken", string.Empty));
+        //        HttpClientHandler clientHandler = new HttpClientHandler
+        //        {
+        //            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+        //        };
+
+        //        var payload = JsonConvert.SerializeObject(product);
+
+        //        HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+        //        HttpClient httpClient = new HttpClient(clientHandler);
+        //        httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+        //        var response = await httpClient.PostAsync("api/Products/UpdateProductDetail", c);
+
+        //        string result = await response.Content.ReadAsStringAsync();
+        //        return result;
+        //    }
+        //    catch (Exception ex)
+
+        //    {
+        //        throw;
+        //    }
+        //}
         public static async Task<string> Submit(Orders orders)
         {
             try
@@ -1062,6 +1092,161 @@ namespace DellyShopApp.Services
                 HttpClient httpClient = new HttpClient(clientHandler);
                 httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
                 var response = await httpClient.PostAsync("api/User/ForgetPassword", c);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return result;
+            }
+            catch (Exception ex)
+
+            {
+                throw;
+            }
+        }
+        public static async Task<string> UpdateFireBaseToken(FirebaseToken token)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+
+                var payload = JsonConvert.SerializeObject(token);
+
+                HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+                HttpClient httpClient = new HttpClient(clientHandler);
+                httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+                var response = await httpClient.PostAsync("api/Notifications/SetUserFirebaseToken", c);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return result;
+            }
+            catch (Exception ex)
+
+            {
+                throw;
+            }
+        }
+       
+        public static async Task<List<CustomerInfo>> GetCustomerDetails(int orgId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/User/GetCustomerDetails?orgId=" + orgId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<CustomerInfo>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<List<Report>> GetTotalorderDetails(int orgId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+        HttpClient httpClient = new HttpClient(clientHandler);
+        var response = await httpClient.GetAsync(
+            AppSettings.ApiUrl + "api/User/GetTotalorderDetails?OrgId=" + orgId);
+
+        string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<Report>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<List<ProductListModel>> GetSimilarProducts(int orgId,int categoryId,int BrandId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Products/GetSimilarProducts?OrgId=" + orgId + "&CategoryId=" + categoryId + "&BrandId=" + BrandId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<ProductListModel>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        //public static async Task<int> GetNumOfItemsInCart( int userId, int orgId)
+        //{
+        //    try
+        //    {
+        //        //await TokenValidator.CheckTokenValidity();
+
+        //        //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+        //        //    "bearer", Preferences.Get("accessToken", string.Empty));
+        //        HttpClientHandler clientHandler = new HttpClientHandler
+        //        {
+        //            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+        //        };
+        //        HttpClient httpClient = new HttpClient(clientHandler);
+        //        var response = await httpClient.GetAsync(
+        //            AppSettings.ApiUrl + "api/Cart/GetNumOfItemsInCart?OrgId=" + orgId + "&UserId=" + userId );
+
+        //        string result = await response.Content.ReadAsStringAsync();
+        //        return 0;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //}
+        public static async Task<string> UpdateProductDetail(UpdateProductInfo product)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+
+                var payload = JsonConvert.SerializeObject(product);
+
+                HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+                HttpClient httpClient = new HttpClient(clientHandler);
+                httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+                var response = await httpClient.PostAsync("api/Products/UpdateProductDetail", c);
 
                 string result = await response.Content.ReadAsStringAsync();
                 return result;

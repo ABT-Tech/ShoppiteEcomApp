@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using DellyShopApp.iOS.Rednerers;
 using FFImageLoading.Forms.Platform;
 using Foundation;
@@ -29,40 +31,26 @@ namespace DellyShopApp.iOS
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Forms.FormsMaterial.Init();
-            var config = new PayPalConfiguration(PayPalEnvironment.NoNetwork, "Your PayPal ID from https://developer.paypal.com/developer/applications/")
-            {
-                //If you want to accept credit cards
-                AcceptCreditCards = true,
-                //Your business name
-                MerchantName = "Test Store",
-                //Your privacy policy Url
-                MerchantPrivacyPolicyUri = "https://www.example.com/privacy",
-                //Your user agreement Url
-                MerchantUserAgreementUri = "https://www.example.com/legal",
-                // OPTIONAL - ShippingAddressOption (Both, None, PayPal, Provided)
-                ShippingAddressOption = ShippingAddressOption.Both,
-                // OPTIONAL - Language: Default languege for PayPal Plug-In
-                Language = "en",
-                // OPTIONAL - PhoneCountryCode: Default phone country code for PayPal Plug-In
-                PhoneCountryCode = "52",
-            };
-            CrossPayPalManager.Init(config);
-            CardsViewRenderer.Preserve();
 
+            var deviceID = UIDevice.CurrentDevice.IdentifierForVendor.ToString();
             CachedImageRenderer.InitImageSourceHandler();
-            LoadApplication(new App());
+            LoadApplication(new App(false,null,deviceID));
+            FirebasePushNotificationManager.Initialize(options, true);
             //Activate after adding the GoogleService-Info.plist file.
+
             //https://github.com/CrossGeeks/FirebasePushNotificationPlugin/blob/master/docs/GettingStarted.md
             //FirebasePushNotificationManager.Initialize(options, true);
             return base.FinishedLaunching(app, options);
         }
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
         {
+
             FirebasePushNotificationManager.DidRegisterRemoteNotifications(deviceToken);
         }
 
         public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
         {
+            //base.FailedToRegisterForRemoteNotifications(application, error);
             FirebasePushNotificationManager.RemoteNotificationRegistrationFailed(error);
 
         }
@@ -82,5 +70,16 @@ namespace DellyShopApp.iOS
 
             completionHandler(UIBackgroundFetchResult.NewData);
         }
+        public override void OnActivated(UIApplication uiApplication)
+        {
+            //FirebasePushNotificationManager.Connect();
+            base.OnActivated(uiApplication);
+        }
+        public override void DidEnterBackground(UIApplication uiApplication)
+        {
+            //FirebasePushNotificationManager.Disconnect();
+        }
+
+
     }
-}
+}   

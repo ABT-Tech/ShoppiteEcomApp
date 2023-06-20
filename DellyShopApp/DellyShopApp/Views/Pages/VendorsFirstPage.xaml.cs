@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DellyShopApp.Models;
 using DellyShopApp.Views.CustomView;
+using DellyShopApp.Views.TabbedPages;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -25,7 +27,8 @@ namespace DellyShopApp.Views.Pages
         private void OrderInfoClick(object sender, EventArgs e)
         {
             if (!(sender is PancakeView stack)) return;
-            switch (stack.ClassId)
+          
+                switch (stack.ClassId)
             {
                 case "EditProfile":
                     OpenPage(new Venderdata());
@@ -40,7 +43,11 @@ namespace DellyShopApp.Views.Pages
                     break;
 
                 case "LastView":
-                    OpenPage(new ProductStockPage());
+                  
+                    {
+                         Navigation.PushAsync(new ProductStockPage());
+                    }
+                       
                     break;
             }
         }

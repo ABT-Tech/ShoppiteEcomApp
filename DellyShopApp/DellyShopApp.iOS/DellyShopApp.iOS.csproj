@@ -27,13 +27,13 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>x86_64</MtouchArch>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <CodesignExtraArgs>
     </CodesignExtraArgs>
-    <CodesignKey>Apple Development: jenith.thakkar@icloud.com (8DPLR3WPX2)</CodesignKey>
+    <CodesignKey>Apple Distribution: Jenith Thakkar (9BPY573567)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>iOS Team Provisioning Profile: *</CodesignProvision>
+    <CodesignProvision>Automatic</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -55,10 +55,12 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>Apple Development: jenith.thakkar@icloud.com (8DPLR3WPX2)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
+    <CodesignProvision>iOS Team Provisioning Profile: *</CodesignProvision>
+    <BuildIpa>true</BuildIpa>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -81,8 +83,8 @@
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
     <BuildIpa>True</BuildIpa>
-    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
-    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignProvision>Shooppy AdHoc Profile</CodesignProvision>
+    <CodesignKey>Apple Distribution: Jenith Thakkar (9BPY573567)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
@@ -98,6 +100,9 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
+    <CreatePackage></CreatePackage>
+    <UseHardenedRuntime>false</UseHardenedRuntime>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
@@ -121,7 +126,6 @@
     <Compile Include="Rednerers\ShapeUtils.cs" />
     <BundleResource Include="Resources\BgImage.png" />
     <Compile Include="AppDelegate.cs" />
-    <None Include="DellyShop.iOS.csproj" />
     <None Include="DellyShopApp.iOS.sln" />
     <BundleResource Include="Resources\Fav.png" />
     <BundleResource Include="Resources\red.png" />
@@ -185,7 +189,6 @@
     <BundleResource Include="Resources\kapada3.gif" />
     <BundleResource Include="Resources\kapada2.gif" />
     <BundleResource Include="Resources\gift.gif" />
-    <None Include="GoogleService-Info.plist" />
     <BundleResource Include="Resources\share.jpeg" />
     <BundleResource Include="Resources\icon25.jpg.gif" />
     <BundleResource Include="Resources\design.gif" />
@@ -196,6 +199,19 @@
     <BundleResource Include="Resources\ic_eye.png" />
     <BundleResource Include="Resources\ic_eye_hide.png" />
     <BundleResource Include="Resources\discount.gif" />
+    <None Include="DellyShopApp.iOS.csproj" />
+    <BundleResource Include="Resources\BlackHeart.png" />
+    <BundleResource Include="Resources\RedHeart.png" />
+    <BundleResource Include="Resources\unscreen.gif" />
+    <BundleResource Include="Resources\asd.gif" />
+    <BundleResource Include="Resources\tools.gif" />
+    <BundleResource Include="Resources\3.png" />
+    <BundleResource Include="Resources\edit.png" />
+    <BundleResource Include="GoogleService-Info.plist">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <None Include=".DS_Store" />
+    <None Include="DellyShopApp.ipa" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -231,7 +247,6 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40-2.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80-1.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\76.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\152.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\167.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120-2.png" />
@@ -261,6 +276,10 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\512-1.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024-2.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\234.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\258.png" />
+    <ImageAsset Include="Assets.xcassets\.DS_Store" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\152.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\shooppy108.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -347,4 +366,17 @@
     <Folder Include="Assets.xcassets\BgImage.imageset\" />
     <Folder Include="Assets.xcassets\Dark Mode Backgroud Color.colorset\" />
   </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <TextStylePolicy TabWidth="4" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" FileWidth="80" TabsToSpaces="True" scope="application/vnd.apple-xcode-storyboard" />
+          <XmlFormattingPolicy inheritsSet="null" scope="application/vnd.apple-xcode-storyboard" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
 </Project>

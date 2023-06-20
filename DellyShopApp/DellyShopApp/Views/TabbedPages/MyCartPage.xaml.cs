@@ -26,7 +26,7 @@ namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationO
             {
                 Login.IsVisible = true;
                 checkout.IsVisible = false;
-                txt.IsVisible = true;
+               
                 cartimg.IsVisible = true;
                 vendorlogin.IsVisible = true;
                 
@@ -35,7 +35,7 @@ namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationO
             {
                 Login.IsVisible = false;
                 checkout.IsVisible = true;
-                txt.IsVisible = false;
+            
                 cartimg.IsVisible = false;
                 vendorlogin.IsVisible = false;
             }
