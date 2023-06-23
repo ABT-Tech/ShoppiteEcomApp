@@ -212,6 +212,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="Views\Pages\AddNewAddress.xaml.cs">
+      <DependentUpon>AddNewAddress.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Pages\TopDeals.xaml.cs">
       <DependentUpon>TopDeals.xaml</DependentUpon>
     </Compile>

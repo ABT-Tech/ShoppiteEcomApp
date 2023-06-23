@@ -15,8 +15,8 @@
     Visual="Material">
     <ScrollView>
 
-        <AbsoluteLayout>
-
+       
+            <Grid>
             <StackLayout  
         x:Name="mainLayout"
         AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -56,7 +56,8 @@
             VerticalOptions="CenterAndExpand"
             Color="#ff002c"/>
             </StackLayout>
-        </AbsoluteLayout>
+                </Grid>
+       
 
     </ScrollView>
 </base:BasePage>

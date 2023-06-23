@@ -76,9 +76,24 @@ namespace DellyShopApp.Views.TabbedPages
                 CarouselView.Position = (CarouselView.Position + 1) % carouselview.Count;
                 return true;
             }));
-            BestSellerList.ItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId,OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
-            PreviousViewedList.ItemsSource = await DataService.GetLastVisitedProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
-            MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
+            var bestseller = await DataService.GetMostSellerProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
+            BestSellerList.ItemsSource = bestseller;
+            if( bestseller.Count != 0)
+            {
+                bestsellerlbl.IsVisible = true;
+            }
+            var previousview = await DataService.GetLastVisitedProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
+            PreviousViewedList.ItemsSource = previousview;
+            if (previousview.Count != 0)
+            {
+                topdeal.IsVisible = true;
+            }
+            var mostnews = await DataService.GetAllProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
+            MostNews.FlowItemsSource = mostnews;
+            if (mostnews.Count != 0)
+            {
+                preview.IsVisible = true;
+            }
             var products = DataService.Instance.products;
 
           

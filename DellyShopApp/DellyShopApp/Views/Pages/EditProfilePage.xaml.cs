@@ -3,6 +3,7 @@ using Plugin.Connectivity;
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
@@ -16,6 +17,7 @@ namespace DellyShopApp.Views.Pages
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         public static string Text = string.Empty;
+
         public EditProfilePage()
         {
             Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
@@ -26,6 +28,7 @@ namespace DellyShopApp.Views.Pages
                 InittEditProfilePage();
             }
         }
+
         private bool ChechConnectivity()
         {
             if (CrossConnectivity.Current.IsConnected)
@@ -53,6 +56,7 @@ namespace DellyShopApp.Views.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            Loader();
         }
         private async void Button_Clicked(System.Object sender, System.EventArgs e)
         {
@@ -115,6 +119,11 @@ namespace DellyShopApp.Views.Pages
             else
             {
                 var Page = new Page2(changeUserData);
+                ai.IsRunning = true;
+                aiLayout.IsVisible = true;
+                await Task.Delay(500);
+                aiLayout.IsVisible = false;
+                ai.IsRunning = false;
                 _ = DisplayAlert("Yes", "Your Profile Update Successfully", "Okay");
                 await DataService.EditUserData(changeUserData);
                 await Navigation.PushAsync(new HomeTabbedPage());
@@ -123,6 +132,14 @@ namespace DellyShopApp.Views.Pages
         void BackButton(System.Object sender, System.EventArgs e)
         {
             Navigation.PopAsync();
+        }
+        public async void Loader()
+        {
+            ai.IsRunning = true;
+            aiLayout.IsVisible = true;
+            await Task.Delay(1500);
+            aiLayout.IsVisible = false;
+            ai.IsRunning = false;
         }
     }
 }

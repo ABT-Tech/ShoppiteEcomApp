@@ -142,10 +142,10 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         }
         public async void Loader()
         {
-            ai.IsRunning = true;
-            aiLayout.IsVisible = true;
-            await Task.Delay(1500);
-            aiLayout.IsVisible = false;
-            ai.IsRunning = false;
+            //ai.IsRunning = true;
+            //aiLayout.IsVisible = true;
+            //await Task.Delay(1500);
+            //aiLayout.IsVisible = false;
+            //ai.IsRunning = false;
         }
     }}

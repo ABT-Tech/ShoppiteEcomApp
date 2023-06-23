@@ -1,5 +1,6 @@
 ﻿using System;using System.Collections.Generic;using System.Linq;using System.Windows.Input;
 using DellyShopApp.Helpers;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;
+using DellyShopApp.Views.ModalPages;
 using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;
 namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class ProductDetail    {
         public string userAuth = SecureStorage.GetAsync("Usertype").Result;        public int UserId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
@@ -16,16 +17,35 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             //    product.ProductList = new string[] { product.Image };
             //}
             _products = product;            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _comments.Add(new CommentModel            {                Name = "Ufuk Sahin",                CommentTime = "12/1/19",                Id = 1,                Rates = _startList            });            _comments.Add(new CommentModel            {                Name = "Hans Goldman",                CommentTime = "11/1/19",                Id = 2,                Rates = _startList.Skip(0).ToList()            });            InitializeComponent();
+            if (UserId == 0 || UserId == null || userAuth != "Client")
+            {
+                Address.IsVisible = false;
+            }
             if (_products.Quantity <= 0)
             {
                 ProductCountLabel.IsVisible = false;
                 Stocklbl.IsVisible = true;
                 stock.IsVisible = false;
+                FewStock.IsVisible = false;
                 Addtocartbtn.IsVisible = false;
                 BuyNowbtn.IsVisible = false;
                 plusimg.IsVisible = false;
                 minusimg.IsVisible = false;
             }
+            else if (_products.Quantity <= 5)
+            {
+                FewStock.IsVisible = true;
+                Stocklbl.IsVisible = false;
+                stock.IsVisible = false;
+            }
+            else if(_products.Quantity > 5)
+            {
+                FewStock.IsVisible = false;
+                Stocklbl.IsVisible = false;
+                stock.IsVisible = true;
+            }
+           
+            
             if (_products.WishlistedProduct == true)
             {
                 myImage.Source = "Redheart.png";
@@ -74,8 +94,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                 var productId = Convert.ToString(_products.Id);
                 gotocart.IsVisible = true;
                 Addtocartbtn.IsVisible = false;
-                //await Xamarin.Essentials.SecureStorage.SetAsync("ProId", productId);
-             
+                //await Xamarin.Essentials.SecureStorage.SetAsync("ProId", productId);            
             }
         }
         private async void BuyNow(object sender, EventArgs e)        {            if (UserId == 0 || UserId == null || userAuth != "Client")
@@ -159,6 +178,13 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
         private void TapGestureRecognizer_Tapped_3(object sender, EventArgs e)
         {
             Navigation.PushAsync(new MyCartPage());
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            List<ChangeAddress> changeAddresses = new List<ChangeAddress>();
+            Navigation.PushAsync(new AddNewAddress(changeAddresses));
+
         }
     }
 }
