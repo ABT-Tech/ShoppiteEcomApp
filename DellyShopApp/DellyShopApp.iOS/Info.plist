@@ -25,13 +25,11 @@
 	<key>CFBundleDisplayName</key>
 	<string>Shooppy</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.XamDesign.DellyShopApp</string>
-	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>com.AshokInfotech.Shoppite</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
-	<string>DellyShopApp</string>
+	<string>Shooppy</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UIAppFonts</key>
@@ -50,11 +48,14 @@
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 	<key>NSCameraUsageDescription</key>
 	<string>We will use your camera to scan the credit card</string>
+	<key>CFBundleVersion</key>
+	<string>0.1.2</string>
 </dict>
 </plist>

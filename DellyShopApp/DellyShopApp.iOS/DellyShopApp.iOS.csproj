@@ -41,9 +41,15 @@
     <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>x86_64</MtouchArch>
     <ConsolePause>false</ConsolePause>
+    <CodesignProvision>Automatic</CodesignProvision>
+    <CodesignKey>Apple Distribution: Jenith Thakkar (9BPY573567)</CodesignKey>
+    <MtouchExtraArgs>--optimize=experimental-xforms-product-type</MtouchExtraArgs>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <MtouchFloat32>true</MtouchFloat32>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,9 +74,15 @@
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
+    <CodesignProvision>iOS Team Store Provisioning Profile: com.AshokInfotech.Shoppite</CodesignProvision>
+    <MtouchExtraArgs>--optimize=force-rejected-types-removal</MtouchExtraArgs>
+    <BuildIpa>true</BuildIpa>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <MtouchFloat32>true</MtouchFloat32>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -136,6 +148,15 @@
     <BundleResource Include="Resources\basket12.png" />
     <BundleResource Include="Resources\mainlogo2.png" />
     <BundleResource Include="Resources\icon.png" />
+    <BundleResource Include="Resources\VerdanaProSemiBold.ttf" />
+    <BundleResource Include="Resources\VerdanaProRegular.ttf" />
+    <BundleResource Include="Resources\VerdanaProLight.ttf" />
+    <BundleResource Include="Resources\VerdanaProCondLight.ttf" />
+    <BundleResource Include="Resources\icofont.ttf" />
+    <BundleResource Include="Resources\VerdanaProBold.ttf" />
+    <BundleResource Include="Resources\Basket.png" />
+    <BundleResource Include="Resources\Home.png" />
+    <BundleResource Include="Resources\Profile.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -242,9 +263,6 @@
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.7.5</Version>
     </PackageReference>
-    <PackageReference Include="PayPal.Forms">
-      <Version>2.18.6</Version>
-    </PackageReference>
     <PackageReference Include="Plugin.PayCards">
       <Version>1.1.1</Version>
     </PackageReference>
@@ -271,5 +289,8 @@
   <ItemGroup>
     <Folder Include="Assets.xcassets\BgImage.imageset\" />
     <Folder Include="Assets.xcassets\Dark Mode Backgroud Color.colorset\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
 </Project>

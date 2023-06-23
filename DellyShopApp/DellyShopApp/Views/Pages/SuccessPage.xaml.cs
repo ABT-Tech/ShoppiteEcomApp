@@ -3,7 +3,7 @@ using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pag
             if (ChechConnectivity())
             {
                 InittSuccessPage();
-            }                        this.Product = product;            this.BindingContext = product;            BasketItems.ItemsSource = DataService.Instance.BasketModel;            foreach (var item in DataService.Instance.ProcutListModel)            {                DataService.Instance.TotalPrice += item.Price;            }        }
+            }                                       }
         private bool ChechConnectivity()
         {
             if (CrossConnectivity.Current.IsConnected)

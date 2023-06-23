@@ -3,8 +3,6 @@ using System;
 using DellyShopApp.iOS.Rednerers;
 using FFImageLoading.Forms.Platform;
 using Foundation;
-using PayPal.Forms;
-using PayPal.Forms.Abstractions;
 using Plugin.FirebasePushNotification;
 using UIKit;
 using Xamarin.Forms;
@@ -29,24 +27,7 @@ namespace DellyShopApp.iOS
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Forms.FormsMaterial.Init();
-            var config = new PayPalConfiguration(PayPalEnvironment.NoNetwork, "Your PayPal ID from https://developer.paypal.com/developer/applications/")
-            {
-                //If you want to accept credit cards
-                AcceptCreditCards = true,
-                //Your business name
-                MerchantName = "Test Store",
-                //Your privacy policy Url
-                MerchantPrivacyPolicyUri = "https://www.example.com/privacy",
-                //Your user agreement Url
-                MerchantUserAgreementUri = "https://www.example.com/legal",
-                // OPTIONAL - ShippingAddressOption (Both, None, PayPal, Provided)
-                ShippingAddressOption = ShippingAddressOption.Both,
-                // OPTIONAL - Language: Default languege for PayPal Plug-In
-                Language = "en",
-                // OPTIONAL - PhoneCountryCode: Default phone country code for PayPal Plug-In
-                PhoneCountryCode = "52",
-            };
-            CrossPayPalManager.Init(config);
+            
             CardsViewRenderer.Preserve();
 
             CachedImageRenderer.InitImageSourceHandler();

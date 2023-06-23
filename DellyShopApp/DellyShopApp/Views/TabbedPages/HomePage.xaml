@@ -162,7 +162,7 @@
                                     <forms:CachedImage
                               
                                         Margin="0"
-                                        Aspect="AspectFill"
+                                        Aspect="Fill"
                                         Source="{Binding Banner}"                                        
                                         WidthRequest="50"
                                         HeightRequest="50"/>
@@ -233,7 +233,7 @@
                                         </pancakeView:PancakeView.GestureRecognizers>
                                         <StackLayout>
                                             <forms:CachedImage
-                                                Aspect="AspectFill"
+                                                Aspect="AspectFit"
                                                 HeightRequest="150"
                                                 Margin="5"
                                                 Source="{Binding Image}" />
@@ -318,7 +318,7 @@
                                         </pancakeView:PancakeView.GestureRecognizers>
                                         <StackLayout>
                                             <forms:CachedImage
-                                                Aspect="AspectFill"
+                                                Aspect="AspectFit"
                                                 HeightRequest="150"
                                                 Margin="5"
                                                 Source="{Binding Image}" />
