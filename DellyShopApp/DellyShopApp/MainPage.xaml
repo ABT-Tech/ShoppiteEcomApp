@@ -14,7 +14,7 @@
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <ScrollView>
-
+        <Grid>
         <StackLayout Margin="15,10,15,0">
             <StackLayout Spacing="0">
                 <Image Source="mainlogo2.png" HorizontalOptions="Center"
@@ -32,5 +32,19 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </StackLayout>
+         <StackLayout
+        x:Name="aiLayout"
+        IsVisible="False"
+        AbsoluteLayout.LayoutBounds="0,0,1,1"
+        AbsoluteLayout.LayoutFlags="All"
+        BackgroundColor="White" Opacity="0.7">
+                <ActivityIndicator
+            x:Name="ai"
+            IsRunning="False"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            />
+            </StackLayout>
+            </Grid>
     </ScrollView>
 </base:BasePage>

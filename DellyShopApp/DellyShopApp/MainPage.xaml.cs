@@ -9,6 +9,7 @@ using System.Net.NetworkInformation;
 using System.Net;
 using Plugin.Connectivity;
 using Plugin.FirebasePushNotification;
+using System.Threading.Tasks;
 
 namespace DellyShopApp
 {
@@ -81,7 +82,7 @@ namespace DellyShopApp
                     {
                         Source = product.Image,
                         BackgroundColor = Color.WhiteSmoke,
-                        Margin = 15,
+                        Margin = new Thickness(0, 15, 0, 25),
                         VerticalOptions = LayoutOptions.Center,
                         HorizontalOptions = LayoutOptions.Center,
                         HeightRequest = 200,
@@ -110,8 +111,13 @@ namespace DellyShopApp
         }
 
 
-        private  void TapGestureRecognizer_Tapped(string orgId,string Img)
+        private async void TapGestureRecognizer_Tapped(string orgId,string Img)
         {
+            ai.IsRunning = true;
+            aiLayout.IsVisible = true;
+            await Task.Delay(1500);
+            aiLayout.IsVisible = false;
+            ai.IsRunning = false;
 
             var neworgId = Convert.ToInt32(orgId);
             if(neworgId != oldorgId)
@@ -119,10 +125,10 @@ namespace DellyShopApp
                 Xamarin.Essentials.SecureStorage.RemoveAll();
             }
 
-            SecureStorage.SetAsync("OrgId",orgId);
-            SecureStorage.SetAsync("ImgId", Img);
+            await SecureStorage.SetAsync("OrgId",orgId);
+            await SecureStorage.SetAsync("ImgId", Img);
 
-            Navigation.PushAsync(new HomeTabbedPage());
+            await Navigation.PushAsync(new HomeTabbedPage());
             
         }
       
