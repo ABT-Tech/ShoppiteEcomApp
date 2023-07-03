@@ -33,6 +33,7 @@ namespace DellyShopApp.Models
                 OnPropertyChanged(nameof(Rotate));
             }
         }
+        
 
 
 
@@ -61,18 +62,16 @@ namespace DellyShopApp.Models
         public bool IsPriceVisible { get; set; }
         public bool IsOutStock { get; set; }
         public bool WishlistedProduct { get; set; }
-
-
-
-
-
         public object Children { get;  set; }
         public object RemoveCommand { get;  set; }
         public int Empty { get; internal set; }
         public object Name { get; internal set; }
+        public string IP { get; set; }
+        public string STATUS { get; set; }
 
-      
-       
+
+
+
     }
 }
 
