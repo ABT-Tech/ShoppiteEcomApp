@@ -6,7 +6,6 @@ using Xamarin.Essentials;
 using Android.OS;
 using Android.Runtime;
 using Acr.UserDialogs;
-using static DellyShopApp.Views.ListViewData;
 using System.Net.NetworkInformation;
 using System.Net;
 using Plugin.Connectivity;

@@ -1,0 +1,27 @@
+﻿using System;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;
+using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class CustomerReport    {        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);        private bool _open = false;
+
+        public CustomerReport()        {            InitializeComponent();            InittMyOrderPage();        }        private async void InittMyOrderPage()        {            BasketItems.ItemsSource = DataService.Instance.report; //await DataService.GetMyOrderDetails(orgId, userId);//
+        }        
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await DisplayAlert("Done", "Submited", "Ok");
+        }
+
+        private void PriceChange(object sender, EventArgs e)
+        {
+            Image imageSource = (Image)sender;
+            if (!(imageSource.Parent is StackLayout stack)) return;
+            stack.Children[0].IsEnabled = true;
+        }
+
+        private void QtyChange(object sender, EventArgs e)
+        {
+
+            Image imageSource = (Image)sender;
+            if(!(imageSource.Parent is StackLayout stack)) return;
+            stack.Children[0].IsEnabled = true;
+        }
+
+    }}

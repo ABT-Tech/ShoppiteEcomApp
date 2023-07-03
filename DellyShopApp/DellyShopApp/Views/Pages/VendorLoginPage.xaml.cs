@@ -1,4 +1,5 @@
-﻿using System;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using Xamarin.Essentials;using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+﻿using System;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.TabbedPages;
+using Xamarin.Essentials;using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class VendorLoginPage    {        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public VendorLoginPage()        {
             Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);            InitializeComponent();        }        private async void LoginButtonClick(object sender, EventArgs e)        {            var login = new Login            {                email = email.Text,                password = pswd.Text,                org_Id = orgId,
                 type = "vendor"
@@ -26,8 +27,8 @@ using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompila
                 await DisplayAlert("Opps", "InValid Username or Password", "ok");
                 return;
             }
-            await Navigation.PushAsync(new Venderdata());
-            
+            await Navigation.PushAsync(new VendorsFirstPage());
+            await Xamarin.Essentials.SecureStorage.SetAsync("VendorUserId", userDetail.VendorUserId.ToString());
 
         }        private void BackButton(object sender, EventArgs e)        {            Navigation.PopAsync();        }      
     }}
