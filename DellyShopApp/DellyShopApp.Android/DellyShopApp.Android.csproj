@@ -87,7 +87,7 @@
       <Version>28.0.0.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.CommunityToolkit">
-      <Version>2.0.5</Version>
+      <Version>2.0.6</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading">
       <Version>2.4.11.982</Version>
@@ -133,6 +133,9 @@
     <PackageReference Include="Xam.Plugin.Connectivity">
       <Version>3.2.0</Version>
     </PackageReference>
+    <PackageReference Include="Plugin.Badge">
+      <Version>2.3.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -176,6 +179,78 @@
     <None Include="Resources\mipmap-xhdpi\mipmap-xhdpi\icon.png" />
     <None Include="Resources\mipmap-xxhdpi\mipmap-xxhdpi\icon.png" />
     <None Include="Resources\mipmap-xxxhdpi\mipmap-xxxhdpi\icon.png" />
+    <None Include="Resources\drawable\drawable\Shoes_Store.png" />
+    <None Include="Resources\drawable\drawable\Fruit_Store.png" />
+    <None Include="Resources\drawable\drawable\clock.json" />
+    <None Include="Resources\drawable\drawable\icon.png" />
+    <None Include="Resources\drawable\drawable\wishlist1.png" />
+    <None Include="Resources\drawable\drawable\Coffee_store.png" />
+    <None Include="Resources\drawable\drawable\images.jpeg" />
+    <None Include="Resources\drawable\drawable\BgImage.png" />
+    <None Include="Resources\drawable\drawable\Grocery_Store.png" />
+    <None Include="Resources\drawable\drawable\Book_Store.png" />
+    <None Include="Resources\drawable\drawable\UnFav.png" />
+    <None Include="Resources\drawable\drawable\Bakery_Store.png" />
+    <None Include="Resources\drawable\drawable\Home.png" />
+    <None Include="Resources\drawable\drawable\electronicCategory.png" />
+    <None Include="Resources\drawable\drawable\Pet_Store.png" />
+    <None Include="Resources\drawable\drawable\black.png" />
+    <None Include="Resources\drawable\drawable\Basket.png" />
+    <None Include="Resources\drawable\drawable\shoesyellow.png" />
+    <None Include="Resources\drawable\drawable\iphone.png" />
+    <None Include="Resources\drawable\drawable\LottieLogo1.json" />
+    <None Include="Resources\drawable\drawable\shoesCategory.png" />
+    <None Include="Resources\drawable\drawable\shoes.jpg" />
+    <None Include="Resources\drawable\drawable\logo.png" />
+    <None Include="Resources\drawable\drawable\pp.png" />
+    <None Include="Resources\drawable\drawable\wishlistimage.png" />
+    <None Include="Resources\drawable\drawable\Cloth_Store.png" />
+    <None Include="Resources\drawable\drawable\Profile.png" />
+    <None Include="Resources\drawable\drawable\Hardware_Store.png" />
+    <None Include="Resources\drawable\drawable\masterCard.png" />
+    <None Include="Resources\drawable\drawable\elecronics.jpeg" />
+    <None Include="Resources\drawable\drawable\Fav.png" />
+    <None Include="Resources\drawable\drawable\splash_screen_dark.xml" />
+    <None Include="Resources\drawable\drawable\splash_screen_light.xml" />
+    <None Include="Resources\drawable\drawable\red.png" />
+    <None Include="Resources\drawable\drawable\Madical_Store.png" />
+    <None Include="Resources\drawable\drawable\shoesblack2.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\Shoes_Store.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\Fruit_Store.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\clock.json" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\icon.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\wishlist1.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\Coffee_store.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\images.jpeg" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\BgImage.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\Grocery_Store.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\Book_Store.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\UnFav.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\Bakery_Store.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\Home.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\electronicCategory.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\Pet_Store.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\black.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\Basket.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\shoesyellow.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\iphone.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\LottieLogo1.json" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\shoesCategory.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\shoes.jpg" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\logo.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\pp.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\wishlistimage.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\Cloth_Store.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\Profile.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\Hardware_Store.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\masterCard.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\elecronics.jpeg" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\Fav.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\splash_screen_dark.xml" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\splash_screen_light.xml" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\red.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\Madical_Store.png" />
+    <None Include="Resources\drawable\drawable\drawable\drawable\shoesblack2.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
@@ -188,49 +263,7 @@
     <AndroidResource Include="Resources\mipmap-xhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\drawable\splash_screen_dark.xml">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\splash_screen_light.xml">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\values-night\styles.xml">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\BgImage.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\Cloth_Store.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\Coffee_store.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\Fruit_Store.png">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\Hardware_Store.png">
       <SubType>
       </SubType>
       <Generator>
@@ -416,14 +449,6 @@
       <Generator>
       </Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\LottieLogo1.json">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\clock.json">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable-hdpi\clock.json">
       <SubType></SubType>
       <Generator></Generator>
@@ -496,10 +521,6 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\icon.png">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable-hdpi\icon.png">
       <SubType></SubType>
       <Generator></Generator>
@@ -533,36 +554,6 @@
       <Project>{DFE6DA77-875D-4CCB-BFCC-22F17BABB84E}</Project>
       <Name>DellyShopApp</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Profile.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Basket.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\electronicCategory.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\shoesCategory.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\elecronics.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\shoes.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iphone.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\shoesyellow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\shoesblack2.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\shoesBlack.png" />
@@ -958,9 +949,6 @@
     <AndroidResource Include="Resources\drawable-hdpi\nocards.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\masterCard.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\ip8_1.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1033,9 +1021,6 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\red1.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\pp.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\Profile.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1090,24 +1075,6 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\Home.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Shoes_Store.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Grocery_Store.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Madical_Store.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Pet_Store.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Book_Store.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Bakery_Store.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\mipmap-hdpi\Shoppit.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1130,30 +1097,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-xhdpi\mipmap-mdpi\Shoppit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\images.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\wishlist1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\wishlistimage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Fav.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\UnFav.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\red.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\black.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- <Target Name="_ResolveSatellitePaths" DependsOnTargets="_ResolveAssemblies">

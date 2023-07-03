@@ -73,18 +73,19 @@
             </ScrollView>
             <StackLayout>
                 <Image
-                    Aspect="AspectFill"
-                    HeightRequest="80"
+                    Source="design1.gif"
+                    Aspect="Fill"
+                    HeightRequest="300"
                     HorizontalOptions="CenterAndExpand"
                     Style="{DynamicResource ImageStyleEntry}"
-                    WidthRequest="80">
-                    <Image.Source>
+                    WidthRequest="300">
+                    <!--<Image.Source>
                         <FontImageSource
                             Size="100"
                             FontFamily="{DynamicResource MaterialFontFamily}"
-                            Glyph="{x:Static font:FontAwesomeIcons.CheckCircled}"
+                           
                             Color="Black" />
-                    </Image.Source>
+                    </Image.Source>-->
                 </Image>
                 <Label
                     FontFamily="{DynamicResource VerdanaProRegular}"

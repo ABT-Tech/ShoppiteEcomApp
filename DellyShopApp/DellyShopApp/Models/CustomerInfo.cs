@@ -1,0 +1,2 @@
+﻿using System;using System.Collections.Generic;using System.Text;namespace DellyShopApp.Models{
+    public class CustomerInfo    {        public string Username { get; set; }        public string Email { get; set; }        public string icon { get; set; }        public int orgId { get; set; }        public int userId { get; set; }        public bool Active { get; set; }    }}

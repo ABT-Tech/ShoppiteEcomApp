@@ -45,6 +45,8 @@ namespace DellyShopApp.Models
         public double Price { get; set; }
         public int Id { get; set; }
         public int orgId { get; set; }
+        public int BrandId { get; set; }
+        public int CategoryId { get; set; }
         public string[] ProductList { get; set; }
         public int OldPrice { get; set; }
         public int orderId { get; set; }
@@ -61,6 +63,7 @@ namespace DellyShopApp.Models
         public OrderCheckOut ordercheckout { get; set; }
         public bool IsPriceVisible { get; set; }
         public bool IsOutStock { get; set; }
+        public bool Isimage { get; set; }
         public bool WishlistedProduct { get; set; }
         public object Children { get;  set; }
         public object RemoveCommand { get;  set; }

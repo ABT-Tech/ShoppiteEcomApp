@@ -43,7 +43,7 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
         /// <summary>        /// Go to Address Page        /// </summary>        /// <param name="sender"></param>        /// <param name="e"></param>        private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }        private async void ContinueClick(object sender, EventArgs e)        {            OrderCheckOut orderCheckOut = new OrderCheckOut();            orderCheckOut.ProductLists = productListModel;            orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);            orderCheckOut.userid = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);            orderCheckOut.Address = (ChangeAddress)AddressPicker.SelectedItem;            orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.OrderGuid = productListModel.FirstOrDefault().OrderGuId;
             if (orderCheckOut.Address == null)            {
                 await DisplayAlert("Opps!", "Please Select Address", "ok");                return;            }
-            await DataService.Checkout(orderCheckOut);            await Navigation.PushAsync(new SuccessPage(productListModel));        }
+            await DataService.Checkout(orderCheckOut);            await Navigation.PushAsync(new SuccessPage());        }
 
 
 

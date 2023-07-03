@@ -1,9 +1,14 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using DellyShopApp.Helpers;
 using DellyShopApp.Languages;
+using DellyShopApp.Models;
+using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
 using Plugin.FirebasePushNotification;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,7 +17,9 @@ namespace DellyShopApp
 {
     public partial class App
     {
-        public App()
+        public int VendorUserId = Convert.ToInt32(SecureStorage.GetAsync("VendorUserId").Result);
+        public int UserId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
+        public App(bool hasNotification = false, IDictionary<string, object> notificationData = null, string deviceID = null)
         {
             InitializeComponent();
             FlowListView.Init();
@@ -31,10 +38,18 @@ namespace DellyShopApp
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(Settings.SelectLanguage);
                 AppResources.Culture = new CultureInfo(Settings.SelectLanguage);
             }
+            CrossFirebasePushNotification.Current.Subscribe("general");
             //Token event usage sample:
             CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
             {
+                FirebaseToken firebaseToken = new FirebaseToken();
+                firebaseToken.MacID = deviceID;
+                firebaseToken.Token = p.Token;
+                firebaseToken.UserID = UserId;
+                SetFirebaseToken(firebaseToken);
                 System.Diagnostics.Debug.WriteLine($"TOKEN : {p.Token}");
+                Xamarin.Essentials.SecureStorage.SetAsync("FirebaseToken", p.Token);
+                Xamarin.Essentials.SecureStorage.SetAsync("MacId", firebaseToken.MacID);
             };
 
             //Push message received event usage sample:
@@ -79,6 +94,10 @@ namespace DellyShopApp
             MainPage = navpage;
             App.Current.MainPage.FlowDirection = Settings.SelectLanguage == "ar" ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
+        }
+        public async void SetFirebaseToken(FirebaseToken firebaseToken)
+        {
+            await DataService.UpdateFireBaseToken(firebaseToken);
         }
     }
 }

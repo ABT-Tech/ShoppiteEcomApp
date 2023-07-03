@@ -27,18 +27,23 @@ namespace DellyShopApp.Services
         public ObservableCollection<ProductListModel> BasketModel = new ObservableCollection<ProductListModel>();
         public ObservableCollection<OrderListModel> OrderModel = new ObservableCollection<OrderListModel>();
 
-
         public List<Category> CatoCategoriesList = new List<Category>();
+        public List<Category1> CatoCategoriesList1 = new List<Category1>();
+        public List<companylogo> BrandLogos = new List<companylogo>();
         public List<Category> Carousel = new List<Category>();
         public List<StartList> StartList = new List<StartList>();
         public List<Category> CatoCategoriesDetail = new List<Category>();
         public List<CommentModel> CommentList = new List<CommentModel>();
         public List<ShopModel> ShopDetails = new List<ShopModel>();
+        public List<Cartnumbercount> cartnumbercounts = new List<Cartnumbercount>();
         public ChangeUserData EditProfile = new ChangeUserData();
         public List<ChangeAddress> changeAddress = new List<ChangeAddress>();
         public List<CategoryDetailPage> Details = new List<CategoryDetailPage>();
         public List<VendorsOrder> vendors = new List<VendorsOrder>();
         public List<UserOrder> user = new List<UserOrder>();
+        public List<Report> report = new List<Report>();
+        public List<CustomerInfo> customerInfo = new List<CustomerInfo>();
+        public List<Products> products = new List<Products>();      
         public OrderDetails orderdetails = new OrderDetails();
         public OrgData ObjOrgData = new OrgData();
         public Cart cart = new Cart();
@@ -48,9 +53,7 @@ namespace DellyShopApp.Services
         public Users_DTO users = new Users_DTO();
         public OrderCheckOut ordercheckout = new OrderCheckOut();
         public double TotalPrice = 0;
-        
-      
-       
+
         public static DataService Instance
         {
             get
@@ -81,10 +84,272 @@ namespace DellyShopApp.Services
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-       
+        public DataService()
+        {
+            BrandLogos.Add(new companylogo
+            {
+                Categoryicon = "apple.png"
+            });
+            BrandLogos.Add(new companylogo
+            {
+                Categoryicon = "puma.png"
+            });
+            BrandLogos.Add(new companylogo
+            {
+                Categoryicon = "jaguar.png"
+            });
+            //Carousel.Add(new Category
+            //{
+            //    Banner = "vacation.webp"
+            //});
+            //Carousel.Add(new Category
+            //{
+            //    Banner = "beardo.jpg"
+            //});
+            //Carousel.Add(new Category
+            //{
+            //    Banner = "fff.jpeg"
+            //});
+            //Carousel.Add(new Category
+            //{
+            //    Banner = "gold.jpg"
+            //});
+            //Carousel.Add(new Category
+            //{
+            //    Banner = "mobile.gif"
+            //});
+            //Carousel.Add(new Category
+            //{
+            //    Banner = "vivo.gif"
+            //});
 
-      
+            Carousel.Add(new Category
+            {
+                Banner = "discount.gif"
+            });
 
+            Carousel.Add(new Category
+            {
+                Banner = "kapada.gif"
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "kapada1.gif"
+            });
+
+            Carousel.Add(new Category
+            {
+                Banner = "kapada3.gif"
+            });
+            
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "T-SHIRT",
+                Categoryicon = "tshirt.webp",
+                
+                
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "KURTA SETS",
+                Categoryicon = "kurtas.webp",
+
+
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "HANDBAGS",
+                Categoryicon = "handbag.webp",
+
+
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "KURTAS",
+                Categoryicon = "kkkk.webp",
+
+
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "JEANS",
+                Categoryicon = "jeans.webp",
+
+
+            });
+            CatoCategoriesList.Add(new Category
+            {
+                CategoryName = "FLIP-FLOP",
+                Categoryicon = "flip.webp",
+
+
+            });
+            CatoCategoriesList1.Add(new Category1
+            {
+                Categoryicon = "blazer.jpg"
+            });
+            CatoCategoriesList1.Add(new Category1
+            {
+                Categoryicon = "night.jpg"
+            });
+            CatoCategoriesList1.Add(new Category1
+            {
+                Categoryicon = "sharee.png"
+            });
+            CatoCategoriesList1.Add(new Category1
+            {
+                Categoryicon = "shirt.jpg"
+            });
+            CatoCategoriesList1.Add(new Category1
+            {
+                Categoryicon = "shoes.jpg"
+            });
+            CatoCategoriesList1.Add(new Category1
+            {
+                Categoryicon = "tshirt.jpg"
+            });
+            report.Add(new Report
+            {
+                UserName = "Pankhaniya Parthik",
+                Date = "16/10/2022",
+                TtlOrder = 40,
+                orgId = 1,
+                userId = 1
+
+            });
+            report.Add(new Report
+            {
+                UserName = "Madhav Suba",
+                Date = "28/02/2022",
+                TtlOrder = 70,
+                orgId = 1,
+                userId = 2
+            });
+            report.Add(new Report
+            {
+                UserName = "Mansuri lookman",
+                Date = "20/07/2022",
+                TtlOrder = 130,
+                orgId = 1,
+                userId = 3
+            });
+            customerInfo.Add(new CustomerInfo
+            {
+                Username = "abcd",
+                Email = "abc@gmail.com",
+                icon = "Red.jpeg",
+                orgId = 1,
+                userId = 1,
+                Active = false
+            });
+            customerInfo.Add(new CustomerInfo
+            {
+                Username = "xyz",
+                Email = "xyz@gmail.com",
+                icon = "Green.jpeg",
+                orgId = 1,
+                userId = 2,
+                Active = true
+
+            }); 
+            customerInfo.Add(new CustomerInfo
+            {
+                Username = "opq",
+                Email = "opq@gmail.com",
+                icon = "Green.jpeg",
+                orgId = 1,
+                userId = 4,
+                Active = true
+
+            });
+            customerInfo.Add(new CustomerInfo
+            {
+                Username = "Suba Madhav",
+                Email = "madhav123@gmail.com",
+                icon = "Green.jpeg",
+                orgId =1,
+                userId =5,
+                Active = true
+            });
+            customerInfo.Add(new CustomerInfo
+            {
+                Username = "Suba Madhav",
+                Email = "madhav123@gmail.com",
+                icon = "Green.jpeg",
+                orgId = 1,
+                userId = 5,
+                Active = true
+            });
+            customerInfo.Add(new CustomerInfo
+            {
+                Username = "opq",
+                Email = "opq@gmail.com",
+                icon = "Green.jpeg",
+                orgId = 1,
+                userId = 4,
+                Active = true
+
+            });
+            customerInfo.Add(new CustomerInfo
+            {
+                Username = "abcd",
+                Email = "abc@gmail.com",
+                icon = "Red.jpeg",
+                orgId = 1,
+                userId = 1,
+                Active = false
+            });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle2,
+                Brand = AppResources.ProductBrand2,
+                Id = 3,
+                Image = "shoesyellow",
+                Price = 299,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "py_1", "shoesyellow" },
+                OldPrice = 400,
+                orgId = 2,
+                Quantity = 1,
+                orderId = 1
+
+            });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle1,
+                Brand = AppResources.ProductBrand1,
+                Id = 2,
+                Image = "grazy1",
+                Price = 150,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "garzy2", "grazy1" },
+                OldPrice = 270
+            });
+            ProcutListModel.Add(new ProductListModel
+            {
+                Title = AppResources.ProcutTitle,
+                Brand = AppResources.ProductBrand,
+                Id = 1,
+                Image = "shoesBlack",
+                Price = 362,
+                VisibleItemDelete = false,
+                ProductList = new string[] { "red1", "shoesBlack" },
+                OldPrice = 570
+            });
+            products.Add(new Products
+            {
+                Status = "Best Deals",
+                all = "ViewAll",
+                ProductLists = ProcutListModel.ToList()
+            });
+            products.Add(new Products
+            {
+                Status = "Top Deals",
+                ProductLists = ProcutListModel.ToList()
+            });
+
+
+        }
         public static async Task<List<Category>> GetCategories(int orgId)
         {
             try
@@ -358,6 +623,35 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
+        //public static async Task<string> UpdateProductDetail(ProductListModel product)
+        //{
+        //    try
+        //    {
+        //        //await TokenValidator.CheckTokenValidity();
+
+        //        //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+        //        //    "bearer", Preferences.Get("accessToken", string.Empty));
+        //        HttpClientHandler clientHandler = new HttpClientHandler
+        //        {
+        //            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+        //        };
+
+        //        var payload = JsonConvert.SerializeObject(product);
+
+        //        HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+        //        HttpClient httpClient = new HttpClient(clientHandler);
+        //        httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+        //        var response = await httpClient.PostAsync("api/Products/UpdateProductDetail", c);
+
+        //        string result = await response.Content.ReadAsStringAsync();
+        //        return result;
+        //    }
+        //    catch (Exception ex)
+
+        //    {
+        //        throw;
+        //    }
+        //}
         public static async Task<string> Submit(Orders orders)
         {
             try
@@ -798,6 +1092,161 @@ namespace DellyShopApp.Services
                 HttpClient httpClient = new HttpClient(clientHandler);
                 httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
                 var response = await httpClient.PostAsync("api/User/ForgetPassword", c);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return result;
+            }
+            catch (Exception ex)
+
+            {
+                throw;
+            }
+        }
+        public static async Task<string> UpdateFireBaseToken(FirebaseToken token)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+
+                var payload = JsonConvert.SerializeObject(token);
+
+                HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+                HttpClient httpClient = new HttpClient(clientHandler);
+                httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+                var response = await httpClient.PostAsync("api/Notifications/SetUserFirebaseToken", c);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return result;
+            }
+            catch (Exception ex)
+
+            {
+                throw;
+            }
+        }
+       
+        public static async Task<List<CustomerInfo>> GetCustomerDetails(int orgId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/User/GetCustomerDetails?orgId=" + orgId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<CustomerInfo>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<List<Report>> GetTotalorderDetails(int orgId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+        HttpClient httpClient = new HttpClient(clientHandler);
+        var response = await httpClient.GetAsync(
+            AppSettings.ApiUrl + "api/User/GetTotalorderDetails?OrgId=" + orgId);
+
+        string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<Report>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<List<ProductListModel>> GetSimilarProducts(int orgId,int categoryId,int BrandId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Products/GetSimilarProducts?OrgId=" + orgId + "&CategoryId=" + categoryId + "&BrandId=" + BrandId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<ProductListModel>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        //public static async Task<int> GetNumOfItemsInCart( int userId, int orgId)
+        //{
+        //    try
+        //    {
+        //        //await TokenValidator.CheckTokenValidity();
+
+        //        //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+        //        //    "bearer", Preferences.Get("accessToken", string.Empty));
+        //        HttpClientHandler clientHandler = new HttpClientHandler
+        //        {
+        //            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+        //        };
+        //        HttpClient httpClient = new HttpClient(clientHandler);
+        //        var response = await httpClient.GetAsync(
+        //            AppSettings.ApiUrl + "api/Cart/GetNumOfItemsInCart?OrgId=" + orgId + "&UserId=" + userId );
+
+        //        string result = await response.Content.ReadAsStringAsync();
+        //        return 0;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //}
+        public static async Task<string> UpdateProductDetail(UpdateProductInfo product)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+
+                var payload = JsonConvert.SerializeObject(product);
+
+                HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+                HttpClient httpClient = new HttpClient(clientHandler);
+                httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+                var response = await httpClient.PostAsync("api/Products/UpdateProductDetail", c);
 
                 string result = await response.Content.ReadAsStringAsync();
                 return result;
