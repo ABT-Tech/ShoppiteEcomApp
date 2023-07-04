@@ -122,12 +122,6 @@ namespace DellyShopApp.Services
             //{
             //    Banner = "vivo.gif"
             //});
-
-            Carousel.Add(new Category
-            {
-                Banner = "discount.gif"
-            });
-
             Carousel.Add(new Category
             {
                 Banner = "kapada.gif"
@@ -399,7 +393,7 @@ namespace DellyShopApp.Services
 
             }
         }
-        public static async Task<List<ProductListModel>> GetMostSellerProductsByOrganizations(int orgId , int? UserId = null)
+        public static async Task<List<ProductListModel>>GetMostSellerProductsByOrganizations(int orgId , int? UserId = null)
         {
             try
             {
@@ -424,7 +418,6 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
-       
         public static async Task<List<ProductListModel>> GetAllProductsByOrganizations(int orgId, int? UserId = null)
         {
             try

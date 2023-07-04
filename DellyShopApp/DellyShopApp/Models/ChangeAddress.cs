@@ -2,7 +2,7 @@
 
 namespace DellyShopApp.Models{    public class ChangeAddress    {
         internal static object CurrentNavigation;
-        private INavigation navigation;        public string SelectCity { get; set; }        public string SelectState { get; set; }        public string AddressDetail { get; set; }
+        private INavigation navigation;        public int OrgId { get; set; }        public int UserId { get; set; }        public string SelectCity { get; set; }        public string SelectState { get; set; }        public string AddressDetail { get; set; }
         public string zipcode { get; set; }
 
         

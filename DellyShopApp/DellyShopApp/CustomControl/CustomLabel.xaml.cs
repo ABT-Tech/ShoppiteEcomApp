@@ -17,7 +17,8 @@
         public bool ReadMoreLabel { get; set; }        private bool _shortTextVisible;        public bool ShortTextVisible        {            get => _shortTextVisible;            set { _shortTextVisible = value; ShortTextPropertyChanged(); }        }
 
         //By Default show first 30 words.
-        private void ShortTextPropertyChanged()        {            if (Text != null)            {                if (ShortTextVisible)                {                    customLabel.Text = string.Join(" ", Text.Split().Take(20));                    lblReadMore.Text = "Read More";                    lblReadMore.IsVisible = true;                    lblReadMore.TextColor = Color.FromHex("#00c58a");                }                else                {                    customLabel.Text = Text;                    lblReadMore.Text = "Read Less";
-                    lblReadMore.TextColor = Color.FromHex("#00c58a");
+        private void ShortTextPropertyChanged()        {            if (Text != null)            {                if (ShortTextVisible)                {                    customLabel.Text = string.Join(" ", Text.Split().Take(20));                    lblReadMore.Text = "Read More";                    lblReadMore.IsVisible = true;                    lblReadMore.TextDecorations = TextDecorations.Underline;                    lblReadMore.TextColor = Color.Gray;                }                else                {                    customLabel.Text = Text;                    lblReadMore.Text = "Read Less";
+                    lblReadMore.TextDecorations = TextDecorations.Underline;
+                    lblReadMore.TextColor = Color.Gray;
 
                 }            }        }        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)        {            ShortTextVisible = !ShortTextVisible;        }    }}

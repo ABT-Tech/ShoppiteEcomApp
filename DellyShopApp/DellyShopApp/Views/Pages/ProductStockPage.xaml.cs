@@ -7,11 +7,10 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
 
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)        {
-            Frame frame = (Frame)sender;            if (!(frame.Parent.Parent is StackLayout pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            UpdateProductInfo updateProductInfo = new UpdateProductInfo();            updateProductInfo.orgId = orgId;            updateProductInfo.Price = item.Price;            updateProductInfo.Qty = item.Quantity;            updateProductInfo.proId = item.Id;
+            Frame frame = (Frame)sender;            if (!(frame.Parent.Parent is StackLayout pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            UpdateProductInfo updateProductInfo = new UpdateProductInfo();            updateProductInfo.orgId = orgId;            updateProductInfo.Price = item.Price;            updateProductInfo.Quantity = item.Quantity;            updateProductInfo.Id = item.Id;
             //item.Price = _products.Price;
             //item.Quantity = _products.Quantity;
             await DataService.UpdateProductDetail(updateProductInfo);            BasketItems.ItemsSource = await DataService.GetAllProductsByOrganizations(orgId);
-
         }        private async void PriceChange(object sender, EventArgs e)        {            Image imageSource = (Image)sender;            if (!(imageSource.Parent is StackLayout stack)) return;            stack.Children[0].IsEnabled = true;        }
 
         private async void QtyChange(object sender, EventArgs e)        {            Image imageSource = (Image)sender;            if (!(imageSource.Parent is StackLayout stack)) return;            stack.Children[0].IsEnabled = true;

@@ -73,12 +73,12 @@
             </ScrollView>
             <StackLayout>
                 <Image
-                    Source="design1.gif"
+                    Source="okay.gif"
                     Aspect="Fill"
-                    HeightRequest="300"
+                    HeightRequest="500"
                     HorizontalOptions="CenterAndExpand"
                     Style="{DynamicResource ImageStyleEntry}"
-                    WidthRequest="300">
+                    WidthRequest="400">
                     <!--<Image.Source>
                         <FontImageSource
                             Size="100"
@@ -87,18 +87,12 @@
                             Color="Black" />
                     </Image.Source>-->
                 </Image>
-                <Label
-                    FontFamily="{DynamicResource VerdanaProRegular}"
-                    FontSize="35"
-                    HorizontalOptions="Center"
-                    Text="{x:Static languages:AppResources.SuccessOrder}"
-                    TextColor="Black"
-                    VerticalOptions="StartAndExpand" />
+               
             </StackLayout>
 
             <Button
                 Margin="0,0,0,10"
-                BackgroundColor="#E59500"
+                BackgroundColor="#ff002c"
                 Clicked="ContinueClick"
                 CornerRadius="20"
                 FontFamily="{DynamicResource VerdanaProRegular}"
@@ -107,7 +101,7 @@
                 WidthRequest="200"
                 HorizontalOptions="CenterAndExpand"
                 Text="Continue Shopping"
-                TextColor="Black"
+                TextColor="White"
                 VerticalOptions="EndAndExpand">
             <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="commostates">
