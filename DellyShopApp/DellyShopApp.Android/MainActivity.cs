@@ -9,7 +9,6 @@ using Android.Runtime;
 using Android.Util;
 using DellyShopApp.Droid.Renderers;
 using FFImageLoading.Forms.Platform;
-using LabelHtml.Forms.Plugin.Droid;
 using PayPal.Forms;
 using PayPal.Forms.Abstractions;
 using Plugin.FirebasePushNotification;

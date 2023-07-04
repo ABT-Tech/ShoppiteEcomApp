@@ -28,9 +28,12 @@ namespace DellyShopApp.Views.TabbedPages
                 LastView.IsVisible = false;
                 Logout.IsVisible = false;
                 Login.IsVisible = true;
-                txt.IsVisible = true;
-                userimg.IsVisible = true;
-                vendorlogin.IsVisible = true;
+                Vendorpcake.IsVisible = true;
+                Vendorlbl.IsVisible = true;
+                Earnlbl.IsVisible = true;
+                Earnpcake.IsVisible = true;
+                Fbacklbl.IsVisible = true;
+                Fbackpcake.IsVisible = true;
             }
             else
             {
@@ -41,9 +44,12 @@ namespace DellyShopApp.Views.TabbedPages
                 LastView.IsVisible = true;
                 Logout.IsVisible = true;
                 Login.IsVisible = false;
-                txt.IsVisible = false;
-                userimg.IsVisible = false;
-                vendorlogin.IsVisible = false;
+                Vendorpcake.IsVisible = false;
+                Vendorlbl.IsVisible = false;
+                Earnlbl.IsVisible = false;
+                Earnpcake.IsVisible = false;
+                Fbacklbl.IsVisible = false;
+                Fbackpcake.IsVisible = false;
             }
         }
 
@@ -101,11 +107,23 @@ namespace DellyShopApp.Views.TabbedPages
         {
             Navigation.PushAsync(new VendorLoginPage());
         }
+
+        private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new HomeTabbedPage());
+        }
+
+        private void Registration(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new RegisterPage());
+        }
+
         
-
-//        private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
-//        {
-
-//=        }
+        private void BrowserUrl(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new VendorRegisterPage());
+            //var url = "https://shooppy.in/";
+            //Device.OpenUri(new Uri(url));
+        }
     }
 }

@@ -31,17 +31,24 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
 
         private async void Blacklisted(object sender, EventArgs e)
         {
+
+
+            
             Image image = (Image)sender;
-            if (!(image.Parent.Parent.Parent.Parent.Parent is CustomControl.RepeaterView pancake)) return;
+            if (!(image.Parent.Parent.Parent.Parent.Parent.Parent is CustomControl.RepeaterView pancake)) return;
             if (!(pancake.BindingContext is CustomerInfo item)) return;
       
 
-           // await DataService.UpdateUserStatus(orgId);
-            DisplayAlert("Sucess", "Customer is Blacklisted", "Ok");
-        }
+           await DataService.UpdateUserStatus(item);
+           await DisplayAlert("Sucess", "Customer is Blacklisted", "Ok");
+         }
 
-        private void Whitelisted(object sender, EventArgs e)
+        private async void Whitelisted(object sender, EventArgs e)
         {
+            Image image = (Image)sender;
+            if (!(image.Parent.Parent.Parent.Parent.Parent is CustomControl.RepeaterView pancake)) return;
+            if (!(pancake.BindingContext is CustomerInfo item)) return;
+            await DataService.UpdateUserStatus(item);
             DisplayAlert("Sucess", "Customer is Whitelisted", "Ok");
         }
 

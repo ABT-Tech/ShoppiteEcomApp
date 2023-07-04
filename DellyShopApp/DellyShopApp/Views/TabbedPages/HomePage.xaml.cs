@@ -81,6 +81,7 @@ namespace DellyShopApp.Views.TabbedPages
             if( bestseller.Count != 0)
             {
                 bestsellerlbl.IsVisible = true;
+                
             }
             var previousview = await DataService.GetLastVisitedProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
             PreviousViewedList.ItemsSource = previousview;

@@ -27,6 +27,6 @@ using System;using System.Collections.Generic;using System.Linq;using Xamarin
             DataService.Instance.TotalPrice = 0;
             foreach (var product in orderListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;            }            TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";            PickerDemo.SelectedItem = orderDetails.ProductLists.FirstOrDefault().orderStatus;        }
 
-        private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }
+       
 
         private async void Submitclick(object sender, EventArgs e)        {            var orders = new Orders                       {                orgId = orgId,                Remark = vendorremark.Text,                orderstatus = (string)PickerDemo.SelectedItem,                orderId = OrderMasterId,                UserId = userId                                          };            await DataService.Submit(orders);            await DisplayAlert("Done", "Submited", "Ok");            await Navigation.PushAsync(new Venderdata());        }        private async void Log_outclick(object sender, EventArgs e)        {            await Navigation.PushAsync(new MainPage());            Xamarin.Essentials.SecureStorage.RemoveAll();        }    }}

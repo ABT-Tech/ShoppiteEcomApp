@@ -83,6 +83,8 @@ namespace TestApp.CustomControl
         {
             ShortTextVisible = !ShortTextVisible;
         }
+         
+        
     }
 
 }

@@ -45,7 +45,6 @@ namespace DellyShopApp.Services
         public OrderDetails orderdetails = new OrderDetails();
         public OrgData ObjOrgData = new OrgData();
         public Cart cart = new Cart();
-        public BadgeCounter badgeCounter = new BadgeCounter();
         public Order order = new Order();
         public Login login = new Login();
         public Registration registration = new Registration();
@@ -82,7 +81,7 @@ namespace DellyShopApp.Services
         }
         public DataService()
         {
-            badgeCounter.count = 1;
+          
 
             BrandLogos.Add(new BrandLogo
             {
@@ -1200,6 +1199,32 @@ namespace DellyShopApp.Services
             }
             catch (Exception ex)
 
+            {
+                throw;
+            }
+        }
+        
+        
+        
+        public static async Task<int> GetNumOfItemsInCart(int userId, int orgId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "shopapi/api/Cart/GetNumOfItemsInCart?OrgId" + orgId + "&UserId=" + userId);
+                string result = await response.Content.ReadAsStringAsync();
+                return 0;
+            }
+            catch (Exception ex)
             {
                 throw;
             }

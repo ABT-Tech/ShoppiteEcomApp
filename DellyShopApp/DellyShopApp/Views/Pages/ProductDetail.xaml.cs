@@ -92,7 +92,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                 await DataService.AddToCart(cart);
                 await DisplayAlert(AppResources.Success, _products.Title + " " + AppResources.AddedBakset, AppResources.Okay);
                 var productId = Convert.ToString(_products.Id);
-                gotocart.IsVisible = true;
+              
                 Addtocartbtn.IsVisible = false;
                 //await Xamarin.Essentials.SecureStorage.SetAsync("ProId", productId);            
             }
@@ -171,7 +171,8 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             Share.RequestAsync(new ShareTextRequest
             {
                 Subject = "Shooppy",
-                Uri = "https://shooppy.in"
+                Uri = "https://shooppy.in",
+                
             });
         }
 
@@ -186,5 +187,23 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             Navigation.PushAsync(new AddNewAddress(changeAddresses));
 
         }
+
+       
     }
+  //  public class PinchToZoomContainer : ContentView
+  //  {
+  
+
+  //          public PinchToZoomContainer()
+  //      {
+  //          var pinchGesture = new PinchGestureRecognizer();
+  //          pinchGesture.PinchUpdated += OnPinchUpdated;
+  //          GestureRecognizers.Add(pinchGesture);
+  //      }
+
+  //      void OnPinchUpdated(object sender, PinchGestureUpdatedEventArgs e)
+  //      {
+            
+  //}
+  //  }
 }

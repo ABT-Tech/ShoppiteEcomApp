@@ -15,8 +15,8 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
             UpdateProductInfo updateProductInfo = new UpdateProductInfo();
             updateProductInfo.orgId = orgId;
             updateProductInfo.Price = item.Price;
-            updateProductInfo.Qty = item.Quantity;
-            updateProductInfo.proId = item.Id;
+            updateProductInfo.Quantity = item.Quantity;
+            updateProductInfo.Id = item.Id;
             //item.Price = _products.Price;
             //item.Quantity = _products.Quantity;
             await DataService.UpdateProductDetail(updateProductInfo);

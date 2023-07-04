@@ -8,7 +8,7 @@ namespace DellyShopApp.Models
     {
         public double Price { get; set; }
         public int orgId { get; set; }
-        public int proId { get; set; }
-        public int Qty { get; set; }
+        public int Id { get; set; }
+        public int Quantity { get; set; }
     }
 }
