@@ -50,8 +50,8 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;using X
 
             if (!(sender is ContentView pancake)) return;            //if (!(pancake.BindingContext is ProductListModel item)) return;
             var img = pancake.BindingContext.ToString();
-            Navigation.ShowPopup (new imagepopup(img));
-            //await Navigation.PushAsync(new Imageview(img));
+            //Navigation.ShowPopup (new imagepopup(img));
+            await Navigation.PushAsync(new Imageview(img));
         } 
             
        private void TapGestureRecognizer_Tapped_1(System.Object sender, System.EventArgs e)

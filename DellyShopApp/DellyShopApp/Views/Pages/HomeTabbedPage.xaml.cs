@@ -6,7 +6,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         }
         private async void InittProductDetail()
         {
-            //basket. = await DataService.GetNumOfItemsInCart(orgId,UserId);
+            badge.BindingContext = await DataService.GetNumOfItemsInCart(orgId,UserId);
 
         }        
         public HomeTabbedPage(Page2 page)        {

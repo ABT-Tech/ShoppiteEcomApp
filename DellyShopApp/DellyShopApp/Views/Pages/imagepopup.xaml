@@ -9,7 +9,7 @@ Size="350,1000">
     <StackLayout>
         <pinch:PinchZoom>
             <pinch:PinchZoom.Content>
-        <Image Aspect="Fill"
+        <Image Aspect="AspectFit"
                HeightRequest="600"
                WidthRequest="300"
                Margin="0"

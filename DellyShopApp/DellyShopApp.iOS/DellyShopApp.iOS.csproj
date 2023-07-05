@@ -234,6 +234,7 @@
     <BundleResource Include="Resources\Heart.png" />
     <BundleResource Include="Resources\YourCartisempty.gif" />
     <BundleResource Include="Resources\okay.gif" />
+    <BundleResource Include="Resources\Missingcartitem.gif" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">

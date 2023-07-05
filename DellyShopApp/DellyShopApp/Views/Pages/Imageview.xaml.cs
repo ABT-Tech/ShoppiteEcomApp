@@ -8,11 +8,17 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;using X
 
         public Imageview(string Image)        {
             InitializeComponent();
-            CarouselView.ItemsSource = Image;        }        private async void InittProductDetail(string Image)        {
+            showimg.Source = Image;        }        private async void InittProductDetail(string Image)        {
 
             //CarouselView.ItemsSource = Image;
 
-        }        public Imageview()        {        }       
-     
+        }        public Imageview()        {        }
+
+       private async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
+
+
 
     }}

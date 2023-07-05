@@ -1197,30 +1197,30 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
-        //public static async Task<int> GetNumOfItemsInCart( int userId, int orgId)
-        //{
-        //    try
-        //    {
-        //        //await TokenValidator.CheckTokenValidity();
+        public static async Task<int> GetNumOfItemsInCart(int orgId, int userId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
 
-        //        //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
-        //        //    "bearer", Preferences.Get("accessToken", string.Empty));
-        //        HttpClientHandler clientHandler = new HttpClientHandler
-        //        {
-        //            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
-        //        };
-        //        HttpClient httpClient = new HttpClient(clientHandler);
-        //        var response = await httpClient.GetAsync(
-        //            AppSettings.ApiUrl + "api/Cart/GetNumOfItemsInCart?OrgId=" + orgId + "&UserId=" + userId );
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Cart/GetNumOfItemsInCart?OrgId=" + orgId + "&UserId=" + userId);
 
-        //        string result = await response.Content.ReadAsStringAsync();
-        //        return 0;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw;
-        //    }
-        //}
+                string result = await response.Content.ReadAsStringAsync();
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public static async Task<string> UpdateProductDetail(UpdateProductInfo product)
         {
             try

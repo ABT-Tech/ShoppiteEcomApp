@@ -11,9 +11,7 @@ namespace DellyShopApp.Views.Pages
 		{
 			InitializeComponent ();
 			showimg.Source = image;
-
-
         }
-	}
+    }
 }
 
