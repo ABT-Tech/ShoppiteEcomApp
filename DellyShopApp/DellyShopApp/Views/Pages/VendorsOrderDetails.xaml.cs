@@ -50,7 +50,7 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
             }                        TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";
             PickerDemo.SelectedItem = orderDetails.ProductLists.FirstOrDefault().orderStatus;
            
-        }                private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }               private async void submit_click(object sender, EventArgs e)        {
+        }                              private async void submit_click(object sender, EventArgs e)        {
             var orders = new Orders
             {                orgId = orgId,                Remark = vendorremark.Text,                orderstatus = (string)PickerDemo.SelectedItem,                orderId = OrderMasterId,                UserId = userId
 

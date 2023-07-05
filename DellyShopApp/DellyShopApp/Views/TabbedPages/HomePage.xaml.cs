@@ -1,7 +1,8 @@
 ﻿using Acr.UserDialogs;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;using DellyShopApp.Views.Pages;using FFImageLoading.Forms;
 using Plugin.Connectivity;
 using SuaveControls.DynamicStackLayout;
-using System;using System.Collections;using System.Collections.Generic;using System.Linq;using System.Windows.Input;
+using System;using System.Collections;using System.Collections.Generic;using System.Linq;using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class HomePage     {
 
         //Order product = new Order();
@@ -26,9 +27,24 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
             CarouselView.ItemsSource = carouselview; //DataService.Instance.Carousel.Where(x => x.orgID == orgId);
             Device.StartTimer(TimeSpan.FromSeconds(7), (Func<bool>)(() =>
             {                CarouselView.Position = (CarouselView.Position + 1) % carouselview.Count;                return true;            }));
-            BestSellerList.ItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
-            PreviousViewedList.ItemsSource = await DataService.GetLastVisitedProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); 
-            MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList();
+            var bestseller = await DataService.GetMostSellerProductsByOrganizations(orgId, OrgUserID);
+            BestSellerList.ItemsSource = bestseller;
+            if (bestseller.Count != 0)
+            {
+                bestsellerlbl.IsVisible = true;
+            }
+            var previousview = await DataService.GetLastVisitedProductsByOrganizations(orgId, OrgUserID);
+            PreviousViewedList.ItemsSource = previousview;
+            if (previousview.Count != 0)
+            {
+                topdeal.IsVisible = true;
+            }
+            var mostnews = await DataService.GetAllProductsByOrganizations(orgId, OrgUserID);
+            MostNews.FlowItemsSource = mostnews;
+            if (mostnews.Count != 0)
+            {
+                preview.IsVisible = true;
+            }
             //var products = DataService.Instance.products;            //foreach (var pro in products)            //{            //    var label = new Label            //    {            //        Text = pro.Status,            //        Margin = 10,            //        Padding = 5,            //        FontAttributes = FontAttributes.Bold,            //        FontFamily = "{DynamicResource VerdanaProBold}",            //        FontSize = 18,            //        TextColor = Color.Black,            //        VerticalOptions = LayoutOptions.Start,            //        HorizontalOptions = LayoutOptions.StartAndExpand            //    };            //    var label2 = new Label
             //    {            //        Text = pro.all,            //        Margin = 10,            //        Padding = 5,            //        FontAttributes = FontAttributes.Bold,            //        FontFamily = "{DynamicResource VerdanaProBold}",            //        FontSize = 16,            //        TextColor = Color.Gray,            //        VerticalOptions = LayoutOptions.Start,            //        HorizontalOptions = LayoutOptions.End            //    };
 
@@ -52,7 +68,11 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
         }
    
         protected override void OnAppearing()        {            if (ChechConnectivity())            {                InittHomePage();            }
-
+            if(BindingContext == null)
+            {
+                BindingContext = new ProductListModel();
+            }
+            Loader();
         }
         private bool ChechConnectivity()
         {
@@ -154,4 +174,5 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
         {
             await Navigation.PushAsync(new MainPage());
         }
+        public async void Loader()        {            ai.IsRunning = true;            aiLayout.IsVisible = true;            await Task.Delay(2000);            aiLayout.IsVisible = false;            ai.IsRunning = false;        }
     }}

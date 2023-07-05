@@ -160,4 +160,9 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
             #endregion
             #region Obtain a Client Metadata ID            //Print Client Metadata Id
                                                             //Debug.WriteLine(CrossPayPalManager.Current.ClientMetadataId);
-            #endregion        }    }}
+            #endregion        }
+
+       private async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new MyCartPage());
+        }    }}

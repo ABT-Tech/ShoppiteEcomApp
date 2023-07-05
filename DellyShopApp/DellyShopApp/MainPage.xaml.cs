@@ -10,30 +10,24 @@ using System.Net;
 using Plugin.Connectivity;
 using Plugin.FirebasePushNotification;
 using System.Threading.Tasks;
-
 namespace DellyShopApp
 {
-    
     public partial class MainPage
     {
         public int oldorgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public MainPage()
         {
-            
             InitializeComponent();
             CrossFirebasePushNotification.Current.OnNotificationReceived += Current_OnNotificationReceived;
             if (ChechConnectivity())
             {
                 InittMainPage();
             }
-           
         }
-
         private void Current_OnNotificationReceived(object source, FirebasePushNotificationDataEventArgs e)
         {
             DisplayAlert("Notification", $"Data:{e.Data["myData"]}", "Ok");
         }
-
         private bool ChechConnectivity()
         {
             if (CrossConnectivity.Current.IsConnected)
@@ -72,11 +66,9 @@ namespace DellyShopApp
                         Text = product.ShopName,
                         VerticalOptions = LayoutOptions.End,
                         HorizontalOptions = LayoutOptions.Center,
-                        TextColor = Color.Chocolate,
+                        TextColor = Color.Black,
                         FontAttributes = FontAttributes.Bold,
                         FontSize = 18,
-                        
-
                     };
                     var image = new Image
                     {
@@ -88,10 +80,6 @@ namespace DellyShopApp
                         HeightRequest = 200,
                         WidthRequest = 200,
                         Aspect = Aspect.AspectFit
-                        
-                        
-
-
                     };
                     var Orglabel = new Label
                     {
@@ -109,8 +97,6 @@ namespace DellyShopApp
             }
             //shop.ItemsSource = DataService.Instance.ShopDetails;
         }
-
-
         private async void TapGestureRecognizer_Tapped(string orgId,string Img)
         {
             ai.IsRunning = true;
@@ -124,10 +110,8 @@ namespace DellyShopApp
             {
                 Xamarin.Essentials.SecureStorage.RemoveAll();
             }
-
             await SecureStorage.SetAsync("OrgId",orgId);
             await SecureStorage.SetAsync("ImgId", Img);
-
             await Navigation.PushAsync(new HomeTabbedPage());
             
         }

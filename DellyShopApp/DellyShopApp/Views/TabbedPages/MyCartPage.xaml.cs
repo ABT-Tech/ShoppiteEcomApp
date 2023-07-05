@@ -28,7 +28,7 @@ namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationO
                 checkout.IsVisible = false;
                
                 cartimg.IsVisible = true;
-                vendorlogin.IsVisible = true;
+               
                 
             }
             else
@@ -37,7 +37,7 @@ namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationO
                 checkout.IsVisible = true;
             
                 cartimg.IsVisible = false;
-                vendorlogin.IsVisible = false;
+               
             }
  
             InittMyCartPage();
@@ -97,11 +97,14 @@ namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationO
         }
         private async void TapGestureRecognizer_Tapped_2(System.Object sender, System.EventArgs e)
         {
+
             await Navigation.PushAsync(new HomeTabbedPage());
         }
 
-        void TapGestureRecognizer_Tapped_3(System.Object sender, System.EventArgs e)
-        {
+       
 
+      private async  void TapGestureRecognizer_Tapped_4(System.Object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new HomeTabbedPage());
         }
     }}

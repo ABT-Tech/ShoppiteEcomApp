@@ -19,7 +19,6 @@
 	 <PackageReference Include="Acr.UserDialogs" Version="8.1.0-alpha-0009" />
 	 <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
 	 <PackageReference Include="Microsoft.Azure.Management.Network" Version="26.0.0" />
-	 <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
 	 <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
@@ -44,6 +43,8 @@
     <PackageReference Include="Xamarin.Forms.EasyLoading" Version="1.0.3" />
     <PackageReference Include="System.Runtime" Version="4.3.1" />
     <PackageReference Include="Intersoft.Crosslight.Services.Barcode" Version="6.0.5000.975" />
+    <PackageReference Include="Xamarin.Forms.PinchZoomImage" Version="1.2.0" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.12" />
   </ItemGroup>
 
   <ItemGroup>
@@ -68,6 +69,7 @@
     <None Remove="GoogleService-Info.plist" />
     <None Remove="System.Runtime" />
     <None Remove="Intersoft.Crosslight.Services.Barcode" />
+    <None Remove="Views\ModalPages\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DellyShopApp.csproj" />
@@ -196,6 +198,7 @@
     <Folder Include="Views\Pages\Base\" />
     <Folder Include="Themes\" />
     <Folder Include="Animations\" />
+    <Folder Include="Views\ModalPages\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Android">
