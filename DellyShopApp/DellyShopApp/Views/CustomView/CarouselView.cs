@@ -4,6 +4,7 @@ namespace DellyShopApp.Views.CustomView
 {
     public class CarouselView : CardsView
     {
+
         public CarouselView() : this(new BaseCarouselFrontViewProcessor(), new BaseCarouselBackViewProcessor())
         {
         }

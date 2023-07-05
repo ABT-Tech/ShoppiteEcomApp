@@ -6,6 +6,8 @@ using DellyShopApp.Models;
 using DellyShopApp.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using System.Threading.Tasks;
+using DellyShopApp.Animations;
 
 namespace DellyShopApp.Views.Pages
 {
@@ -20,10 +22,25 @@ namespace DellyShopApp.Views.Pages
 
             InitializeComponent();		  
 		}
-	    protected override async void OnAppearing()
-	    {
-	        base.OnAppearing();
-	     
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            Task.Run(async () =>
+            {
+                //await ViewAnimations.FadeAnimY(Logo);
+                //await ViewAnimations.FadeAnimY(zip);
+                //await ViewAnimations.FadeAnimY(city);
+                //await ViewAnimations.FadeAnimY(state);
+                //await ViewAnimations.FadeAnimY(Address);
+                //await ViewAnimations.FadeAnimY(confirmpassword);
+                //await ViewAnimations.FadeAnimY(password);
+                //await ViewAnimations.FadeAnimY(phnumber);
+                //await ViewAnimations.FadeAnimY(mail);
+
+                await ViewAnimations.FadeAnimY(user1);
+                await ViewAnimations.FadeAnimY(user);
+
+            });
         }
         private async void RegisteruButtonClick(object sender, EventArgs e)
         {
@@ -63,7 +80,7 @@ namespace DellyShopApp.Views.Pages
                 await DisplayAlert("opps..", "Please Enter Your Conform Password", "Ok");
                 return;
             }
-            else if (phonenumber.Text == null || phonenumber.Text == "")
+            else if (phonenumber.Text == null || phonenumber.Text == "" || phonenumber.Text.Length < 10)
             {
                 await DisplayAlert("opps..", "Please Enter Your Phonenumber", "Ok");
                 return;
@@ -83,7 +100,7 @@ namespace DellyShopApp.Views.Pages
                 await DisplayAlert("opps..", "Please Enter Your City", "Ok");
                 return;
             }
-            else if (zipcode.Text == null || zipcode.Text == "")
+            else if (zipcode.Text == null || zipcode.Text == "" || zipcode.Text.Length < 6)
             {
                 await DisplayAlert("opps..", "Please Enter Your ZipCode", "Ok");
                 return;

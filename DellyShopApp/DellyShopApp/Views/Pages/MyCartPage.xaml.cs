@@ -1,11 +1,11 @@
-﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;using DellyShopApp.Views.TabbedPages;using System;using System.Collections.Generic;using System.Linq;using System.Text;using System.Threading.Tasks;using DellyShopApp.ViewModel;using Xamarin.Forms;using Xamarin.Forms.Xaml;using Xamarin.Essentials;
+﻿ using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;using DellyShopApp.Views.TabbedPages;using System;using System.Collections.Generic;using System.Linq;using System.Text;using System.Threading.Tasks;using DellyShopApp.ViewModel;using Xamarin.Forms;using Xamarin.Forms.Xaml;using Xamarin.Essentials;
 
 namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class MyCartPage
     {
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             InittMyCartPage();
-
+            Loader();
         }
         List<ProductListModel> productListModel = new List<ProductListModel>();
         private readonly ProductListModel _products;
@@ -24,9 +24,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             {
                 Login.IsVisible = true;
                 cartimg.IsVisible = true;
-                txt.IsVisible = true;
                 checkout.IsVisible = false;
-                vendorlogin.IsVisible = true;
                 
             }
             else
@@ -34,8 +32,6 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 Login.IsVisible = false;
                 cartimg.IsVisible = false;
                 checkout.IsVisible = true;
-                txt.IsVisible = false;
-                vendorlogin.IsVisible = false;                
             }
            
             
@@ -65,8 +61,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 }
             }
             BasketItems.ItemsSource = productListModel; //DataService.Instance.ProcutListModel;
-            var productid = Convert.ToString(productListModel.Count);
-            
+            var productid = Convert.ToString(productListModel.Count);           
            
             if (productListModel.Count > 0 && (userId > 0 && userAuth == "Client"))
             {
@@ -87,10 +82,10 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 shopping.IsVisible = false;
             }
         }
-        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;
-            int Id = DataService.Instance.order.orgId;
-            int UserId = DataService.Instance.order.UserId;
-            await Navigation.PushAsync(new ProductDetail(item));        }        private async void Button_Clicked(object sender, EventArgs e)        {            var prodItems =  productListModel;            prodItems.RemoveAll(x => x.IsOutStock == true);            await Navigation.PushAsync(new BasketPage(prodItems));        }        private void PlusClick(object sender, EventArgs e)        {
+        //private async void ClickItem(object sender, EventArgs e)        //{        //    if (!(sender is PancakeView pancake)) return;        //    if (!(pancake.BindingContext is ProductListModel item)) return;
+        //    int Id = DataService.Instance.order.orgId;
+        //    int UserId = DataService.Instance.order.UserId;
+        //    await Navigation.PushAsync(new ProductDetail(item));        //}        private async void Button_Clicked(object sender, EventArgs e)        {            var prodItems =  productListModel;            prodItems.RemoveAll(x => x.IsOutStock == true);            await Navigation.PushAsync(new BasketPage(prodItems));        }        private void PlusClick(object sender, EventArgs e)        {
             Image image = (Image)sender;            StackLayout repaterStack = (StackLayout)image.Parent;            Label MyCartCountLable = (Label)repaterStack.Children[1];            int CurrentQuantity  = Convert.ToInt32(MyCartCountLable.Text);
             //if (CurrentQuantity >= 10) return;
            
@@ -140,6 +135,19 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         }
 
         private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new HomeTabbedPage());
+        }
+        public void Loader()
+        {
+            //ai.IsRunning = true;
+            //aiLayout.IsVisible = true;
+            //await Task.Delay(1500);
+            //aiLayout.IsVisible = false;
+            //ai.IsRunning = false;
+        }
+
+        private void TapGestureRecognizer_Tapped_3(object sender, EventArgs e)
         {
             Navigation.PushAsync(new HomeTabbedPage());
         }

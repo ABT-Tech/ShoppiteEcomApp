@@ -9,6 +9,7 @@ using Acr.UserDialogs;
 using System.Net.NetworkInformation;
 using System.Net;
 using Plugin.Connectivity;
+using System.Threading.Tasks;
 
 namespace DellyShopApp
 {
@@ -16,7 +17,7 @@ namespace DellyShopApp
     public partial class MainPage
     {
         public int oldorgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
-
+        public Command TouchCommand { get; }
         public MainPage()
         {
             GetDeviceInfo();
@@ -52,18 +53,21 @@ namespace DellyShopApp
                     var label = new Label
                     {
                         Text = product.ShopName,
-                        VerticalOptions = LayoutOptions.End,
+                        VerticalOptions = LayoutOptions.EndAndExpand,
                         HorizontalOptions = LayoutOptions.Center,
-                        TextColor = Color.Chocolate,
+                        TextColor = Color.Black,
                         FontAttributes = FontAttributes.Bold,
                         FontSize = 20,
+                        LineBreakMode = LineBreakMode.TailTruncation,
+                        MaxLines = 1
                     };
                     var image = new Image
                     {
+                        Aspect = Aspect.AspectFit,
                         Source = product.Image,
                         BackgroundColor = Color.WhiteSmoke,
-                        Margin = 15,
-                        VerticalOptions = LayoutOptions.Center,
+                        Margin = new Thickness(0, 15, 0, 25),
+                        VerticalOptions = LayoutOptions.Start,
                         HorizontalOptions = LayoutOptions.Center,
                         HeightRequest = 200,
                         WidthRequest = 200
@@ -75,8 +79,15 @@ namespace DellyShopApp
                     };
                     image.GestureRecognizers.Add(new TapGestureRecognizer
                     {
-                        Command = new Command(() => TapGestureRecognizer_Tapped(Orglabel.Text, product.Image.ToString())),
-                    });
+                        Command = new Command(async () => await TapGestureRecognizer_TappedAsync(Orglabel.Text, product.Image.ToString()
+                       /* product.Image = Xamarin.CommunityToolkit.Effects.TouchEffect.GetPressedScale*/)),
+
+
+                    }) ;
+                    //image.GestureRecognizers.Add(new TapGestureRecognizer 
+                    //{
+                    //    Command = new Command(() => TapGestureRecognizer_Tapped(Xamarin.CommunityToolkit.Effects.TouchEffect.GetNativeAnimation.product.Image))
+                    //});
                     shop.Children.Add(image, columnIndex, rowIndex);
                     shop.Children.Add(label, columnIndex, rowIndex);
                     shop.Children.Add(Orglabel, columnIndex, rowIndex);
@@ -99,23 +110,37 @@ namespace DellyShopApp
             }
         }
 
-        private void TapGestureRecognizer_Tapped(string orgId, string Img)
+        private async Task TapGestureRecognizer_TappedAsync(string orgId, string Img)
         {
-            
+            ai.IsRunning = true;
+            aiLayout.IsVisible = true;
+            await Task.Delay(1500);
+            aiLayout.IsVisible = false;
+            ai.IsRunning = false;
+
             var neworgId = Convert.ToInt32(orgId);
             if (neworgId != oldorgId)
             {
                 Xamarin.Essentials.SecureStorage.RemoveAll();
             }
-            SecureStorage.SetAsync("OrgId", orgId);
-            SecureStorage.SetAsync("ImgId", Img);
-            Navigation.PushAsync(new HomeTabbedPage());
+           await SecureStorage.SetAsync("OrgId", orgId);
+           await SecureStorage.SetAsync("ImgId", Img);
+            
+           await Navigation.PushAsync(new HomeTabbedPage());
+           // StartAnimation();
         }
+       
+        //private async void StartAnimation()
+        //{
+        //    await Task.Delay(200);
+        //    await Imagebtn.FadeTo(0, 250);
+        //    await Task.Delay(200);
+        //    await Imagebtn.FadeTo(1, 250);
+        //}
         private string GetDeviceInfo()
         {
             string mac = string.Empty;
             string ip = string.Empty;
-
             foreach (var netInterface in NetworkInterface.GetAllNetworkInterfaces())
             {
                 if (netInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 ||      

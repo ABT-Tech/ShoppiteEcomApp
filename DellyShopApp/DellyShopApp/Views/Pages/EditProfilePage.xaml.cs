@@ -2,6 +2,8 @@
 using Plugin.Connectivity;
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
@@ -15,6 +17,7 @@ namespace DellyShopApp.Views.Pages
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         public static string Text = string.Empty;
+
         public EditProfilePage()
         {
             Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
@@ -25,6 +28,7 @@ namespace DellyShopApp.Views.Pages
                 InittEditProfilePage();
             }
         }
+
         private bool ChechConnectivity()
         {
             if (CrossConnectivity.Current.IsConnected)
@@ -52,6 +56,7 @@ namespace DellyShopApp.Views.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            Loader();
         }
         private async void Button_Clicked(System.Object sender, System.EventArgs e)
         {
@@ -67,14 +72,74 @@ namespace DellyShopApp.Views.Pages
                 OrgId = orgId,
                 UserId = userId
             };
-            var Page = new Page2(changeUserData);
-            _ = DisplayAlert("Yes", "Your Profile Edit Successfully", "Okay");
-            await DataService.EditUserData(changeUserData);
-            await Navigation.PushAsync(new HomeTabbedPage());
+            if (UserName.Text == null || UserName.Text == "")
+            {
+                await DisplayAlert("o" +
+                    "pps..", "Please Enter Your UserName", "Ok");
+                return;
+            }
+            else if (EmailAddress.Text == null || EmailAddress.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your EmailAddress", "Ok");
+                return;
+            }
+
+            else if (number.Text == null || number.Text == "" || number.Text.Length < 10)
+            {
+                await DisplayAlert("opps..", "Please Enter Your Phonenumber", "Ok");
+                return;
+            }
+            else if (address.Text == null || address.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your Address", "Ok");
+                return;
+            }
+            else if (statename.Text == null || statename.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your State Name", "Ok");
+                return;
+            }
+            else if (cityname.Text == null || cityname.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your City", "Ok");
+                return;
+            }
+            else if (zipcode.Text == null || zipcode.Text == "" || zipcode.Text.Length < 6)
+            {
+                await DisplayAlert("opps..", "Please Enter Your ZipCode", "Ok");
+                return;
+            }
+            Regex regex = new Regex(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+            bool EmailCheck = regex.IsMatch(EmailAddress.Text.Trim());
+            if (!EmailCheck)
+            {
+                await DisplayAlert("opps..", "Please Enter Valid Email Address", "Ok");
+                return;
+            }
+            else
+            {
+                var Page = new Page2(changeUserData);
+                ai.IsRunning = true;
+                aiLayout.IsVisible = true;
+                await Task.Delay(500);
+                aiLayout.IsVisible = false;
+                ai.IsRunning = false;
+                _ = DisplayAlert("Yes", "Your Profile Update Successfully", "Okay");
+                await DataService.EditUserData(changeUserData);
+                await Navigation.PushAsync(new HomeTabbedPage());
+            }
         }
         void BackButton(System.Object sender, System.EventArgs e)
         {
             Navigation.PopAsync();
+        }
+        public async void Loader()
+        {
+            ai.IsRunning = true;
+            aiLayout.IsVisible = true;
+            await Task.Delay(1500);
+            aiLayout.IsVisible = false;
+            ai.IsRunning = false;
         }
     }
 }

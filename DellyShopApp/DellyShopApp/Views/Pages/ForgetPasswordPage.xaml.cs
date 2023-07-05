@@ -1,4 +1,6 @@
 ﻿using System;using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using DellyShopApp.Animations;
 using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.Pages.Base;
 using FirebaseAdmin.Auth;
 using Xamarin.Essentials;
@@ -9,7 +11,14 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public ForgetPasswordPage()        {
             Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
-            InitializeComponent();        }        private async void Button_Clicked(object sender, EventArgs e)        {            var forgetpass = new ForgetPassword            {                Email = email.Text,                Password = pswd.Text,                OrgId = orgId,
+            InitializeComponent();        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            Task.Run(async () =>            {
+                //await ViewAnimations.FadeAnimY(Logo);
+                await ViewAnimations.FadeAnimY(MainStack1);                await ViewAnimations.FadeAnimY(MainStack);            });
+        }        private async void Button_Clicked(object sender, EventArgs e)        {            var forgetpass = new ForgetPassword            {                Email = email.Text,                Password = pswd.Text,                OrgId = orgId,
                 ConfirmPassword = CfmPass.Text
                
             };

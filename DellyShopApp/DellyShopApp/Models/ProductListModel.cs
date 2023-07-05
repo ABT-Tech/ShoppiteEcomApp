@@ -1,11 +1,16 @@
 ﻿using DellyShopApp.ViewModel;
 using System;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace DellyShopApp.Models
 {
     public class ProductListModel : BaseVm
     {
         private bool _visibleDeleteItem;
+        public bool IsLoading { get; set; }
+        public ICommand ToggleLoadingCommand { get; set; }
         public bool VisibleItemDelete
         {
             get => _visibleDeleteItem;
@@ -15,7 +20,15 @@ namespace DellyShopApp.Models
                 OnPropertyChanged(nameof(VisibleItemDelete));
             }
         }
-
+        public ProductListModel()
+        {
+            ToggleLoadingCommand = new Command(async (x) =>
+            {
+                IsLoading = true;
+                await Task.Delay(2000);
+                IsLoading = false;
+            });
+        }
 
         private int _rotate;
         internal Guid orderGuid;

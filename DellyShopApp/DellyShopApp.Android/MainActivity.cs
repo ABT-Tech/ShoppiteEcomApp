@@ -21,6 +21,7 @@ namespace DellyShopApp.Droid
     {
         private bool IsNotification = false;
         private IDictionary<string, object> NotificationData;
+      
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -29,15 +30,15 @@ namespace DellyShopApp.Droid
             initFontScale();
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
-            base.OnCreate(savedInstanceState);
+            base.OnCreate(savedInstanceState);           
 
-           
             ///For Performance 
             Forms.SetFlags("FastRenderers_Experimental");
 
             AndroidEnvironment.UnhandledExceptionRaiser -= StoreLogger;
             AndroidEnvironment.UnhandledExceptionRaiser += StoreLogger;
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+           
             var config = new PayPalConfiguration(PayPalEnvironment.NoNetwork, "Your PayPal ID from https://developer.paypal.com/developer/applications/")
             {
                 //If you want to accept credit cards
@@ -55,6 +56,7 @@ namespace DellyShopApp.Droid
                 // OPTIONAL - PhoneCountryCode: Default phone country code for PayPal Plug-In
                 PhoneCountryCode = "52",
             };
+           
             CrossPayPalManager.Init(config, this);
             CardsViewRenderer.Preserve();
             CachedImageRenderer.InitImageViewHandler();
