@@ -3,7 +3,7 @@ using DellyShopApp.Helpers;using DellyShopApp.Languages;using DellyShopApp.Mod
 using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;
 namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class ProductDetail    {
         public string userAuth = SecureStorage.GetAsync("Usertype").Result;        public int UserId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
-        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("orgId").Result);
+        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
 
         int productCount = 1 ;        private static IEnumerable<ProductListModel> ItemsSource;
        
@@ -33,10 +33,11 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             {
                 myImage.Source = "black.png";
             }
-
+            InittProductDetail(product);
             this.BindingContext = product;            //starList.ItemsSource = _startList;            //this.BindingContext = product.Quantity;                        //starListglobal.ItemsSource = _startList;            //CommentList.ItemsSource = _comments;
             //MainScroll.Scrolled += MainScroll_Scrolled;           
-                   }       
+                   }
+        private async void InittProductDetail(ProductListModel product)        {            List<ProductListModel> categories = new List<ProductListModel>();            categories.Add(product);            PreviousViewedList.ItemsSource = await DataService.GetSimilarProducts(orgId, Convert.ToInt32(product.CategoryId), Convert.ToInt32(product.BrandId));        }
         public ProductDetail()        {        }        private void PlusClick(object sender, EventArgs e)        {            if (_products.Quantity >= 10)
             {
                 if (productCount <= 9)
@@ -123,6 +124,11 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
 
+        }
+
+        private async void ProductDetailClick(object sender, EventArgs e)
+        {
+            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));
         }
     }
 }

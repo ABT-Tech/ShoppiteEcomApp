@@ -60,6 +60,8 @@ namespace DellyShopApp.Models
         public bool IsPriceVisible { get; set; }
         public bool IsOutStock { get; set; }
         public bool WishlistedProduct { get; set; }
+        public int CategoryId { get; set; }
+        public int BrandId { get; set; }
 
     }
 }

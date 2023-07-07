@@ -126,7 +126,7 @@
                             <ContentView>
                                     <forms:CachedImage
                                     Margin="0"
-                                    Aspect="AspectFill"
+                                    Aspect="Fill"
                                     CacheType="Memory"
                                     DownsampleToViewSize="True"
                                     FadeAnimationDuration="100"

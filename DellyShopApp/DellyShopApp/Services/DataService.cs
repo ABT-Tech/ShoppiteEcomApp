@@ -817,7 +817,30 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
-        
+        public static async Task<List<ProductListModel>> GetSimilarProducts(int orgId, int categoryId, int BrandId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Products/GetSimilarProducts?OrgId=" + orgId + "&CategoryId=" + categoryId + "&BrandId=" + BrandId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<ProductListModel>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
 
