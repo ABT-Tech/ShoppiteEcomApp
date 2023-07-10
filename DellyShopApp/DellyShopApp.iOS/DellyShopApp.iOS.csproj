@@ -27,13 +27,13 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>x86_64</MtouchArch>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <CodesignExtraArgs>
     </CodesignExtraArgs>
-    <CodesignKey>Apple Development: jenith.thakkar@icloud.com (8DPLR3WPX2)</CodesignKey>
+    <CodesignKey>Apple Distribution: Jenith Thakkar (9BPY573567)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>iOS Team Provisioning Profile: *</CodesignProvision>
+    <CodesignProvision>Automatic</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -55,10 +55,12 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>Apple Development: jenith.thakkar@icloud.com (8DPLR3WPX2)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
+    <CodesignProvision>iOS Team Provisioning Profile: *</CodesignProvision>
+    <BuildIpa>true</BuildIpa>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -81,8 +83,8 @@
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
     <BuildIpa>True</BuildIpa>
-    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
-    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignProvision>Shooppy AdHoc Profile</CodesignProvision>
+    <CodesignKey>Apple Distribution: Jenith Thakkar (9BPY573567)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
@@ -98,6 +100,9 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
+    <CreatePackage></CreatePackage>
+    <UseHardenedRuntime>false</UseHardenedRuntime>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
@@ -113,49 +118,125 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <BundleResource Include="Resources\VerdanaProBold.ttf" />
-    <BundleResource Include="Resources\VerdanaProCondLight.ttf" />
-    <BundleResource Include="Resources\VerdanaProLight.ttf" />
-    <BundleResource Include="Resources\VerdanaProRegular.ttf" />
-    <BundleResource Include="Resources\VerdanaProSemiBold.ttf" />
-    <BundleResource Include="Resources\icofont.ttf" />
     <Compile Include="Rednerers\CardsViewRenderer.cs" />
     <Compile Include="Rednerers\PancakeViewRenderer.cs" />
     <Compile Include="Rednerers\ShapeUtils.cs" />
-    <BundleResource Include="Resources\BgImage.png" />
     <Compile Include="AppDelegate.cs" />
-    <BundleResource Include="Resources\Grocery_Store.png" />
-    <BundleResource Include="Resources\Pet_Store.png" />
-    <BundleResource Include="Resources\Shoes_Store.png" />
-    <BundleResource Include="Resources\Coffee_store.png" />
-    <BundleResource Include="Resources\Bakery_Store.png" />
-    <BundleResource Include="Resources\Bakery_Store 2.png" />
-    <BundleResource Include="Resources\Book_Store.png" />
-    <BundleResource Include="Resources\Book_Store 2.png" />
-    <None Include="DellyShop.iOS.csproj" />
     <None Include="DellyShopApp.iOS.sln" />
-    <BundleResource Include="Resources\Shoes.jpeg" />
-    <BundleResource Include="Resources\images.jpeg" />
-    <BundleResource Include="Resources\loko.jpg" />
-    <BundleResource Include="Resources\logo.png" />
-    <BundleResource Include="Resources\Fruit_Store.png" />
-    <BundleResource Include="Resources\Cloth_Store.png" />
-    <BundleResource Include="Resources\Hardware_Store.png" />
-    <BundleResource Include="Resources\whitehearticon3.png.webp" />
-    <BundleResource Include="Resources\whitehearticon3.webp" />
-    <BundleResource Include="Resources\hearts.png" />
-    <BundleResource Include="Resources\images.png.jpeg" />
-    <BundleResource Include="Resources\images 2.jpeg" />
-    <BundleResource Include="Resources\Heart.png" />
-    <BundleResource Include="Resources\UnFav.png" />
-    <BundleResource Include="Resources\Fav.png" />
-    <BundleResource Include="Resources\red.png" />
+    <None Include="DellyShopApp.iOS.csproj" />
+    <BundleResource Include="GoogleService-Info.plist">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <None Include=".DS_Store" />
+    <None Include="DellyShopApp.ipa" />
+    <BundleResource Include="Resources\.DS_Store" />
+    <BundleResource Include="Resources\vivo.gif" />
+    <BundleResource Include="Resources\3.png" />
+    <BundleResource Include="Resources\abc.jpg" />
+    <BundleResource Include="Resources\apple.png" />
+    <BundleResource Include="Resources\asd.gif" />
+    <BundleResource Include="Resources\Basket.png" />
+    <BundleResource Include="Resources\basket00.png" />
+    <BundleResource Include="Resources\basket11.png" />
+    <BundleResource Include="Resources\basket12.png" />
+    <BundleResource Include="Resources\bbbb.png" />
+    <BundleResource Include="Resources\beardo.jpg" />
+    <BundleResource Include="Resources\beauty.jpg" />
+    <BundleResource Include="Resources\BgImage.png" />
     <BundleResource Include="Resources\black.png" />
+    <BundleResource Include="Resources\BlackHeart.png" />
+    <BundleResource Include="Resources\blazer.jpg" />
+    <BundleResource Include="Resources\chat.png" />
+    <BundleResource Include="Resources\boy.webp" />
+    <BundleResource Include="Resources\check.png" />
+    <BundleResource Include="Resources\design.gif" />
+    <BundleResource Include="Resources\design1.gif" />
+    <BundleResource Include="Resources\discount.gif" />
+    <BundleResource Include="Resources\edit.png" />
+    <BundleResource Include="Resources\eee.webp" />
+    <BundleResource Include="Resources\electronics.png" />
+    <BundleResource Include="Resources\empty.gif" />
+    <BundleResource Include="Resources\emptycart.gif" />
+    <BundleResource Include="Resources\fashion.png" />
+    <BundleResource Include="Resources\Fav.png" />
+    <BundleResource Include="Resources\fff.jpeg" />
+    <BundleResource Include="Resources\flip.webp" />
+    <BundleResource Include="Resources\gift.gif" />
+    <BundleResource Include="Resources\footwear.jpg" />
+    <BundleResource Include="Resources\gold.jpg" />
+    <BundleResource Include="Resources\Green.jpeg" />
+    <BundleResource Include="Resources\grocery.png" />
+    <BundleResource Include="Resources\handbag.webp" />
+    <BundleResource Include="Resources\home.jpg" />
+    <BundleResource Include="Resources\Home.png" />
+    <BundleResource Include="Resources\icofont.ttf" />
+    <BundleResource Include="Resources\icon.png" />
+    <BundleResource Include="Resources\icon25.jpg.gif" />
+    <BundleResource Include="Resources\ic_eye.png" />
+    <BundleResource Include="Resources\ic_eye_hide.png" />
+    <BundleResource Include="Resources\images.jpeg" />
+    <BundleResource Include="Resources\images1.jpeg" />
+    <BundleResource Include="Resources\jaguar.png" />
+    <BundleResource Include="Resources\jeans.webp" />
+    <BundleResource Include="Resources\kalo1.png" />
+    <BundleResource Include="Resources\kapada.gif" />
+    <BundleResource Include="Resources\kapada1.gif" />
+    <BundleResource Include="Resources\kapada2.gif" />
+    <BundleResource Include="Resources\kapada3.gif" />
+    <BundleResource Include="Resources\kkkk.webp" />
+    <BundleResource Include="Resources\kurtas.webp" />
+    <BundleResource Include="Resources\lal1.png" />
+    <BundleResource Include="Resources\virat.jpg" />
+    <BundleResource Include="Resources\VerdanaProSemiBold.ttf" />
+    <BundleResource Include="Resources\VerdanaProRegular.ttf" />
+    <BundleResource Include="Resources\VerdanaProLight.ttf" />
+    <BundleResource Include="Resources\VerdanaProCondLight.ttf" />
+    <BundleResource Include="Resources\VerdanaProBold.ttf" />
+    <BundleResource Include="Resources\vacation.webp" />
+    <BundleResource Include="Resources\userimg.png" />
+    <BundleResource Include="Resources\unscreen.gif" />
+    <BundleResource Include="Resources\Unknown.jpeg" />
+    <BundleResource Include="Resources\tshirt.webp" />
+    <BundleResource Include="Resources\tshirt.jpg" />
+    <BundleResource Include="Resources\toys.png" />
+    <BundleResource Include="Resources\tools.gif" />
+    <BundleResource Include="Resources\Switch2.png" />
+    <BundleResource Include="Resources\siyaram.jpeg" />
+    <BundleResource Include="Resources\ShopSwitch.png" />
+    <BundleResource Include="Resources\ShopHigh.png" />
+    <BundleResource Include="Resources\shoes.jpg" />
+    <BundleResource Include="Resources\shirt.jpg" />
+    <BundleResource Include="Resources\sharee.png" />
+    <BundleResource Include="Resources\share.jpeg" />
+    <BundleResource Include="Resources\sari1.jpg" />
+    <BundleResource Include="Resources\RedHeart.png" />
+    <BundleResource Include="Resources\red.png" />
+    <BundleResource Include="Resources\Red.jpeg" />
+    <BundleResource Include="Resources\puma.png" />
+    <BundleResource Include="Resources\Profile.png" />
+    <BundleResource Include="Resources\ppp.png" />
+    <BundleResource Include="Resources\off.png" />
+    <BundleResource Include="Resources\night.jpg" />
+    <BundleResource Include="Resources\mobile.png" />
+    <BundleResource Include="Resources\mobile.gif" />
+    <BundleResource Include="Resources\mainlogo2.png" />
+    <BundleResource Include="Resources\Basket%402x.png" />
+    <BundleResource Include="Resources\Basket%403x.png" />
+    <BundleResource Include="Resources\Home%402x.png" />
+    <BundleResource Include="Resources\Home%403x.png" />
+    <BundleResource Include="Resources\Profile%402x.png" />
+    <BundleResource Include="Resources\Profile%403x.png" />
+    <BundleResource Include="Resources\Cartbag.png" />
+    <BundleResource Include="Resources\Share.png" />
+    <BundleResource Include="Resources\Heart.png" />
+    <BundleResource Include="Resources\YourCartisempty.gif" />
+    <BundleResource Include="Resources\okay.gif" />
+    <BundleResource Include="Resources\Missingcartitem.gif" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -174,141 +255,54 @@
     <ImageAsset Include="Assets.xcassets\BgImage.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\60.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\58.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\87.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120-1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\180.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\20.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40-1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\29.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\58-1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40-2.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80-1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\76.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\152.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\167.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120-2.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\180-1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\48.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\55.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\66.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\58-2.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\87-1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80-2.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\88.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\92.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\100.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\102.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\172.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\196.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\216.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024-1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\16.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\32.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\32-1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\64.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\128.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\256.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\256-1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\512.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\512-1.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024-2.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Shoppit.png">
-      <Visible>false</Visible>
-    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\60.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\87.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\180.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\20.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\29.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\58-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40-2.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\76.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\167.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120-2.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\180-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\48.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\55.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\66.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\58-2.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\87-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80-2.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\88.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\92.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\100.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\102.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\172.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\196.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\216.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\16.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\32.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\32-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\64.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\128.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\256.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\256-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\512.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\512-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024-2.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\234.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\258.png" />
+    <ImageAsset Include="Assets.xcassets\.DS_Store" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\152.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\shooppy108.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -322,9 +316,6 @@
     </PackageReference>
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
       <Version>4.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="Rg.Plugins.Popup">
-      <Version>2.1.0</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugins.Settings">
       <Version>3.1.1</Version>
@@ -362,6 +353,24 @@
     <PackageReference Include="Com.Airbnb.iOS.Lottie">
       <Version>2.5.13</Version>
     </PackageReference>
+    <PackageReference Include="Xam.Plugin.Connectivity">
+      <Version>3.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="DynamicStackLayout">
+      <Version>2017.12.4</Version>
+    </PackageReference>
+    <PackageReference Include="Prism.Unity.Forms">
+      <Version>8.1.97</Version>
+    </PackageReference>
+    <PackageReference Include="YmChat">
+      <Version>2.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.CommunityToolkit">
+      <Version>2.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.Badge">
+      <Version>2.3.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -371,325 +380,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Home%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Home%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Basket.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Basket%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Basket%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\shoesCategory.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\electronicCategory.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\clothingCategory.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\shoes.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\elecronics.jpeg" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\clothing.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\shoesblack.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\shoesyellow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\iphone.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\shoesBlack%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\shoesBlack%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\shoesblack2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bestShoes.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bestShoes%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bestShoes%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bestofYear%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bestofYear%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bestofYear.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\grazy1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\garzy2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\garzy2%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\garzy2%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\grazy1%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\grazy1%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\masterCard%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\masterCard%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\masterCard.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\check%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\check.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\check%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\nocards%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\americanexpresslogo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\americanexpresslogo%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\americanexpresslogo%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex_blue.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex_blue%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex_blue%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_chip.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_chip%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_chip%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_cvv.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_cvv%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_cvv%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_date.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_date%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_date%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_dinersclub.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_dinersclub%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_dinersclub%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_dinersclub_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_dinersclub_white%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_dinersclub_white%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_discover.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_discover%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_discover%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_discover_light.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_discover_light%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_discover_light%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_jcb.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_jcb%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_jcb%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_mastercard.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_mastercard%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_mastercard%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_mastercard_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_mastercard_white%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_mastercard_white%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_visa.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_visa%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_visa%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_visa_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_visa_white%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_visa_white%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\nocards.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\nocards%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex_light%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex_light.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex_light%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\creditCardIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ip8_1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\red1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\red1%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\red1%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ip8_1%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ip8_1%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ip8_2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ip8_2%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\py_1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\py_1%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\py_1%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ip8_2%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\pp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Profile.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Profile%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Profile%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Assets.xcassets\BgImage.imageset\" />
     <Folder Include="Assets.xcassets\Dark Mode Backgroud Color.colorset\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\clock.json" />
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <TextStylePolicy TabWidth="4" IndentWidth="4" RemoveTrailingWhitespace="True" NoTabsAfterNonTabs="False" EolMarker="Native" FileWidth="80" TabsToSpaces="True" scope="application/vnd.apple-xcode-storyboard" />
+          <XmlFormattingPolicy inheritsSet="null" scope="application/vnd.apple-xcode-storyboard" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
 </Project>

@@ -21,9 +21,7 @@ namespace DellyShopApp.Models
 
 
         private int _rotate;
-        internal string orderStatus;
-        internal Guid orderGuid;
-        private int _Quantity;
+      
         internal double product;
 
         public int Rotate
@@ -35,6 +33,7 @@ namespace DellyShopApp.Models
                 OnPropertyChanged(nameof(Rotate));
             }
         }
+        
 
 
 
@@ -42,33 +41,40 @@ namespace DellyShopApp.Models
         public string Title { get; set; }
         public string Brand { get; set; }
         public string Image { get; set; }
+        public string Description { get; set; }
         public double Price { get; set; }
         public int Id { get; set; }
         public int orgId { get; set; }
+        public int BrandId { get; set; }
+        public int CategoryId { get; set; }
         public string[] ProductList { get; set; }
         public int OldPrice { get; set; }
         public int orderId { get; set; }
-        public Guid OrderGuId { get; internal set; }
-        public DateTime InsertDate { get; internal set; }
+        public Guid OrderGuId { get;  set; }
+        public DateTime InsertDate { get;  set; }
         public int UserId { get; set; }
         public int Quantity { get; set; }
+        public int OrderNo { get; set; }
+        public DateTime orderDate { get; set; }
+        public string orderStatus { get; set; }
+        public int OrderNumber { get; set; }
+        public int productQty { get; set; }
         public ChangeAddress changeAddress { get; set; }
         public OrderCheckOut ordercheckout { get; set; }
-        public object BaseTotalPrice  { get; internal set; }
-
-
-
-
-        public object Children { get; internal set; }
-        public object RemoveCommand { get; internal set; }
+        public bool IsPriceVisible { get; set; }
+        public bool IsOutStock { get; set; }
+        public bool Isimage { get; set; }
+        public bool WishlistedProduct { get; set; }
+        public object Children { get;  set; }
+        public object RemoveCommand { get;  set; }
         public int Empty { get; internal set; }
+        public object Name { get; internal set; }
+        public string IP { get; set; }
+        public string STATUS { get; set; }
 
-        public static implicit operator ProductListModel(List<ProductListModel> v)
-        {
-            throw new NotImplementedException();
-        }
 
-       
+
+
     }
 }
 

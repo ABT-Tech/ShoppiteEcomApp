@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<xct:Popup
+xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+xmlns:pinch="clr-namespace:Xamarin.Forms.PinchZoomImage;assembly=Xamarin.Forms.PinchZoomImage" 
+x:Class="DellyShopApp.Views.Pages.imagepopup"
+Size="350,1000">
+    <StackLayout>
+        <pinch:PinchZoom>
+            <pinch:PinchZoom.Content>
+        <Image Aspect="AspectFit"
+               HeightRequest="600"
+               WidthRequest="300"
+               Margin="0"
+               x:Name="showimg"
+               Source="{Binding Image}">
+        </Image>
+           </pinch:PinchZoom.Content>
+</pinch:PinchZoom>
+    </StackLayout>
+   
+</xct:Popup>
+

@@ -11,23 +11,40 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <ConsolePause>true</ConsolePause>
+    <LangVersion>Default</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
 	 <PackageReference Include="Acr.UserDialogs" Version="8.1.0-alpha-0009" />
 	 <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
 	 <PackageReference Include="Microsoft.Azure.Management.Network" Version="26.0.0" />
-	 <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
 	 <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.2012" />
     <PackageReference Include="XamarinFastEntry.Behaviors" Version="1.1.1" />
     <PackageReference Include="Plugin.Multilingual" Version="1.0.2" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
     <PackageReference Include="Plugin.FirebasePushNotification" Version="3.3.10" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="PayPal.Forms" Version="2.18.6" />
     <PackageReference Include="Plugin.PayCards" Version="1.1.1" />
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
+    <PackageReference Include="DynamicStackLayout" Version="2017.12.4" />
+    <PackageReference Include="Prism.Unity.Forms" Version="8.1.97" />
+    <PackageReference Include="YmChat" Version="2.2.0" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.6" />
+    <PackageReference Include="Plugin.Badge" Version="2.3.1" />
+    <PackageReference Include="PushSharp" Version="4.0.10" />
+    <PackageReference Include="Xamarin.Forms.Skeleton" Version="2.0.0" />
+    <PackageReference Include="FreshMvvm" Version="3.0.0" />
+    <PackageReference Include="Xamarin.Forms.EasyLoading" Version="1.0.3" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
+    <PackageReference Include="Intersoft.Crosslight.Services.Barcode" Version="6.0.5000.975" />
+    <PackageReference Include="Xamarin.Forms.PinchZoomImage" Version="1.2.0" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.12" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,11 +56,25 @@
     <None Remove="Themes\LottieLogo1.json" />
     <None Remove="Themes\clock.json" />
     <None Remove="Resources\clock.json" />
+    <None Remove="Xam.Plugin.Connectivity" />
+    <None Remove="DynamicStackLayout" />
+    <None Remove="Prism.Unity.Forms" />
+    <None Remove="YmChat" />
+    <None Remove="Xamarin.CommunityToolkit" />
+    <None Remove="Plugin.Badge" />
+    <None Remove="Animations\" />
+    <None Remove="Xamarin.Forms.Skeleton" />
+    <None Remove="FreshMvvm" />
+    <None Remove="Xamarin.Forms.EasyLoading" />
+    <None Remove="GoogleService-Info.plist" />
+    <None Remove="System.Runtime" />
+    <None Remove="Intersoft.Crosslight.Services.Barcode" />
+    <None Remove="Views\ModalPages\" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
+    <None Include="DellyShopApp.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
@@ -75,9 +106,6 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Views\Pages\MyFavoritePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\Pages\ProductDetail.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Views\Pages\RegisterPage.xaml">
@@ -126,9 +154,6 @@
     <EmbeddedResource Update="Views\Pages\LastViewPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Pages\MyCartPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\Pages\NotificationDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -172,6 +197,8 @@
     <Folder Include="Services\" />
     <Folder Include="Views\Pages\Base\" />
     <Folder Include="Themes\" />
+    <Folder Include="Animations\" />
+    <Folder Include="Views\ModalPages\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Android">
@@ -189,6 +216,18 @@
       <DependentUpon>AppResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Pages\VendorsOrderDetails %28copy%29.xaml.cs">
+      <DependentUpon>VendorsOrderDetails %28copy%29.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="MainPage %28copy%29.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Helpers\FontAwesomeIcons.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </Compile>
   </ItemGroup>
 </Project>

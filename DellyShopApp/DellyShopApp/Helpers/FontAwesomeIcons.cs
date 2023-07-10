@@ -2095,5 +2095,6 @@
         public const string World = "\uf02c";
         public const string Zigzag = "\uf02d";
         public const string Zipped = "\uf02e";
+       
     }
 }

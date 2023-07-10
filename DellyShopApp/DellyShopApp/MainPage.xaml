@@ -14,30 +14,14 @@
     NavigationPage.HasNavigationBar="False"
     Visual="Material">
     <ScrollView>
+        <Grid>
         <StackLayout Margin="15,10,15,0">
             <StackLayout Spacing="0">
-                <Label
-                        Margin="0"
-                        Padding="0,20,0,0"
-                        FontAttributes="Bold"
-                        FontFamily="{DynamicResource VerdanaProRegular}"
-                        FontSize="30"
-                        HorizontalOptions="Center"
-                        Style="{DynamicResource LabelStyle}"
-                        Text="Shoppite"
-                        TextColor="Chocolate" />
-                <Label
-                        Margin="0"
-                        Padding="0,5,0,0"
-                        FontAttributes="Bold"
-                        FontFamily="{DynamicResource VerdanaProBold}"
-                        FontSize="15"
-                        HorizontalOptions="Center"
-                        Text="What You Shop Matters!!! "
-                        TextColor="Chocolate" />
+                <Image Source="mainlogo2.png" HorizontalOptions="Center"
+                       VerticalOptions="Start"/>
             </StackLayout>
-          
-            <Grid  BackgroundColor="#f5f5f5" x:Name="shop">
+          <Label x:Name="networkstate" IsVisible="true" TextColor="Red" FontSize="25" />
+            <Grid  BackgroundColor="#f5f5f5" x:Name="shop" IsVisible="true">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -46,9 +30,21 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                
-              
             </Grid>
         </StackLayout>
+         <StackLayout
+        x:Name="aiLayout"
+        IsVisible="False"
+        AbsoluteLayout.LayoutBounds="0,0,1,1"
+        AbsoluteLayout.LayoutFlags="All"
+        BackgroundColor="White" Opacity="0.7">
+                <ActivityIndicator
+            x:Name="ai"
+            IsRunning="False"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            />
+            </StackLayout>
+            </Grid>
     </ScrollView>
 </base:BasePage>

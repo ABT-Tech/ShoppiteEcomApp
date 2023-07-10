@@ -3,22 +3,42 @@ using DellyShopApp.Views.Pages;
 using Xamarin.Forms;
 using DellyShopApp.Services;
 using Xamarin.Essentials;
-using Android.OS;
-using Android.Runtime;
 using Acr.UserDialogs;
 using static DellyShopApp.Views.ListViewData;
-
+using System.Net.NetworkInformation;
+using System.Net;
+using Plugin.Connectivity;
+using Plugin.FirebasePushNotification;
+using System.Threading.Tasks;
 namespace DellyShopApp
 {
-    
     public partial class MainPage
     {
-
+        public int oldorgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public MainPage()
         {
             InitializeComponent();
-            InittMainPage();
-           
+            CrossFirebasePushNotification.Current.OnNotificationReceived += Current_OnNotificationReceived;
+            if (ChechConnectivity())
+            {
+                InittMainPage();
+            }
+        }
+        private void Current_OnNotificationReceived(object source, FirebasePushNotificationDataEventArgs e)
+        {
+            DisplayAlert("Notification", $"Data:{e.Data["myData"]}", "Ok");
+        }
+        private bool ChechConnectivity()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                return true;
+            }
+            else
+            {
+                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
+                return false;
+            }
         }
         private async void InittMainPage()
         {
@@ -46,25 +66,20 @@ namespace DellyShopApp
                         Text = product.ShopName,
                         VerticalOptions = LayoutOptions.End,
                         HorizontalOptions = LayoutOptions.Center,
-                        TextColor = Color.Chocolate,
+                        TextColor = Color.Black,
                         FontAttributes = FontAttributes.Bold,
-                        FontSize = 20,
-                        
-
+                        FontSize = 18,
                     };
                     var image = new Image
                     {
                         Source = product.Image,
                         BackgroundColor = Color.WhiteSmoke,
-                        Margin = 15,
+                        Margin = new Thickness(0, 15, 0, 25),
                         VerticalOptions = LayoutOptions.Center,
                         HorizontalOptions = LayoutOptions.Center,
                         HeightRequest = 200,
-                        WidthRequest = 200
-                        
-                        
-
-
+                        WidthRequest = 200,
+                        Aspect = Aspect.AspectFit
                     };
                     var Orglabel = new Label
                     {
@@ -82,17 +97,25 @@ namespace DellyShopApp
             }
             //shop.ItemsSource = DataService.Instance.ShopDetails;
         }
-
-
-        private  void TapGestureRecognizer_Tapped(string orgId,string Img)
+        private async void TapGestureRecognizer_Tapped(string orgId,string Img)
         {
+            ai.IsRunning = true;
+            aiLayout.IsVisible = true;
+            await Task.Delay(1500);
+            aiLayout.IsVisible = false;
+            ai.IsRunning = false;
 
-            SecureStorage.SetAsync("OrgId",orgId);
-            SecureStorage.SetAsync("ImgId", Img);
-            Navigation.PushAsync(new HomeTabbedPage());
-         
+            var neworgId = Convert.ToInt32(orgId);
+            if(neworgId != oldorgId)
+            {
+                Xamarin.Essentials.SecureStorage.RemoveAll();
+            }
+            await SecureStorage.SetAsync("OrgId",orgId);
+            await SecureStorage.SetAsync("ImgId", Img);
+            await Navigation.PushAsync(new HomeTabbedPage());
+            
         }
-
+      
     }
    
 }

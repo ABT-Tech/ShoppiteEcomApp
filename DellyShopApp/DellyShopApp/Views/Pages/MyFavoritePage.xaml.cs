@@ -1,6 +1,7 @@
 ﻿using DellyShopApp.Models;
 using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
+using Plugin.Connectivity;
 using System;
 using Xamarin.Essentials;
 using Xamarin.Forms.Xaml;
@@ -11,13 +12,29 @@ namespace DellyShopApp.Views.Pages
     public partial class MyFavoritePage
     {
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
-        public int userId = 34;//Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         public MyFavoritePage()
 
         {
             InitializeComponent();
-            InittFavoritePage();
+            if (ChechConnectivity())
+            {
+                InittFavoritePage(); 
+            }
+         
            
+        }
+        private bool ChechConnectivity()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                return true;
+            }
+            else
+            {
+                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
+                return false;
+            }
         }
         private async void InittFavoritePage()
         {

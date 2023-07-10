@@ -5,6 +5,8 @@ using DellyShopApp.Languages;
 using DellyShopApp.Models;
 using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
+using Plugin.Connectivity;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,14 +16,31 @@ namespace DellyShopApp.Views.Pages
     [DesignTimeVisible(false)]
     public partial class BestSellerPage 
     {
+        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public BestSellerPage()
         {
             InitializeComponent();
-            InittBestSellerPage();
+            if (ChechConnectivity())
+            {
+                InittBestSellerPage();
+            }
+
+        }
+        private bool ChechConnectivity()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                return true;
+            }
+            else
+            {
+                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
+                return false;
+            }
         }
         private async void InittBestSellerPage()
         {
-            BestSeller.FlowItemsSource = DataService.Instance.ProcutListModel;
+            BestSeller.FlowItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
         }
         private async void ProductDetailClick(object sender, EventArgs e)
         {

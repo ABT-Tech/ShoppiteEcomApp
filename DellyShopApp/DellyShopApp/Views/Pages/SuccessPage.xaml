@@ -73,33 +73,26 @@
             </ScrollView>
             <StackLayout>
                 <Image
-                    Aspect="AspectFill"
-                    HeightRequest="80"
+                    Source="okay.gif"
+                    Aspect="Fill"
+                    HeightRequest="500"
                     HorizontalOptions="CenterAndExpand"
                     Style="{DynamicResource ImageStyleEntry}"
-                    WidthRequest="80">
-                    <Image.Source>
+                    WidthRequest="400">
+                    <!--<Image.Source>
                         <FontImageSource
                             Size="100"
                             FontFamily="{DynamicResource MaterialFontFamily}"
-                            Glyph="{x:Static font:FontAwesomeIcons.CheckCircled}"
+                           
                             Color="Black" />
-                    </Image.Source>
+                    </Image.Source>-->
                 </Image>
-                <Label
-                    FontFamily="{DynamicResource VerdanaProRegular}"
-                    FontSize="35"
-                    HorizontalOptions="Center"
-                    Text="{x:Static languages:AppResources.SuccessOrder}"
-                    TextColor="Black"
-                    VerticalOptions="StartAndExpand" />
+               
             </StackLayout>
 
             <Button
                 Margin="0,0,0,10"
-                BackgroundColor="Chocolate"
-                
-               
+                BackgroundColor="#ff002c"
                 Clicked="ContinueClick"
                 CornerRadius="20"
                 FontFamily="{DynamicResource VerdanaProRegular}"
@@ -107,7 +100,7 @@
                 HeightRequest="45"   
                 WidthRequest="200"
                 HorizontalOptions="CenterAndExpand"
-                Text="{x:Static languages:AppResources.HomePage}"
+                Text="Continue Shopping"
                 TextColor="White"
                 VerticalOptions="EndAndExpand">
             <VisualStateManager.VisualStateGroups>
