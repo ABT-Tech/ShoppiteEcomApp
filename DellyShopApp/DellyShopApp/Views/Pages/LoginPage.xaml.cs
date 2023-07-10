@@ -7,7 +7,7 @@ using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompila
             InitializeComponent();        }        private async void LoginButtonClick(object sender, EventArgs e)        {            var login = new Login            {                email = email.Text,                password = pswd.Text,                org_Id = orgId,
                 type = "Client"
             };
-            if (email.Text == null || email.Text == "")            {                await DisplayAlert("Opps", "Please Enter Email", "ok");                return;            }            else if (pswd.Text == null || pswd.Text == "")            {                await DisplayAlert("Opps", "Please Enter Password", "ok");                return;            }
+            if (email.Text == null || email.Text == "")            {                await DisplayAlert("Opps", "Please Enter Email", "Ok");                return;            }            else if (pswd.Text == null || pswd.Text == "")            {                await DisplayAlert("Opps", "Please Enter Password", "Ok");                return;            }
 
             var userDetail = await DataService.Login(login);
             if(userDetail != null)

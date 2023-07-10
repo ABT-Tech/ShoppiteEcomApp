@@ -68,6 +68,8 @@ namespace DellyShopApp.Models
         public object Name { get; internal set; }
         public string IP { get; set; }
         public string STATUS { get; set; }
+        public int CategoryId { get; set; }
+        public int BrandId { get; set; }
 
 
 

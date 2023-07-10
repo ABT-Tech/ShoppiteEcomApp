@@ -7,7 +7,7 @@ using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompila
             var login = new Login            {                email = email.Text,                password = pswd.Text,                org_Id = orgId,
                 type = "vendor"
             };
-            if (email.Text == null || email.Text == "")            {                await DisplayAlert("Opps", "Please Enter Email", "ok");                return;            }            else if (pswd.Text == null || pswd.Text == "")            {                await DisplayAlert("Opps", "Please Enter Password", "ok");                return;            }
+            if (email.Text == null || email.Text == "")            {                await DisplayAlert("Opps", "Please Enter Email", "Ok");                return;            }            else if (pswd.Text == null || pswd.Text == "")            {                await DisplayAlert("Opps", "Please Enter Password", "Ok");                return;            }
             var userDetail = await DataService.Login(login);
             if (userDetail != null)
             {
@@ -23,19 +23,10 @@ using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompila
 
 
                await Navigation.PushAsync(new Venderdata());
-
-
-
         }        private void BackButton(object sender, EventArgs e)        {            Navigation.PopAsync();        }        private async void ForgetPassClick(object sender, EventArgs e)        {            string result = await DisplayPromptAsync(AppResources.ForgotPass,                AppResources.EnterEmailAddress);            if (string.IsNullOrEmpty(result)) return;            await DisplayAlert(AppResources.Success,                AppResources.SuccessSendEmail                + " " + result, AppResources.Okay);        }
-
         void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
         {
             Navigation.PopAsync();
         }
-
-
-
-
-
     }
     }

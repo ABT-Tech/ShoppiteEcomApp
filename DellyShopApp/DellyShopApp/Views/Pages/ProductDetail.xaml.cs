@@ -1,7 +1,9 @@
-﻿using System;using System.Collections.Generic;using System.Linq;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class ProductDetail    {        public int proId = Convert.ToInt32(SecureStorage.GetAsync("ProId").Result);        public int orderId = Convert.ToInt32(SecureStorage.GetAsync("OrderId").Result);
+﻿using System;using System.Collections.Generic;using System.Linq;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;
+using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class ProductDetail    {        public int proId = Convert.ToInt32(SecureStorage.GetAsync("ProId").Result);        public int orderId = Convert.ToInt32(SecureStorage.GetAsync("OrderId").Result);
         public string UserId = SecureStorage.GetAsync("UserId").Result;
         public string userAuth = SecureStorage.GetAsync("Usertype").Result;
-        
+        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+
 
         int productCount = 1;        private static IEnumerable<ProductListModel> ItemsSource;        private readonly ProductListModel _products;
         private List<ProductListModel> _productLists = new List<ProductListModel>();
@@ -66,8 +68,11 @@
             MainPage = new HomePage();            //starList.ItemsSource = _startList;            //starListglobal.ItemsSource = _startList;            //CommentList.ItemsSource = _comments;
             //MainScroll.Scrolled += MainScroll_Scrolled; 
 
-            InittProductDetail();        }        private async void InittProductDetail()        {            ProductDetail.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.Id == proId);
-
+            InittProductDetail(product);        }        private async void InittProductDetail(ProductListModel product)        {            ProductDetail.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.Id == proId);
+            List<ProductListModel> categories = new List<ProductListModel>();
+            categories.Add(product);
+            PreviousViewedList.ItemsSource = await DataService.GetSimilarProducts(orgId, Convert.ToInt32(product.CategoryId), Convert.ToInt32(product.BrandId));
+            
         }
 
         public ProductDetail()        {        }        private void PlusClick(object sender, EventArgs e)        {
@@ -162,5 +167,9 @@
 
         }
 
+       private async void ProductDetailClick(System.Object sender, System.EventArgs e)
+        {
+            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));
+        }
     }
 }

@@ -48,7 +48,9 @@
            TextTransform="Lowercase"
            FontSize="Medium"
            TextChanged="SearchBar_TextChanged" />
-                <ListView x:Name="searchResults" IsVisible="False" ItemSelected="searchResults_ItemSelected">
+                <ListView x:Name="searchResults"
+                          IsVisible="False"
+                          ItemSelected="searchResults_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell Text="{Binding Title}">
@@ -56,8 +58,6 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>                    
                 </ListView>
-              
-
                 <Label
                     Margin="0"
                     Padding="5,5,0,0"
@@ -176,7 +176,7 @@
                         </controls:CarouselView.ItemTemplate>
                     </controls:CarouselView>
                 </pancakeView:PancakeView>
-                <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal" x:Name="bestsellerstk" IsVisible="False">
                     <Label
                         Margin="0,10,0,0"
                         Padding="5,5,0,0"
@@ -282,16 +282,32 @@
                         </customControl:RepeaterView.ItemTemplate>
                     </customControl:RepeaterView>
                 </ScrollView>
+                <StackLayout Orientation="Horizontal">
                 <Label
                     Margin="0,10,0,0"
                     Padding="5,5,0,0"
                     FontAttributes="Bold"
                     FontFamily="{DynamicResource VerdanaProBold}"
                     FontSize="22"
-                    HorizontalOptions="Start"
+                    HorizontalOptions="StartAndExpand"
                     Text="Top Deals"
                     TextColor="Black"
                     VerticalOptions="Start" />
+                  <Label
+                        Margin="0,10,0,0"
+                        Padding="5,5,0,0"
+                        FontAttributes="Bold"
+                        FontFamily="{DynamicResource VerdanaProBold}"
+                        FontSize="18"
+                        HorizontalOptions="End"
+                        Text="{x:Static helpers:AppResources.ViewAll}"
+                        TextColor="Gray"
+                        VerticalOptions="Start">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="viewall" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    </StackLayout>
                 <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
                     <customControl:RepeaterView
                         x:Name="PreviousViewedList"
@@ -314,6 +330,10 @@
                                                                  Phone=130}">
                                        
                                         <pancakeView:PancakeView.GestureRecognizers>
+                                             <DragGestureRecognizer
+                                                CanDrag="True"
+                                                DragStarting="DragGestureRecognizer_DragStarting"
+                                                DropCompleted="DragGestureRecognizer_DropCompleted" />
                                             <TapGestureRecognizer Tapped="ProductDetailClick" />
                                         </pancakeView:PancakeView.GestureRecognizers>
                                         <StackLayout>
@@ -425,6 +445,14 @@
             </StackLayout>
                
         </ScrollView>
+        <Label IsVisible="false"
+                            x:Name="ProductCountLabel"
+                            FontFamily="{DynamicResource VerdanaProLight}"
+                            FontSize="44"
+                            HorizontalOptions="End"
+                            Text="1"
+                            TextColor="{DynamicResource WhiteDarkFontColor}"
+                            VerticalOptions="CenterAndExpand" />
         <controls:PancakeView
             x:Name="BasketLayout"
             IsVisible="false"
@@ -450,7 +478,7 @@
                         FontFamily="{DynamicResource MaterialFontFamily}"
                         Glyph="{x:Static font:FontAwesomeIcons.CartAlt}"
                         Size="50"
-                        Color="White" />
+                        Color="Chocolate" />
                 </Image.Source>
             </Image>
         </controls:PancakeView>

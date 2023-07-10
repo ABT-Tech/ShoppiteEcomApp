@@ -98,4 +98,9 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         {
             await Navigation.PushAsync(new HomeTabbedPage());
         }
+
+       private async void TapGestureRecognizer_Tapped_3(System.Object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new HomeTabbedPage());
+        }
     }}
