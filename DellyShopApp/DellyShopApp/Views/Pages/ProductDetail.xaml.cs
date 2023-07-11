@@ -127,7 +127,6 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                 _products.Quantity = Convert.ToInt32(ProductCountLabel.Text);
                 _productLists.Add(_products);
                 await Navigation.PushAsync(new BasketPage(_productLists));
-
             }
         }
         private async void Imgtapp(System.Object sender, System.EventArgs e)
