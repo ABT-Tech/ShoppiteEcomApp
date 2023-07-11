@@ -1,4 +1,5 @@
-﻿using System;using System.Collections.Generic;using System.Linq;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;
+﻿using System;using System.Collections.Generic;using System.Drawing;
+using System.Linq;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class ProductDetail    {        public int proId = Convert.ToInt32(SecureStorage.GetAsync("ProId").Result);        public int orderId = Convert.ToInt32(SecureStorage.GetAsync("OrderId").Result);
         public string UserId = SecureStorage.GetAsync("UserId").Result;
         public string userAuth = SecureStorage.GetAsync("Usertype").Result;
@@ -127,7 +128,6 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                 _products.Quantity = Convert.ToInt32(ProductCountLabel.Text);
                 _productLists.Add(_products);
                 await Navigation.PushAsync(new BasketPage(_productLists));
-
             }
         }
         private async void Imgtapp(System.Object sender, System.EventArgs e)
@@ -170,6 +170,11 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
        private async void ProductDetailClick(System.Object sender, System.EventArgs e)
         {
             if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));
+        }
+
+      private async  void TapGestureRecognizer_Tapped_5(System.Object sender, System.EventArgs e)
+        {
+            string action = await DisplayActionSheet("Select Size", "Cancel", null, "X", "XL", "XXL");            size.Text = action;
         }
     }
 }

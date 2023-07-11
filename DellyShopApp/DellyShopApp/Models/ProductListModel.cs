@@ -70,6 +70,7 @@ namespace DellyShopApp.Models
         public string STATUS { get; set; }
         public int CategoryId { get; set; }
         public int BrandId { get; set; }
+        public string Attributename { get; set; }
 
 
 
