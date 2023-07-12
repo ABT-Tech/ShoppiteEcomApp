@@ -71,6 +71,8 @@ namespace DellyShopApp.Models
         public int CategoryId { get; set; }
         public int BrandId { get; set; }
         public string Attributename { get; set; }
+        public bool Isenable { get; set; }
+        public Guid ProductGUId { get; set; }
 
 
 

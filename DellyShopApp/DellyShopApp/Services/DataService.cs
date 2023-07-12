@@ -38,6 +38,7 @@ namespace DellyShopApp.Services
         public List<ChangeAddress> changeAddress = new List<ChangeAddress>();
         public List<CategoryDetailPage> Details = new List<CategoryDetailPage>();
         public List<VendorsOrder> vendors = new List<VendorsOrder>();
+        public List<Attributes> attributes = new List<Attributes>();
         public List<UserOrder> user = new List<UserOrder>();
         public OrderDetails orderdetails = new OrderDetails();
         public OrgData ObjOrgData = new OrgData();
@@ -81,9 +82,42 @@ namespace DellyShopApp.Services
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-                 
+        public DataService()
+        {
+            attributes.Add(new Attributes
+            {
+                SpecificationNames = "S",
+                SpecificationIds = 1,
+            }) ;
+            attributes.Add(new Attributes
+            {
+                SpecificationNames = "L",
+                SpecificationIds = 2,
+            });
+            attributes.Add(new Attributes
+            {
+                SpecificationNames = "M",
+                SpecificationIds = 3,
+            });
+            attributes.Add(new Attributes
+            {
+                SpecificationNames = "XL",
+                SpecificationIds = 4,
+            });
+            attributes.Add(new Attributes
+            {
+                SpecificationNames = "XXL",
+                SpecificationIds = 5,
+            });
+            attributes.Add(new Attributes
+            {
+                SpecificationNames = "XXXL",
+                SpecificationIds = 6,
+            });
+        }
 
-      
+
+
 
         public static async Task<List<Category>> GetCategories(int orgId)
         {
@@ -826,6 +860,30 @@ namespace DellyShopApp.Services
 
                 string result = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<ProductListModel>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<List<Attributes>> GetProductVariation(int OrgId, Guid ProductGUID)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Products/GetProductVariation?OrgId=" + OrgId + "&ProductGUId=" + ProductGUID);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<Attributes>>(result);
             }
             catch (Exception ex)
             {

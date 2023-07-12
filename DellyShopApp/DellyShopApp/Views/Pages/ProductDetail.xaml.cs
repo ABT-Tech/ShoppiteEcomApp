@@ -1,6 +1,8 @@
 ﻿using System;using System.Collections.Generic;using System.Drawing;
 using System.Linq;using DellyShopApp.Languages;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;
-using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class ProductDetail    {        public int proId = Convert.ToInt32(SecureStorage.GetAsync("ProId").Result);        public int orderId = Convert.ToInt32(SecureStorage.GetAsync("OrderId").Result);
+using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;using Color = System.Drawing.Color;
+
+namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class ProductDetail    {        public int proId = Convert.ToInt32(SecureStorage.GetAsync("ProId").Result);        public int orderId = Convert.ToInt32(SecureStorage.GetAsync("OrderId").Result);
         public string UserId = SecureStorage.GetAsync("UserId").Result;
         public string userAuth = SecureStorage.GetAsync("Usertype").Result;
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
@@ -9,6 +11,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
         int productCount = 1;        private static IEnumerable<ProductListModel> ItemsSource;        private readonly ProductListModel _products;
         private List<ProductListModel> _productLists = new List<ProductListModel>();
         public HomePage MainPage { get; }
+        PancakeView lastCell;
 
 
         public ProductDetail(ProductListModel product)        {
@@ -17,7 +20,8 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             //    product.ProductList = new string[] { product.Image };
             //}
             _products = product;
-
+           
+            
             //_startList.Add(new StartList
             //{
             //    StarImg = FontAwesomeIcons.Star
@@ -69,10 +73,11 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             MainPage = new HomePage();            //starList.ItemsSource = _startList;            //starListglobal.ItemsSource = _startList;            //CommentList.ItemsSource = _comments;
             //MainScroll.Scrolled += MainScroll_Scrolled; 
 
-            InittProductDetail(product);        }        private async void InittProductDetail(ProductListModel product)        {            ProductDetail.ItemsSource = DataService.Instance.ProcutListModel.Where(x => x.Id == proId);
+            InittProductDetail(product);        }        private async void InittProductDetail(ProductListModel product)        {            
             List<ProductListModel> categories = new List<ProductListModel>();
             categories.Add(product);
             PreviousViewedList.ItemsSource = await DataService.GetSimilarProducts(orgId, Convert.ToInt32(product.CategoryId), Convert.ToInt32(product.BrandId));
+            AttributeName.ItemsSource = await DataService.GetProductVariation(orgId,product.ProductGUId);
             
         }
 
@@ -106,6 +111,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                 cart.UserId = Convert.ToInt32(UserId);
                 cart.proId = _products.Id;
                 cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
+
                 await DataService.AddToCart(cart);
                 _products.Quantity = Convert.ToInt32(ProductCountLabel.Text);
                 _productLists.Add(_products);
@@ -171,10 +177,8 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
         {
             if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));
         }
+        private void AttributeClick(object sender, EventArgs e)        {            if (lastCell != null)                lastCell.Content.BackgroundColor = Color.Transparent;                      var pancake = (PancakeView)sender;            if (pancake. Content!= null)            {                pancake.Content.BackgroundColor = Color.Chocolate;                lastCell = pancake;                           }
+                    }
 
-      private async  void TapGestureRecognizer_Tapped_5(System.Object sender, System.EventArgs e)
-        {
-            string action = await DisplayActionSheet("Select Size", "Cancel", null, "X", "XL", "XXL");            size.Text = action;
-        }
     }
 }
