@@ -890,7 +890,31 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
+        public static async Task<List<AttributeListModel>> GetProductDetailsBySpecifcation(int OrgId, Guid ProductGUID, int SpecificationId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
 
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Products/GetProductDetailsBySpecifcation?OrgId=" + OrgId + "&ProductGUID=" + ProductGUID + "&SpecificationId=" + SpecificationId);
+
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<AttributeListModel>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
 

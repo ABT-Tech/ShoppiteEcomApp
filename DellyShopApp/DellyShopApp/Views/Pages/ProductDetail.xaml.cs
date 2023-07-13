@@ -81,7 +81,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             
         }
 
-        public ProductDetail()        {        }        private void PlusClick(object sender, EventArgs e)        {
+        public ProductDetail()        {        }        private void PlusClick(object sender, EventArgs e)        {
             {
                 if (_products.Quantity >= 10)
                 {
@@ -177,8 +177,8 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         {
             if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));
         }
-        private void AttributeClick(object sender, EventArgs e)        {            if (lastCell != null)                lastCell.Content.BackgroundColor = Color.Transparent;                      var pancake = (PancakeView)sender;            if (pancake. Content!= null)            {                pancake.Content.BackgroundColor = Color.Chocolate;                lastCell = pancake;                           }
-                    }
+        private async void AttributeClick(object sender, EventArgs e)        {            if (lastCell != null)                lastCell.Content.BackgroundColor = Color.Transparent;                      var pancake = (PancakeView)sender;            if (pancake. Content!= null)            {                pancake.Content.BackgroundColor = Color.Chocolate;                lastCell = pancake;                           }
+            if (!(sender is PancakeView stack)) return;            if (stack.Children.Count() <= 0) return;            if (!(stack.Children[0] is StackLayout sa)) return;            var specificationStack = sa.Children;            if (specificationStack.Count() <= 0) return;            if (!(specificationStack[1] is Label specLabel)) return;            var specificationValue = specLabel.Text;            ProductListModel attributeList = new ProcutListModel();            attributeList.orgId = _products.orgId;            attributeList.ProductGUId = _products.ProductGUId;            attributeList.SpecificationId = Convert.ToInt32(specificationValue);            NavbarStack.BindingContext = await DataService.GetProductDetailsBySpecifcation(attributeList.orgId, attributeList.ProductGUId, attributeList.SpecificationId);            await Navigation.PushAsync(new ProductDetail());        }
 
     }
 }
