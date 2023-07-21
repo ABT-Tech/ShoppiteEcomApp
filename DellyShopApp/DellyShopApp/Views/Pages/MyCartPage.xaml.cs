@@ -20,8 +20,17 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         public MyCartPage()        {
            
             InitializeComponent();
-            //if (_products.productQty == 0)            //{            //    //ProductCountLabel.IsVisible = false;            //    //Stocklbl.IsVisible = true;            //    //Addtocartbtn.IsVisible = false;            //    //BuyNowbtn.IsVisible = false;            //    //plusclick.IsVisible = false;            //    //minus.IsVisible = false;            //}
-            if (userId == 0 || userAuth != "Client")
+            //if (_products.productQty == 0)
+            //{
+            //    //ProductCountLabel.IsVisible = false;
+            //    //Stocklbl.IsVisible = true;
+            //    //Addtocartbtn.IsVisible = false;
+            //    //BuyNowbtn.IsVisible = false;
+            //    //plusclick.IsVisible = false;
+            //    //minus.IsVisible = false;
+            //}
+           
+                if (userId == 0 || userAuth != "Client")
             {
                 Login.IsVisible = true;
                 checkout.IsVisible = false;
@@ -44,13 +53,24 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
        
         
         private async void InittMyCartPage()        {
+            Busy();
             productListModel = await DataService.GetAllCartDetails(orgId, userId);
+          
             foreach (var product in productListModel)            {                if (product.productQty == 0)                {                    product.IsOutStock = true;                    product.IsPriceVisible = false;                }                else
-                {                    product.IsOutStock = false;                    product.IsPriceVisible = true;                }            }
+                {                    product.IsOutStock = false;                    product.IsPriceVisible = true;                }            }
+            foreach (var varient in productListModel)            {                if (varient.SpecificationNames != "")                {                    varient.IsSpecificationNames = true;                }                else
+                {
+                    varient.IsSpecificationNames = false;                }            }
+            NotBusy();
             BasketItems.ItemsSource = productListModel; //DataService.Instance.ProcutListModel;
             var productid = Convert.ToString(productListModel.Count);            if (productListModel.Count > 0 && (userId > 0 && userAuth == "Client"))            {                checkout.IsVisible = true;                gif.IsVisible = false;                shopping.IsVisible = false;            }            else if (productListModel.Count == 0 && userId > 0 && (userId > 0 && userAuth == "Client"))            {                checkout.IsVisible = false;                gif.IsVisible = true;                shopping.IsVisible = true;            }            else            {                checkout.IsVisible = false;                gif.IsVisible = false;                shopping.IsVisible = false;            }
         }
-      
+        public void Busy()        {            uploadIndicator.IsVisible = true;            uploadIndicator.IsRunning = true;
+
+        }        public void NotBusy()        {            uploadIndicator.IsVisible = false;            uploadIndicator.IsRunning = false;
+
+        }
+
         private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;
             int Id = DataService.Instance.order.orgId;
             int UserId = DataService.Instance.order.UserId;
@@ -89,7 +109,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 Image image = (Image)sender;
                 if (!(image.Parent.Parent.Parent.Parent.Parent is PancakeView pancake)) return;
                 if (!(pancake.BindingContext is ProductListModel item)) return;
-                await DataService.RemoveFromCart(userId, orgId, item.Id);
+                await DataService.RemoveFromCart(userId, orgId, item.Id,item.SpecificationIds);
                 await DisplayAlert("Sucess !", "Item was Deleted", "Done");
                 InittMyCartPage();
             }

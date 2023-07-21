@@ -24,8 +24,12 @@ using System;using System.Collections.Generic;using System.Linq;using Xamarin
             lblstatus.Text = orderDetails.ProductLists.FirstOrDefault().orderStatus;
             lblno.Text = OrderMasterId.ToString();
             lblAddress.Text = orderDetails.Address;
+            lblVarient.Text = orderDetails.specificationNames;
             DataService.Instance.TotalPrice = 0;            foreach (var product in orderListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;            }            TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";
-            if (orderDetails.ProductLists.FirstOrDefault().orderStatus == "Pending")            {                cancelbutton.IsVisible = true;                canceltxtbox.IsVisible = true;            }        }        private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }
+            if (orderDetails.ProductLists.FirstOrDefault().orderStatus == "Pending")            {                cancelbutton.IsVisible = true;                canceltxtbox.IsVisible = true;            }
+            foreach (var varient in productListModel)            {                if (varient.SpecificationNames != "")                {                    varient.IsSpecificationNames = true;                }                else
+                {
+                    varient.IsSpecificationNames = false;                }            }        }        private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }
         private async void ClickItem(object sender, EventArgs e)        {
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;

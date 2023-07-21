@@ -1,6 +1,9 @@
-﻿using System;using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;using Plugin.Connectivity;
+﻿using System;using System.Collections.Generic;
+using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;using DellyShopApp.Views.TabbedPages;
+using Plugin.Connectivity;
 using Xamarin.Essentials;
 using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class LastViewPage    {
+        List<ProductListModel> productListModel = new List<ProductListModel>();
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public LastViewPage()        {            InitializeComponent();
             if (ChechConnectivity())
             {
@@ -22,5 +25,10 @@ using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pag
         }
         private async void InittLastViewPage()
         {
+            
             LastViewList.ItemsSource = await DataService.GetAllProductsByOrganizations(orgId);//DataService.Instance.ProcutListModel;
+            
+            foreach (var varient in productListModel)            {                if (varient.SpecificationNames != "")                {                    varient.IsSpecificationNames = true;                }                else
+                {
+                    varient.IsSpecificationNames = false;                }            }
         }        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));        }    }}

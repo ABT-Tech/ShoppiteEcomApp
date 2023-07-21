@@ -22,7 +22,11 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
             AddressPicker.ItemsSource = await DataService.GetAddressByUserId(orgId, userId); //DataService.Instance.changeAddress;
             //productListModel = await DataService.GetAllCartDetails(orgId, userId);
             BasketItems.ItemsSource = productListModel;
-                  }        protected override async void OnAppearing()        {            base.OnAppearing();            this.BindingContext = Product;            BasketItems.ItemsSource = productListModel;//await DataService.GetAllCartDetails(orgId, userId);
+            foreach (var varient in productListModel)            {                if (varient.SpecificationNames != "")                {                    varient.IsSpecificationNames = true;                }                else
+                {
+                    varient.IsSpecificationNames = false;                }            }
+
+        }        protected override async void OnAppearing()        {            base.OnAppearing();            this.BindingContext = Product;            BasketItems.ItemsSource = productListModel;//await DataService.GetAllCartDetails(orgId, userId);
            DataService.Instance.TotalPrice = 0;                       foreach (var product in productListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;                //DataService.Instance.TotalPrice += product.Quantity * product.Price;
 
                 //return;

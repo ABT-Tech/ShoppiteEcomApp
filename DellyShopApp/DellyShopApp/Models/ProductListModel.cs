@@ -66,14 +66,24 @@ namespace DellyShopApp.Models
         public object RemoveCommand { get;  set; }
         public int Empty { get; internal set; }
         public object Name { get; internal set; }
-        public string IP { get; set; }
+        public string IP { get; set;}
         public string STATUS { get; set; }
         public int CategoryId { get; set; }
         public int BrandId { get; set; }
         public string Attributename { get; set; }
         public bool Isenable { get; set; }
         public Guid ProductGUId { get; set; }
-        public int SpecificationId { get; set; }
+        public int SpecificationIds { get; set; }
+        public string SpecificationNames { get; set; }
+        public bool IsSpecificationNames { get; set; }
+        public int DefaultSpecification { get; set; }
+        public bool IsImage {get; set;}
+        public bool IsSpecificationImage {get; set;}
+        public bool IsSpecificationExist {get; set;}
+       
+
+
+
 
 
 

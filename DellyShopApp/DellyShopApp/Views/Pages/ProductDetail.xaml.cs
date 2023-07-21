@@ -12,7 +12,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         private List<ProductListModel> _productLists = new List<ProductListModel>();
         public HomePage MainPage { get; }
         PancakeView lastCell;
-
+      
 
         public ProductDetail(ProductListModel product)        {
             //if (product.ProductList.Length == 0 || (product.ProductList.Length == 1 && string.IsNullOrEmpty(product.ProductList[0])) )
@@ -58,6 +58,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             //});
             InitializeComponent();
 
+            if ( _products.ProductList != null )            {                specificationimage.IsVisible = false;                CarouselView.IsVisible = true;            }            else            {                specificationimage.IsVisible = true;                CarouselView.IsVisible = false;            }
             if (_products.Quantity <= 0)            {                ProductCountLabel.IsVisible = false;                Stocklbl.IsVisible = true;                Addtocartbtn.IsVisible = false;                BuyNowbtn.IsVisible = false;                plusimg.IsVisible = false;                minusimg.IsVisible = false;            }
             if (_products.WishlistedProduct == true)
             {
@@ -67,21 +68,35 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             {
                 myImage.Source = "black.png";
             }
-
+         
             this.BindingContext = product;
+           
             //this.BindingContext = product.Quantity;
             MainPage = new HomePage();            //starList.ItemsSource = _startList;            //starListglobal.ItemsSource = _startList;            //CommentList.ItemsSource = _comments;
             //MainScroll.Scrolled += MainScroll_Scrolled; 
 
-            InittProductDetail(product);        }        private async void InittProductDetail(ProductListModel product)        {            
+            InittProductDetail(product);        }        private async void InittProductDetail(ProductListModel product)        {
             List<ProductListModel> categories = new List<ProductListModel>();
             categories.Add(product);
-            PreviousViewedList.ItemsSource = await DataService.GetSimilarProducts(orgId, Convert.ToInt32(product.CategoryId), Convert.ToInt32(product.BrandId));
-            AttributeName.ItemsSource = await DataService.GetProductVariation(orgId,product.ProductGUId);
-            
+            var similarpro = await DataService.GetSimilarProducts(orgId, Convert.ToInt32(product.CategoryId), Convert.ToInt32(product.BrandId));
+            PreviousViewedList.ItemsSource = similarpro;
+            if(similarpro.Count != 0)
+            {
+                similarlbl.IsVisible = true;
+            }
+            var atb = await DataService.GetProductVariation(orgId, product.ProductGUId);
+            var atb2 = new List<Attributes>();         
+            foreach(var Spect in atb)
+            {
+                if(Spect.IsSpecificationExist == true)
+                {
+                    atb2.Add(Spect);
+                }   
+            }
+            AttributeName.ItemsSource = atb2;
+          
         }
-
-        public ProductDetail()        {        }        private void PlusClick(object sender, EventArgs e)        {
+        private void PlusClick(object sender, EventArgs e)        {
             {
                 if (_products.Quantity >= 10)
                 {
@@ -97,7 +112,8 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                         ProductCountLabel.Text = (++productCount).ToString();
                     }
                 }
-            }        }        private void MinusClick(object sender, EventArgs e)        {            if (productCount <= 1) return;            ProductCountLabel.Text = (--productCount).ToString();        }        private void MainScroll_Scrolled(object sender, ScrolledEventArgs e)        {            var height = Math.Round(Application.Current.MainPage.Height);            var ycordinate = Math.Round(e.ScrollY);            if (ycordinate > (height / 3))            {                NavbarStack.IsVisible = true;                return;            }            NavbarStack.IsVisible = false;        }        private async void CommentsPageClick(object sender, EventArgs e)        {            await Navigation.PushAsync(new CommentsPage(_products));        }
+            }        }
+             private void MinusClick(object sender, EventArgs e)        {            if (productCount <= 1) return;            ProductCountLabel.Text = (--productCount).ToString();        }        private void MainScroll_Scrolled(object sender, ScrolledEventArgs e)        {            var height = Math.Round(Application.Current.MainPage.Height);            var ycordinate = Math.Round(e.ScrollY);            if (ycordinate > (height / 3))            {                NavbarStack.IsVisible = true;                return;            }            NavbarStack.IsVisible = false;        }        private async void CommentsPageClick(object sender, EventArgs e)        {            await Navigation.PushAsync(new CommentsPage(_products));        }
 
         private async void AddBasketButton(object sender, EventArgs e)        {            if (UserId == "" || UserId == null || userAuth != "Client")
             {
@@ -111,7 +127,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 cart.UserId = Convert.ToInt32(UserId);
                 cart.proId = _products.Id;
                 cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
-
+                cart.SpecificationId = _products.SpecificationIds;
                 await DataService.AddToCart(cart);
                 _products.Quantity = Convert.ToInt32(ProductCountLabel.Text);
                 _productLists.Add(_products);
@@ -130,6 +146,8 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 cart.UserId = Convert.ToInt32(UserId);
                 cart.proId = _products.Id;
                 cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
+
+                cart.SpecificationId = _products.SpecificationIds;
                 //await DataService.AddToCart(cart);
                 _products.Quantity = Convert.ToInt32(ProductCountLabel.Text);
                 _productLists.Add(_products);
@@ -155,8 +173,8 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                     favourite.orgId = _products.orgId;
                     favourite.UserId = Convert.ToInt32(UserId);
                     favourite.proId = _products.Id;
+                    favourite.SpecificationId = _products.SpecificationIds;
                     await DataService.RemovefromFavourite(favourite.proId, favourite.UserId, favourite.orgId); //RemoveFavourite(favourite);
-
                 }
                 else
                 {
@@ -165,20 +183,21 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                     favourite.orgId = _products.orgId;
                     favourite.UserId = Convert.ToInt32(UserId);
                     favourite.proId = _products.Id;
+                    favourite.SpecificationId = _products.SpecificationIds;
                     await DataService.MyFavourite(favourite);
-
                 }
-
             }
-
         }
-
        private async void ProductDetailClick(System.Object sender, System.EventArgs e)
         {
             if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));
         }
-        private async void AttributeClick(object sender, EventArgs e)        {            if (lastCell != null)                lastCell.Content.BackgroundColor = Color.Transparent;                      var pancake = (PancakeView)sender;            if (pancake. Content!= null)            {                pancake.Content.BackgroundColor = Color.Chocolate;                lastCell = pancake;                           }
-            if (!(sender is PancakeView stack)) return;            if (stack.Children.Count() <= 0) return;            if (!(stack.Children[0] is StackLayout sa)) return;            var specificationStack = sa.Children;            if (specificationStack.Count() <= 0) return;            if (!(specificationStack[1] is Label specLabel)) return;            var specificationValue = specLabel.Text;            ProductListModel attributeList = new ProcutListModel();            attributeList.orgId = _products.orgId;            attributeList.ProductGUId = _products.ProductGUId;            attributeList.SpecificationId = Convert.ToInt32(specificationValue);            NavbarStack.BindingContext = await DataService.GetProductDetailsBySpecifcation(attributeList.orgId, attributeList.ProductGUId, attributeList.SpecificationId);            await Navigation.PushAsync(new ProductDetail());        }
-
+        private async void AttributeClick(object sender, EventArgs e)        {            if (lastCell != null)                lastCell.Content.BackgroundColor = Color.Transparent;            var pancake = (PancakeView)sender;            if (pancake. Content!= null)            {                pancake.Content.BackgroundColor = Color.Chocolate;                lastCell = pancake;
+            }   
+            if (!(sender is PancakeView stack)) return;            if (stack.Children.Count() <= 0) return;            if (!(stack.Children[0] is StackLayout sa)) return;            var specificationStack = sa.Children;            if (specificationStack.Count() <= 0) return;            if (!(specificationStack[1] is Label specLabel)) return;            var specificationValue = specLabel.Text;            AttributeListModel attributeList = new AttributeListModel();            attributeList.orgId = _products.orgId;            attributeList.ProductGUID = _products.ProductGUId;            attributeList.SpecificationId = Convert.ToInt32(specificationValue);
+            var item = await DataService.GetProductDetailsBySpecifcation(attributeList.orgId, attributeList.ProductGUID, attributeList.SpecificationId);            NavbarStack.BindingContext = item;
+            item.SpecificationIds= Convert.ToInt32(specificationValue);
+            await Navigation.PushAsync(new ProductDetail(item));
+        }
     }
 }
