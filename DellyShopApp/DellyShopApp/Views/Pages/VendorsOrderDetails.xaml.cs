@@ -21,12 +21,24 @@ using System;using System.Collections.Generic;using System.Linq;using Xamarin
                 return false;
             }
         }
-        public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {            var orderDetails = await DataService.GetOrderDetailsByOrderMasterId(orgId, OrderMasterId);            orderListModel = orderDetails.ProductLists.ToList();            BasketItems.ItemsSource = orderDetails.ProductLists;//DataService.Instance.orderdetails.ProductLists;
+        public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {            Busy();            var orderDetails = await DataService.GetOrderDetailsByOrderMasterId(orgId, OrderMasterId);            orderListModel = orderDetails.ProductLists.ToList();            BasketItems.ItemsSource = orderDetails.ProductLists;//DataService.Instance.orderdetails.ProductLists;
             lblDate.Text = orderDetails.Date;//DataService.Instance.orderdetails.Date;
             lblAddress.Text = orderDetails.Address;//DataService.Instance.orderdetails.Address;
             DataService.Instance.TotalPrice = 0;
-            foreach (var product in orderListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;            }            TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";            PickerDemo.SelectedItem = orderDetails.ProductLists.FirstOrDefault().orderStatus;        }
+            foreach (var product in orderListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;            }            TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";            PickerDemo.SelectedItem = orderDetails.ProductLists.FirstOrDefault().orderStatus;            NotBusy();        }
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
 
+        }
+
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+
+        }
         private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }
 
         private async void Submitclick(object sender, EventArgs e)        {            var orders = new Orders                       {                orgId = orgId,                Remark = vendorremark.Text,                orderstatus = (string)PickerDemo.SelectedItem,                orderId = OrderMasterId,                UserId = userId                                          };            await DataService.Submit(orders);            await DisplayAlert("Done", "Submited", "Ok");            await Navigation.PushAsync(new Venderdata());        }        private async void Log_outclick(object sender, EventArgs e)        {            await Navigation.PushAsync(new MainPage());            Xamarin.Essentials.SecureStorage.RemoveAll();        }    }}

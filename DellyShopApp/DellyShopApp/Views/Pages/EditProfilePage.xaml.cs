@@ -39,6 +39,7 @@ namespace DellyShopApp.Views.Pages
         }
         private async void InittEditProfilePage()
         {
+            Busy();
             var getUserDate = await DataService.GetUserById(userId, orgId);
             var getUser = getUserDate.FirstOrDefault();
             UserName.Text = getUser.ChangeUsername;
@@ -48,6 +49,20 @@ namespace DellyShopApp.Views.Pages
             statename.Text = getUser.ChangeState;
             cityname.Text = getUser.Changecity;
             zipcode.Text = getUser.ChangeZipcode;
+            NotBusy();
+        }
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
+
+        }
+
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+
         }
         protected override void OnAppearing()
         {
@@ -55,6 +70,7 @@ namespace DellyShopApp.Views.Pages
         }
         private async void Button_Clicked(System.Object sender, System.EventArgs e)
         {
+            Busy();
             var changeUserData = new ChangeUserData
             {
                 ChangeUsername = UserName.Text,
@@ -67,6 +83,7 @@ namespace DellyShopApp.Views.Pages
                 OrgId = orgId,
                 UserId = userId
             };
+            NotBusy();
             var Page = new Page2(changeUserData);
             _ = DisplayAlert("Yes", "Your Profile Edit Successfully", "Okay");
             await DataService.EditUserData(changeUserData);

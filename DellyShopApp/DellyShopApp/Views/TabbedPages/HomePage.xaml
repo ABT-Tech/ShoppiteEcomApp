@@ -22,24 +22,26 @@
 
         <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
             <StackLayout Margin="5,10,5,0">
+                <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="DodgerBlue" />
+
                 <Grid RowSpacing="5" ColumnSpacing="5">                    <Image Source="{Binding Image}"                       x:Name="ShopLogo"                       WidthRequest="130"                        HeightRequest="130"                     HorizontalOptions="Start"/>                    <Image Source="ShopTHigh.png"                      VerticalOptions="Start"                       WidthRequest="130"                        HeightRequest="130"                       HorizontalOptions="End">                        <Image.GestureRecognizers>                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>                        </Image.GestureRecognizers>                    </Image>                </Grid>
                 
                 <SearchBar Placeholder="Search items..."
            CancelButtonColor="Gray"
            PlaceholderColor="Black"
-           TextColor="Black"
+           TextColor="Black" BackgroundColor="White"
            TextTransform="Lowercase"
            FontSize="Medium"
            TextChanged="SearchBar_TextChanged" />
                 <ListView x:Name="searchResults" IsVisible="False" ItemSelected="searchResults_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell Text="{Binding Title}">
+                            <TextCell Text="{Binding Title}" TextColor="Black">
                             </TextCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>                    
                 </ListView>
-                <Label
+                <Label 
                     Margin="0"
                     Padding="5,5,0,0"
                     FontAttributes="Bold"
@@ -89,10 +91,10 @@
                                                 HorizontalOptions="FillAndExpand" />
                                             <Label
                                                 Margin="0"
-                                                Padding="0,5,0,0"
+                                                Padding="5,0,5,0"
                                                 FontAttributes="Bold"
                                                 FontFamily="{DynamicResource VerdanaProBold}"
-                                                FontSize="12"
+                                                FontSize="12" HorizontalTextAlignment="Center"
                                                 HorizontalOptions="CenterAndExpand"
                                                 Text="{Binding CategoryName}"
                                                 TextColor="{DynamicResource LabelTextColor}"
@@ -153,7 +155,7 @@
                         </controls:CarouselView.ItemTemplate>
                     </controls:CarouselView>
                 </pancakeView:PancakeView>
-                <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal" IsVisible="false" x:Name="Bestsellerstk">
                     <Label
                         Margin="0,10,0,0"
                         Padding="5,5,0,0"
@@ -257,7 +259,7 @@
                         </customControl:RepeaterView.ItemTemplate>
                     </customControl:RepeaterView>
                 </ScrollView>
-                <Label
+                <Label IsVisible="false" x:Name="TopDeatlbl"
                     Margin="0,10,0,0"
                     Padding="5,5,0,0"
                     FontAttributes="Bold"
@@ -327,7 +329,7 @@
                         </customControl:RepeaterView.ItemTemplate>
                     </customControl:RepeaterView>
                 </ScrollView>
-                <Label
+                <Label IsVisible="false" x:Name="AllProductlbl"
                     
                     Margin="0,10,0,0"
                     Padding="5,5,0,0"
@@ -400,6 +402,7 @@
                 </controls:FlowListView>
             </StackLayout>
         </ScrollView>
+        <Label IsVisible="false"                            x:Name="ProductCountLabel"                            FontFamily="{DynamicResource VerdanaProLight}"                            FontSize="44"                            HorizontalOptions="End"                            Text="1"                            TextColor="{DynamicResource WhiteDarkFontColor}"                            VerticalOptions="CenterAndExpand" />
         <controls:PancakeView
             x:Name="BasketLayout"
             IsVisible="false"
@@ -425,7 +428,7 @@
                         FontFamily="{DynamicResource MaterialFontFamily}"
                         Glyph="{x:Static font:FontAwesomeIcons.CartAlt}"
                         Size="50"
-                        Color="White" />
+                        Color="Chocolate" />
                 </Image.Source>
             </Image>
         </controls:PancakeView>

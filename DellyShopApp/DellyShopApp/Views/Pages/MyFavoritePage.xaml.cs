@@ -37,8 +37,22 @@ namespace DellyShopApp.Views.Pages
         }
         private async void InittFavoritePage()
         {
+            Busy();
             BasketItems.ItemsSource = await DataService.GetWishlistByUser(orgId,userId);//DataService.Instance.ProcutListModel;         
-            
+            NotBusy();
+        }
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
+
+        }
+
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+
         }
         private async void ClickItem(object sender, EventArgs e)
         {

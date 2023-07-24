@@ -45,9 +45,23 @@ namespace DellyShopApp.Views.Pages
 
         private async void InittMyOrderPage()
         {
+            Busy();
             BasketItems.ItemsSource = await DataService.GetMyOrderDetails(orgId , userId);
+            NotBusy();
+        }
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
+
         }
 
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+
+        }
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             if (!(sender is PancakeView pancake)) return;

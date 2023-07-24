@@ -24,6 +24,19 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
             //}
             //productListModel = await DataService.GetAllCartDetails(orgId, userId);
             BasketItems.ItemsSource = productListModel;
+            foreach (var Varient in productListModel)
+            {
+                if (Varient.SpecificationNames != "")
+                {
+
+                    Varient.ISSpecificationNames = true;
+                }
+                else
+                {
+
+                    Varient.ISSpecificationNames = false;
+                }
+            }
         }        protected override async void OnAppearing()        {            base.OnAppearing();
 
             this.BindingContext = Product;            BasketItems.ItemsSource = productListModel;//await DataService.GetAllCartDetails(orgId, userId);           // DataService.Instance.BaseTotalPrice = 0;            DataService.Instance.TotalPrice = 0;            foreach (var product in productListModel)
@@ -37,8 +50,7 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
             {
                await DisplayAlert("Opps!", "Please Select Address", "ok");
                 return;
-            }
-                      await DataService.Checkout(orderCheckOut);            await Navigation.PushAsync(new SuccessPage(productListModel));                   }
+            }                      await DataService.Checkout(orderCheckOut);            await Navigation.PushAsync(new SuccessPage(productListModel));                   }
         /// <summary>        /// Delete Visible Settings        /// </summary        /// <param name="sender"></param>        /// <param name="e"></param>        private void DeleteItemSwipe(object sender, SwipedEventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (pancake.BindingContext is ProductListModel item)            {                item.VisibleItemDelete = true;                VisibleDelete(item.Id);            }        }
         /// <summary>        /// Delete Visible Settings        /// </summary>        /// <param name="sender"></param>        /// <param name="e"></param>        private void UndeleteI(object sender, SwipedEventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (pancake.BindingContext is ProductListModel item)            {                item.VisibleItemDelete = false;                VisibleDelete(item.Id);            }        }        private void VisibleDelete(int id)        {            var items = _basketVm.ProcutListModel.Where(x => x.Id != id);            foreach (var item in items)            {                item.VisibleItemDelete = false;            }        }        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));        }        async void ContinueWithPaypal(System.Object sender, System.EventArgs e)        {
             //Single Item

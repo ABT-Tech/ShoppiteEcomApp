@@ -6,5 +6,7 @@ namespace DellyShopApp.Models
         public int UserId { get; set; }
         public int orgId { get; set; }
         public int proId { get; set; }
+        public int SpecificationId { get; set; }
+
     }
 }

@@ -33,6 +33,7 @@ namespace DellyShopApp.Services
         public List<Category> CatoCategoriesDetail = new List<Category>();
         public List<CommentModel> CommentList = new List<CommentModel>();
         public List<ShopModel> ShopDetails = new List<ShopModel>();
+        public List<Attributes> attributes = new List<Attributes>();
         public ChangeUserData EditProfile = new ChangeUserData();
         public List<ChangeAddress> changeAddress = new List<ChangeAddress>();
         public List<CategoryDetailPage> Details = new List<CategoryDetailPage>();
@@ -75,8 +76,9 @@ namespace DellyShopApp.Services
             GC.SuppressFinalize(this);
         }
         public DataService()
-        {    
+        {
             
+
 
             StartList.Add(new StartList
             {
@@ -711,7 +713,7 @@ namespace DellyShopApp.Services
                 throw;        
             }
         }
-        public static async Task<int> RemoveFromCart(int userId, int orgId, int proId)
+        public static async Task<int> RemoveFromCart(int userId, int orgId, int proId,int SpecificationId)
         {
             try
             {
@@ -725,7 +727,7 @@ namespace DellyShopApp.Services
                 };
                 HttpClient httpClient = new HttpClient(clientHandler);
                 var response = await httpClient.GetAsync(
-                    AppSettings.ApiUrl +"api/Cart/RemoveFromCart?userId="+userId + "&proId=" +proId + "&orgId=" +orgId);
+                    AppSettings.ApiUrl +"api/Cart/RemoveFromCart?userId="+userId + "&proId=" +proId + "&orgId=" +orgId+ "&SpecificationId=" +SpecificationId);
                 string result = await response.Content.ReadAsStringAsync();
                 return 0;
             }
@@ -836,6 +838,64 @@ namespace DellyShopApp.Services
                 string result = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<ProductListModel>>(result);
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<List<Attributes>> GetProductVariation(int OrgId,Guid ProductGUID)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Products/GetProductVariation?OrgId=" + OrgId + "&ProductGUId=" + ProductGUID);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<Attributes>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<ProductListModel> GetProductDetailsBySpecifcation(int OrgId, Guid ProductGUID ,int SpecificationId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Products/GetProductDetailsBySpecifcation?OrgId="+ OrgId +"&ProductGUID=" + ProductGUID + "&SpecificationId=" + SpecificationId);
+                    
+
+                string result = await response.Content.ReadAsStringAsync();
+                 var STORE = JsonConvert.DeserializeObject<List<ProductListModel>>(result);
+                ProductListModel product = new ProductListModel();
+                
+                foreach (var Single in STORE)
+                {
+                    product = Single;
+                }
+
+                return product; //JsonConvert.DeserializeObject<ProductListModel>(STORE);
+            }
+
             catch (Exception ex)
             {
                 throw;

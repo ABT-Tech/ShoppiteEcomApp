@@ -110,6 +110,9 @@
     <EmbeddedResource Include="Resources\clock.json" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="CustomControl\CustomLabel.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="FirstPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

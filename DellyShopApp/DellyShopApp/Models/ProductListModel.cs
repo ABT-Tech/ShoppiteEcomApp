@@ -1,5 +1,6 @@
 ﻿using DellyShopApp.ViewModel;
 using System;
+using System.Drawing;
 
 namespace DellyShopApp.Models
 {
@@ -62,7 +63,15 @@ namespace DellyShopApp.Models
         public bool WishlistedProduct { get; set; }
         public int CategoryId { get; set; }
         public int BrandId { get; set; }
-
+        public string Attribute{ get; set; }
+        public int AttributeId{ get; set; }
+        public Guid ProductGUId { get; set; }
+        public int SpecificationIds { get; set; }
+        public string SpecificationNames { get; set; }
+        public bool ISSpecificationNames { get; set; }
+        public Color BGColor { get; set; }
+        public string SelectedSpecification { get; set; }
+        public int DefaultSpecification { get; set; }
     }
 }
 
