@@ -42,8 +42,9 @@ namespace DellyShopApp.Views.Pages
         }
         private async void InittMyOrderPage()
         {
-
+            Busy();
             BasketItems.ItemsSource = await DataService.GetMyOrderDetails(orgId,userId);//DataService.Instance.vendors;
+            NotBusy();
 
 
 
@@ -57,6 +58,19 @@ namespace DellyShopApp.Views.Pages
             {
                 await Navigation.PushAsync(new UserOrderDetails(item.orderId));
             }
+
+        }
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
+
+        }
+
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
 
         }
     }

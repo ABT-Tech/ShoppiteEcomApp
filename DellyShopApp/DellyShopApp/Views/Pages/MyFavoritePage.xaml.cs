@@ -1,8 +1,10 @@
 ﻿using DellyShopApp.Models;
 using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
+using DellyShopApp.Views.TabbedPages;
 using Plugin.Connectivity;
 using System;
+using System.Collections.Generic;
 using Xamarin.Essentials;
 using Xamarin.Forms.Xaml;
 
@@ -13,9 +15,12 @@ namespace DellyShopApp.Views.Pages
     {
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
+        List<ProductListModel> productListModel = new List<ProductListModel>();
+
         public MyFavoritePage()
 
         {
+
             InitializeComponent();
             if (ChechConnectivity())
             {
@@ -38,13 +43,40 @@ namespace DellyShopApp.Views.Pages
         }
         private async void InittFavoritePage()
         {
+            Busy();
             BasketItems.ItemsSource = await DataService.GetWishlistByUser(orgId,userId);//DataService.Instance.ProcutListModel;
+            NotBusy();
+            foreach (var varient in productListModel)
+            {
+                if (varient.SpecificationNames != "")
+                {
+                    varient.IsSpecificationNames = true;
+                }
+                else
+                {
+                    varient.IsSpecificationNames = false;
+                }
+
+            }
         }
         private async void ClickItem(object sender, EventArgs e)
         {
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;
             await Navigation.PushAsync(new ProductDetail(item));
+        }
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
+
+        }
+
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+
         }
     }
 }

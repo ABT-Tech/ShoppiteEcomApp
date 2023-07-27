@@ -101,5 +101,10 @@ namespace DellyShopApp.Views.TabbedPages
             await Navigation.PushAsync(new VenderLoginPage());
 
         }
+
+        private async void TapGestureRecognizer_Tapped_3(System.Object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new HomeTabbedPage());
+        }
     }
 }

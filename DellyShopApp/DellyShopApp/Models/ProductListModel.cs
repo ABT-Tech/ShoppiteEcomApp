@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using DellyShopApp.ViewModel;
-
 namespace DellyShopApp.Models
 {
     public class ProductListModel : BaseVm
@@ -18,12 +17,8 @@ namespace DellyShopApp.Models
                 OnPropertyChanged(nameof(VisibleItemDelete));
             }
         }
-
-
         private int _rotate;
-      
         internal double product;
-
         public int Rotate
         {
             get => _rotate;
@@ -33,11 +28,6 @@ namespace DellyShopApp.Models
                 OnPropertyChanged(nameof(Rotate));
             }
         }
-        
-
-
-
-
         public string Title { get; set; }
         public string Brand { get; set; }
         public string Image { get; set; }
@@ -61,6 +51,7 @@ namespace DellyShopApp.Models
         public OrderCheckOut ordercheckout { get; set; }
         public bool IsPriceVisible { get; set; }
         public bool IsOutStock { get; set; }
+        public bool IsImgVisible { get; set; }
         public bool WishlistedProduct { get; set; }
         public object Children { get;  set; }
         public object RemoveCommand { get;  set; }
@@ -80,14 +71,6 @@ namespace DellyShopApp.Models
         public bool IsImage {get; set;}
         public bool IsSpecificationImage {get; set;}
         public bool IsSpecificationExist {get; set;}
-       
-
-
-
-
-
-
-
     }
 }
 

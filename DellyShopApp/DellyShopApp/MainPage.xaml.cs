@@ -39,10 +39,12 @@ namespace DellyShopApp
         }
         private async void InittMainPage()
         {
+            Busy();
             this.BindingContext = this;
             var AllOrganizations = await DataService.GetAllOrganizations(); //DataService.Instance.ShopDetails;
             float rows = (float)AllOrganizations.Count / 2;
             double rowcount = Math.Round(rows);
+            NotBusy();
             if (AllOrganizations.Count % 2 == 1)
             {
                 rowcount = rowcount + 1;
@@ -101,7 +103,19 @@ namespace DellyShopApp
             //shop.ItemsSource = DataService.Instance.ShopDetails;
         }
 
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
 
+        }
+
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+
+        }
         private  void TapGestureRecognizer_Tapped(string orgId,string Img)
         {
             var neworgId = Convert.ToInt32(orgId);

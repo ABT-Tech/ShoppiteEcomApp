@@ -56,8 +56,9 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             Busy();
             productListModel = await DataService.GetAllCartDetails(orgId, userId);
           
-            foreach (var product in productListModel)            {                if (product.productQty == 0)                {                    product.IsOutStock = true;                    product.IsPriceVisible = false;                }                else
-                {                    product.IsOutStock = false;                    product.IsPriceVisible = true;                }            }
+            foreach (var product in productListModel)            {
+                if (product.productQty == 0)                {                    product.IsOutStock = true;                    product.IsPriceVisible = false;                    product.IsImgVisible = false;                    product.IsSpecificationNames = true;                }                else
+                {                    product.IsOutStock = false;                    product.IsPriceVisible = true;                    product.IsImgVisible = true;                    product.IsSpecificationNames = false;                }            }
             foreach (var varient in productListModel)            {                if (varient.SpecificationNames != "")                {                    varient.IsSpecificationNames = true;                }                else
                 {
                     varient.IsSpecificationNames = false;                }            }

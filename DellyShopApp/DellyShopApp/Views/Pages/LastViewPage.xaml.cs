@@ -25,10 +25,23 @@ using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pag
         }
         private async void InittLastViewPage()
         {
-            
+            Busy();
             LastViewList.ItemsSource = await DataService.GetAllProductsByOrganizations(orgId);//DataService.Instance.ProcutListModel;
-            
+            NotBusy();
             foreach (var varient in productListModel)            {                if (varient.SpecificationNames != "")                {                    varient.IsSpecificationNames = true;                }                else
                 {
                     varient.IsSpecificationNames = false;                }            }
-        }        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));        }    }}
+        }        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));        }
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
+
+        }
+
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+
+        }    }}

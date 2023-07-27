@@ -31,10 +31,11 @@ using Xamarin.Forms.Xaml;using static DellyShopApp.Views.Pages.HomeTabbedPage;
         }
         private async void InittEditProfilepage()
         {
+            Busy();
             var getuserData = await DataService.GetUserById(userId, orgId);
             var getUser = getuserData.FirstOrDefault();
             UserName.Text = getUser.ChangeUsername;            EmailAddress.Text =  getUser.ChangeEmail;
-            number.Text = getUser.ChangeContactNumber;            address.Text =  getUser.ChangeAddress;            statename.Text =  getUser.ChangeState;            cityname.Text =  getUser.Changecity;            zipcode.Text =  getUser.ChangeZipcode;        }
+            number.Text = getUser.ChangeContactNumber;            address.Text =  getUser.ChangeAddress;            statename.Text =  getUser.ChangeState;            cityname.Text =  getUser.Changecity;            zipcode.Text =  getUser.ChangeZipcode;            NotBusy();        }
         protected override void OnAppearing()        {            base.OnAppearing();        }        private async void Button_Clicked(System.Object sender, System.EventArgs e)   {
 
 
@@ -53,5 +54,17 @@ using Xamarin.Forms.Xaml;using static DellyShopApp.Views.Pages.HomeTabbedPage;
 
             var Page = new Page2(changeUserData);            _ = DisplayAlert("Yes", "Your Profile Edit Successfully", "Okay");            await DataService.EditUserData(changeUserData);            await Navigation.PushAsync(new HomeTabbedPage());
         }        void BackButton(System.Object sender, System.EventArgs e)        {            Navigation.PopAsync();        }
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
 
+        }
+
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+
+        }
     }}

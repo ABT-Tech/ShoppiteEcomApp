@@ -4,6 +4,7 @@ using System;using System.Collections;using System.Collections.Generic;using 
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public int UserId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);        public string userAuth = SecureStorage.GetAsync("Usertype").Result;        List<Category> categories = new List<Category>();        private ProductListModel product;        public HomePage()        {            InitializeComponent();
             ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;
         }        private async void InittHomePage()        {
+            Busy();
             int? OrgUserID = UserId == 0 ? null : (int?)UserId;            categories = await DataService.GetAllCategories(orgId);            CategoryList.ItemsSource = categories; //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId); //
             CarouselView.ItemsSource = categories.Where(x => x.Banner != null && x.Banner != "").ToList(); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
             var bestsellerlabel = await DataService.GetMostSellerProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
@@ -14,7 +15,9 @@ using System;using System.Collections;using System.Collections.Generic;using 
             }
 
             PreviousViewedList.ItemsSource = await DataService.GetLastVisitedProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
+            NotBusy();
             MostNews.FlowItemsSource = await DataService.GetAllProductsByOrganizations(orgId, OrgUserID); //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
+           
         }
         protected override void OnAppearing()        {
             if (ChechConnectivity())
@@ -50,5 +53,17 @@ using System;using System.Collections;using System.Collections.Generic;using 
         {
             await Navigation.PushAsync(new TopdealsPage());
         }
-        
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
+
+        }
+
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+
+        }
     }}

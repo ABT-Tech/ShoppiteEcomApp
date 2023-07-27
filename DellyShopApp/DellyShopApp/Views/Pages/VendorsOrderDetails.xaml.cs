@@ -39,11 +39,13 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
         }                  
        
         public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {
+            Busy();
             var orderDetails = await DataService.GetOrderDetailsByOrderMasterId(orgId, OrderMasterId);
             orderListModel = orderDetails.ProductLists.ToList();
             BasketItems.ItemsSource = orderDetails.ProductLists;//DataService.Instance.orderdetails.ProductLists;
             lblDate.Text = orderDetails.Date;//DataService.Instance.orderdetails.Date;
             lblAddress.Text = orderDetails.Address;//DataService.Instance.orderdetails.Address;
+            NotBusy();
             DataService.Instance.TotalPrice = 0;
             foreach (var product in orderListModel)                       {
                                DataService.Instance.TotalPrice += product.Quantity * product.Price;              //DataService.Instance.TotalPrice += product.Quantity * product.Price;
@@ -68,6 +70,19 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
       async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
         {
             
+        }
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
+
+        }
+
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+
         }
     }
 }

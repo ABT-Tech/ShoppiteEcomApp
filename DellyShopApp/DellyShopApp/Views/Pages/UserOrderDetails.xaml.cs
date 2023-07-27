@@ -19,12 +19,12 @@ using System;using System.Collections.Generic;using System.Linq;using Xamarin
                 DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
                 return false;
             }
-        }        public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {            var orderDetails = await DataService.GetOrderDetailsByOrderMasterId(orgId, OrderMasterId);            orderListModel = orderDetails.ProductLists.ToList();            BasketItems.ItemsSource = orderDetails.ProductLists;//DataService.Instance.orderdetails.ProductLists;
+        }        public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {            Busy();            var orderDetails = await DataService.GetOrderDetailsByOrderMasterId(orgId, OrderMasterId);            orderListModel = orderDetails.ProductLists.ToList();            BasketItems.ItemsSource = orderDetails.ProductLists;//DataService.Instance.orderdetails.ProductLists;
             lblDate.Text = orderDetails.Date;//DataService.Instance.orderdetails.Date;
             lblstatus.Text = orderDetails.ProductLists.FirstOrDefault().orderStatus;
             lblno.Text = OrderMasterId.ToString();
             lblAddress.Text = orderDetails.Address;
-            lblVarient.Text = orderDetails.specificationNames;
+            NotBusy();
             DataService.Instance.TotalPrice = 0;            foreach (var product in orderListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;            }            TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";
             if (orderDetails.ProductLists.FirstOrDefault().orderStatus == "Pending")            {                cancelbutton.IsVisible = true;                canceltxtbox.IsVisible = true;            }
             foreach (var varient in productListModel)            {                if (varient.SpecificationNames != "")                {                    varient.IsSpecificationNames = true;                }                else
@@ -46,6 +46,19 @@ using System;using System.Collections.Generic;using System.Linq;using Xamarin
             await DataService.Cancel(canselorder);
             await DisplayAlert("Done", "Your Order Is Cancel", "Ok");
             await Navigation.PushAsync(new MyOrderPage());
+
+        }
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
+
+        }
+
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
 
         }
     }}

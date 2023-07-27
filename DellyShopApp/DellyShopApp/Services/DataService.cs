@@ -890,7 +890,7 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
-        public static async Task<ProductListModel> GetProductDetailsBySpecifcation(int OrgId, Guid ProductGUID, int SpecificationId)
+        public static async Task<ProductListModel> GetProductDetailsBySpecifcation(int OrgId, Guid ProductGUID, int SpecificationId,int UserId)
         {
             try
             {
@@ -904,7 +904,7 @@ namespace DellyShopApp.Services
                 };
                 HttpClient httpClient = new HttpClient(clientHandler);
                 var response = await httpClient.GetAsync(
-                    AppSettings.ApiUrl + "api/Products/GetProductDetailsBySpecifcation?OrgId=" + OrgId + "&ProductGUID=" + ProductGUID + "&SpecificationId=" + SpecificationId);
+                    AppSettings.ApiUrl + "api/Products/GetProductDetailsBySpecifcation?OrgId=" + OrgId + "&ProductGUID=" + ProductGUID + "&SpecificationId=" + SpecificationId +"&UserId=" + UserId);
 
 
                 string result = await response.Content.ReadAsStringAsync();
