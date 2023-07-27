@@ -868,7 +868,7 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
-        public static async Task<ProductListModel> GetProductDetailsBySpecifcation(int OrgId, Guid ProductGUID ,int SpecificationId,int UserId)
+        public static async Task<ProductListModel> GetProductDetailsBySpecifcation(int OrgId, Guid ProductGUID ,int SpecificationId, int UserId)
         {
             try
             {
@@ -881,8 +881,9 @@ namespace DellyShopApp.Services
                     ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
                 };
                 HttpClient httpClient = new HttpClient(clientHandler);
+                var userData = UserId.ToString() == "0" ? "" : UserId.ToString();
                 var response = await httpClient.GetAsync(
-                    AppSettings.ApiUrl + "api/Products/GetProductDetailsBySpecifcation?OrgId="+ OrgId +"&ProductGUID=" + ProductGUID + "&SpecificationId=" + SpecificationId+ "&UserId=" + UserId);
+                    AppSettings.ApiUrl + "api/Products/GetProductDetailsBySpecifcation?OrgId="+ OrgId +"&ProductGUID=" + ProductGUID + "&SpecificationId=" + SpecificationId+ "&UserId=" + userData);
                     
 
                 string result = await response.Content.ReadAsStringAsync();

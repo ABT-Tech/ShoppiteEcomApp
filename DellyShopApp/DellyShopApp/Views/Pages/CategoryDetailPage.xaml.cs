@@ -34,6 +34,7 @@ namespace DellyShopApp.Views.Pages
        
         public async void InitCategoryPage(Category category) 
         {
+            Busy();
             List<Category> categories = new List<Category>();
             categories.Add(category);
             var AllMostSeller = await DataService.GetAllProductsByCategory(orgId,Convert.ToInt32(category.CategoryId));
@@ -41,8 +42,21 @@ namespace DellyShopApp.Views.Pages
             ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result;
             CarouselView.ItemsSource = categories;
             MostNews.FlowItemsSource = AllMostSeller;
+            NotBusy();
+        }
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
+            MainLayout.Opacity = 0.7;
         }
 
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+            MainLayout.Opacity = 100;
+        }
         private async void ClickCategory(object sender, EventArgs e)
         {
             if (!(sender is StackLayout stack)) return;

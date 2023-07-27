@@ -18,7 +18,9 @@
     <ScrollView Margin="-10,0,-10,0">
         <StackLayout>
             <!--  DellyShop Title And Description  -->  
-             <StackLayout Margin="15,10,15,0">
+             <StackLayout Margin="15,10,15,0" x:Name="MainLayout" >
+                <ActivityIndicator x:Name="uploadIndicator"  VerticalOptions="Center"
+                      HorizontalOptions="Center" IsVisible="False" IsRunning="False" Color="Chocolate" />
                 <Grid RowSpacing="5" ColumnSpacing="5">                    <Image Source="{Binding Image}"                       x:Name="ShopLogo"                       WidthRequest="130"                        HeightRequest="130"                     HorizontalOptions="Start"/>                    <Image Source="ShopTHigh.png"                      VerticalOptions="Start"                       WidthRequest="130"                        HeightRequest="130"                       HorizontalOptions="End">                        <Image.GestureRecognizers>                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>                        </Image.GestureRecognizers>                    </Image>                </Grid> 
             <!--  SearchBar  --><!--
                     <Frame
@@ -58,35 +60,39 @@
                         CornerRadius="10"
                         HorizontalOptions="FillAndExpand" />
                     <StackLayout Orientation="Horizontal">
-                        <Image  
+                            <StackLayout>
+                                <Image  
                           
                             HeightRequest="50"
                             HorizontalOptions="Start"
                             VerticalOptions="Center"
                             WidthRequest="50">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="BackPage" />
-                            </Image.GestureRecognizers>
-                            <Image.Source>
-                                <FontImageSource
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="BackPage" />
+                                    </Image.GestureRecognizers>
+                                    <Image.Source>
+                                        <FontImageSource
                                     FontFamily="{DynamicResource MaterialFontFamily}"
                                     Glyph="{x:Static font:FontAwesomeIcons.ThinLeft}"
                                     Size="30"
                                     
                                     Color="Black" />
-                            </Image.Source>
-                        </Image>
-                        <Label
-                            Margin="-50,0,50,0"
+                                    </Image.Source>
+                                </Image>
+                            </StackLayout>
+                            <StackLayout HorizontalOptions="Center">
+                                <Label
+                            
                             Padding="0,5,0,0"
                             FontAttributes="Bold"
                             FontFamily="{DynamicResource VerdanaProBold}"
                             FontSize="20"
                             x:Name="StackLabelCategoryName"
-                            HorizontalOptions="CenterAndExpand"
-                            TextColor="Black" HorizontalTextAlignment="Center"
+                            LineBreakMode="TailTruncation" MaxLines="1"
+                            TextColor="Black" 
                             VerticalOptions="CenterAndExpand" />
-                    </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
 
                 </Grid>
             </StackLayout>
