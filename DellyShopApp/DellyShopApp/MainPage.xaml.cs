@@ -30,9 +30,10 @@ namespace DellyShopApp
         
         private async void InittMainPage()
         {
-           
+            Busy();
             this.BindingContext = this;
             var AllOrganizations = await DataService.GetAllOrganizations(); //DataService.Instance.ShopDetails;
+            NotBusy();
             float rows = (float)AllOrganizations.Count / 2;
             double rowcount = Math.Round(rows);
             if (AllOrganizations.Count % 2 == 1)
@@ -87,7 +88,19 @@ namespace DellyShopApp
             
             //shop.ItemsSource = DataService.Instance.ShopDetails;
         }
+        public void Busy()
+        {
+            uploadIndicator.IsVisible = true;
+            uploadIndicator.IsRunning = true;
+            MainLayout.Opacity = 0.7;
+        }
 
+        public void NotBusy()
+        {
+            uploadIndicator.IsVisible = false;
+            uploadIndicator.IsRunning = false;
+            MainLayout.Opacity = 100;
+        }
         private bool ChechConnectivity()
         {
             if (CrossConnectivity.Current.IsConnected)
