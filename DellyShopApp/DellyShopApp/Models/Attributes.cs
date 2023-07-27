@@ -11,6 +11,7 @@ namespace DellyShopApp.Models
         public bool IsSpecificationExist { get; set; }
         public Guid ProductGUId { get; set; }
         public int OrgId { get; set; }
+        public int UserId { get; set; }
         public Color BGColor { get; set; }
         public int DefaultSpecification { get; set; }
 

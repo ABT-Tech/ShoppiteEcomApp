@@ -106,9 +106,9 @@
                 FontSize="20"
                 HeightRequest="45"   
                 WidthRequest="300"
-                HorizontalOptions="CenterAndExpand"
+                HorizontalOptions="FillAndExpand"
                 Text="Continue Shopping"
-                TextColor="White"
+                TextColor="Black"
                 VerticalOptions="EndAndExpand">
             <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="commostates">

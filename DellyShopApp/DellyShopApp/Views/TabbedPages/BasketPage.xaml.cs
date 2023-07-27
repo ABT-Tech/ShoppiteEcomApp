@@ -24,19 +24,7 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
             //}
             //productListModel = await DataService.GetAllCartDetails(orgId, userId);
             BasketItems.ItemsSource = productListModel;
-            foreach (var Varient in productListModel)
-            {
-                if (Varient.SpecificationNames != "")
-                {
-
-                    Varient.ISSpecificationNames = true;
-                }
-                else
-                {
-
-                    Varient.ISSpecificationNames = false;
-                }
-            }
+           
         }        protected override async void OnAppearing()        {            base.OnAppearing();
 
             this.BindingContext = Product;            BasketItems.ItemsSource = productListModel;//await DataService.GetAllCartDetails(orgId, userId);           // DataService.Instance.BaseTotalPrice = 0;            DataService.Instance.TotalPrice = 0;            foreach (var product in productListModel)

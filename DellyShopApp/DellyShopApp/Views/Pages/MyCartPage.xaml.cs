@@ -61,7 +61,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                     product.IsPriceVisible = false;
                     product.ISSpecificationNames = true;
                 }
-                else 
+                else
                 {
                     product.IsOutStock = false;
                     product.IsPriceVisible = true;
@@ -110,14 +110,14 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         {
             uploadIndicator.IsVisible = true;
             uploadIndicator.IsRunning = true;
-           
+            MainLayout.Opacity = 0.7;
         }
 
         public void NotBusy()
         {
             uploadIndicator.IsVisible = false;
             uploadIndicator.IsRunning = false;
-           
+            MainLayout.Opacity = 100;
         }
         private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;
             int Id = DataService.Instance.order.orgId;

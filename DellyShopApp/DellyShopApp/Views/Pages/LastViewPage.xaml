@@ -13,7 +13,7 @@
     BackgroundColor="#f5f5f5"
     NavigationPage.HasNavigationBar="False">
     <ScrollView>
-    <StackLayout Margin="10">
+    <StackLayout Margin="10" x:Name="MainLayout">
             <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="DodgerBlue" />
             <partialViews:NavigationBarPartialView
             BackButtonVisibler="True"

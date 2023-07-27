@@ -22,17 +22,17 @@ using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pag
         private async void InittLastViewPage()
         {
             Busy();
-            LastViewList.ItemsSource = await DataService.GetMostSellerProductsByOrganizations(orgId);//DataService.Instance.ProcutListModel;
+            LastViewList.ItemsSource = await DataService.GetAllProductsByOrganizations(orgId);//DataService.Instance.ProcutListModel;
             NotBusy();        }        public void Busy()
         {
             uploadIndicator.IsVisible = true;
             uploadIndicator.IsRunning = true;
-
+            MainLayout.Opacity = 0.7;
         }
 
         public void NotBusy()
         {
             uploadIndicator.IsVisible = false;
             uploadIndicator.IsRunning = false;
-
+            MainLayout.Opacity = 100;
         }        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));        }    }}

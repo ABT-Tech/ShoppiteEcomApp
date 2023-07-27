@@ -30,14 +30,14 @@ using System;using System.Collections.Generic;using System.Linq;using Xamarin
         {
             uploadIndicator.IsVisible = true;
             uploadIndicator.IsRunning = true;
-
+            MainStack.Opacity = 0.7;
         }
 
         public void NotBusy()
         {
             uploadIndicator.IsVisible = false;
             uploadIndicator.IsRunning = false;
-
+            MainStack.Opacity = 100;
         }
         private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }
 

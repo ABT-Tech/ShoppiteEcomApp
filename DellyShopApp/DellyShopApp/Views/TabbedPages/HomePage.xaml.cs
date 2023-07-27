@@ -52,25 +52,27 @@ namespace DellyShopApp.Views.TabbedPages
             {
                 TopDeatlbl.IsVisible = true;
             }
-            NotBusy();
+            
             var AllProducts = await DataService.GetAllProductsByOrganizations(orgId, OrgUserID);
             MostNews.FlowItemsSource = AllProducts; //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
             if(AllProducts.Count != 0)
             {
                 AllProductlbl.IsVisible = true;
             }
-           
+            NotBusy();
         }
         public void Busy()
         {
             uploadIndicator.IsVisible = true;
             uploadIndicator.IsRunning = true;
+            MainLayout.Opacity = 0.7;
         }
 
         public void NotBusy()
         {
             uploadIndicator.IsVisible = false;
             uploadIndicator.IsRunning = false;
+            MainLayout.Opacity = 100;
         }
         protected override void OnAppearing()
         {

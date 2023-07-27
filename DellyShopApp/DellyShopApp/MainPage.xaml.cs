@@ -58,12 +58,13 @@ namespace DellyShopApp
                         TextColor = Color.Chocolate,
                         FontAttributes = FontAttributes.Bold,
                         FontSize = 20,
+
                     };
                     var image = new Image
                     {
                         Source = product.Image,
                         BackgroundColor = Color.WhiteSmoke,
-                        Margin = 15,
+                        Margin = new Thickness(0,20,0,25),
                         VerticalOptions = LayoutOptions.Center,
                         HorizontalOptions = LayoutOptions.Center,
                         HeightRequest = 200,

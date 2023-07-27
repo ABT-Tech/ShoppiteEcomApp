@@ -22,6 +22,27 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             //}
             _products = product;           var SpcName = _products.SpecificationNames;            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _comments.Add(new CommentModel            {                Name = "Ufuk Sahin",                CommentTime = "12/1/19",                Id = 1,                Rates = _startList            });            _comments.Add(new CommentModel            {                Name = "Hans Goldman",                CommentTime = "11/1/19",                Id = 2,                Rates = _startList.Skip(0).ToList()            });            InitializeComponent();
            
+            
+            BindingContext = this;
+            //InittProductDetail(product);
+            this.BindingContext = product;            //starList.ItemsSource = _startList;            //this.BindingContext = product.Quantity;                         //starListglobal.ItemsSource = _startList;            //CommentList.ItemsSource = _comments;
+            //MainScroll.Scrolled += MainScroll_Scrolled;           
+                   }
+
+        public ProductDetail()
+        {
+        }
+
+        protected override void OnAppearing()
+        {
+            InittProductDetail(_products);
+        }
+
+        public async void InittProductDetail(ProductListModel product)        {
+                       List<ProductListModel> categories = new List<ProductListModel>();            categories.Add(product);
+            var SimilarPro = await DataService.GetSimilarProducts(orgId, Convert.ToInt32(product.CategoryId), Convert.ToInt32(product.BrandId));
+            Busy();
+            PreviousViewedList.ItemsSource = SimilarPro;
             if (_products.Quantity <= 0)
             {
                 ProductCountLabel.IsVisible = false;
@@ -39,31 +60,18 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             {
                 myImage.Source = "black.png";
             }
-            if ( _products.ProductList.Length != 0)            {                specificationimage.IsVisible = false;                CarouselView.IsVisible = true;                         }
+            if (_products.ProductList.Length != 0)            {                specificationimage.IsVisible = false;                CarouselView.IsVisible = true;
+            }
             else
             {
                 specificationimage.IsVisible = true;                CarouselView.IsVisible = false;
             }
-            BindingContext = this;
-            InittProductDetail(product);
-            this.BindingContext = product;            //starList.ItemsSource = _startList;            //this.BindingContext = product.Quantity;                         //starListglobal.ItemsSource = _startList;            //CommentList.ItemsSource = _comments;
-            //MainScroll.Scrolled += MainScroll_Scrolled;           
-                   }
-
-        public ProductDetail()
-        {
-        }
-
-        public async void InittProductDetail(ProductListModel product)        {
-                       List<ProductListModel> categories = new List<ProductListModel>();            categories.Add(product);
-            var SimilarPro = await DataService.GetSimilarProducts(orgId, Convert.ToInt32(product.CategoryId), Convert.ToInt32(product.BrandId));
-            Busy();
-            PreviousViewedList.ItemsSource = SimilarPro;
-            if(SimilarPro.Count != 0)
+            if (SimilarPro.Count != 0)
             {
                 Similarlbl.IsVisible = true;
             }
             var atb = await DataService.GetProductVariation(orgId, product.ProductGUId);            var atb2 = new List<Attributes>();
+            
             foreach (var Spect in atb)            {                if (Spect.IsSpecificationExist == true)                {                    atb2.Add(Spect);                }
             }
             foreach (var Sname in atb)            {                if (Sname.SpecificationNames == _products.SpecificationNames)                {
@@ -76,12 +84,14 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
         {
             uploadIndicator.IsVisible = true;
             uploadIndicator.IsRunning = true;
+            MainLayout.Opacity = 0.7;
         }
 
         public void NotBusy()
         {
             uploadIndicator.IsVisible = false;
             uploadIndicator.IsRunning = false;
+            MainLayout.Opacity = 100 ;
         }        private void PlusClick(object sender, EventArgs e)        {            if (_products.Quantity >= 10)
             {
                 if (productCount <= 9)
@@ -96,7 +106,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                     ProductCountLabel.Text = (++productCount).ToString();
                 }
             }
-        }        private void MinusClick(object sender, EventArgs e)        {            if (productCount <= 1) return;            ProductCountLabel.Text = (--productCount).ToString();        }        private void MainScroll_Scrolled(object sender, ScrolledEventArgs e)        {            var height = Math.Round(Application.Current.MainPage.Height);            var ycordinate = Math.Round(e.ScrollY);            if (ycordinate > (height / 3))            {                NavbarStack.IsVisible = true;                return;            }            NavbarStack.IsVisible = false;        }        private async void CommentsPageClick(object sender, EventArgs e)        {            await Navigation.PushAsync(new CommentsPage(_products));        }
+        }        private void MinusClick(object sender, EventArgs e)        {            if (productCount <= 1) return;            ProductCountLabel.Text = (--productCount).ToString();        }        //private void MainScroll_Scrolled(object sender, ScrolledEventArgs e)        //{        //    var height = Math.Round(Application.Current.MainPage.Height);        //    var ycordinate = Math.Round(e.ScrollY);        //    if (ycordinate > (height / 3))        //    {        //        NavbarStack.IsVisible = true;        //        return;        //    }        //    NavbarStack.IsVisible = false;        //}        private async void CommentsPageClick(object sender, EventArgs e)        {            await Navigation.PushAsync(new CommentsPage(_products));        }
         async void AddBasketButton(object sender, EventArgs e)        {
             if (UserId == 0 || UserId == null || userAuth != "Client")
             {
@@ -206,15 +216,21 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
 
             Attributes attributeList = new Attributes(); 
             attributeList.OrgId = _products.orgId;
+            attributeList.UserId = UserId;
             attributeList.ProductGUId = _products.ProductGUId;
             attributeList.DefaultSpecification = _products.DefaultSpecification;
+
             attributeList.SpecificationIds = Convert.ToInt32(specificationValue);
-            var item = await DataService.GetProductDetailsBySpecifcation(attributeList.OrgId, attributeList.ProductGUId, attributeList.SpecificationIds);
-            NavbarStack.BindingContext = item;
+            var item = await DataService.GetProductDetailsBySpecifcation(attributeList.OrgId, attributeList.ProductGUId, attributeList.SpecificationIds,attributeList.UserId);
+           // NavbarStack.BindingContext = item;
             item.SpecificationIds = Convert.ToInt32(specificationValue);
             await Navigation.PushAsync(new ProductDetail(item));
         }
 
-        
+        private void TapGestureRecognizer_Tapped_3(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+
+        }
     }
 }

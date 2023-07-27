@@ -20,25 +20,26 @@ using System;using System.Collections.Generic;using System.Linq;using Xamarin
                 DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
                 return false;
             }
-        }        public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {            Busy();            var orderDetails = await DataService.GetOrderDetailsByOrderMasterId(orgId, OrderMasterId);            orderListModel = orderDetails.ProductLists.ToList();            BasketItems.ItemsSource = orderDetails.ProductLists;//DataService.Instance.orderdetails.ProductLists;
+        }        public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;             }        }        private async void InittBasketPage()        {            Busy();            var orderDetails = await DataService.GetOrderDetailsByOrderMasterId(orgId, OrderMasterId);            orderListModel = orderDetails.ProductLists.ToList();            BasketItems.ItemsSource = orderDetails.ProductLists;//DataService.Instance.orderdetails.ProductLists;
             lblDate.Text = orderDetails.Date;//DataService.Instance.orderdetails.Date;
-            lblstatus.Text = orderDetails.ProductLists.FirstOrDefault().orderStatus;            lblno.Text = OrderMasterId.ToString();            lblAddress.Text = orderDetails.Address;            DataService.Instance.TotalPrice = 0;            foreach (var product in orderListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;            }            TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";            if(orderDetails.ProductLists.FirstOrDefault().orderStatus == "Pending")
+            lblstatus.Text = orderDetails.ProductLists.FirstOrDefault().orderStatus;            lblno.Text = OrderMasterId.ToString();            lblAddress.Text = orderDetails.Address;            DataService.Instance.TotalPrice = 0;             foreach (var product in orderListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;            }            TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";            if(orderDetails.ProductLists.FirstOrDefault().orderStatus == "Pending")
             {
                 cancelbutton.IsVisible = true;
                 canceltxtbox.IsVisible = true;
-            }            NotBusy();        }        public void Busy()
+            }            NotBusy();
+                  }        public void Busy()
         {
             uploadIndicator.IsVisible = true;
             uploadIndicator.IsRunning = true;
-
+            MainStack.Opacity = 0.7;
         }
 
         public void NotBusy()
         {
             uploadIndicator.IsVisible = false;
             uploadIndicator.IsRunning = false;
-
-        }        private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));        }        async void TapGestureRecognizer_Tapped_1(System.Object sender, System.EventArgs e)        {
+            MainStack.Opacity = 100;
+        }        private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));        }        async void TapGestureRecognizer_Tapped_1(System.Object sender, System.EventArgs e)        {
             {
                 var canselorder = new Cancelorder
                 {

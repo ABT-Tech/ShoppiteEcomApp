@@ -53,14 +53,14 @@ namespace DellyShopApp.Views.Pages
         {
             uploadIndicator.IsVisible = true;
             uploadIndicator.IsRunning = true;
-
+            MainLayout.Opacity = 0.7;
         }
 
         public void NotBusy()
         {
             uploadIndicator.IsVisible = false;
             uploadIndicator.IsRunning = false;
-
+            MainLayout.Opacity = 100;
         }
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
