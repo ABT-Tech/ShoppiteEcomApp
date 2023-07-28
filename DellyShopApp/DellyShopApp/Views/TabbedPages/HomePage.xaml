@@ -17,8 +17,6 @@
     NavigationPage.HasNavigationBar="False"
     Visual="Default">
     <Grid>
-
-
         <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
             <StackLayout Margin="5,10,5,0" WidthRequest="150">
                     <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="Chocolate" />
@@ -43,6 +41,7 @@
                 
                   
          <renderers:BorderlessSearchBar x:Name="item"
+                                        BackgroundColor="White"
            Placeholder="Search items..."
            PlaceholderColor="Black"
            TextColor="Black"
@@ -96,7 +95,6 @@
                                                 Grid.Row="0"
                                                 Grid.Column="0"
                                                 Aspect="AspectFill">
-                                               
                                                 <Image.GestureRecognizers>
                                                     <TapGestureRecognizer Tapped="ClickCategory" />
                                                 </Image.GestureRecognizers>
@@ -104,7 +102,6 @@
                                             <pancakeView:PancakeView
                                                 Grid.Row="0"
                                                 Grid.Column="0"
-                                            
                                                 BackgroundGradientEndColor="{DynamicResource DarkFontColor}"
                                                 BackgroundGradientStartColor="White"
                                                 CornerRadius="10"
@@ -115,6 +112,7 @@
                                                 FontAttributes="Bold"
                                                 FontFamily="{DynamicResource VerdanaProBold}"
                                                 FontSize="12"
+                                                HorizontalTextAlignment="Center"
                                                 HorizontalOptions="CenterAndExpand"
                                                 Text="{Binding CategoryName}"
                                                 TextColor="{DynamicResource LabelTextColor}"
@@ -127,7 +125,6 @@
                         </customControl:RepeaterView.ItemTemplate>
                     </customControl:RepeaterView>
                 </ScrollView>
-
                 <pancakeView:PancakeView
                     x:Name="view"
                     Margin="0,10,0,0"
@@ -136,14 +133,12 @@
                     Elevation="2"
                     BackgroundColor="#f5f5f5"
                     HasShadow="False">
-
                     <controls:CarouselView
                         x:Name="CarouselView"
                         Margin="0,0,0,0"
                         BackgroundColor="#f5f5f5"
                         HeightRequest="{x:OnIdiom Tablet=350,
                                                   Phone=200}"
-                       
                         SelectedIndex="0"
                         WidthRequest="300">
                         <x:Arguments>
@@ -172,8 +167,6 @@
                                     </forms:CachedImage.GestureRecognizers>
                                 </ContentView>                                
                             </DataTemplate>
-
-                          
                         </controls:CarouselView.ItemTemplate>
                     </controls:CarouselView>
                 </pancakeView:PancakeView>
@@ -242,7 +235,6 @@
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 Text="{Binding Title}"
                                                 MaxLines="1"
-
                                                 LineBreakMode="TailTruncation"
                                                 TextColor="Black"
                                                 VerticalOptions="Start" />
@@ -263,8 +255,6 @@
                                                     Text="{Binding OldPrice, StringFormat='{0}₹'}"
                                                     TextColor="Gray"
                                                     WidthRequest="100"
-
-                                                    
                                                     TextDecorations="Strikethrough"
                                                     VerticalOptions="CenterAndExpand" />
                                                 <Label
@@ -374,7 +364,6 @@
                     </customControl:RepeaterView>
                 </ScrollView>
                 <Label
-                    
                     Margin="0,10,0,0"
                     Padding="5,5,0,0"
                     FontAttributes="Bold"
@@ -430,7 +419,6 @@
                                         Text="{Binding Brand}"
                                         TextColor="{DynamicResource DescLabelColor}"
                                         VerticalOptions="Start" />
-
                                     <Label
                                         FontFamily="{DynamicResource VerdanaProBold}"
                                         FontSize="15"
@@ -444,7 +432,6 @@
                     </controls:FlowListView.FlowColumnTemplate>
                 </controls:FlowListView>
             </StackLayout>
-               
         </ScrollView>
         <Label IsVisible="false"
                             x:Name="ProductCountLabel"

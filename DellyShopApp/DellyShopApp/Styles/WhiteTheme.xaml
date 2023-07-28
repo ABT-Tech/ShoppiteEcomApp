@@ -57,7 +57,6 @@
     <Color x:Key="PrimaryDark">#75849D</Color>
     <Color x:Key="Secondary">#B5BBC2</Color>
     <Color x:Key="Accent">White</Color>
-
     <Color x:Key="LightColor">LightGray</Color>
 
 
