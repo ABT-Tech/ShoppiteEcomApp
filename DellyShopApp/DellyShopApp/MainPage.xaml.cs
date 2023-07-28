@@ -33,7 +33,7 @@ namespace DellyShopApp
             Busy();
             this.BindingContext = this;
             var AllOrganizations = await DataService.GetAllOrganizations(); //DataService.Instance.ShopDetails;
-            NotBusy();
+          
             float rows = (float)AllOrganizations.Count / 2;
             double rowcount = Math.Round(rows);
             if (AllOrganizations.Count % 2 == 1)
@@ -85,7 +85,7 @@ namespace DellyShopApp
                     shop.Children.Add(Orglabel, columnIndex, rowIndex);
                 }
             }
-            
+            NotBusy();
             //shop.ItemsSource = DataService.Instance.ShopDetails;
         }
         public void Busy()
