@@ -19,10 +19,8 @@
         <StackLayout Margin="10">
             <partialViews:NavigationBarPartialView
                 x:Name="Navbar"
-                BackButtonVisibler="True"
                 FavVisible="False"
-                IsModalpage="True"
-                NavigationTitle="{x:Static languages:AppResources.AddNewCard}" />
+                IsModalpage="True"                             BackButtonVisibler="True"                NavigationTitle="Add Card Details" />
             <ScrollView>
                 <Grid
                     ColumnSpacing="20"
@@ -66,6 +64,7 @@
                                 </Image.Source>
                             </Image>
                             <renderers:BorderlessEntry
+                                Placeholder="Card Holder Name"
                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                 HorizontalOptions="FillAndExpand"
                                 TextColor="Black"
@@ -167,7 +166,7 @@
                         Grid.Column="0"
                         Grid.ColumnSpan="3"
                         VerticalOptions="EndAndExpand">
-                        <Frame
+                        <!--<Frame
                             Margin="10"
                             BackgroundColor="#015598"
                             Style="{DynamicResource ButtonFrameStyle}">
@@ -180,7 +179,7 @@
                                     Text="{x:Static languages:AppResources.ScanCard}"
                                     TextColor="black" />
                             </StackLayout>
-                        </Frame>
+                        </Frame>-->
                         <Frame
                             Grid.Row="5"
                             Grid.Column="0"
