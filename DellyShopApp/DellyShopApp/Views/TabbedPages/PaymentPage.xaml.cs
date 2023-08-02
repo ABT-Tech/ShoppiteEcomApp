@@ -1,5 +1,5 @@
 ﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.ViewModel;using DellyShopApp.Views.CustomView;using DellyShopApp.Views.ModalPages;using DellyShopApp.Views.Pages;using Plugin.Connectivity;
-using System;using System.Collections.Generic;using System.Diagnostics;using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class BasketPage    {        List<ProductListModel> productListModel = new List<ProductListModel>();        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);               private readonly BasketPageVm _basketVm = new BasketPageVm();        private int _quantity;        private Page2 page;        private List<ProductListModel> Product { get; set; }        public BasketPage(List<ProductListModel> product)        {            this.Product = product;            InitializeComponent();
+using System;using System.Collections.Generic;using System.Diagnostics;using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class PaymentPage    {        List<ProductListModel> productListModel = new List<ProductListModel>();        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);               private readonly BasketPageVm _basketVm = new BasketPageVm();        private int _quantity;        private Page2 page;        private List<ProductListModel> Product { get; set; }        public PaymentPage(List<ProductListModel> product)        {            this.Product = product;            InitializeComponent();
             if (ChechConnectivity())
             {
                 InittBasketPage();
@@ -15,11 +15,11 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
                 DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
                 return false;
             }
-        }        public BasketPage(Page2 page)        {            this.page = page;        }        public BasketPage()
+        }        public PaymentPage(Page2 page)        {            this.page = page;        }        public PaymentPage()
         {
 
         }               public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {            productListModel = this.Product;            BasketItems.ItemsSource = this.Product;//await DataService.GetAllCartDetails(orgId, userId);//DataService.Instance.ProcutListModel;
-            AddressPicker.ItemsSource = await DataService.GetAddressByUserId(orgId, userId); //DataService.Instance.changeAddress;
+            //AddressPicker.ItemsSource = await DataService.GetAddressByUserId(orgId, userId); //DataService.Instance.changeAddress;
             //productListModel = await DataService.GetAllCartDetails(orgId, userId);
             BasketItems.ItemsSource = productListModel;
             
@@ -42,12 +42,10 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
 
 
 
-        /// <summary>        /// Go to Address Page        /// </summary>        /// <param name="sender"></param>        /// <param name="e"></param>        private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }        private async void ContinueClick(object sender, EventArgs e)        {
-
-            OrderCheckOut orderCheckOut = new OrderCheckOut();            orderCheckOut.ProductLists = productListModel;            orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);            orderCheckOut.userid = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);            orderCheckOut.Address = (ChangeAddress)AddressPicker.SelectedItem;            orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.OrderGuid = productListModel.FirstOrDefault().OrderGuId;
-            if (orderCheckOut.Address == null)            {
-                await DisplayAlert("Opps!", "Please Select Address", "ok");                return;            }
-            await Navigation.PushAsync(new PaymentPage(productListModel));
+        /// <summary>        /// Go to Address Page        /// </summary>        /// <param name="sender"></param>        /// <param name="e"></param>        private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }        private async void ContinueClick(object sender, EventArgs e)        {                       //OrderCheckOut orderCheckOut = new OrderCheckOut();            //orderCheckOut.ProductLists = productListModel;            //orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);            //orderCheckOut.userid = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);            //orderCheckOut.Address = (ChangeAddress)AddressPicker.SelectedItem;            //orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice);            //orderCheckOut.OrderGuid = productListModel.FirstOrDefault().OrderGuId;
+            //if (orderCheckOut.Address == null)            //{
+            //    await DisplayAlert("Opps!", "Please Select Address", "ok");            //    return;            //}
+            ////await Navigation.PushAsync(new (productListModel));
             //await DataService.Checkout(orderCheckOut);            //await Navigation.PushAsync(new SuccessPage(productListModel));
         }
 
@@ -176,4 +174,13 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
             #endregion
             #region Obtain a Client Metadata ID            //Print Client Metadata Id
                                                             //Debug.WriteLine(CrossPayPalManager.Current.ClientMetadataId);
-            #endregion        }    }}
+            #endregion        }
+
+       private async void cardclick(System.Object sender, System.EventArgs e)
+        {
+
+            OrderCheckOut orderCheckOut = new OrderCheckOut();            orderCheckOut.ProductLists = productListModel;            orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);            orderCheckOut.userid = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);            //orderCheckOut.Address = (ChangeAddress)AddressPicker.SelectedItem;            orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.OrderGuid = productListModel.FirstOrDefault().OrderGuId;
+            //if (orderCheckOut.Address == null)            //{
+            //    await DisplayAlert("Opps!", "Please Select Address", "ok");            //    return;            //}
+            await Navigation.PushAsync(new AddNewCardPage(productListModel));
+        }    }}

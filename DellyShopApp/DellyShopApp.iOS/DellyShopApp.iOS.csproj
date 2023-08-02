@@ -165,6 +165,9 @@
     <BundleResource Include="Resources\Profile%403x.png" />
     <BundleResource Include="Resources\ic_eye.png" />
     <BundleResource Include="Resources\ic_eye_hide.png" />
+    <BundleResource Include="Resources\UPI.gif" />
+    <BundleResource Include="Resources\Wallets.gif" />
+    <BundleResource Include="Resources\nocards.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -269,7 +272,7 @@
       <Version>3.4.35</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
-      <Version>1.7.5</Version>
+      <Version>1.7.7</Version>
     </PackageReference>
     <PackageReference Include="Plugin.PayCards">
       <Version>1.1.1</Version>

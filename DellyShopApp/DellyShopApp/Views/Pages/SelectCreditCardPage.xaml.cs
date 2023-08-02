@@ -39,7 +39,7 @@ namespace DellyShopApp.Views.Pages
 
         private void AddCardClick(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new AddNewCardPage(), true);
+            //Navigation.PushModalAsync(new AddNewCardPage(), true);
         }
 
         private void BackButton(object sender, EventArgs e)

@@ -11,6 +11,7 @@ namespace DellyShopApp.Models
         public int proId { get; set; }
         public int Qty { get; set; }
         public int SpecificationId { get; set; }
+        public string SpecificationNames { get; set; }
 
 
     }
