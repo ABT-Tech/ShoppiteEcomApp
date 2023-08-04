@@ -13,7 +13,9 @@ namespace DellyShopApp.Models
         public object BaseTotalPrice { get; set; }
         public object TotalPrice { get; set; }
         public Guid OrderGuid { get; set; }
-
+        public bool OnePay { get; set; }
+        public string encryptedParams { get; set; }
+        public string AggregatorRedirectionLink { get; set; }
 
         internal List<OrderCheckOut> ToList()
         {

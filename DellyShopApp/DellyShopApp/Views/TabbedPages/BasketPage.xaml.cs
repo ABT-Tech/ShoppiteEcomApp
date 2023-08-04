@@ -1,6 +1,8 @@
-﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.ViewModel;using DellyShopApp.Views.CustomView;using DellyShopApp.Views.ModalPages;using DellyShopApp.Views.Pages;using PayPal.Forms;using PayPal.Forms.Abstractions;using Plugin.Connectivity;
+﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.ViewModel;using DellyShopApp.Views.CustomView;using DellyShopApp.Views.ModalPages;using DellyShopApp.Views.Pages;using Foundation;
+using Newtonsoft.Json;
+using PayPal.Forms;using PayPal.Forms.Abstractions;using Plugin.Connectivity;
 using System;using System.Collections.Generic;using System.Diagnostics;using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class BasketPage    {        List<ProductListModel> productListModel = new List<ProductListModel>();        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);        private readonly BasketPageVm _basketVm = new BasketPageVm();        private int _quantity;        private Page2 page;        private List<ProductListModel> Product { get; set; }        public BasketPage(List<ProductListModel> product)        {
-            this.Product = product;            InitializeComponent();            if (ChechConnectivity())
+            this.Product = product;            InitializeComponent();                      if (ChechConnectivity())
             {
                 InittBasketPage();
             }            this.BindingContext = product;
@@ -34,7 +36,7 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
             TotalPrice.Text = $"{ DataService.Instance.TotalPrice }₹";
         }
         /// <summary>        /// Go to Address Page        /// </summary>        /// <param name="sender"></param>        /// <param name="e"></param>        private async void AddAddressClick(object sender, EventArgs e)        {
-                   }        private async void ContinueClick(object sender, EventArgs e)        {            OrderCheckOut orderCheckOut = new OrderCheckOut();            orderCheckOut.ProductLists = productListModel;            orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);            orderCheckOut.userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);            orderCheckOut.Address = (ChangeAddress)AddressPicker.SelectedItem;            orderCheckOut.BaseTotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice + 12);            orderCheckOut.OrderGuid = productListModel.FirstOrDefault().OrderGuId;            if (orderCheckOut.Address == null)
+                   }        private async void ContinueClick(object sender, EventArgs e)        {            OrderCheckOut orderCheckOut = new OrderCheckOut();            orderCheckOut.ProductLists = productListModel;            orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);            orderCheckOut.userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);            orderCheckOut.Address = (ChangeAddress)AddressPicker.SelectedItem;            //orderCheckOut.BaseTotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.OrderGuid = productListModel.FirstOrDefault().OrderGuId;            if (orderCheckOut.Address == null)
             {
                 await DisplayAlert("Opps!", "Please Select Address", "ok");
                 return;
@@ -122,5 +124,41 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
                                                             //Debug.WriteLine(CrossPayPalManager.Current.ClientMetadataId);
             #endregion        }
 
+        private void BrowserUrl(object sender, EventArgs e)
+        {
+            MerchantParams merchantParams = new MerchantParams();
+            var serializeObject = JsonConvert.SerializeObject(merchantParams);
+            merchantParams.amount = TotalPrice.Text;
+            merchantParams.dateTime = DateTime.Now.ToString();
+            
+            Random rnd = new Random();
+            int myRandomNo = rnd.Next(10000000, 99999999);
+            string plain = "{\"merchantId\":\"M00006063\",\"apiKey\":\"Jt5cO5cf2jg8bX4Bc9yw0Nr8Ng5zm5xz\",\"txnId\":\""+myRandomNo+"\",\"amount\":\"10.00\",\"dateTime\":\"2023-08-02 08:44:47\",\"custMail\":\"test@test.com\",\"custMobile\":\"9876543210\",\"udf1\":\"NA\",\"udf2\":\"NA\",\"returnURL\":\"https://mewanuts.shooppy.in/\",\"isMultiSettlement\":\"0\",\"productId\":\"DEFAULT\",\"channelId\":\"0\",\"txnType\":\"DIRECT\",\"udf3\":\"NA\",\"udf4\":\"NA\",\"udf5\":\"NA\",\"instrumentId\":\"NA\",\"cardDetails\":\"NA\",\"cardType\":\"NA\",\"ResellerTxnId\":\"NA\",\"Rid\":\"R0000259\"}";
+            DataService dataService = new DataService();
+            var Encrypt = dataService.EncryptPaymentRequest("M00006063", "Jt5cO5cf2jg8bX4Bc9yw0Nr8Ng5zm5xz", plain);
 
+            Content = new StackLayout
+            {
+
+                Children =
+                     {
+                               
+
+                      new MyWebview()
+                      {
+                      
+                          url="https://pa-preprod.1pay.in/payment/payprocessorV2",
+                            WidthRequest = 300,
+                            HeightRequest = 1100,
+                            data = string.Format("reqData={0}&merchantId={1}", Encrypt, "M00006063")
+                      },
+                     },
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand
+
+
+            };
+            
+        }
+        
     }}
