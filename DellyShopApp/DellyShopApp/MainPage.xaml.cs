@@ -8,6 +8,7 @@ using static DellyShopApp.Views.ListViewData;
 using System.Net.NetworkInformation;
 using System.Net;
 using Plugin.Connectivity;
+using DellyShopApp.Models;
 
 namespace DellyShopApp
 {
@@ -41,7 +42,7 @@ namespace DellyShopApp
         {
             Busy();
             this.BindingContext = this;
-            var AllOrganizations = await DataService.GetAllOrganizations(); //DataService.Instance.ShopDetails;
+            var AllOrganizations = await DataService.GetAllOrganizationCategories(); //DataService.Instance.ShopDetails;
             float rows = (float)AllOrganizations.Count / 2;
             double rowcount = Math.Round(rows);
             NotBusy();
@@ -62,42 +63,46 @@ namespace DellyShopApp
                     productIndex += 1;
                     var label = new Label
                     {
-                        Text = product.ShopName,
+                        Text = product.CategoryName,
                         VerticalOptions = LayoutOptions.End,
                         HorizontalOptions = LayoutOptions.Center,
                         TextColor = Color.Chocolate,
+                        MaxLines = 1,
+                        LineBreakMode = LineBreakMode.TailTruncation,
+                        HorizontalTextAlignment = TextAlignment.Center,
                         FontAttributes = FontAttributes.Bold,
-                        FontSize = 20,
+                        FontSize = 18,
                         
 
                     };
                     var image = new Image
                     {
+                        
                         Aspect = Aspect.AspectFit,
-                        Source = product.Image,
+                        Source = product.CategoryImage,
                         BackgroundColor = Color.WhiteSmoke,
                         Margin = new Thickness(0,15,0,25),
                         VerticalOptions = LayoutOptions.Center,
                         HorizontalOptions = LayoutOptions.Center,
                         HeightRequest = 200,
-                        WidthRequest = 200
+                        WidthRequest = 200,
                         
-                        
-
-
                     };
+                 
+
                     var Orglabel = new Label
                     {
-                        Text = product.OrgId.ToString(),
+                        Text = product.Org_CategoryId.ToString(),
                         IsVisible = false
                     };
                     image.GestureRecognizers.Add(new TapGestureRecognizer
                     {
-                        Command = new Command(() => TapGestureRecognizer_Tapped(Orglabel.Text,product.Image.ToString())),
+                        Command = new Command(() => TapGestureRecognizer_Tapped(Orglabel.Text,product.CategoryImage.ToString())),
                     });
                     shop.Children.Add(image, columnIndex, rowIndex);
                     shop.Children.Add(label, columnIndex, rowIndex);
                     shop.Children.Add(Orglabel, columnIndex, rowIndex);
+                   
                 }
             }
             //shop.ItemsSource = DataService.Instance.ShopDetails;
@@ -109,7 +114,7 @@ namespace DellyShopApp
             uploadIndicator.IsRunning = true;
 
         }
-
+        
         public void NotBusy()
         {
             uploadIndicator.IsVisible = false;
@@ -118,19 +123,21 @@ namespace DellyShopApp
         }
         private  void TapGestureRecognizer_Tapped(string orgId,string Img)
         {
-            var neworgId = Convert.ToInt32(orgId);
-            if(neworgId != oldorgId)
-            {
-                Xamarin.Essentials.SecureStorage.RemoveAll();
-            }
+            //var neworgId = Convert.ToInt32(orgId);
+            //if(neworgId != oldorgId)
+            //{
+            //    Xamarin.Essentials.SecureStorage.RemoveAll();
+            //}
 
-            SecureStorage.SetAsync("OrgId",orgId);
-            SecureStorage.SetAsync("ImgId", Img);
+            SecureStorage.SetAsync("OrgCatId",orgId);
+            //SecureStorage.SetAsync("ImgId", Img);
 
-            Navigation.PushAsync(new HomeTabbedPage());
+            var org = Convert.ToInt32(orgId);
+            Navigation.PushAsync(new OrgPage(org));
             
         }
-      
+
+     
     }
    
 }

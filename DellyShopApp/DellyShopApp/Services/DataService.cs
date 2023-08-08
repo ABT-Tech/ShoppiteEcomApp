@@ -8,9 +8,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -143,7 +145,7 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
-         public static async Task<List<ShopModel>> GetAllOrganizations()
+         public static async Task<List<ShopModel>> GetAllOrganizations(int Org_CategoryId)
         {
             try
             {
@@ -157,10 +159,35 @@ namespace DellyShopApp.Services
                 };
                 HttpClient httpClient = new HttpClient(clientHandler);
                 var response = await httpClient.GetAsync(
-                    AppSettings.ApiUrl + "api/Organization/GetAllOrganizations?OrgId=1");
+                    AppSettings.ApiUrl + "api/Organization/GetAllOrganizations?Org_CategoryId="+ Org_CategoryId);
 
                 string result = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<ShopModel>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+
+            }
+        }
+        public static async Task<List<OrgCategories>> GetAllOrganizationCategories()
+        {
+            try
+            {
+                // await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //"bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Organization/GetAllOrganizationCategories");
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<OrgCategories>>(result);
             }
             catch (Exception ex)
             {
@@ -890,7 +917,7 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
-        public static async Task<ProductListModel> GetProductDetailsBySpecifcation(int OrgId, Guid ProductGUID, int SpecificationId,int UserId)
+        public static async Task<ProductListModel> GetProductDetailsBySpecifcation(int OrgId, Guid ProductGUID, int SpecificationId, int UserId)
         {
             try
             {
@@ -903,8 +930,9 @@ namespace DellyShopApp.Services
                     ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
                 };
                 HttpClient httpClient = new HttpClient(clientHandler);
+                var userData = UserId.ToString() == "0" ? "" : UserId.ToString();
                 var response = await httpClient.GetAsync(
-                    AppSettings.ApiUrl + "api/Products/GetProductDetailsBySpecifcation?OrgId=" + OrgId + "&ProductGUID=" + ProductGUID + "&SpecificationId=" + SpecificationId +"&UserId=" + UserId);
+                    AppSettings.ApiUrl + "api/Products/GetProductDetailsBySpecifcation?OrgId=" + OrgId + "&ProductGUID=" + ProductGUID + "&SpecificationId=" + SpecificationId + "&UserId=" + userData);
 
 
                 string result = await response.Content.ReadAsStringAsync();
@@ -918,7 +946,179 @@ namespace DellyShopApp.Services
 
                 return product; //JsonConvert.DeserializeObject<ProductListModel>(STORE);
             }
-            catch (Exception ex) 
+
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public string EncryptPaymentRequest(string merchantId, string key, string merchantParamsJson)
+        {
+            String encryptedText = string.Empty;
+            try
+            {
+                string original = merchantParamsJson;
+                string merchantEncryptionKey = key.Substring(0, 16);
+                encryptedText = EncryptAES256_V3(merchantParamsJson, key, merchantEncryptionKey);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+
+            return encryptedText;
+        }
+        public string DecryptAES256_V3(string cipherText, string _key, string _iv)
+        {
+            // Instantiate a new Aes object to perform string symmetric encryption
+            Aes encryptor = Aes.Create();
+
+            byte[] key = Encoding.ASCII.GetBytes(_key);
+            byte[] iv = Encoding.ASCII.GetBytes(_iv);
+
+            encryptor.Mode = CipherMode.CBC;
+
+            // Set key and IV
+            encryptor.Key = key;
+            encryptor.IV = iv;
+
+            // Instantiate a new MemoryStream object to contain the encrypted bytes
+            MemoryStream memoryStream = new MemoryStream();
+
+            // Instantiate a new encryptor from our Aes object
+            ICryptoTransform aesDecryptor = encryptor.CreateDecryptor();
+
+            // Instantiate a new CryptoStream object to process the data and write it to the 
+            // memory stream
+            CryptoStream cryptoStream = new CryptoStream(memoryStream, aesDecryptor, CryptoStreamMode.Write);
+
+            // Will contain decrypted plaintext
+            string plainText = String.Empty;
+
+            try
+            {
+                // Convert the ciphertext string into a byte array
+                byte[] cipherBytes = Convert.FromBase64String(cipherText);
+
+                // Decrypt the input ciphertext string
+                cryptoStream.Write(cipherBytes, 0, cipherBytes.Length);
+
+                // Complete the decryption process
+                cryptoStream.FlushFinalBlock();
+
+                // Convert the decrypted data from a MemoryStream to a byte array
+                byte[] plainBytes = memoryStream.ToArray();
+
+                // Convert the decrypted byte array to string
+                plainText = Encoding.ASCII.GetString(plainBytes, 0, plainBytes.Length);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                // Close both the MemoryStream and the CryptoStream
+                memoryStream.Close();
+                cryptoStream.Close();
+            }
+
+            // Return the decrypted data as a string
+            return plainText;
+        }
+
+        public string EncryptAES256_V3(string plainText, string _key, string _iv)
+        {
+            // Instantiate a new Aes object to perform string symmetric encryption
+            Aes encryptor = Aes.Create();
+            byte[] key = Encoding.ASCII.GetBytes(_key);
+            byte[] iv = Encoding.ASCII.GetBytes(_iv);
+            encryptor.Mode = CipherMode.CBC;
+
+            // Set key and IV
+            encryptor.Key = key;
+            encryptor.IV = iv;
+
+            // Instantiate a new MemoryStream object to contain the encrypted bytes
+            MemoryStream memoryStream = new MemoryStream();
+
+            // Instantiate a new encryptor from our Aes object
+            ICryptoTransform aesEncryptor = encryptor.CreateEncryptor();
+
+            // Instantiate a new CryptoStream object to process the data and write it to the 
+            // memory stream
+            CryptoStream cryptoStream = new CryptoStream(memoryStream, aesEncryptor, CryptoStreamMode.Write);
+
+            // Convert the plainText string into a byte array
+            byte[] plainBytes = Encoding.ASCII.GetBytes(plainText);
+
+            // Encrypt the input plaintext string
+            cryptoStream.Write(plainBytes, 0, plainBytes.Length);
+
+            // Complete the encryption process
+            cryptoStream.FlushFinalBlock();
+
+            // Convert the encrypted data from a MemoryStream to a byte array
+            byte[] cipherBytes = memoryStream.ToArray();
+
+            // Close both the MemoryStream and the CryptoStream
+            memoryStream.Close();
+            cryptoStream.Close();
+
+            // Convert the encrypted byte array to a base64 encoded string
+            string cipherText = Convert.ToBase64String(cipherBytes, 0, cipherBytes.Length);
+
+            // Return the encrypted data as a string
+            return cipherText;
+        }
+        public static async Task<OrderCheckOut> GetOnePlayFlag(int orgId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Cart/GetOnePlayFlag?OrgId=" + orgId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<OrderCheckOut>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<PaymentGatewayResponse> MakePaymentRequest(OrderCheckOut orderCheckOut)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                var payload = JsonConvert.SerializeObject(orderCheckOut);
+
+                HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+                HttpClient httpClient = new HttpClient(clientHandler);
+                httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+                var response = await httpClient.PostAsync("api/Cart/MakePaymentRequest", c);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<PaymentGatewayResponse>(result);
+            }
+            catch (Exception ex)
+
             {
                 throw;
             }

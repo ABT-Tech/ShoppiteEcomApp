@@ -1,0 +1,1 @@
+﻿using System;using System.Collections.Generic;namespace DellyShopApp.Models{    public class PaymentGatewayResponse    {        public string encryptedParams { get; set; }        public string AggregatorRedirectionLink { get; set; }        public string AggregatorCallbackURL { get; set; }        public string merchantId { get; set; }    }}

@@ -1,0 +1,2 @@
+﻿using Xamarin.Forms;namespace DellyShopApp{    public class MyWebview : WebView    {        public string data; //Parameters that you want to pass
+        public string url;        public MyWebview()        {        }    }}

@@ -219,6 +219,8 @@
     <BundleResource Include="Resources\masterCard%403x.png" />
     <BundleResource Include="Resources\nocards%402x.png" />
     <BundleResource Include="Resources\nocards%403x.png" />
+    <Compile Include="Rednerers\MyWebViewRenderer.cs" />
+    <BundleResource Include="Resources\soon.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
