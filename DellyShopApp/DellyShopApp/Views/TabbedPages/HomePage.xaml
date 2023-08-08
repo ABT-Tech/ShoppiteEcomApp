@@ -291,7 +291,7 @@
                                                                  Phone=130}">
                                        
                                         <pancakeView:PancakeView.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="ProductDetailClick" />
+                                            <DragGestureRecognizer                                                CanDrag="True"                                                DragStarting="DragGestureRecognizer_DragStarting"                                                DropCompleted="DragGestureRecognizer_DropCompleted" />                                            <TapGestureRecognizer Tapped="ProductDetailClick" />
                                         </pancakeView:PancakeView.GestureRecognizers>
                                         <StackLayout>
                                             <forms:CachedImage

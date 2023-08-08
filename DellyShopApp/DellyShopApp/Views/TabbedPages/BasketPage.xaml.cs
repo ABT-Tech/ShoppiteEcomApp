@@ -18,13 +18,15 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
                 DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
                 return false;
             }
-        }        public BasketPage(Page2 page)        {            this.page = page;        }        public BasketPage()        {        }        public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {            productListModel = this.Product;            BasketItems.ItemsSource = this.Product;//await DataService.GetAllCartDetails(orgId, userId);//DataService.Instance.ProcutListModel;
-            var Add = await DataService.GetAddressByUserId(orgId, userId);                        AddressPicker.ItemsSource = Add; //DataService.Instance.changeAddress;
-            //if (Add != null)
-            //{
-            //    SelAdd.IsVisible = false;
-            //}
-            //productListModel = await DataService.GetAllCartDetails(orgId, userId);
+        }        public BasketPage(Page2 page)        {            this.page = page;        }        public BasketPage()        {        }        public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {
+            productListModel = this.Product;            var payment = await DataService.GetOnePlayFlag(orgId);            if (payment.OnePay != false)
+            {
+                onepay.IsVisible = true;
+            }            else
+            {
+                onepay.IsVisible = false;
+            }            BasketItems.ItemsSource = this.Product;
+            var Add = await DataService.GetAddressByUserId(orgId, userId);                        AddressPicker.ItemsSource = Add;
             BasketItems.ItemsSource = productListModel;
            
         }        protected override async void OnAppearing()        {            base.OnAppearing();
@@ -35,8 +37,7 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
             }
             TotalPrice.Text = $"{ DataService.Instance.TotalPrice }₹";
         }
-        /// <summary>        /// Go to Address Page        /// </summary>        /// <param name="sender"></param>        /// <param name="e"></param>        private async void AddAddressClick(object sender, EventArgs e)        {
-                   }        private async void ContinueClick(object sender, EventArgs e)        {            OrderCheckOut orderCheckOut = new OrderCheckOut();            orderCheckOut.ProductLists = productListModel;            orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);            orderCheckOut.userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);            orderCheckOut.Address = (ChangeAddress)AddressPicker.SelectedItem;            //orderCheckOut.BaseTotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.OrderGuid = productListModel.FirstOrDefault().OrderGuId;            if (orderCheckOut.Address == null)
+        /// <summary>        /// Go to Address Page        /// </summary>        /// <param name="sender"></param>        /// <param name="e"></param>               private async void ContinueClick(object sender, EventArgs e)        {            OrderCheckOut orderCheckOut = new OrderCheckOut();            orderCheckOut.ProductLists = productListModel;            orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);            orderCheckOut.userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);            orderCheckOut.Address = (ChangeAddress)AddressPicker.SelectedItem;            //orderCheckOut.BaseTotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.OrderGuid = productListModel.FirstOrDefault().OrderGuId;            if (orderCheckOut.Address == null)
             {
                 await DisplayAlert("Opps!", "Please Select Address", "ok");
                 return;
@@ -124,18 +125,19 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
                                                             //Debug.WriteLine(CrossPayPalManager.Current.ClientMetadataId);
             #endregion        }
 
-        private void BrowserUrl(object sender, EventArgs e)
+        private async void BrowserUrl(object sender, EventArgs e)
         {
-            MerchantParams merchantParams = new MerchantParams();
-            var serializeObject = JsonConvert.SerializeObject(merchantParams);
-            merchantParams.amount = TotalPrice.Text;
-            merchantParams.dateTime = DateTime.Now.ToString();
-            
-            Random rnd = new Random();
-            int myRandomNo = rnd.Next(10000000, 99999999);
-            string plain = "{\"merchantId\":\"M00006063\",\"apiKey\":\"Jt5cO5cf2jg8bX4Bc9yw0Nr8Ng5zm5xz\",\"txnId\":\""+myRandomNo+"\",\"amount\":\"10.00\",\"dateTime\":\"2023-08-02 08:44:47\",\"custMail\":\"test@test.com\",\"custMobile\":\"9876543210\",\"udf1\":\"NA\",\"udf2\":\"NA\",\"returnURL\":\"https://mewanuts.shooppy.in/\",\"isMultiSettlement\":\"0\",\"productId\":\"DEFAULT\",\"channelId\":\"0\",\"txnType\":\"DIRECT\",\"udf3\":\"NA\",\"udf4\":\"NA\",\"udf5\":\"NA\",\"instrumentId\":\"NA\",\"cardDetails\":\"NA\",\"cardType\":\"NA\",\"ResellerTxnId\":\"NA\",\"Rid\":\"R0000259\"}";
-            DataService dataService = new DataService();
-            var Encrypt = dataService.EncryptPaymentRequest("M00006063", "Jt5cO5cf2jg8bX4Bc9yw0Nr8Ng5zm5xz", plain);
+            OrderCheckOut orderCheckOut = new OrderCheckOut();            orderCheckOut.ProductLists = productListModel;            orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);            orderCheckOut.userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);            orderCheckOut.Address = (ChangeAddress)AddressPicker.SelectedItem;
+            orderCheckOut.OnePay = true;
+            //orderCheckOut.BaseTotalPrice = ((decimal)DataService.Instance.TotalPrice);
+            orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.OrderGuid = productListModel.FirstOrDefault().OrderGuId;            if (orderCheckOut.Address == null)
+            {
+                await DisplayAlert("Opps!", "Please Select Address", "ok");
+                return;
+            }
+
+             var payment =  await DataService.MakePaymentRequest(orderCheckOut);
+             await SecureStorage.SetAsync("PaymentUrl", payment.AggregatorCallbackURL);
 
             Content = new StackLayout
             {
@@ -150,7 +152,7 @@ using System;using System.Collections.Generic;using System.Diagnostics;using 
                           url="https://pa-preprod.1pay.in/payment/payprocessorV2",
                             WidthRequest = 300,
                             HeightRequest = 1100,
-                            data = string.Format("reqData={0}&merchantId={1}", Encrypt, "M00006063")
+                            data = string.Format("reqData={0}&merchantId={1}", payment.encryptedParams, payment.merchantId)
                       },
                      },
                 VerticalOptions = LayoutOptions.FillAndExpand,

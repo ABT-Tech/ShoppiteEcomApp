@@ -14,6 +14,8 @@ namespace DellyShopApp.Views.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoryDetailPage
     {
+        public int Org_CategoryId = Convert.ToInt32(SecureStorage.GetAsync(" Org_CategoryId").Result);
+
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public CategoryDetailPage()
         {
@@ -75,8 +77,8 @@ namespace DellyShopApp.Views.Pages
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {           
+        {
             await Navigation.PushAsync(new MainPage());           
         }
     }
-}
+}                                                                            

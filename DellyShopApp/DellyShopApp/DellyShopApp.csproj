@@ -200,6 +200,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="OrgPage.xaml.cs">
+      <DependentUpon>OrgPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Pages\ForgetPasswordPage.xaml.cs">
       <DependentUpon>ForgetPasswordPage.xaml</DependentUpon>
     </Compile>

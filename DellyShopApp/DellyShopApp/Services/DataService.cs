@@ -128,7 +128,7 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
-         public static async Task<List<ShopModel>> GetAllOrganizations()
+        public static async Task<List<OrgCategories>> GetAllOrganizationCategories()
         {
             try
             {
@@ -142,7 +142,32 @@ namespace DellyShopApp.Services
                 };
                 HttpClient httpClient = new HttpClient(clientHandler);
                 var response = await httpClient.GetAsync(
-                    AppSettings.ApiUrl + "api/Organization/GetAllOrganizations?OrgId=1");
+                    AppSettings.ApiUrl + "api/Organization/GetAllOrganizationCategories");
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<OrgCategories>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+
+            }
+        }
+        public static async Task<List<ShopModel>> GetAllOrganizations( int Org_CategoryId)
+        {
+            try
+            {
+                // await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //"bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Organization/GetAllOrganizations?Org_CategoryId="+ Org_CategoryId);
 
                 string result = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<ShopModel>>(result);
@@ -759,6 +784,58 @@ namespace DellyShopApp.Services
                 return JsonConvert.DeserializeObject<List<UserOrder>>(result);
             }
             catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<OrderCheckOut> GetOnePlayFlag(int orgId)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Cart/GetOnePlayFlag?OrgId=" + orgId );
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<OrderCheckOut>(result); 
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static async Task<PaymentGatewayResponse> MakePaymentRequest(OrderCheckOut orderCheckOut)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                var payload = JsonConvert.SerializeObject(orderCheckOut);
+
+                HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+                HttpClient httpClient = new HttpClient(clientHandler);
+                httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+                var response = await httpClient.PostAsync("api/Cart/MakePaymentRequest", c);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<PaymentGatewayResponse>(result);
+            }
+            catch (Exception ex)
+
             {
                 throw;
             }
