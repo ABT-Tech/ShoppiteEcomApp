@@ -29,6 +29,10 @@ namespace DellyShopApp.Views.Pages
          
            
         }
+        protected override void OnAppearing()
+        {
+            InittFavoritePage();
+        }
         private bool ChechConnectivity()
         {
             if (CrossConnectivity.Current.IsConnected)
@@ -44,20 +48,15 @@ namespace DellyShopApp.Views.Pages
         private async void InittFavoritePage()
         {
             Busy();
-            BasketItems.ItemsSource = await DataService.GetWishlistByUser(orgId,userId);//DataService.Instance.ProcutListModel;
-            NotBusy();
-            foreach (var varient in productListModel)
+         var Wishlistproducts = await DataService.GetWishlistByUser(orgId,userId);//DataService.Instance.ProcutListModel;
+            BasketItems.ItemsSource = Wishlistproducts;
+            if (Wishlistproducts.Count == 0)
             {
-                if (varient.SpecificationNames != "")
-                {
-                    varient.IsSpecificationNames = true;
-                }
-                else
-                {
-                    varient.IsSpecificationNames = false;
-                }
-
+                gif.IsVisible = true;
+                shopping.IsVisible = true;
             }
+            NotBusy();
+           
         }
         private async void ClickItem(object sender, EventArgs e)
         {
@@ -77,6 +76,11 @@ namespace DellyShopApp.Views.Pages
             uploadIndicator.IsVisible = false;
             uploadIndicator.IsRunning = false;
 
+        }
+
+        private void TapGestureRecognizer_Tapped_2(System.Object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new HomeTabbedPage());
         }
     }
 }

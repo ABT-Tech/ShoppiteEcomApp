@@ -8,14 +8,18 @@
         }        private bool ChechConnectivity()        {            if (CrossConnectivity.Current.IsConnected)            {                return true;            }            else            {                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");                return false;            }        }        public BasketPage(Page2 page)        {            this.page = page;        }        public BasketPage()        {        }
 
 
-        public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {            productListModel = this.Product;            var payment = await DataService.GetOnePlayFlag(orgId);            if (payment.OnePay != false)            {                onepay.IsVisible = true;            }            else            {                onepay.IsVisible = false;            }            BasketItems.ItemsSource = this.Product;//await DataService.GetAllCartDetails(orgId, userId);//DataService.Instance.ProcutListModel;
+        public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {            Busy();            productListModel = this.Product;            var payment = await DataService.GetOnePlayFlag(orgId);            if (payment.OnePay != false)            {                onepay.IsVisible = true;            }            else            {                onepay.IsVisible = false;            }            BasketItems.ItemsSource = this.Product;//await DataService.GetAllCartDetails(orgId, userId);//DataService.Instance.ProcutListModel;
             AddressPicker.ItemsSource = await DataService.GetAddressByUserId(orgId, userId); //DataService.Instance.changeAddress;
-                                                                                             //productListModel = await DataService.GetAllCartDetails(orgId, userId);
             BasketItems.ItemsSource = productListModel;
+            NotBusy();
 
 
+        }        public void Busy()        {            uploadIndicator.IsVisible = true;            uploadIndicator.IsRunning = true;
 
-        }        protected override async void OnAppearing()        {            base.OnAppearing();            this.BindingContext = Product;            BasketItems.ItemsSource = productListModel;//await DataService.GetAllCartDetails(orgId, userId);
+        }        public void NotBusy()        {            uploadIndicator.IsVisible = false;            uploadIndicator.IsRunning = false;
+
+        }
+        protected override async void OnAppearing()        {            base.OnAppearing();            this.BindingContext = Product;            BasketItems.ItemsSource = productListModel;//await DataService.GetAllCartDetails(orgId, userId);
             DataService.Instance.TotalPrice = 0;
 
 

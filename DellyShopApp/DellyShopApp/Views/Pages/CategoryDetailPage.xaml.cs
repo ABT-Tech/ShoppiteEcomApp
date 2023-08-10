@@ -2,7 +2,8 @@
 
         public async void InitCategoryPage(Category category)
         {            Busy();            List<Category> categories = new List<Category>();            categories.Add(category);            var AllMostSeller = await DataService.GetAllProductsByCategory(orgId, Convert.ToInt32(category.CategoryId));            StackLabelCategoryName.Text = category.CategoryName;            ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result;            CarouselView.ItemsSource = categories;            MostNews.FlowItemsSource = AllMostSeller;            NotBusy();        }        private async void ClickCategory(object sender, EventArgs e)        {            if (!(sender is StackLayout stack)) return;            if (!(stack.BindingContext is ProductListModel ca)) return;            await Navigation.PushAsync(new ProductDetail(ca));        }        private async void BackPage(object sender, EventArgs e)        {
-            await Navigation.PushAsync(new MainPage());        }        private async void ProductDetailClick(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));        }        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)        {
+            await Navigation.PopAsync();
+        }        private async void ProductDetailClick(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));        }        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)        {
             await Navigation.PopAsync();
         }
         public void Busy()

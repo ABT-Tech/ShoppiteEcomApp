@@ -43,7 +43,13 @@ namespace DellyShopApp.Views.Pages
         private async void InittMyOrderPage()
         {
             Busy();
-            BasketItems.ItemsSource = await DataService.GetMyOrderDetails(orgId,userId);//DataService.Instance.vendors;
+            var orderproduct = await DataService.GetMyOrderDetails(orgId, userId);
+            BasketItems.ItemsSource = orderproduct;
+            if (orderproduct.Count == 0)
+            {
+                gif.IsVisible = true;
+                shopping.IsVisible = true;
+            }
             NotBusy();
 
 
@@ -72,6 +78,11 @@ namespace DellyShopApp.Views.Pages
             uploadIndicator.IsVisible = false;
             uploadIndicator.IsRunning = false;
 
+        }
+
+       private async void TapGestureRecognizer_Tapped_2(System.Object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new HomeTabbedPage());
         }
     }
 }

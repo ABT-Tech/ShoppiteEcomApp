@@ -111,7 +111,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 if (!(image.Parent.Parent.Parent.Parent.Parent is PancakeView pancake)) return;
                 if (!(pancake.BindingContext is ProductListModel item)) return;
                 await DataService.RemoveFromCart(userId, orgId, item.Id,item.SpecificationIds);
-                await DisplayAlert("Sucess !", "Item was Deleted", "Done");
+                await DisplayAlert("Sucess", "Item was Deleted", "Done");
                 InittMyCartPage();
             }
         }

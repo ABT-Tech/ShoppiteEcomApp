@@ -348,14 +348,29 @@
                                                 Text="{Binding Brand}"
                                                 TextColor="{DynamicResource DescLabelColor}"
                                                 VerticalOptions="Start" />
+                                           
 
-                                            <Label
-                                                FontFamily="{DynamicResource VerdanaProBold}"
-                                                FontSize="15"
-                                                HorizontalOptions="EndAndExpand"
-                                                Text="{Binding Price, StringFormat='{0}₹'}"
-                                                TextColor="Black"
-                                                VerticalOptions="EndAndExpand" />
+                                             <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                                                <Label
+                                                    FontFamily="{DynamicResource VerdanaProBold}"
+                                                    FontSize="{x:OnPlatform Android=13,
+                                                                            iOS=13}"
+                                                    HorizontalOptions="EndAndExpand"
+                                                    IsVisible="{Binding OldPrice}"
+                                                    Text="{Binding OldPrice, StringFormat='{0}₹'}"
+                                                    TextColor="Gray"
+                                                    WidthRequest="100"
+                                                    TextDecorations="Strikethrough"
+                                                    VerticalOptions="CenterAndExpand" />
+                                                <Label
+                                                    FontFamily="{DynamicResource VerdanaProBold}"
+                                                    FontSize="13"
+                                                    HorizontalOptions="End"
+                                                    Text="{Binding Price, StringFormat='{0}₹'}"
+                                                    TextColor="Black"
+                                                    WidthRequest="100"
+                                                    VerticalOptions="CenterAndExpand" />
+                                            </StackLayout>
                                         </StackLayout>
                                     </pancakeView:PancakeView>
                                 </ViewCell>
