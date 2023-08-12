@@ -1,4 +1,4 @@
-﻿using Acr.UserDialogs;
+﻿     using Acr.UserDialogs;
 using DellyShopApp.Languages;
 using DellyShopApp.Models;
 using DellyShopApp.Services;
@@ -38,7 +38,24 @@ namespace DellyShopApp.Views.TabbedPages
             Busy();
             int? OrgUserID = UserId == 0 ? null : (int?)UserId;
             categories = await DataService.GetAllCategories(orgId);
-            CategoryList.ItemsSource = categories; //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId); //
+            List<Category> mainPageCategories = new List<Category>();
+            foreach (var categorydata in categories)
+            {
+                var categoryExist = mainPageCategories.Any(X => X.CategoryId == categorydata.CategoryId);
+                if (!categoryExist)
+                {
+                    Category mainPageCategory = new Category();
+                    mainPageCategory.CategoryId = categorydata.CategoryId;
+                    mainPageCategory.CategoryName = categorydata.CategoryName;
+                    mainPageCategory.orgID = categorydata.orgID;
+                    mainPageCategory.SpecificationIds = categorydata.SpecificationIds;
+                    mainPageCategory.SpecificationNames = categorydata.SpecificationNames;
+                    mainPageCategory.Banner = categorydata.Banner;
+                    mainPageCategories.Add(mainPageCategory);
+                }
+            }
+
+            CategoryList.ItemsSource = mainPageCategories; //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId); //
             CarouselView.ItemsSource = categories.Where(x => x.Banner != null && x.Banner!="").ToList(); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
             var Bestseller = await DataService.GetMostSellerProductsByOrganizations(orgId, OrgUserID);
             BestSellerList.ItemsSource = Bestseller; //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
@@ -52,14 +69,14 @@ namespace DellyShopApp.Views.TabbedPages
             {
                 TopDeatlbl.IsVisible = true;
             }
-            
+            NotBusy();
+
             var AllProducts = await DataService.GetAllProductsByOrganizations(orgId, OrgUserID);
             MostNews.FlowItemsSource = AllProducts; //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
             if(AllProducts.Count != 0)
             {
                 AllProductlbl.IsVisible = true;
             }
-            NotBusy();
         }
         public void Busy()
         {
@@ -138,9 +155,11 @@ namespace DellyShopApp.Views.TabbedPages
                     cart.UserId = Convert.ToInt32(UserId);
                     cart.proId = product.Id;
                     cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
+                    cart.SpecificationNames = product.SpecificationNames;
+                    cart.SpecificationId = product.SpecificationIds;
                     await DataService.AddToCart(cart);
                     await DisplayAlert(AppResources.Success, product.Title + " " + AppResources.AddedBakset, AppResources.Okay);
-                    var productId = Convert.ToString(product.Id);
+                    //var productId = Convert.ToString(product.Id);
                     //await Xamarin.Essentials.SecureStorage.SetAsync("ProId", productId);
                 }
             }
@@ -181,6 +200,12 @@ namespace DellyShopApp.Views.TabbedPages
             var type = sender.GetType();
             var evnt = (ProductListModel)searchResults.SelectedItem;
             await Navigation.PushAsync(new ProductDetail(evnt));
+        }
+
+       
+        private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new TopDeals());
         }
     }
 }

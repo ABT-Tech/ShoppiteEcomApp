@@ -201,11 +201,10 @@
                                         VerticalOptions="StartAndExpand"
                                        
                                         WidthRequest="{x:OnIdiom Tablet=150,
-                                                                 Phone=130}">
+                                                                 Phone=140}">
                                         <pancakeView:PancakeView.GestureRecognizers>
                                             <DragGestureRecognizer
                                                 CanDrag="True"
-                                                
                                                 DragStarting="DragGestureRecognizer_DragStarting"
                                                 DropCompleted="DragGestureRecognizer_DropCompleted" />
                                             <TapGestureRecognizer Tapped="ProductDetailClick" />
@@ -214,13 +213,12 @@
                                             <forms:CachedImage
                                                 Aspect="AspectFit"
                                                 HeightRequest="150"
-                                                Margin="5"
+                                                Margin="5" VerticalOptions="Start"
                                                 Source="{Binding Image}" />
                                             <Label
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 Text="{Binding Title}"
                                                 MaxLines="1"
-                                                
                                                 LineBreakMode="TailTruncation"
                                                 TextColor="Black"
                                                 VerticalOptions="Start" />
@@ -228,13 +226,15 @@
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 FontSize="10"
                                                 HorizontalOptions="Start"
+                                                MaxLines="1"
+                                                LineBreakMode="TailTruncation"
                                                 Text="{Binding Brand}"
                                                 TextColor="{DynamicResource DescLabelColor}"
                                                 VerticalOptions="Start" />
                                             <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
                                                 <Label x:Name="oldprice"
                                                     FontFamily="{DynamicResource VerdanaProBold}"
-                                                    FontSize="{x:OnPlatform Android=12,
+                                                    FontSize="{x:OnPlatform Android=10,
                                                                             iOS=18}"
                                                     HorizontalOptions="EndAndExpand"
                                                        IsVisible="{Binding OldPrice}"
@@ -259,7 +259,9 @@
                         </customControl:RepeaterView.ItemTemplate>
                     </customControl:RepeaterView>
                 </ScrollView>
-                <Label IsVisible="false" x:Name="TopDeatlbl"
+                <StackLayout Orientation="Horizontal" IsVisible="false" x:Name="TopDeatlbl">
+
+                    <Label
                     Margin="0,10,0,0"
                     Padding="5,5,0,0"
                     FontAttributes="Bold"
@@ -269,6 +271,21 @@
                     Text="Top Deals"
                     TextColor="Black"
                     VerticalOptions="Start" />
+                    <Label
+                        Margin="0,10,0,0"
+                        Padding="5,5,0,0"
+                        FontAttributes="Bold"
+                        FontFamily="{DynamicResource VerdanaProBold}"
+                        FontSize="18"
+                        HorizontalOptions="EndAndExpand"
+                        Text="{x:Static helpers:AppResources.ViewAll}"
+                        TextColor="Gray"
+                        VerticalOptions="Start">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
                 <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
                     <customControl:RepeaterView
                         x:Name="PreviousViewedList"
@@ -284,7 +301,7 @@
                                         CornerRadius="8"
                                         Elevation="2"
                                         HasShadow="True"
-                                        HeightRequest="250"
+                                        HeightRequest="240"
                                         HorizontalOptions="StartAndExpand"
                                         VerticalOptions="StartAndExpand"
                                         WidthRequest="{x:OnIdiom Tablet=150,
@@ -302,7 +319,6 @@
                                             <Label
                                                 FontFamily="{DynamicResource VerdanaProRegular}"
                                                 Text="{Binding Title}"
-                                               
                                                 TextColor="{DynamicResource WhiteDarkFontColor}"
                                                 VerticalOptions="Start"
                                                 LineBreakMode="TailTruncation"
@@ -312,6 +328,8 @@
                                                 FontSize="10"
                                                 HorizontalOptions="Start"
                                                 Text="{Binding Brand}"
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="1"
                                                 TextColor="{DynamicResource DescLabelColor}"
                                                 VerticalOptions="Start" />
 
@@ -383,6 +401,8 @@
                                     <Label
                                         FontFamily="{DynamicResource VerdanaProRegular}"
                                         FontSize="10"
+                                        MaxLines="1"
+                                        LineBreakMode="TailTruncation"
                                         HorizontalOptions="Start"
                                         Text="{Binding Brand}"
                                         TextColor="{DynamicResource DescLabelColor}"

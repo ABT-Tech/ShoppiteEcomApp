@@ -23,6 +23,11 @@ namespace DellyShopApp.Views.Pages
             }
            
         }
+        protected override void OnAppearing()
+        {
+            InittFavoritePage();
+        }
+
         private bool ChechConnectivity()
         {
             if (CrossConnectivity.Current.IsConnected)
@@ -38,7 +43,13 @@ namespace DellyShopApp.Views.Pages
         private async void InittFavoritePage()
         {
             Busy();
-            BasketItems.ItemsSource = await DataService.GetWishlistByUser(orgId,userId);//DataService.Instance.ProcutListModel;         
+            var Wishlistproducts = await DataService.GetWishlistByUser(orgId, userId);//DataService.Instance.ProcutListModel; 
+            BasketItems.ItemsSource = Wishlistproducts;
+            if(Wishlistproducts.Count == 0)
+            {
+                gif.IsVisible = true;
+                shopping.IsVisible = true;
+            }
             NotBusy();
         }
         public void Busy()
@@ -59,6 +70,11 @@ namespace DellyShopApp.Views.Pages
             if (!(sender is PancakeView pancake)) return;
             if (!(pancake.BindingContext is ProductListModel item)) return;
             await Navigation.PushAsync(new ProductDetail(item));
+        }
+
+        private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new HomeTabbedPage());
         }
     }
 }

@@ -175,4 +175,6 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         {
             Navigation.PushAsync(new HomeTabbedPage());
         }
+
+       
     }}

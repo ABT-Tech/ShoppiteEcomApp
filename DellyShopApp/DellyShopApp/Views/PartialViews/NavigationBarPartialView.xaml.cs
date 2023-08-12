@@ -64,7 +64,8 @@ namespace DellyShopApp.Views.PartialViews
             }
         }
 
-        public static BindableProperty BackButtonVisibleroperty = BindableProperty.Create(
+      public static BindableProperty BackButtonVisibleroperty = BindableProperty.Create(
+
      propertyName: nameof(BackButtonVisibler),
      returnType: typeof(bool),
      declaringType: typeof(NavigationBarPartialView),
@@ -84,7 +85,7 @@ namespace DellyShopApp.Views.PartialViews
             }
         }
 
-        public static BindableProperty TitleProperty = BindableProperty.Create(
+       public static BindableProperty TitleProperty = BindableProperty.Create(
        propertyName: nameof(NavigationTitle),
        returnType: typeof(string),
        declaringType: typeof(NavigationBarPartialView),

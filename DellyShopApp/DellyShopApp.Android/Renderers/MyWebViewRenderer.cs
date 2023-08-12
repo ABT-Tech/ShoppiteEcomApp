@@ -45,13 +45,21 @@ namespace DellyShopApp.Droid
         public async void YourWebView_Navigating(object sender, WebNavigatingEventArgs e)
         {
             var mywebview = Element as MyWebview;
-            if(e.Url == Url)
+            var Sucess = Url + "Cart/OrderSuccess";
+            if (e.Url.ToLower() == Sucess.ToLower())
 
             {
-                (Xamarin.Forms.Application.Current).MainPage = new NavigationPage(new HomeTabbedPage());
+                (Xamarin.Forms.Application.Current).MainPage = new NavigationPage(new SuccessPage());
                  Xamarin.Essentials.SecureStorage.Remove("PaymentUrl");
             }
             //await mywebview.EvaluateJavaScriptAsync("javascript: alert('"+e.Url.ToString()+"');");
+            var cancel = Url + "Cart/OrderPaymentFail";
+            if (e.Url.ToLower() == cancel.ToLower())
+
+            {
+                (Xamarin.Forms.Application.Current).MainPage = new NavigationPage(new PaymentFail());
+                Xamarin.Essentials.SecureStorage.Remove("PaymentUrl");
+            }
         }
     }
 }

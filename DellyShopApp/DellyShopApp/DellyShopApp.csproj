@@ -203,6 +203,12 @@
     <Compile Update="OrgPage.xaml.cs">
       <DependentUpon>OrgPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Pages\PaymentFail.xaml.cs">
+      <DependentUpon>PaymentFail.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Pages\TopDeals.xaml.cs">
+      <DependentUpon>TopDeals.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Pages\ForgetPasswordPage.xaml.cs">
       <DependentUpon>ForgetPasswordPage.xaml</DependentUpon>
     </Compile>

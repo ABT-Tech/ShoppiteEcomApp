@@ -40,6 +40,11 @@ namespace DellyShopApp.Views.Pages
             List<Category> categories = new List<Category>();
             categories.Add(category);
             var AllMostSeller = await DataService.GetAllProductsByCategory(orgId,Convert.ToInt32(category.CategoryId));
+            if(AllMostSeller.Count == 0)
+            {
+                gif.IsVisible = true;
+                lbl.IsVisible = false;
+            }
             StackLabelCategoryName.Text = category.CategoryName;
             ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result;
             CarouselView.ItemsSource = categories;

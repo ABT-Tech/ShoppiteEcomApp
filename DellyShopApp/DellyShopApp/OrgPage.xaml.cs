@@ -71,6 +71,7 @@ namespace DellyShopApp
                     {
                         var image = new Image
                         {
+                            Aspect = Aspect.AspectFit,
                             Source = product.Image,
                             BackgroundColor = Color.WhiteSmoke,
                             Margin = new Thickness(0, 20, 0, 25),
@@ -117,6 +118,7 @@ namespace DellyShopApp
                         };
                         var image = new Image
                         {
+                            Aspect = Aspect.AspectFit,
                             Source = product.Image,
                             BackgroundColor = Color.WhiteSmoke,
                             Margin = new Thickness(0, 20, 0, 25),

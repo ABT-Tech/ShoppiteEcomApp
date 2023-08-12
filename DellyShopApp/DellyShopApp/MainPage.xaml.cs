@@ -66,9 +66,10 @@ namespace DellyShopApp
                     };                    
                         var image = new Image
                         {
+                            Aspect = Aspect.AspectFit,
                             Source = product.CategoryImage,
                             BackgroundColor = Color.WhiteSmoke,
-                            Margin = new Thickness(10, 10, 10, 40),
+                            Margin = new Thickness(10, 0, 10, 20),
                             VerticalOptions = LayoutOptions.Center,
                             HorizontalOptions = LayoutOptions.Center,
                             HeightRequest = 200,

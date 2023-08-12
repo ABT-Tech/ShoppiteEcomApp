@@ -30,6 +30,10 @@ namespace DellyShopApp.Views.Pages
                 InittMyOrderPage();
             }
         }
+        protected override void OnAppearing()
+        {
+            InittMyOrderPage();
+        }
         private bool ChechConnectivity()
         {
             if (CrossConnectivity.Current.IsConnected)
@@ -46,7 +50,13 @@ namespace DellyShopApp.Views.Pages
         private async void InittMyOrderPage()
         {
             Busy();
-            BasketItems.ItemsSource = await DataService.GetMyOrderDetails(orgId , userId);
+            var orderproduct = await DataService.GetMyOrderDetails(orgId, userId);
+            BasketItems.ItemsSource = orderproduct;
+            if (orderproduct.Count == 0)
+            {
+                gif.IsVisible = true;
+                shopping.IsVisible = true;
+            }
             NotBusy();
         }
         public void Busy()
@@ -69,6 +79,11 @@ namespace DellyShopApp.Views.Pages
             {
                 await Navigation.PushAsync(new UserOrderDetails(item.orderId));
             }
+        }
+
+        private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new HomeTabbedPage());
         }
     }
 }
