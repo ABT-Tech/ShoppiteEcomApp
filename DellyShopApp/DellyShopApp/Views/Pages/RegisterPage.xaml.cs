@@ -63,7 +63,7 @@ namespace DellyShopApp.Views.Pages
                 await DisplayAlert("opps..", "Please Enter Your Conform Password", "Ok");
                 return;
             }
-            else if (phonenumber.Text == null || phonenumber.Text == "")
+            else if (phonenumber.Text == null || phonenumber.Text == "" || phonenumber.Text.Length < 10)
             {
                 await DisplayAlert("opps..", "Please Enter Your Phonenumber", "Ok");
                 return;
@@ -83,7 +83,7 @@ namespace DellyShopApp.Views.Pages
                 await DisplayAlert("opps..", "Please Enter Your City", "Ok");
                 return;
             }
-            else if (zipcode.Text == null || zipcode.Text == "")
+            else if (zipcode.Text == null || zipcode.Text == "" || zipcode.Text.Length < 6)
             {
                 await DisplayAlert("opps..", "Please Enter Your ZipCode", "Ok");
                 return;
