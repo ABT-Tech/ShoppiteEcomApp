@@ -54,7 +54,7 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
             {
                 DataService.Instance.TotalPrice += product.Quantity * product.Price;               
             }
-            TotalPricee.Text = $"{DataService.Instance.TotalPrice}₹";
+            TotalPricee.Text = $"₹{DataService.Instance.TotalPrice}";
             TotalPrice.Text = $"{ DataService.Instance.TotalPrice }";
             var ttlprice = TotalPrice.Text;            var ttlprice2 = Convert.ToInt32(ttlprice);            var disprice = ttlprice2 ;
            
@@ -67,8 +67,8 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
             {
                 disprice = ttlprice2 / 2;
             }
-            Discountprice.Text = $"{disprice}₹";
-            TotalPrice.Text = $"{ttlprice2}₹";
+            Discountprice.Text = $"₹{disprice}";
+            TotalPrice.Text = $"₹{ttlprice2}";
         }
         /// <summary>        /// Go to Address Page        /// </summary>        /// <param name="sender"></param>        /// <param name="e"></param>               private async void ContinueClick(object sender, EventArgs e)        {
             OrderCheckOut orderCheckOut = new OrderCheckOut();
