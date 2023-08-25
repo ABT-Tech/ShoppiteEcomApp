@@ -98,6 +98,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             }
             foreach (var Sname in atb)            {                if (Sname.SpecificationNames == _products.SpecificationNames)                {                    Sname.BGColor = Color.Chocolate;                }                else                {                    Sname.BGColor = Color.Transparent;                }            }
             AttributeName.ItemsSource = atb2;
+
           
         }
         private void PlusClick(object sender, EventArgs e)        {
@@ -131,7 +132,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 cart.UserId = Convert.ToInt32(UserId);
                 cart.proId = _products.Id;
                 cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
-                cart.SpecificationId = _products.SpecificationIds;
+                cart.SpecificationId = _products.SpecificationId;
                 await DataService.AddToCart(cart);
                 _products.Quantity = Convert.ToInt32(ProductCountLabel.Text);
                 _productLists.Add(_products);
@@ -151,7 +152,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 cart.proId = _products.Id;
                 cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
 
-                cart.SpecificationId = _products.SpecificationIds;
+                cart.SpecificationId = _products.SpecificationId;
                 //await DataService.AddToCart(cart);
                 _products.Quantity = Convert.ToInt32(ProductCountLabel.Text);
                 _productLists.Add(_products);
@@ -177,7 +178,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                     favourite.orgId = _products.orgId;
                     favourite.UserId = Convert.ToInt32(UserId);
                     favourite.proId = _products.Id;
-                    favourite.SpecificationId = _products.SpecificationIds;
+                    favourite.SpecificationId = _products.SpecificationId;
                     await DataService.RemovefromFavourite(favourite.proId, favourite.UserId, favourite.orgId); //RemoveFavourite(favourite);
                 }
                 else
@@ -187,7 +188,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                     favourite.orgId = _products.orgId;
                     favourite.UserId = Convert.ToInt32(UserId);
                     favourite.proId = _products.Id;
-                    favourite.SpecificationId = _products.SpecificationIds;
+                    favourite.SpecificationId = _products.SpecificationId;
                     await DataService.MyFavourite(favourite);
                 }
             }
@@ -201,7 +202,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             if (!(sender is PancakeView stack)) return;            if (stack.Children.Count() <= 0) return;            if (!(stack.Children[0] is StackLayout sa)) return;            var specificationStack = sa.Children;            if (specificationStack.Count() <= 0) return;            if (!(specificationStack[1] is Label specLabel)) return;            var specificationValue = specLabel.Text;            Attributes attributeList = new Attributes();            attributeList.OrgId = _products.orgId;            attributeList.UserId = UserId;            attributeList.ProductGUId = _products.ProductGUId;            attributeList.SpecificationIds = Convert.ToInt32(specificationValue);
             attributeList.DefaultSpecification = _products.DefaultSpecification;
             var item = await DataService.GetProductDetailsBySpecifcation(attributeList.OrgId, attributeList.ProductGUId, attributeList.SpecificationIds,attributeList.UserId);            NavbarStack.BindingContext = item;
-            item.SpecificationIds= Convert.ToInt32(specificationValue);
+            item.SpecificationId= Convert.ToInt32(specificationValue);
             await Navigation.PushAsync(new ProductDetail(item));
         }
         public void Busy()

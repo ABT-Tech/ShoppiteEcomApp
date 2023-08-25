@@ -1,0 +1,1 @@
+﻿using System;using Xamarin.Forms;namespace DellyShopApp.Models{    public class DiscountCoupon    {        public int UserId { get; set; }        public string CoupanCode { get; set; }        public int OrgId { get; set; }    }}

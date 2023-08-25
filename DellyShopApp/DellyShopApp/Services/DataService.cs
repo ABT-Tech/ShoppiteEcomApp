@@ -86,36 +86,8 @@ namespace DellyShopApp.Services
         }
         public DataService()
         {
-            attributes.Add(new Attributes
-            {
-                SpecificationNames = "S",
-                SpecificationIds = 1,
-            }) ;
-            attributes.Add(new Attributes
-            {
-                SpecificationNames = "L",
-                SpecificationIds = 2,
-            });
-            attributes.Add(new Attributes
-            {
-                SpecificationNames = "M",
-                SpecificationIds = 3,
-            });
-            attributes.Add(new Attributes
-            {
-                SpecificationNames = "XL",
-                SpecificationIds = 4,
-            });
-            attributes.Add(new Attributes
-            {
-                SpecificationNames = "XXL",
-                SpecificationIds = 5,
-            });
-            attributes.Add(new Attributes
-            {
-                SpecificationNames = "XXXL",
-                SpecificationIds = 6,
-            });
+           
+          
         }
 
 
@@ -1116,6 +1088,34 @@ namespace DellyShopApp.Services
 
                 string result = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<PaymentGatewayResponse>(result);
+            }
+            catch (Exception ex)
+
+            {
+                throw;
+            }
+        }
+        public static async Task<CouponMsg> DisCoupon(DiscountCoupon discountCoupon)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                var payload = JsonConvert.SerializeObject(discountCoupon);
+
+                HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+                HttpClient httpClient = new HttpClient(clientHandler);
+                httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+                var response = await httpClient.PostAsync("api/User/ApplyCoupon", c);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<CouponMsg>(result);
             }
             catch (Exception ex)
 

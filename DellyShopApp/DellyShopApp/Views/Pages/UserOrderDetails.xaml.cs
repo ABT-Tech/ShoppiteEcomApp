@@ -1,6 +1,7 @@
 ﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.ViewModel;using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.ModalPages;using DellyShopApp.Views.Pages;using Plugin.Connectivity;
-using System;using System.Collections.Generic;using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class UserOrderDetails    {        List<OrderListModel> orderListModel = new List<OrderListModel>();        List<ProductListModel> productListModel = new List<ProductListModel>();        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+using System;using System.Collections.Generic;using System.Globalization;
+using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class UserOrderDetails    {        List<OrderListModel> orderListModel = new List<OrderListModel>();        List<ProductListModel> productListModel = new List<ProductListModel>();        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         //public int orderId = Convert.ToInt32(SecureStorage.GetAsync("orderId").Result);
         public int OrderMasterId = Convert.ToInt32(SecureStorage.GetAsync("OrderMasterId").Result);        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);        public string remark = SecureStorage.GetAsync("Remark").Result;                private List<OrderListModel> Product { get; set; }        private List<ProductListModel> product { get; set; }        public UserOrderDetails(int orderId)        {            OrderMasterId = orderId;            InitializeComponent();
             if (ChechConnectivity())
@@ -21,12 +22,13 @@ using System;using System.Collections.Generic;using System.Linq;using Xamarin
             }
         }        public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;            }        }        private async void InittBasketPage()        {            Busy();            var orderDetails = await DataService.GetOrderDetailsByOrderMasterId(orgId, OrderMasterId);            orderListModel = orderDetails.ProductLists.ToList();            BasketItems.ItemsSource = orderDetails.ProductLists;//DataService.Instance.orderdetails.ProductLists;
             lblDate.Text = orderDetails.Date;//DataService.Instance.orderdetails.Date;
+            var orderDate = DateTime.ParseExact(orderDetails.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture);            lblArrivingDate.Text = orderDate.AddDays(+7).ToString("dd/MM/yyyy");
             lblstatus.Text = orderDetails.ProductLists.FirstOrDefault().orderStatus;
             lblno.Text = OrderMasterId.ToString();
             lblAddress.Text = orderDetails.Address;
             NotBusy();
-            DataService.Instance.TotalPrice = 0;            foreach (var product in orderListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;            }            TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";
-            if (orderDetails.ProductLists.FirstOrDefault().orderStatus == "Pending")            {                cancelbutton.IsVisible = true;                canceltxtbox.IsVisible = true;            }
+            DataService.Instance.TotalPrice = 0;            foreach (var product in orderListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;            }            TotalPrice.Text = $"₹{ DataService.Instance.TotalPrice}";
+            
             foreach (var varient in productListModel)            {                if (varient.SpecificationNames != "")                {                    varient.IsSpecificationNames = true;                }                else
                 {
                     varient.IsSpecificationNames = false;                }            }        }        private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }
@@ -37,17 +39,17 @@ using System;using System.Collections.Generic;using System.Linq;using Xamarin
         }
 
       
-    private async void cancel_btn(System.Object sender, System.EventArgs e)
-        {
-            var canselorder = new Cancelorder
-            {                orgId = orgId,                Reason = vendorreason.Text,                orderstatus = lblstatus.Text,                OrderId = OrderMasterId,               
+    //private async void cancel_btn(System.Object sender, System.EventArgs e)
+    //    {
+    //        var canselorder = new Cancelorder
+    //        {    //            orgId = orgId,                   //            orderstatus = lblstatus.Text,    //            OrderId = OrderMasterId,               
 
-            };
-            await DataService.Cancel(canselorder);
-            await DisplayAlert("Done", "Your Order Is Cancel", "Ok");
-            await Navigation.PushAsync(new MyOrderPage());
+    //        };  
+    //        await DataService.Cancel(canselorder);
+    //        await DisplayAlert("Done", "Your Order Is Cancel", "Ok");
+    //        await Navigation.PushAsync(new MyOrderPage());
 
-        }
+    //    }
         public void Busy()
         {
             uploadIndicator.IsVisible = true;

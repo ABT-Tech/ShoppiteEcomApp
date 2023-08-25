@@ -15,6 +15,12 @@ namespace DellyShopApp.Models
         public bool OnePay { get; set; }
         public string encryptedParams { get; set; }
         public string AggregatorRedirectionLink { get; set; }
+        public int CoupanId { get; set; }
+        public bool IsCouponApplied { get; set; }
+        public string Contactnumber { get; set; }
+        public int SpecificationId { get; set; }
+
+
 
     }
 }

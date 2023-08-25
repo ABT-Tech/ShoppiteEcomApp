@@ -1,9 +1,11 @@
 ﻿using Foundation;using UIKit;using DellyShopApp;using DellyShopApp.iOS;using Xamarin.Forms;using Xamarin.Forms.Platform.iOS;using Xamarin.Forms.PlatformConfiguration;using DellyShopApp.Views.Pages;using Xamarin.Essentials;using Newtonsoft.Json;[assembly: ExportRenderer(typeof(MyWebview), typeof(MyWebViewRenderer))]namespace DellyShopApp.iOS{    public class MyWebViewRenderer : Xamarin.Forms.Platform.iOS.WkWebViewRenderer    {        public string Url = SecureStorage.GetAsync("PaymentUrl").Result;        protected override void OnElementChanged(VisualElementChangedEventArgs e)        {            base.OnElementChanged(e);            if (NativeView != null)            {                var mywebview = Element as MyWebview;                var request = new NSMutableUrlRequest(new NSUrl(new NSString(mywebview.url))); //Your Url
                 request.HttpMethod = "POST";                request.Body = mywebview.data; //Data for POST
-                request["Content-Type"] = "application/x-www-form-urlencoded";                LoadRequest(request);                mywebview.Navigating += YourWebView_Navigating;            }        }        public async void YourWebView_Navigating(object sender, WebNavigatingEventArgs e)        {            var mywebview = Element as MyWebview;            if (e.Url == Url)            {
-                //var eventStr = JsonConvert.SerializeObject(sender);
-                //await mywebview.EvaluateJavaScriptAsync("javascript: alert('" + sender + "');");
-                (Xamarin.Forms.Application.Current).MainPage = new NavigationPage(new SuccessPage());                Xamarin.Essentials.SecureStorage.Remove("PaymentUrl");            }
+                request["Content-Type"] = "application/x-www-form-urlencoded";                LoadRequest(request);                mywebview.Navigating += YourWebView_Navigating;            }        }        public async void YourWebView_Navigating(object sender, WebNavigatingEventArgs e)        {            var mywebview = Element as MyWebview;
+            var  Sucess =  Url+"Cart/OrderSuccess";            if (e.Url.ToLower() == Sucess.ToLower())            {                (Xamarin.Forms.Application.Current).MainPage = new NavigationPage(new SuccessPage());
+                Xamarin.Essentials.SecureStorage.Remove("PaymentUrl");            }
             //await mywebview.EvaluateJavaScriptAsync("javascript: alert('"+e.Url.ToString()+"');");
+            var cancel = Url + "Cart/OrderPaymentFail";
+            if (e.Url.ToLower() == cancel.ToLower())            {                (Xamarin.Forms.Application.Current).MainPage = new NavigationPage(new Canselpage());                Xamarin.Essentials.SecureStorage.Remove("PaymentUrl");            }
+           // await mywebview.EvaluateJavaScriptAsync("javascript: alert('" + e.Url.ToString() + "');");
         }    }
 }

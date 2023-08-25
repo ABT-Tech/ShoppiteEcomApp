@@ -55,6 +55,11 @@ namespace DellyShopApp.Views.Pages
                 return;
 
             }
+            else if (number.Text == null || number.Text == "" || number.Text.Length < 10)
+            {
+                await DisplayAlert("opps..", "Please Enter Your Phonenumber", "Ok");
+                return;
+            }
             else if (Pswd.Text == null || Pswd.Text == "")
             {
                 await DisplayAlert("opps..", "Please Enter Your Password", "Ok");
@@ -65,11 +70,7 @@ namespace DellyShopApp.Views.Pages
                 await DisplayAlert("opps..", "Please Enter Your Conform Password", "Ok");
                 return;
             }
-            else if (number.Text == null || number.Text == "")
-            {
-                await DisplayAlert("opps..", "Please Enter Your Phonenumber", "Ok");
-                return;
-            }
+          
             else if (address.Text == null || address.Text == "")
             {
                 await DisplayAlert("opps..", "Please Enter Your Address", "Ok");
@@ -85,7 +86,7 @@ namespace DellyShopApp.Views.Pages
                 await DisplayAlert("opps..", "Please Enter Your City", "Ok");
                 return;
             }
-            else if (zipcode.Text == null || zipcode.Text == "")
+            else if (zipcode.Text == null || zipcode.Text == ""||zipcode.Text.Length<6)
             {
                 await DisplayAlert("opps..", "Please Enter Your ZipCode", "Ok");
                 return;
@@ -93,7 +94,7 @@ namespace DellyShopApp.Views.Pages
 
 
             //await Navigation.PushAsync(new LoginPage());
-           var reg = await DataService.Registration(registration);
+        
 
 
 
@@ -159,6 +160,7 @@ namespace DellyShopApp.Views.Pages
 
             else
             {
+                var reg = await DataService.Registration(registration);
                 if (reg == "You are Registered!!")
                 {
                     await DisplayAlert("Congrulations", reg, "Ok");
@@ -171,12 +173,6 @@ namespace DellyShopApp.Views.Pages
                 }
 
             }
-
-
-
-
-
-
         }
 
         private void BackButton(object sender, EventArgs e)

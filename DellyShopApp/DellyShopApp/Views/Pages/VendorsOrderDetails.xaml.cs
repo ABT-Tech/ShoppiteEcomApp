@@ -1,5 +1,6 @@
 ﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.ViewModel;using DellyShopApp.Views.CustomView;using DellyShopApp.Views.ModalPages;using DellyShopApp.Views.Pages;using Plugin.Connectivity;
-using System;using System.Collections.Generic;using System.Diagnostics;using System.Linq;using System.Threading.Tasks;
+using System;using System.Collections.Generic;using System.Diagnostics;using System.Globalization;
+using System.Linq;using System.Threading.Tasks;
 using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.TabbedPages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class VendorsOrderDetails    {        List<OrderListModel> orderListModel = new List<OrderListModel>();
      
 
@@ -44,12 +45,13 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
             orderListModel = orderDetails.ProductLists.ToList();
             BasketItems.ItemsSource = orderDetails.ProductLists;//DataService.Instance.orderdetails.ProductLists;
             lblDate.Text = orderDetails.Date;//DataService.Instance.orderdetails.Date;
+            var orderDate = DateTime.ParseExact(orderDetails.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture);            lblDelivereddate.Text = orderDate.AddDays(+7).ToString("dd/MM/yyyy");
             lblAddress.Text = orderDetails.Address;//DataService.Instance.orderdetails.Address;
             NotBusy();
             DataService.Instance.TotalPrice = 0;
             foreach (var product in orderListModel)                       {
                                DataService.Instance.TotalPrice += product.Quantity * product.Price;              //DataService.Instance.TotalPrice += product.Quantity * product.Price;
-            }                        TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";
+            }                        TotalPrice.Text = $"₹{ DataService.Instance.TotalPrice}";
             PickerDemo.SelectedItem = orderDetails.ProductLists.FirstOrDefault().orderStatus;
            
         }                private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }               private async void submit_click(object sender, EventArgs e)        {
