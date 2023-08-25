@@ -24,11 +24,11 @@ using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.
         }        public partial class Page2 : ContentPage        {            public ChangeAddress model;            public Page2(ChangeAddress m)            {                this.model = m;             }        }        private async void InittBasketPage()        {            Busy();            var orderDetails = await DataService.GetOrderDetailsByOrderMasterId(orgId, OrderMasterId);            orderListModel = orderDetails.ProductLists.ToList();            BasketItems.ItemsSource = orderDetails.ProductLists;//DataService.Instance.orderdetails.ProductLists;
             lblDate.Text = orderDetails.Date;//DataService.Instance.orderdetails.Date;
             var orderDate = DateTime.ParseExact(orderDetails.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture);            lblArrivingDate.Text = orderDate.AddDays(+7).ToString("dd/MM/yyyy");
-            lblstatus.Text = orderDetails.ProductLists.FirstOrDefault().orderStatus;            lblno.Text = OrderMasterId.ToString();            lblAddress.Text = orderDetails.Address;            DataService.Instance.TotalPrice = 0;             foreach (var product in orderListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;            }            TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";            if(orderDetails.ProductLists.FirstOrDefault().orderStatus == "Pending")
-            {
-                cancelbutton.IsVisible = true;
-                canceltxtbox.IsVisible = true;
-            }            NotBusy();
+            lblstatus.Text = orderDetails.ProductLists.FirstOrDefault().orderStatus;            lblno.Text = OrderMasterId.ToString();            lblAddress.Text = orderDetails.Address;            DataService.Instance.TotalPrice = 0;             foreach (var product in orderListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;            }            TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";            //if(orderDetails.ProductLists.FirstOrDefault().orderStatus == "Pending")
+            //{
+            //    cancelbutton.IsVisible = true;
+            //    canceltxtbox.IsVisible = true;
+            //}            NotBusy();
                   }        public void Busy()
         {
             uploadIndicator.IsVisible = true;
@@ -41,19 +41,19 @@ using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.
             uploadIndicator.IsVisible = false;
             uploadIndicator.IsRunning = false;
             MainStack.Opacity = 100;
-        }        private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));        }        async void TapGestureRecognizer_Tapped_1(System.Object sender, System.EventArgs e)        {
-            {
-                var canselorder = new Cancelorder
-                {
-                    orgId = orgId,
-                    Reason = reason.Text,
-                    orderstatus = lblstatus.Text,
-                    OrderId = OrderMasterId,
+        }        private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));        }        //async void TapGestureRecognizer_Tapped_1(System.Object sender, System.EventArgs e)        //{
+        //    {
+        //        var canselorder = new Cancelorder
+        //        {
+        //            orgId = orgId,
+        //            //Reason = reason.Text,
+        //            orderstatus = lblstatus.Text,
+        //            OrderId = OrderMasterId,
 
 
-                };
-                await DataService.Cancel(canselorder);
-                await DisplayAlert("Done", "Your Order Is Cancel", "Ok");
-                await Navigation.PushAsync(new MyOrderPage());
+        //        };
+        //        await DataService.Cancel(canselorder);
+        //        await DisplayAlert("Done", "Your Order Is Cancel", "Ok");
+        //        await Navigation.PushAsync(new MyOrderPage());
 
-            }        }    }}
+        //    }        //}    }}

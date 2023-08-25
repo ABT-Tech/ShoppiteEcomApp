@@ -41,6 +41,14 @@ namespace DellyShopApp.Views.TabbedPages
             List<Category> mainPageCategories = new List<Category>();
             foreach (var categorydata in categories)
             {
+                if (categorydata.IsCouponEnabled == true)
+                {
+                    Discountbanner.IsVisible = true;
+                }
+                else
+                {
+                    Discountbanner.IsVisible = false;
+                }
                 var categoryExist = mainPageCategories.Any(X => X.CategoryId == categorydata.CategoryId);
                 if (!categoryExist)
                 {
@@ -54,7 +62,7 @@ namespace DellyShopApp.Views.TabbedPages
                     mainPageCategories.Add(mainPageCategory);
                 }
             }
-
+            
             CategoryList.ItemsSource = mainPageCategories; //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId); //
             CarouselView.ItemsSource = categories.Where(x => x.Banner != null && x.Banner!="").ToList(); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
             var Bestseller = await DataService.GetMostSellerProductsByOrganizations(orgId, OrgUserID);
@@ -156,7 +164,7 @@ namespace DellyShopApp.Views.TabbedPages
                     cart.proId = product.Id;
                     cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
                     cart.SpecificationNames = product.SpecificationNames;
-                    cart.SpecificationId = product.SpecificationIds;
+                    cart.SpecificationId = product.SpecificationId;
                     await DataService.AddToCart(cart);
                     await DisplayAlert(AppResources.Success, product.Title + " " + AppResources.AddedBakset, AppResources.Okay);
                     //var productId = Convert.ToString(product.Id);

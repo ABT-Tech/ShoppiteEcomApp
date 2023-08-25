@@ -588,6 +588,34 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
+        public static async Task<CouponMsg> DisCoupon(DiscountCoupon discountCoupon)
+        {
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //    "bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                var payload = JsonConvert.SerializeObject(discountCoupon);
+
+                HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+                HttpClient httpClient = new HttpClient(clientHandler);
+                httpClient.BaseAddress = new Uri(AppSettings.ApiUrl);
+                var response = await httpClient.PostAsync("api/User/ApplyCoupon", c);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<CouponMsg>(result); 
+            }
+            catch (Exception ex)
+
+            {
+                throw;
+            }
+        }
         public static async Task<List<ChangeUserData>>GetUserById(int userId, int orgId)
         {
             try
@@ -629,7 +657,8 @@ namespace DellyShopApp.Services
                     AppSettings.ApiUrl + "api/Cart/GetAddressByUserId?OrgId=" + orgId + "&UserId=" + userId);
 
                 string result = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<ChangeAddress>>(result);
+                return JsonConvert.DeserializeObject<List<ChangeAddress>>(result); 
+                 
             }
             catch (Exception ex)
             {
@@ -1101,6 +1130,7 @@ namespace DellyShopApp.Services
             // Return the encrypted data as a string
             return cipherText;
         }
+       
     }
 }
 

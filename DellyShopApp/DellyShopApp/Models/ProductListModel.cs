@@ -66,7 +66,7 @@ namespace DellyShopApp.Models
         public string Attribute{ get; set; }
         public int AttributeId{ get; set; }
         public Guid ProductGUId { get; set; }
-        public int SpecificationIds { get; set; }
+        public int SpecificationId { get; set; }
         public string SpecificationNames { get; set; }
         public bool ISSpecificationNames { get; set; }
         public Color BGColor { get; set; }

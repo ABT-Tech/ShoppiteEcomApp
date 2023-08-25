@@ -84,6 +84,46 @@ namespace DellyShopApp.Views.Pages
                 UserId = userId
             };
             NotBusy();
+
+            if (UserName.Text == null || UserName.Text == "")
+            {
+                await DisplayAlert("o" +
+                    "pps..", "Please Enter Your UserName", "Ok");
+                return;
+            }
+            else if (EmailAddress.Text == null || EmailAddress.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your EmailAddress", "Ok");
+                return;
+
+            }
+            else if (number.Text == null || number.Text == "" || number.Text.Length < 10)
+            {
+                await DisplayAlert("opps..", "Please Enter Your Phonenumber", "Ok");
+                return;
+            }          
+
+            else if (address.Text == null || address.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your Address", "Ok");
+                return;
+            }
+            else if (statename.Text == null || statename.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your State Name", "Ok");
+                return;
+            }
+            else if (cityname.Text == null || cityname.Text == "")
+            {
+                await DisplayAlert("opps..", "Please Enter Your City", "Ok");
+                return;
+            }
+            else if (zipcode.Text == null || zipcode.Text == "" || zipcode.Text.Length < 6)
+            {
+                await DisplayAlert("opps..", "Please Enter Your ZipCode", "Ok");
+                return;
+            }
+
             var Page = new Page2(changeUserData);
             _ = DisplayAlert("Yes", "Your Profile Edit Successfully", "Okay");
             await DataService.EditUserData(changeUserData);

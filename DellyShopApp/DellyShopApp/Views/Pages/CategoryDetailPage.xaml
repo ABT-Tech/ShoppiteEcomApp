@@ -208,7 +208,7 @@
                                     FontFamily="{DynamicResource VerdanaProBold}"
                                     FontSize="16"
                                     HorizontalOptions="EndAndExpand"
-                                    Text="{Binding Price, StringFormat='{0} ₹'}"
+                                    Text="{Binding Price, StringFormat='₹{0}'}"
                                     TextColor="Black"
                                     VerticalOptions="EndAndExpand" />
                             </StackLayout>

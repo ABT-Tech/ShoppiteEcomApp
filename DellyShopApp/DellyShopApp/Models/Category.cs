@@ -10,5 +10,6 @@ namespace DellyShopApp.Models
         public int orgID { get; set; }
         public string SpecificationNames { get; set; }
         public int SpecificationIds { get; set; }
+        public bool IsCouponEnabled { get; set; }
     }
 }

@@ -14,12 +14,10 @@ namespace DellyShopApp.Views.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoryDetailPage
     {
-        public int Org_CategoryId = Convert.ToInt32(SecureStorage.GetAsync(" Org_CategoryId").Result);
+        //public int Org_CategoryId = Convert.ToInt32(SecureStorage.GetAsync(" Org_CategoryId").Result);
 
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
-        public CategoryDetailPage()
-        {
-        }
+      
         public CategoryDetailPage(Category category)
         {
             InitializeComponent();

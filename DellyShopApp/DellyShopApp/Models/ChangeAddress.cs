@@ -9,5 +9,6 @@ namespace DellyShopApp.Models{    public class ChangeAddress    {
         public string SelectState { get; set; }
         public string AddressDetail { get; set; }
         public string zipcode { get; set; }
+        public string Contactnumber { get; set; }
 
     }}

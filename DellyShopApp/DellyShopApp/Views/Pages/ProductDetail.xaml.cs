@@ -119,7 +119,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                 cart.UserId = Convert.ToInt32(UserId);
                 cart.proId = _products.Id;
                 cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
-                cart.SpecificationId = _products.SpecificationIds;
+                cart.SpecificationId = _products.SpecificationId;
                 //if (!(sender is Frame stack)) return;
                 //if (stack.Parent.BindingContext is ProductListModel item) return;
 
@@ -142,9 +142,9 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                 cart.orgId =_products.orgId;
                 cart.UserId = Convert.ToInt32(UserId);
                 cart.proId = _products.Id;
-                cart.SpecificationId = _products.SpecificationIds;
+                //cart.SpecificationId = _products.SpecificationId;
                 cart.Qty = Convert.ToInt32(ProductCountLabel.Text);
-                cart.SpecificationId = _products.SpecificationIds;
+                cart.SpecificationId = _products.SpecificationId;
                 _products.Quantity = Convert.ToInt32(ProductCountLabel.Text);
                 _productLists.Add(_products);
                 await Navigation.PushAsync(new BasketPage(_productLists));
@@ -167,7 +167,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                     favourite.orgId = _products.orgId;
                     favourite.UserId = Convert.ToInt32(UserId);
                     favourite.proId = _products.Id;
-                    favourite.SpecificationId = _products.SpecificationIds;
+                    favourite.SpecificationId = _products.SpecificationId;
                     await DataService.RemovefromFavourite(favourite.proId, favourite.UserId, favourite.orgId); //RemoveFavourite(favourite);
                 }
                
@@ -178,7 +178,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
                     favourite.orgId = _products.orgId;
                     favourite.UserId = Convert.ToInt32(UserId);
                     favourite.proId = _products.Id;
-                    favourite.SpecificationId = _products.SpecificationIds;
+                    favourite.SpecificationId = _products.SpecificationId;
                     await DataService.MyFavourite(favourite);
                 }
             }
@@ -223,7 +223,7 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             attributeList.SpecificationIds = Convert.ToInt32(specificationValue);
             var item = await DataService.GetProductDetailsBySpecifcation(attributeList.OrgId, attributeList.ProductGUId, attributeList.SpecificationIds,attributeList.UserId);
            // NavbarStack.BindingContext = item;
-            item.SpecificationIds = Convert.ToInt32(specificationValue);
+            item.SpecificationId = Convert.ToInt32(specificationValue);
             await Navigation.PushAsync(new ProductDetail(item));
         }
 

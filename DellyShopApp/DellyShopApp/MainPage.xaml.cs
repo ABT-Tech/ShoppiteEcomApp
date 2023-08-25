@@ -154,6 +154,8 @@ namespace DellyShopApp
                 }
             }
             return mac;
+            SecureStorage.SetAsync("DeviceId", mac);
+
         }
 
     }
