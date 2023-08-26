@@ -212,9 +212,6 @@
     <Compile Update="Views\Pages\ForgetPasswordPage.xaml.cs">
       <DependentUpon>ForgetPasswordPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Pages\PaymentPage.xaml.cs">
-      <DependentUpon>PaymentPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\Pages\UserOrderDetails.xaml.cs">
       <DependentUpon>UserOrderDetails.xaml</DependentUpon>
     </Compile>

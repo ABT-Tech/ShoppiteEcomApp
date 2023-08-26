@@ -28,7 +28,7 @@
                                                 Text="{Binding SpecificationNames}"
                                                 TextColor="Black"
                                                 VerticalOptions="Start" />
-                                                <Label  Text="{Binding SpecificationIds}" IsVisible="false"/>
+                                                <Label  Text="{Binding SpecificationId}" IsVisible="false"/>
                                             </StackLayout>
                                         </customView:PancakeView>
                                     </ViewCell>

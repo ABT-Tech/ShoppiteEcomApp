@@ -71,16 +71,16 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
             TotalPrice.Text = $"₹{ttlprice2}";
         }
         /// <summary>        /// Go to Address Page        /// </summary>        /// <param name="sender"></param>        /// <param name="e"></param>               private async void ContinueClick(object sender, EventArgs e)        {
-            OrderCheckOut orderCheckOut = new OrderCheckOut();
-                       orderCheckOut.ProductLists = productListModel;            orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);            orderCheckOut.userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);            var GetAddress = (ChangeAddress)AddressPicker.SelectedItem;            orderCheckOut.Address = GetAddress;            //orderCheckOut.BaseTotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.OrderGuid = productListModel.FirstOrDefault().OrderGuId;            orderCheckOut.CoupanId = Convert.ToInt32(this.lbl_CouponId.Text);            orderCheckOut.SpecificationId = productListModel.FirstOrDefault().SpecificationId;            orderCheckOut.IsCouponApplied = Convert.ToBoolean(this.lbl_IsCouponApplied.Text);
-            if (orderCheckOut.Address.AddressDetail == "" || orderCheckOut.Address.AddressDetail == null)
-            {
-                await DisplayAlert("Opps!", "Your Address is Empty! Please Add your Address in Edit Profile", "Ok");
-                return;
-            }
+            OrderCheckOut orderCheckOut = new OrderCheckOut();                      orderCheckOut.ProductLists = productListModel;            orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);            orderCheckOut.userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);            var GetAddress = (ChangeAddress)AddressPicker.SelectedItem;            orderCheckOut.Address = GetAddress;            //orderCheckOut.BaseTotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.OrderGuid = productListModel.FirstOrDefault().OrderGuId;            orderCheckOut.CoupanId = Convert.ToInt32(this.lbl_CouponId.Text);            orderCheckOut.SpecificationId = productListModel.FirstOrDefault().SpecificationId;            orderCheckOut.IsCouponApplied = Convert.ToBoolean(this.lbl_IsCouponApplied.Text);
             if (orderCheckOut.Address == null)
             {
                 await DisplayAlert("Opps!", "Please Select Address", "ok");
+                return;
+            }
+
+            if (orderCheckOut.Address.AddressDetail == "" || orderCheckOut.Address.AddressDetail == null)
+            {
+                await DisplayAlert("Opps!", "Your Address is Empty! Please Add your Address in Edit Profile", "Ok");
                 return;
             }
            

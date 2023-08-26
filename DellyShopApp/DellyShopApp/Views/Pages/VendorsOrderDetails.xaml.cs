@@ -27,7 +27,7 @@ using System.Linq;using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.
             var orderDate = DateTime.ParseExact(orderDetails.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture);            lblArrivingDate.Text = orderDate.AddDays(+7).ToString("dd/MM/yyyy");
             lblAddress.Text = orderDetails.Address;//DataService.Instance.orderdetails.Address;
             DataService.Instance.TotalPrice = 0;
-            foreach (var product in orderListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;            }            TotalPrice.Text = $"{ DataService.Instance.TotalPrice}₹";            PickerDemo.SelectedItem = orderDetails.ProductLists.FirstOrDefault().orderStatus;            NotBusy();        }
+            foreach (var product in orderListModel)            {                DataService.Instance.TotalPrice += product.Quantity * product.Price;            }            TotalPrice.Text = $"₹{ DataService.Instance.TotalPrice}";            PickerDemo.SelectedItem = orderDetails.ProductLists.FirstOrDefault().orderStatus;            NotBusy();        }
         public void Busy()
         {
             uploadIndicator.IsVisible = true;

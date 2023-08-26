@@ -220,8 +220,8 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
             attributeList.ProductGUId = _products.ProductGUId;
             attributeList.DefaultSpecification = _products.DefaultSpecification;
 
-            attributeList.SpecificationIds = Convert.ToInt32(specificationValue);
-            var item = await DataService.GetProductDetailsBySpecifcation(attributeList.OrgId, attributeList.ProductGUId, attributeList.SpecificationIds,attributeList.UserId);
+            attributeList.SpecificationId = Convert.ToInt32(specificationValue);
+            var item = await DataService.GetProductDetailsBySpecifcation(attributeList.OrgId, attributeList.ProductGUId, attributeList.SpecificationId,attributeList.UserId);
            // NavbarStack.BindingContext = item;
             item.SpecificationId = Convert.ToInt32(specificationValue);
             await Navigation.PushAsync(new ProductDetail(item));
