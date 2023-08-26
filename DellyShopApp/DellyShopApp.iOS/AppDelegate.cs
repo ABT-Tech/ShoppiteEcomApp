@@ -1,11 +1,12 @@
-﻿
-using System;
+﻿using System;
 using DellyShopApp.iOS.Rednerers;
 using FFImageLoading.Forms.Platform;
 using Foundation;
 using Plugin.FirebasePushNotification;
 using UIKit;
 using Xamarin.Forms;
+using Facebook.CoreKit;
+using Plugin.FacebookClient;
 
 namespace DellyShopApp.iOS
 {
@@ -35,6 +36,8 @@ namespace DellyShopApp.iOS
             //Activate after adding the GoogleService-Info.plist file.
             //https://github.com/CrossGeeks/FirebasePushNotificationPlugin/blob/master/docs/GettingStarted.md
             //FirebasePushNotificationManager.Initialize(options, true);
+
+            FacebookClientManager.Initialize(app, options);
             return base.FinishedLaunching(app, options);
         }
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
@@ -62,6 +65,15 @@ namespace DellyShopApp.iOS
             System.Console.WriteLine(userInfo);
 
             completionHandler(UIBackgroundFetchResult.NewData);
+        }
+        public override void OnActivated(UIApplication uiApplication)
+        {
+            FacebookClientManager.OnActivated();
+        }
+
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
+             return FacebookClientManager.OpenUrl(app, url, options);
         }
     }
 }

@@ -63,5 +63,20 @@
 	<string>Light</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1484605305699645</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>1484605305699645</string>
+	<key>FacebookClientToken</key>
+	<string>280e2665d1b83e11fa9943d3db126e0c</string>
+	<key>FacebookDisplayName</key>
+	<string>Shooppy</string>
 </dict>
 </plist>
