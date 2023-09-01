@@ -20,10 +20,10 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
 
         }        public void Busy()        {            uploadIndicator.IsVisible = true;            uploadIndicator.IsRunning = true;
 
-        }        public void NotBusy()        {            uploadIndicator.IsVisible = false;            uploadIndicator.IsRunning = false;
+        }        public void NotBusy()        {            uploadIndicator.IsVisible = false;            uploadIndicator.IsRunning = false;
 
         }
-        protected override async void OnAppearing()        {            base.OnAppearing();            this.BindingContext = Product;            BasketItems.ItemsSource = productListModel;//await DataService.GetAllCartDetails(orgId, userId);
+        protected override async void OnAppearing()        {            base.OnAppearing();            this.BindingContext = Product;            BasketItems.ItemsSource = productListModel;//await DataService.GetAllCartDetails(orgId, userId);
             DataService.Instance.TotalPrice = 0;
 
 
@@ -35,24 +35,11 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
                 //   DataService.Instance.BaseTotalPrice = product.Quantity * product.Price;
                 //}
             }
-
             //SubTotal.Text = $"{ DataService.Instance.BaseTotalPrice }₹";
             TotalPrice.Text = $"{DataService.Instance.TotalPrice}";            TotalPricee.Text = $"₹{DataService.Instance.TotalPrice}";            var ttlprice = TotalPrice.Text;            var ttlprice2 = Convert.ToInt32(ttlprice);            var disprice = ttlprice2;
 
             if (ttlprice2 >= 2000)            {                disprice = ttlprice2 - 1000;            }            else            {                disprice = ttlprice2 / 2;            }            Discountprice.Text = $"₹{disprice}";            TotalPrice.Text = $"₹{ttlprice2}";
-
-
         }
-
-
-
-
-
-
-
-
-
-
         /// <summary>        /// Go to Address Page        /// </summary>        /// <param name="sender"></param>        /// <param name="e"></param>                                                                                                                                                                                                                                                                                                                              private async void AddAddressClick(object sender, EventArgs e)        {            await Navigation.PushModalAsync(new AddNewAddressPage(DataService.Instance.changeAddress.ToList()));        }        private async void ContinueClick(object sender, EventArgs e)        {            OrderCheckOut orderCheckOut = new OrderCheckOut();            orderCheckOut.ProductLists = productListModel;            orderCheckOut.orgid = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);            orderCheckOut.userid = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);            var getaddress = (ChangeAddress)AddressPicker.SelectedItem;            orderCheckOut.Address = getaddress;            orderCheckOut.TotalPrice = ((decimal)DataService.Instance.TotalPrice);            orderCheckOut.OrderGuid = productListModel.FirstOrDefault().OrderGuId;
             orderCheckOut.CoupanId = Convert.ToInt32(this.lbl_CouponId.Text);            orderCheckOut.SpecificationId = productListModel.FirstOrDefault().SpecificationId;            orderCheckOut.IsCouponApplied = Convert.ToBoolean(this.lbl_IsCouponApplied.Text);
             if (orderCheckOut.Address == null)            {                await DisplayAlert("Opps!", "Please Select Address", "ok");                return;            }            if (orderCheckOut.Address.AddressDetail == "" || orderCheckOut.Address.AddressDetail == null)            {                await DisplayAlert("Opps!", "Your Address is Empty! Please Add your Address in Edit Profile", "Ok");                return;            }
@@ -70,29 +57,8 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
 
             Content = new StackLayout            {                Children =                     {                        new MyWebview()                       {                            url="https://pa-preprod.1pay.in/payment/payprocessorV2",                            WidthRequest = 300,                            HeightRequest = 900,                            data = string.Format("merchantId={0}&reqData={1}", pay.merchantId, pay.encryptedParams)
                        },                  },                VerticalOptions = LayoutOptions.FillAndExpand,                HorizontalOptions = LayoutOptions.FillAndExpand            };        }
-
-
-
-
-
-
-
-
-
-
         /// <summary>        /// Delete Visible Settings        /// </summary        /// <param name="sender"></param>        /// <param name="e"></param>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     private void DeleteItemSwipe(object sender, SwipedEventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (pancake.BindingContext is ProductListModel item)            {                item.VisibleItemDelete = true;                VisibleDelete(item.Id);            }        }
-
-
-
-
-
-
-
-
-
-
         /// <summary>        /// Delete Visible Settings        /// </summary>        /// <param name="sender"></param>        /// <param name="e"></param>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        private void UndeleteI(object sender, SwipedEventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (pancake.BindingContext is ProductListModel item)            {                item.VisibleItemDelete = false;                VisibleDelete(item.Id);            }        }        private void VisibleDelete(int id)        {            var items = _basketVm.ProcutListModel.Where(x => x.Id != id);            foreach (var item in items)            {                item.VisibleItemDelete = false;            }        }        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));        }
-
         private async void Button_Clicked_1(System.Object sender, System.EventArgs e)
         {
 
@@ -105,9 +71,6 @@ using Xamarin.Essentials;using Xamarin.Forms;using Xamarin.Forms.Xaml;namesp
                         price.IsVisible = true;
                         discont.IsVisible = false;
                         discontprice.IsVisible = false;                        return;
-                }                                
-            }
-
-
+                }            }
         }
     }}

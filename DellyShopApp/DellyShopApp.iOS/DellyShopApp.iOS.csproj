@@ -183,6 +183,7 @@
     <BundleResource Include="Resources\scart.png" />
     <BundleResource Include="Resources\Noproducts.png" />
     <BundleResource Include="Resources\cou.gif" />
+    <BundleResource Include="Resources\Verify.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">

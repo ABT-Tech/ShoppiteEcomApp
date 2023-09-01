@@ -45,4 +45,6 @@ using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompila
 
             await Navigation.PushAsync(new VenderLoginPage());
         }
+
+        private async void Verification(object sender, EventArgs e)        {            await Navigation.PushAsync(new VerificationPage());        }
     }}
