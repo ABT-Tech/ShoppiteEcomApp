@@ -184,6 +184,9 @@
     <BundleResource Include="Resources\Noproducts.png" />
     <BundleResource Include="Resources\cou.gif" />
     <BundleResource Include="Resources\Verify.jpg" />
+    <BundleResource Include="Resources\Mobile_Landscape_Banner.png" />
+    <BundleResource Include="Resources\shoes.jpg" />
+    <BundleResource Include="Resources\elecronics.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -307,6 +310,9 @@
     </PackageReference>
     <PackageReference Include="Plugin.FacebookClient">
       <Version>4.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="CarouselView.FormsPlugin">
+      <Version>6.0.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

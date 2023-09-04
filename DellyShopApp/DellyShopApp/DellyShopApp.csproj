@@ -28,6 +28,7 @@
     <PackageReference Include="Plugin.PayCards" Version="1.1.1" />
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
+    <PackageReference Include="CarouselView.FormsPlugin" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

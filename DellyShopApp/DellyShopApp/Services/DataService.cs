@@ -86,8 +86,17 @@ namespace DellyShopApp.Services
         }
         public DataService()
         {
-           
-          
+            Carousel.Add(new Category
+            {
+                Banner = "shoes.jpg",
+                CategoryId = "1"
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "elecronics.jpeg",
+                CategoryId = "3"
+            });
+
         }
 
 

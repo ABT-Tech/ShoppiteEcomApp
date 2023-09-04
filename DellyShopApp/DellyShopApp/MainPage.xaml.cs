@@ -42,6 +42,8 @@ namespace DellyShopApp
         {
             Busy();
             this.BindingContext = this;
+            CarouselView.ItemsSource = DataService.Instance.Carousel;
+            CarouselViewa.ItemsSource = DataService.Instance.Carousel;
             var AllOrganizations = await DataService.GetAllOrganizationCategories(); //DataService.Instance.ShopDetails;
             float rows = (float)AllOrganizations.Count / 2;
             double rowcount = Math.Round(rows);
@@ -137,7 +139,10 @@ namespace DellyShopApp
             
         }
 
-     
+        void OrderInfoClick(System.Object sender, System.EventArgs e)
+        {
+        }
+
     }
    
 }
