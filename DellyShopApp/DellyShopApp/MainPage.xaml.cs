@@ -79,8 +79,8 @@ namespace DellyShopApp
                             Margin = new Thickness(5, 0, 5, 10),
                             VerticalOptions = LayoutOptions.FillAndExpand,
                             HorizontalOptions = LayoutOptions.FillAndExpand,
-                            HeightRequest = 100,
-                            WidthRequest = 300,
+                            WidthRequest = 160,
+                            HeightRequest = 80
                         };
                         var Orglabel = new Label
                         {
@@ -193,7 +193,7 @@ namespace DellyShopApp
                     $"{placemark.Locality} {placemark.SubAdminArea}"; //CityName;
                     if (geocodeAddress.Length > 25)
                         geocodeAddress = geocodeAddress.Substring(0, 20)+"...";
-                    AddressLabel.Text =  geocodeAddress;
+                    LocalAddress.Text =  geocodeAddress;
                     CurrentAddress += geocodeAddress;
                 }
                 else

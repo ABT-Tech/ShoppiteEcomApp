@@ -31,7 +31,7 @@ namespace DellyShopApp.Views.TabbedPages
         {
             InitializeComponent();
             
-            ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;            
+         //   ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;            
         }
         private async void InittHomePage()
         {
