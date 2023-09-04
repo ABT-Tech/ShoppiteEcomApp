@@ -30,8 +30,7 @@ namespace DellyShopApp.Droid
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
             base.OnCreate(savedInstanceState);
-
-           
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             ///For Performance 
             Forms.SetFlags("FastRenderers_Experimental");
 

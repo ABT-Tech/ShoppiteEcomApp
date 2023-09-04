@@ -156,6 +156,7 @@
     <Compile Include="Renderers\BorderlessEntryRenderer.cs" />
     <Compile Include="Renderers\BorderlessPickerAndroid.cs" />
     <Compile Include="Renderers\BorderlessSearchBarRenderer.cs" />
+    <Compile Include="Renderers\GradientColorStackRenderer.cs" />
     <Compile Include="Renderers\MyWebViewRenderer.cs" />
     <Compile Include="Renderers\IconViewRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

@@ -10,6 +10,10 @@ using static DellyShopApp.Views.ListViewData;
 using System.Net.NetworkInformation;
 using System.Net;
 using Plugin.Connectivity;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Linq;
+using DellyShopApp.Helpers;
 
 namespace DellyShopApp
 {
@@ -18,7 +22,8 @@ namespace DellyShopApp
     {
         public int oldorgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public string Banner = "Mobile_Landscape_Banner.png" ;
-        
+        public string CurrentAddress = "";
+        CancellationTokenSource cts;
         public MainPage()
         {
             GetDeviceInfo();
@@ -95,6 +100,20 @@ namespace DellyShopApp
             NotBusy();
             //shop.ItemsSource = DataService.Instance.ShopDetails;
         }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var request = new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(20));
+            CancellationTokenSource cts = new CancellationTokenSource();
+            var location = await Geolocation.GetLocationAsync();
+
+            if (location != null)
+                await GetLocation(location);
+            else
+                await DisplayAlert("Unknown", "Your Location is unknown", "Ok");
+        }
         public void Busy()
         {
             uploadIndicator.IsVisible = true;
@@ -158,6 +177,34 @@ namespace DellyShopApp
             SecureStorage.SetAsync("DeviceId", mac);
 
         }
+
+        public async Task GetLocation(Location location)
+        {
+            try
+            {   
+                var placemarks = await Geocoding.GetPlacemarksAsync(location.Latitude, location.Longitude);
+                var placemark = placemarks?.FirstOrDefault();
+
+                if (placemark != null)
+                {
+                    var geocodeAddress = $"{ placemark.Thoroughfare}" + " " + //Address
+                                         $"{ placemark.SubLocality}" + " " + //Address area name
+
+                    $"{placemark.Locality} {placemark.SubAdminArea}"; //CityName;
+                    if (geocodeAddress.Length > 25)
+                        geocodeAddress = geocodeAddress.Substring(0, 20)+"...";
+                    AddressLabel.Text =  geocodeAddress;
+                    CurrentAddress += geocodeAddress;
+                }
+                else
+                    await DisplayAlert("Error occurred", "Unable to retreive address information", "Ok");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error occurred", ex.Message.ToString(), "Ok");
+            }
+        }
+
 
     }
 }
