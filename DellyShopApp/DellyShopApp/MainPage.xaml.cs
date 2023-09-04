@@ -17,7 +17,8 @@ namespace DellyShopApp
     public partial class MainPage
     {
         public int oldorgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
-
+        public string Banner = "Mobile_Landscape_Banner.png" ;
+        
         public MainPage()
         {
             GetDeviceInfo();
@@ -32,6 +33,7 @@ namespace DellyShopApp
         {
             Busy();
             this.BindingContext = this;
+            CarouselView.ItemsSource = DataService.Instance.Carousel;
             var AllOrganizations = await DataService.GetAllOrganizationCategories(); //DataService.Instance.ShopDetails;
           
             float rows = (float)AllOrganizations.Count / 2;
@@ -66,14 +68,14 @@ namespace DellyShopApp
                     };                    
                         var image = new Image
                         {
-                            Aspect = Aspect.AspectFit,
+                            Aspect = Aspect.Fill,
                             Source = product.CategoryImage,
                             BackgroundColor = Color.WhiteSmoke,
-                            Margin = new Thickness(10, 0, 10, 20),
-                            VerticalOptions = LayoutOptions.Center,
-                            HorizontalOptions = LayoutOptions.Center,
-                            HeightRequest = 200,
-                            WidthRequest = 200,
+                            Margin = new Thickness(5, 0, 5, 10),
+                            VerticalOptions = LayoutOptions.FillAndExpand,
+                            HorizontalOptions = LayoutOptions.FillAndExpand,
+                            HeightRequest = 100,
+                            WidthRequest = 300,
                         };
                         var Orglabel = new Label
                         {
@@ -86,7 +88,6 @@ namespace DellyShopApp
                         });
                         shop.Children.Add(image, columnIndex, rowIndex);
 
-                        shop.Children.Add(label, columnIndex, rowIndex);
                         shop.Children.Add(Orglabel, columnIndex, rowIndex);
                     }
                 }

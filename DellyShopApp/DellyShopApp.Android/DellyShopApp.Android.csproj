@@ -178,6 +178,8 @@
     <AndroidAsset Include="Assets\icofont.ttf" />
     <GoogleServicesJson Include="google-services.json" />
     <AndroidAsset Include="Assets\SFPro.ttf" />
+    <AndroidAsset Include="Assets\PlayfairDisplay-VariableFont_wght.ttf" />
+    <AndroidAsset Include="Assets\PlayfairDisplay-Italic-VariableFont_wght.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -799,6 +801,15 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\string.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Mobile_Landscape_Banner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\elecronics.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\shoes.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- <Target Name="_ResolveSatellitePaths" DependsOnTargets="_ResolveAssemblies">

@@ -60,6 +60,11 @@
                 <On Platform="iOS" Value="Font/VerdanaProSemiBold" />
             </OnPlatform>
 
+            <OnPlatform x:Key="PlayfairDisplay" x:TypeArguments="x:String">
+                <On Platform="Android" Value="PlayfairDisplay-VariableFont_wght.ttf#variable_fonts" />
+                <On Platform="iOS" Value="Font/VerdanaProSemiBold" />
+            </OnPlatform>
+
             <Style x:Key="LabelStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="{DynamicResource TitleFontColor}" />
                 <Setter Property="Margin" Value="0" />

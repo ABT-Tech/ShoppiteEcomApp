@@ -101,7 +101,18 @@ namespace DellyShopApp.Services
             StartList.Add(new StartList
             {
                 StarImg = FontAwesomeIcons.Star
-            });            
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "shoes.jpg",
+                CategoryId = "1"
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "elecronics.jpeg",
+                CategoryId = "3"
+            });
+            
         }
 
         public static async Task<List<Category>> GetCategories(int orgId)
