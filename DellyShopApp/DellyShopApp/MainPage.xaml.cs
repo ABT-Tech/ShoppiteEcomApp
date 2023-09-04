@@ -74,7 +74,7 @@ namespace DellyShopApp
                             Margin = new Thickness(5, 0, 5, 10),
                             VerticalOptions = LayoutOptions.FillAndExpand,
                             HorizontalOptions = LayoutOptions.FillAndExpand,
-                            HeightRequest = 100,
+                            HeightRequest = 200,
                             WidthRequest = 300,
                         };
                         var Orglabel = new Label
