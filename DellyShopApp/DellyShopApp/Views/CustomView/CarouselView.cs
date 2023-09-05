@@ -10,9 +10,9 @@ namespace DellyShopApp.Views.CustomView
 
         public CarouselView(ICardProcessor frontViewProcessor, ICardBackViewProcessor backViewProcessor) : base(frontViewProcessor, backViewProcessor)
         {
-            IsClippedToBounds = true;
+            IsClippedToBounds = false;
             //IsAutoInteractionRunning = true;  
-            IsPanInteractionEnabled = true;
+            //IsPanInteractionEnabled = true;
         }
 
         protected override double DefaultMoveSizePercentage => .20;

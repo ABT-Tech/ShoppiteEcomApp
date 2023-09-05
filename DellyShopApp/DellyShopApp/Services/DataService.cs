@@ -104,15 +104,26 @@ namespace DellyShopApp.Services
             });
             Carousel.Add(new Category
             {
-                Banner = "shoes.jpg",
+                Banner = "bigsale.png",
                 CategoryId = "1"
             });
             Carousel.Add(new Category
             {
-                Banner = "elecronics.jpeg",
+                Banner = "cosmetics.png",
                 CategoryId = "3"
             });
-            
+            Carousel.Add(new Category
+            {
+                Banner = "gift.png",
+                CategoryId = "1"
+            });
+            Carousel.Add(new Category
+            {
+                Banner = "jewallary.png",
+                CategoryId = "3"
+            });
+
+
         }
 
         public static async Task<List<Category>> GetCategories(int orgId)

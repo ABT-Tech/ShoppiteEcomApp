@@ -1,114 +1,1 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<base:BasePage
-    x:Class="DellyShopApp.MainPage"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:base="clr-namespace:DellyShopApp.Views.Pages.Base"
-    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    xmlns:font="clr-namespace:DellyShopApp.Helpers;assembly=DellyShopApp"
-    xmlns:helpers="clr-namespace:DellyShopApp.Languages"
-    xmlns:controls="clr-namespace:DellyShopApp.Views.CustomView"
-    xmlns:customControl="clr-namespace:DellyShopApp.CustomControl;assembly=DellyShopApp"
-    xmlns:iOsSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-    xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
-    xmlns:proc="clr-namespace:DellyShopApp.Processors" xmlns:forms1="http://xamarin.com/schemas/2014/forms/design"
-    iOsSpecific:Page.UseSafeArea="False"
-    BackgroundColor="#A2E5F6"
-    NavigationPage.HasNavigationBar="False"
-    Visual="Material">
-    <ScrollView>
-        
-        <StackLayout Margin="15,10,15,0" x:Name="MainLayout">
-            
-            <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="Chocolate" />
-            <!--<pancakeView:PancakeView  BackgroundGradientAngle="70" BackgroundGradientStartColor="#00aad5" BackgroundGradientEndColor="#ec1d26">-->
-            <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-              
-                <Image  Grid.Row="0" Grid.Column="0" Source="mainlogo2.png" HorizontalOptions="Start" 
-                       VerticalOptions="Start"/>
-                <Label  Grid.Row="0" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" FontAttributes="Bold"
-                    FontFamily="{DynamicResource PlayfairDisplay}"
-                    FontSize="22"
-                    Text="Hi, Welcome"
-                    TextColor="White"/>
-                    
-               
-            </Grid>
-            <pancakeView:PancakeView HorizontalOptions="FillAndExpand"                                          Margin="0,10,0,0"                                         BackgroundGradientAngle="100"                                          BackgroundGradientEndColor="White"                                         BackgroundGradientStartColor="White"                                         HasShadow="True"                                      HeightRequest="70"                                         BackgroundColor="#dcd6d0"                                        CornerRadius="10">                <pancakeView:PancakeView.GestureRecognizers>                    <TapGestureRecognizer Tapped="OrderInfoClick" />                </pancakeView:PancakeView.GestureRecognizers>                <StackLayout Orientation="Horizontal" >                    <Image                                     Margin="10,0,22,0"                                    HeightRequest="35"                                    Style="{DynamicResource ImageStyleEntry}"                                    WidthRequest="35">                        <Image.Source>                            <FontImageSource                                            FontFamily="{DynamicResource MaterialFontFamily}"                                            Glyph="{x:Static font:FontAwesomeIcons.LocationArrow}"                                            Size="35"                                            Color="#A2E5F6" />                        </Image.Source>                    </Image>                    <StackLayout Orientation="Vertical" VerticalOptions="Center">                        <Label                                    FontFamily="{DynamicResource MaterialFontFamily}"                                    FontSize="20"                                    VerticalOptions="Center"                                    FontAttributes="Bold"                                    Text="Your Delivery Address"                                    TextColor="Black" />                        <Label                                    FontFamily="{DynamicResource MaterialFontFamily}"                                    FontSize="16"                                    VerticalOptions="Center"                                    Text="C-610,Titanium City Cen..."                                    TextColor="Black" />                    </StackLayout>                    <Image                            Aspect="AspectFit"                            HorizontalOptions="EndAndExpand"                            Style="{DynamicResource ImageStyleEntry}">                        <Image.Source>                            <FontImageSource                                    FontFamily="{DynamicResource MaterialFontFamily}"                                    Glyph="{x:Static font:FontAwesomeIcons.ThinRight}"                                    Color="Black" />                        </Image.Source>                    </Image>                </StackLayout>            </pancakeView:PancakeView>
-            <!--</pancakeView:PancakeView>-->
-           
-            <StackLayout Margin="0,10,0,0">
-                
-                <Image Source="Mobile_Landscape_Banner1.png"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-            </StackLayout>
-            
-            <pancakeView:PancakeView
-                    Margin="0,10,0,0"
-                    Padding="0"
-                    x:Name="view"
-                    CornerRadius="8"
-                    Elevation="2"
-                    BackgroundColor="#f5f5f5"
-                    HasShadow="False">
-
-                <controls:CarouselView  IsNextItemPanInteractionEnabled="True"
-                        x:Name="CarouselView"
-                        Margin="0,0,0,0"
-                        BackgroundColor="#f5f5f5"
-                        HeightRequest="{x:OnIdiom Tablet=350, Phone=200}"
-                        SelectedIndex="0"
-                        WidthRequest="300">
-                    <x:Arguments>
-                        <proc:BaseCarouselFrontViewProcessor
-                                OpacityFactor="0.5"
-                                RotationFactor="0"
-                                ScaleFactor=".8" />
-                        <proc:BaseCarouselBackViewProcessor
-                                OpacityFactor="0.5"
-                                RotationFactor="0"
-                                ScaleFactor=".8" />
-                    </x:Arguments>
-                    <customControl:IndicatorsControl SelectedIndicatorStyle="{StaticResource ActiveIndicator}" IsAutoInteractionRunning="True" UnselectedIndicatorStyle="{DynamicResource InactiveIndicator}" />
-                    <controls:CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <ContentView >
-                                <forms1:Image
-                                        Margin="0"
-                                        Aspect="Fill"
-                                        Source="{Binding Banner}"                                        
-                                        WidthRequest="50"
-                                        HeightRequest="50"/>
-                                <!--<forms:CachedImage.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="Click_Banner" />
-                                </forms:CachedImage.GestureRecognizers>-->
-                            </ContentView>
-                        </DataTemplate>
-
-                    </controls:CarouselView.ItemTemplate>
-                </controls:CarouselView>
-            </pancakeView:PancakeView>
-            <Grid  BackgroundColor="#f5f5f5" x:Name="shop">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                
-              
-            </Grid>
-        </StackLayout>
-    </ScrollView>
-</base:BasePage>
+﻿<?xml version="1.0" encoding="utf-8" ?><base:BasePage    x:Class="DellyShopApp.MainPage"    xmlns="http://xamarin.com/schemas/2014/forms"    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    xmlns:base="clr-namespace:DellyShopApp.Views.Pages.Base"    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"    xmlns:helpers="clr-namespace:DellyShopApp.Languages"    xmlns:customControl="clr-namespace:DellyShopApp.CustomControl;assembly=DellyShopApp"    xmlns:iOsSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"    xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"     xmlns:font="clr-namespace:DellyShopApp.Helpers;assembly=DellyShopApp"    xmlns:proc="clr-namespace:DellyShopApp.Processors"    xmlns:forms1="http://xamarin.com/schemas/2014/forms/design"    xmlns:controls="clr-namespace:DellyShopApp.Views.CustomView"    iOsSpecific:Page.UseSafeArea="False"    BackgroundColor="#f5f5f5"    NavigationPage.HasNavigationBar="False"    Visual="Default">    <StackLayout Margin="15,10,15,0">        <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="Chocolate" />        <Grid HorizontalOptions="FillAndExpand"                  VerticalOptions="FillAndExpand">            <BoxView BackgroundColor="#a1a1a1" Opacity="0.3"/>            <SwipeView x:Name="mainswipeview"                           BackgroundColor="Transparent"                           SwipeStarted="SwipeStarted"                           SwipeEnded="SwipeEnded"                           >                <SwipeView.LeftItems>                    <SwipeItems>                        <SwipeItemView>                            <Grid>                                <StackLayout Spacing="20"                                                 Padding="35"                                                 WidthRequest="250"                                                 BindableLayout.ItemsSource="{Binding MyMenu}"                                                 VerticalOptions="CenterAndExpand">                                    <BindableLayout.ItemTemplate>                                        <DataTemplate>                                            <StackLayout Orientation="Horizontal">                                                <StackLayout.GestureRecognizers>                                                    <TapGestureRecognizer Tapped="CloseSwipe"/>                                                </StackLayout.GestureRecognizers>                                                <pancakeView:PancakeView BackgroundColor="#557ed2"                                                                             HeightRequest="30"                                                                             WidthRequest="30"                                                                             CornerRadius="15"                                                                             VerticalOptions="Center"                                                                             HorizontalOptions="Start">                                                    <Image Source="{Binding Icon}"                                                           HeightRequest="15"                                                           WidthRequest="15"                                                           VerticalOptions="Center"                                                           HorizontalOptions="Center"/>                                                </pancakeView:PancakeView>                                                <Label Text="{Binding Name}"                                                           TextColor="White"                                                           FontSize="15"                                                           FontAttributes="Bold"                                                           HorizontalOptions="Start"                                                           VerticalOptions="Center"/>                                            </StackLayout>                                        </DataTemplate>                                    </BindableLayout.ItemTemplate>                                </StackLayout>                            </Grid>                        </SwipeItemView>                    </SwipeItems>                </SwipeView.LeftItems>                    <Grid x:Name="swipecontent">                    <ScrollView>                        <pancakeView:PancakeView x:Name="pancake"                                                 BackgroundColor="White">                            <Grid>                                <Grid.RowDefinitions>                                    <RowDefinition Height="Auto"/>                                    <RowDefinition Height="Auto"/>                                    <RowDefinition Height="*"/>                                    <RowDefinition Height="*"/>                                </Grid.RowDefinitions>                                <Grid Padding="10">                                    <Image Aspect="AspectFit" Source="menu.png" Grid.Row="0" Grid.Column="0"                                            HeightRequest="20"                                           HorizontalOptions="Start">                                        <Image.GestureRecognizers>                                            <TapGestureRecognizer Tapped="OpenSwipe"/>                                        </Image.GestureRecognizers>                                    </Image>                                    <Image   Source="mainlogo2.png"                                                  HorizontalOptions="End"                                                     VerticalOptions="Start"/>                                </Grid>                                <StackLayout Grid.Row="1" Padding="10 " VerticalOptions="Start">                                    <Label  HorizontalOptions="Start"                                                  VerticalOptions="StartAndExpand"                                                  FontAttributes="Bold"                                            FontFamily="{DynamicResource PlayfairDisplay}"                                            FontSize="18"                                            Text="Hi, Welcome"                                            TextColor="Black"/>                                </StackLayout>                                <StackLayout Grid.Row="2" Grid.Column="0" Padding="10">                                    <pancakeView:PancakeView                HorizontalOptions="FillAndExpand"                 BackgroundGradientAngle="100"                 BackgroundGradientEndColor="White"                BackgroundGradientStartColor="White"                HasShadow="True"                HeightRequest="70"                BackgroundColor="#dcd6d0"                CornerRadius="10">                                        <pancakeView:PancakeView.GestureRecognizers>                                            <TapGestureRecognizer Tapped="OrderInfoClick" />                                        </pancakeView:PancakeView.GestureRecognizers>                                        <StackLayout Orientation="Horizontal" Spacing="10" >                                            <Image                                     Margin="10,0,22,0"                                    HeightRequest="35"                                    Style="{DynamicResource ImageStyleEntry}"                                    WidthRequest="35">                                                <Image.Source>                                                    <FontImageSource                                            FontFamily="{DynamicResource MaterialFontFamily}"                                            Glyph="{x:Static font:FontAwesomeIcons.LocationArrow}"                                            Size="35"                                            Color="#A2E5F6" />                                                </Image.Source>                                            </Image>                                            <StackLayout Orientation="Vertical" VerticalOptions="Center">                                                <Label                                    FontFamily="{DynamicResource MaterialFontFamily}"                                    FontSize="20"                                    VerticalOptions="Center"                                    FontAttributes="Bold"                                    Text="Your Delivery Address"                                    TextColor="Black" />                                                <Label                                    FontFamily="{DynamicResource MaterialFontFamily}"                                    FontSize="16"                                    VerticalOptions="Center"                                    Text="C-610,Titanium City Cen..."                                    TextColor="Black" />                                            </StackLayout>                                            <Image                            Aspect="AspectFit"                            HorizontalOptions="EndAndExpand"                            Style="{DynamicResource ImageStyleEntry}">                                                <Image.Source>                                                    <FontImageSource                                    FontFamily="{DynamicResource MaterialFontFamily}"                                    Glyph="{x:Static font:FontAwesomeIcons.ThinRight}"                                    Color="Black" />                                                </Image.Source>                                            </Image>                                        </StackLayout>                                    </pancakeView:PancakeView>                                    <Image  Grid.Row="3" Grid.Column="0" Source="Mobile_Landscape_Banner.png"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>                                    <pancakeView:PancakeView                    Margin="0,10,0,0"  Grid.Row="4"                    Padding="0"                    x:Name="view"                    CornerRadius="8"                    Elevation="2"                    BackgroundColor="#f5f5f5"                    HasShadow="False">                                        <controls:CarouselView                                           x:Name="CarouselView"                        Margin="0,0,0,0"                        BackgroundColor="#f5f5f5"                        HeightRequest="{x:OnIdiom Tablet=350, Phone=200}"                        SelectedIndex="0"                        WidthRequest="300">                                            <x:Arguments>                                                <proc:BaseCarouselFrontViewProcessor                                OpacityFactor="0.5"                                RotationFactor="0"                                ScaleFactor=".8" />                                                <proc:BaseCarouselBackViewProcessor                                OpacityFactor="0.5"                                RotationFactor="0"                                ScaleFactor=".8" />                                            </x:Arguments>                                            <customControl:IndicatorsControl SelectedIndicatorStyle="{StaticResource ActiveIndicator}" UnselectedIndicatorStyle="{DynamicResource InactiveIndicator}" />                                            <controls:CarouselView.ItemTemplate>                                                <DataTemplate>                                                    <ContentView>                                                        <forms1:Image                                        Margin="0"                                        Aspect="Fill"                                        Source="{Binding Banner}"                                                                                WidthRequest="50"                                        HeightRequest="50"/>                                                        <!--<forms:CachedImage.GestureRecognizers>                                    <TapGestureRecognizer Tapped="Click_Banner" />                                </forms:CachedImage.GestureRecognizers>-->                                                    </ContentView>                                                </DataTemplate>                                            </controls:CarouselView.ItemTemplate>                                        </controls:CarouselView>                                    </pancakeView:PancakeView>                                    <Grid  BackgroundColor="#f5f5f5" x:Name="shop" IsVisible="true" Grid.Row="5">                                        <Grid.RowDefinitions>                                            <RowDefinition Height="*"/>                                            <RowDefinition Height="*"/>                                        </Grid.RowDefinitions>                                        <Grid.ColumnDefinitions>                                            <ColumnDefinition Width="*"/>                                            <ColumnDefinition Width="*"/>                                        </Grid.ColumnDefinitions>                                    </Grid>                                </StackLayout>                            </Grid>                        </pancakeView:PancakeView>                    </ScrollView>                </Grid>            </SwipeView>        </Grid>    </StackLayout></base:BasePage> 
