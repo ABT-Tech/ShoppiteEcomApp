@@ -154,6 +154,11 @@ namespace DellyShopApp
             MainLayout.Opacity = 0.7;
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
         public void NotBusy()
         {
             uploadIndicator.IsVisible = false;

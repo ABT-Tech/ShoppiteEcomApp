@@ -22,7 +22,7 @@ using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pag
         private async void InittLastViewPage()
         {
             Busy();
-            LastViewList.ItemsSource = await DataService.GetAllProductsByOrganizations(orgId);//DataService.Instance.ProcutListModel;
+            LastViewList.ItemsSource = DataService.Instance.ProcutListModel;
             NotBusy();        }        public void Busy()
         {
             uploadIndicator.IsVisible = true;

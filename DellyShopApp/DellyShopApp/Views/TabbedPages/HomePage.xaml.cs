@@ -1,4 +1,5 @@
 ﻿     using Acr.UserDialogs;
+using DellyShopApp.CustomControl;
 using DellyShopApp.Languages;
 using DellyShopApp.Models;
 using DellyShopApp.Services;
@@ -21,6 +22,7 @@ namespace DellyShopApp.Views.TabbedPages
 
         //Order product = new Order();
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
+        public int OrgCatId = Convert.ToInt32(SecureStorage.GetAsync("OrgCatId").Result);
         public int UserId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         public string userAuth = SecureStorage.GetAsync("Usertype").Result;
         List<Category> categories = new List<Category>();
@@ -35,56 +37,11 @@ namespace DellyShopApp.Views.TabbedPages
         }
         private async void InittHomePage()
         {
-            Busy();
+            //Busy();
             int? OrgUserID = UserId == 0 ? null : (int?)UserId;
             categories = await DataService.GetAllCategories(orgId);
-            List<Category> mainPageCategories = new List<Category>();
-            foreach (var categorydata in categories)
-            {
-                if (categorydata.IsCouponEnabled == true)
-                {
-                    Discountbanner.IsVisible = true;
-                }
-                else
-                {
-                    Discountbanner.IsVisible = false;
-                }
-                var categoryExist = mainPageCategories.Any(X => X.CategoryId == categorydata.CategoryId);
-                if (!categoryExist)
-                {
-                    Category mainPageCategory = new Category();
-                    mainPageCategory.CategoryId = categorydata.CategoryId;
-                    mainPageCategory.CategoryName = categorydata.CategoryName;
-                    mainPageCategory.orgID = categorydata.orgID;
-                    mainPageCategory.SpecificationIds = categorydata.SpecificationIds;
-                    mainPageCategory.SpecificationNames = categorydata.SpecificationNames;
-                    mainPageCategory.Banner = categorydata.Banner;
-                    mainPageCategories.Add(mainPageCategory);
-                }
-            }
-            
-            CategoryList.ItemsSource = mainPageCategories; //DataService.Instance.CatoCategoriesList.Where(x => x.orgID == orgId); //
-            CarouselView.ItemsSource = categories.Where(x => x.Banner != null && x.Banner!="").ToList(); //DataService.Instance.Carousel.Where(x => x.orgID == orgId); //
-            var Bestseller = await DataService.GetMostSellerProductsByOrganizations(orgId, OrgUserID);
-            BestSellerList.ItemsSource = Bestseller; //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId);
-            if(Bestseller.Count != 0)
-            {
-                Bestsellerstk.IsVisible = true;
-            }
-            var Lastview = await DataService.GetLastVisitedProductsByOrganizations(orgId, OrgUserID);
-            PreviousViewedList.ItemsSource = Lastview; //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId); //
-            if(Lastview.Count != 0)
-            {
-                TopDeatlbl.IsVisible = true;
-            }
-            NotBusy();
-
-            var AllProducts = await DataService.GetAllProductsByOrganizations(orgId, OrgUserID);
-            MostNews.FlowItemsSource = AllProducts; //DataService.Instance.ProcutListModel.Where(x => x.orgId == orgId).ToList(); //
-            if(AllProducts.Count != 0)
-            {
-                AllProductlbl.IsVisible = true;
-            }
+            var AllProducts = await DataService.GetAllProductsByOrganizations(orgId, OrgUserID, OrgCatId);
+           
         }
         public void Busy()
         {
@@ -215,5 +172,54 @@ namespace DellyShopApp.Views.TabbedPages
         {
             Navigation.PushAsync(new TopDeals());
         }
+
+        public void BindStack(string label, List<ProductResponse> productResponses)
+        {
+            var dynamicResource = new Xamarin.Forms.Internals.DynamicResource("VerdanaProBold");
+            StackLayout stackLayout = new StackLayout();
+            stackLayout.Orientation = StackOrientation.Horizontal;
+            Label stacklabel = new Label();
+            stacklabel.Margin = new Thickness(0, 10, 0, 0);
+            stacklabel.Padding = new Thickness(5, 5, 0, 0);
+            stacklabel.FontAttributes = FontAttributes.Bold;
+            stacklabel.FontFamily = dynamicResource.Key;
+            stacklabel.FontSize = 22;
+            stacklabel.HorizontalOptions = LayoutOptions.StartAndExpand;
+            stacklabel.Text = label;
+            stacklabel.TextColor = Color.Black;
+            stacklabel.VerticalOptions = LayoutOptions.Start;
+            stackLayout.Children.Add(stacklabel);
+            ScrollView statusScrollView = new ScrollView();
+            statusScrollView.HorizontalScrollBarVisibility = ScrollBarVisibility.Never;
+            statusScrollView.Orientation = ScrollOrientation.Horizontal;
+            RepeaterView statusRepeaterView = new RepeaterView();
+            statusRepeaterView.Orientation = StackOrientation.Horizontal;
+            statusRepeaterView.Spacing = -5;
+            statusRepeaterView.ItemsSource = productResponses;
+            statusRepeaterView.ItemTemplate = new DataTemplate(() => {
+                PancakeView dataTemplatePancakeView = new PancakeView();
+                dataTemplatePancakeView.Margin = 5;
+                dataTemplatePancakeView.Padding = 5;
+                dataTemplatePancakeView.BackgroundColor = Color.White;
+                dataTemplatePancakeView.CornerRadius = 8;
+                dataTemplatePancakeView.Elevation = 3;
+                dataTemplatePancakeView.HasShadow = true;
+                dataTemplatePancakeView.HeightRequest = 250;
+                dataTemplatePancakeView.HorizontalOptions = LayoutOptions.StartAndExpand;
+                dataTemplatePancakeView.VerticalOptions = LayoutOptions.StartAndExpand;
+                dataTemplatePancakeView.WidthRequest = 140;
+                dataTemplatePancakeView.GestureRecognizers.Add(new TapGestureRecognizer
+                {
+                    Command = new Command(() => ProductDetailClick(dataTemplatePancakeView, null)),
+                });
+                StackLayout pancakeChildLayout = new StackLayout();
+
+                return dataTemplatePancakeView;
+            });
+            
+            MainLayout.Children.Add(stackLayout);
+
+        }
+
     }
 }

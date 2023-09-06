@@ -224,5 +224,8 @@
     <Compile Update="Views\Pages\VendorLoginPage.xaml.cs">
       <DependentUpon>VendorLoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\TabbedPages\CategoryPage.xaml.cs">
+      <DependentUpon>CategoryPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

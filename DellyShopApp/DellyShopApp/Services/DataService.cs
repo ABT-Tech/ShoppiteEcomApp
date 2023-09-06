@@ -214,7 +214,7 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
-        public static async Task<List<ProductListModel>> GetAllProductsByOrganizations(int orgId,int? UserId = null)
+        public static async Task<ProductMasterResponse> GetAllProductsByOrganizations(int orgId,int? UserId = null, int? OrgCatId = 0)
         {
             try
             {
@@ -228,10 +228,10 @@ namespace DellyShopApp.Services
                 };
                 HttpClient httpClient = new HttpClient(clientHandler);
                 var response = await httpClient.GetAsync(
-                    AppSettings.ApiUrl + "api/Products/GetAllProductsByOrganizations?org_Id=" + orgId+"&UserID="+ UserId);
+                    AppSettings.ApiUrl + "api/Products/GetAllProductsByOrganizations?org_Id=" + orgId+"&UserID="+ UserId + "&orgcat_id=" + OrgCatId);
 
                 string result = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<ProductListModel>>(result);
+                return JsonConvert.DeserializeObject<ProductMasterResponse>(result);
             }
             catch (Exception ex)
             {
