@@ -13,9 +13,15 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 homePage.IconImageSource = "Home";
                 this.Children.Add(homePage);
             }
+            
+            var myCartPage1 = new MyCartPage();
+            myCartPage1.IconImageSource = "Shops";
+            this.Children.Add(myCartPage1);
+
             var myCartPage = new MyCartPage();
-            myCartPage.IconImageSource = "Basket";
+            myCartPage.IconImageSource = "Offer";
             this.Children.Add(myCartPage);
+
             var profilePage = new ProfilePage();
             profilePage.IconImageSource = "Profile";
             this.Children.Add(profilePage);

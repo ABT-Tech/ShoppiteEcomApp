@@ -23,24 +23,7 @@
         <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
             <StackLayout Margin="5,10,5,0" x:Name="MainLayout">
                 <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="Chocolate" />
-
-
-                <ScrollView HorizontalOptions="Center" HorizontalScrollBarVisibility="Always" Orientation="Horizontal">
-                    <StackLayout Orientation="Horizontal" x:Name="PlayingWindow2">
-                        <Image Source="Tarsi_Mobile_Logo.png" Aspect="AspectFit" HeightRequest="70" WidthRequest="70" VerticalOptions="Center" HorizontalOptions="Start" />
-                        <Image Source="Tarsi_Mobile_Logo.png" Aspect="AspectFit" HeightRequest="70" WidthRequest="70" VerticalOptions="Center" HorizontalOptions="Start" />
-                        <Image Source="Tarsi_Mobile_Logo.png" Aspect="AspectFit" HeightRequest="70" WidthRequest="70" VerticalOptions="Center" HorizontalOptions="Start" />
-                        <Image Source="Tarsi_Mobile_Logo.png" Aspect="AspectFit" HeightRequest="70" WidthRequest="70" VerticalOptions="Center" HorizontalOptions="Start" />
-                        <Image Source="Tarsi_Mobile_Logo.png" Aspect="AspectFit" HeightRequest="70" WidthRequest="70" VerticalOptions="Center" HorizontalOptions="Start" />
-                        <Image Source="Tarsi_Mobile_Logo.png" Aspect="AspectFit" HeightRequest="70" WidthRequest="70" VerticalOptions="Center" HorizontalOptions="Start" />
-                        <Image Source="Tarsi_Mobile_Logo.png" Aspect="AspectFit" HeightRequest="70" WidthRequest="70" VerticalOptions="Center" HorizontalOptions="Start" />
-                        <Image Source="Tarsi_Mobile_Logo.png" Aspect="AspectFit" HeightRequest="70" WidthRequest="70" VerticalOptions="Center" HorizontalOptions="Start" />
-                        <Image Source="Tarsi_Mobile_Logo.png" Aspect="AspectFit" HeightRequest="70" WidthRequest="70" VerticalOptions="Center" HorizontalOptions="Start" />
-                    </StackLayout>
-                </ScrollView>
-
-               
-                
+   
                 <Grid RowSpacing="5" ColumnSpacing="5">                    <!--<Image Source="{Binding Image}"                       x:Name="ShopLogo"                       WidthRequest="130"                        HeightRequest="130"                     HorizontalOptions="Start"/>-->                                       <!--<Image Source="ShopTHigh.png"                      VerticalOptions="Start"                       WidthRequest="130"                        HeightRequest="130"                       HorizontalOptions="End">                        <Image.GestureRecognizers>                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>                        </Image.GestureRecognizers>                    </Image>-->                </Grid>
                 <SearchBar Placeholder="Search items..."
            CancelButtonColor="Gray"

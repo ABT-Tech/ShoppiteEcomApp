@@ -41,7 +41,7 @@ namespace DellyShopApp.Views.TabbedPages
             //Busy();
             int? OrgUserID = UserId == 0 ? null : (int?)UserId;
             categories = await DataService.GetAllCategories(orgId);
-            var AllProducts = await DataService.GetAllProductsByOrganizations(orgId, OrgUserID, OrgCatId);
+            var AllProducts = await DataService.GetAllProductsByOrganizations(0, OrgUserID, OrgCatId);
             foreach(var prodDetails in AllProducts.MainProductDTOs)
             {
                 BindStack(prodDetails.Status, prodDetails.productsDTOs);
@@ -200,7 +200,62 @@ namespace DellyShopApp.Views.TabbedPages
             RepeaterView statusRepeaterView = new RepeaterView();
             statusRepeaterView.Orientation = StackOrientation.Horizontal;
             statusRepeaterView.Spacing = -5;
-            statusRepeaterView.ItemTemplate = new DataTemplate(() => {
+            var dataTemplate = new DataTemplate(() => {
+                ViewCell vc = new ViewCell();
+                Image cacheImage = new Image
+                {
+                    Aspect = Aspect.AspectFit,
+                    HeightRequest = 150,
+                    Margin = 5,
+                    VerticalOptions = LayoutOptions.Start
+                };
+                cacheImage.SetBinding(Image.SourceProperty, "Image");
+                Label stacklabelChild = new Label
+                {
+                    FontFamily = dynamicResourceRegular.Key,
+                    LineBreakMode = LineBreakMode.TailTruncation,
+                    TextColor = Color.Black,
+                    VerticalOptions = LayoutOptions.Start
+                };
+                stacklabelChild.SetBinding(Label.TextProperty, "Title");
+                
+                
+                
+                Label childLabel = new Label
+                {
+                    FontFamily = dynamicResourceBold.Key,
+                    FontSize = 10,
+                    HorizontalOptions = LayoutOptions.EndAndExpand,
+                    TextColor = Color.Gray,
+                    WidthRequest = 80,
+                    TextDecorations = TextDecorations.Strikethrough,
+                    VerticalOptions = LayoutOptions.CenterAndExpand
+                };
+                childLabel.SetBinding(Label.TextProperty, "OldPrice");
+                Label childLabel2 = new Label
+                {
+                    FontFamily = dynamicResourceBold.Key,
+                    FontSize = 13,
+                    HorizontalOptions = LayoutOptions.End,
+                    TextColor = Color.Black,
+                    WidthRequest = 80,
+                    VerticalOptions = LayoutOptions.Center
+                };
+                childLabel2.SetBinding(Label.TextProperty, "Price");
+
+                StackLayout childStackLayout = new StackLayout
+                {
+                    Orientation = StackOrientation.Horizontal,
+                    VerticalOptions = LayoutOptions.EndAndExpand
+                };
+                childStackLayout.Children.Add(childLabel);
+                childStackLayout.Children.Add(childLabel2);
+
+                StackLayout pancakeChildLayout = new StackLayout();
+                pancakeChildLayout.Children.Add(cacheImage);
+                pancakeChildLayout.Children.Add(stacklabelChild);
+                pancakeChildLayout.Children.Add(childStackLayout);
+
                 PancakeView dataTemplatePancakeView = new PancakeView();
                 dataTemplatePancakeView.Margin = 5;
                 dataTemplatePancakeView.Padding = 5;
@@ -216,51 +271,15 @@ namespace DellyShopApp.Views.TabbedPages
                 {
                     Command = new Command(() => ProductDetailClick(dataTemplatePancakeView, null)),
                 });
-                StackLayout pancakeChildLayout = new StackLayout();
-                CachedImage cacheImage = new CachedImage();
-                cacheImage.Aspect = Aspect.AspectFit;
-                cacheImage.HeightRequest = 150;
-                cacheImage.Margin = 5;
-                cacheImage.VerticalOptions = LayoutOptions.Start;
-                this.SetBinding(CachedImage.SourceProperty, new Binding() { Path = "Image" });
-                Label stacklabelChild = new Label();
-                stacklabelChild.FontFamily =  dynamicResourceRegular.Key;
-                this.SetBinding(Label.TextProperty, "Title");
-                stacklabelChild.LineBreakMode = LineBreakMode.TailTruncation;
-                stacklabelChild.TextColor = Color.Black;
-                stacklabelChild.VerticalOptions = LayoutOptions.Start;
-                pancakeChildLayout.Children.Add(cacheImage);
-                pancakeChildLayout.Children.Add(stacklabelChild);
-                StackLayout childStackLayout = new StackLayout();
-                childStackLayout.Orientation = StackOrientation.Horizontal;
-                childStackLayout.VerticalOptions = LayoutOptions.EndAndExpand;
-                Label childLabel = new Label();
-                childLabel.FontFamily = dynamicResourceBold.Key;
-                childLabel.FontSize = 10;
-                childLabel.HorizontalOptions = LayoutOptions.EndAndExpand;
-                //this.SetBinding(Label.IsVisibleProperty, new Binding() { Path = "OldPrice" });
-                this.SetBinding(Label.TextProperty, new Binding() { Path = "OldPrice" });
-                childLabel.TextColor = Color.Gray;
-                childLabel.WidthRequest = 80;
-                childLabel.TextDecorations = TextDecorations.Strikethrough;
-                childLabel.VerticalOptions = LayoutOptions.CenterAndExpand;
-                Label childLabel2 = new Label();
-                childLabel2.FontFamily = dynamicResourceBold.Key;
-                childLabel2.FontSize = 13;
-                childLabel2.HorizontalOptions = LayoutOptions.End;
-                this.SetBinding(Label.TextProperty, new Binding() { Path = "Price"});
-                childLabel2.TextColor = Color.Black;
-                childLabel2.WidthRequest = 80;
-                childLabel2.VerticalOptions = LayoutOptions.Center;
-                childStackLayout.Children.Add(childLabel);
-                childStackLayout.Children.Add(childLabel2);
-                pancakeChildLayout.Children.Add(childStackLayout);
                 dataTemplatePancakeView.Content = pancakeChildLayout;
-                
-              //  dataTemplatePancakeView.ChildAdded(pancakeChildLayout); 
-                return dataTemplatePancakeView;
+
+                //  dataTemplatePancakeView.ChildAdded(pancakeChildLayout); 
+                vc.View = dataTemplatePancakeView;
+                return vc;
             });
+            statusRepeaterView.ItemTemplate = dataTemplate;
             statusRepeaterView.ItemsSource = productResponses.ToList();
+            statusRepeaterView.BindingContext = productResponses.ToList();
             statusScrollView.Content = statusRepeaterView;
             MainLayout.Children.Add(stackLayout);
             MainLayout.Children.Add(statusScrollView);
