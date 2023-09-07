@@ -11,18 +11,18 @@ namespace DellyShopApp.Models
         public string Title { get; set; }
         public Guid ProductGUID { get; set; }
         public int Quantity { get; set; }
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
         public string Brand { get; set; }
         public string Image { get; set; }
-        public double Price { get; set; }
+        public string Price { get; set; }
         public int Id { get; set; }
         public int orgId { get; set; }
         public string[] ProductList { get; set; }
-        public int OldPrice { get; set; }
+        public string OldPrice { get; set; }
         public Boolean WishlistedProduct { get; set; }
         public int BrandId { get; set; }
         public int CategoryId { get; set; }
-        public string SpecificationNames { get; set; }
+        public string SpecificationNames { get; set; } = string.Empty;
         public int SpecificationId { get; set; }
     }
     public class ProductMasterResponse
