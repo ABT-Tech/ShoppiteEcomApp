@@ -4,16 +4,21 @@ using DellyShopApp.Views.TabbedPages;
 
 namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class HomeTabbedPage : TabbedPage    {        private Page2 page;
                 public HomeTabbedPage()        {               InitializeComponent();
-            int Org_CategoryId = Convert.ToInt32(SecureStorage.GetAsync("OrgCatId").Result);
+           
+        }
+        protected async override void OnAppearing()
+        {
+            var AllProducts = await DataService.GetAllProductsByOrganizations(0, null, 4);
+            await App.SQLiteDb.SaveItemAsync(AllProducts);
+            
+            var homePage = new HomePage();
+            homePage.IconImageSource = "Home";
+            this.Children.Add(homePage);
+
             var categoryPage = new CategoryPage();
             categoryPage.IconImageSource = "Category";
-            this.Children.Add(categoryPage);            if (Org_CategoryId != 0)
-            {
-                var homePage = new HomePage();
-                homePage.IconImageSource = "Home";
-                this.Children.Add(homePage);
-            }
-            
+            this.Children.Add(categoryPage);
+
             var myCartPage1 = new MyCartPage();
             myCartPage1.IconImageSource = "Shops";
             this.Children.Add(myCartPage1);
@@ -25,10 +30,6 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             var profilePage = new ProfilePage();
             profilePage.IconImageSource = "Profile";
             this.Children.Add(profilePage);
-        }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
         }
         public HomeTabbedPage(Page2 page)        {            this.page = page;            
         }        public partial class Page2 : ContentPage        {            public ChangeUserData model;            public Page2(ChangeUserData m)            {                this.model = m;            }

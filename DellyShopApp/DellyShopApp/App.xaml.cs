@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Threading.Tasks;
+using DellyShopApp.DbModels;
 using DellyShopApp.Helpers;
 using DellyShopApp.Languages;
 using DellyShopApp.Models;
@@ -23,6 +25,7 @@ namespace DellyShopApp
     {
         public int VendorUserId = Convert.ToInt32(SecureStorage.GetAsync("VendorUserId").Result);
         public int UserId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
+        static SQLiteHelper db;
         public App(bool hasNotification = false, IDictionary<string, object> notificationData = null)
         {
             InitializeComponent();            
@@ -150,6 +153,20 @@ namespace DellyShopApp
         public async void SetFirebaseToken(FirebaseToken firebaseToken) 
         {
             await DataService.UpdateFireBaseToken(firebaseToken);
+        }
+
+       
+
+        public static SQLiteHelper SQLiteDb
+        {
+            get
+            {
+                if (db == null)
+                {
+                    db = new SQLiteHelper(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "XamarinSQLite.db3"));
+                }
+                return db;
+            }
         }
     }
 

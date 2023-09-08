@@ -826,6 +826,18 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Shops.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Notification.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Wishlist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Shopping_Bag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ShooppyMobileLogo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- <Target Name="_ResolveSatellitePaths" DependsOnTargets="_ResolveAssemblies">
     <ResolveAssemblyReference AllowedAssemblyExtensions="$(AllowedReferenceAssemblyFileExtensions)" AssemblyFiles="@(ResolvedUserAssemblies)" AutoUnify="$(AutoUnifyAssemblyReferences)" FindDependencies="True" FindRelatedFiles="False" FindSatellites="True" SearchPaths="$(AssemblySearchPaths)" TargetFrameworkMoniker="$(TargetFrameworkMoniker)" TargetFrameworkMonikerDisplayName="$(TargetFrameworkMonikerDisplayName)" TargetFrameworkDirectories="$(TargetFrameworkDirectory)">

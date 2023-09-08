@@ -27,13 +27,17 @@ namespace DellyShopApp
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
             if (ChechConnectivity())
             {
                 Navigation.PushAsync(new HomeTabbedPage());
             }
         }
-        
-      
+
+
         private bool ChechConnectivity()
         {
             if (CrossConnectivity.Current.IsConnected)

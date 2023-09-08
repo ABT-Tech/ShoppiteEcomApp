@@ -1,5 +1,6 @@
-﻿     using Acr.UserDialogs;
+﻿using Acr.UserDialogs;
 using DellyShopApp.CustomControl;
+using DellyShopApp.DbModels;
 using DellyShopApp.Languages;
 using DellyShopApp.Models;
 using DellyShopApp.Services;
@@ -11,8 +12,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Extended;
 using Xamarin.Forms.Xaml;
 
 namespace DellyShopApp.Views.TabbedPages
@@ -27,25 +30,43 @@ namespace DellyShopApp.Views.TabbedPages
         public int UserId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         public string userAuth = SecureStorage.GetAsync("Usertype").Result;
         List<Category> categories = new List<Category>();
-
+        public InfiniteScrollCollection<Tbl_ProductResponse> Items { get; set; }
         private ProductListModel product;
-
+        private const int PageSize = 20;
         public HomePage()
         {
             InitializeComponent();
-            
-         //   ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;            
+            if (ChechConnectivity())
+            {
+                InittHomePage();
+            }
+            //   ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;            
         }
         private async void InittHomePage()
         {
             //Busy();
+            Tbl_ProductMasterResponse masterProductDTO = new Tbl_ProductMasterResponse();
             int? OrgUserID = UserId == 0 ? null : (int?)UserId;
             categories = await DataService.GetAllCategories(orgId);
-            var AllProducts = await DataService.GetAllProductsByOrganizations(0, OrgUserID, OrgCatId);
-            foreach(var prodDetails in AllProducts.MainProductDTOs)
+            var AllProducts = await GetProducts(true);
+            var productList = AllProducts.GroupBy(p => p.status, p => p, (key, g) => new Tbl_ProductDetailResponse { Status = key, productsDTOs = g.ToList() }).ToList();
+            masterProductDTO.MainProductDTOs = productList;
+            //var AllProducts = await DataService.GetAllProductsByOrganizations(0, OrgUserID, OrgCatId);
+            foreach (var prodDetails in masterProductDTO.MainProductDTOs)
             {
                 BindStack(prodDetails.Status, prodDetails.productsDTOs);
             }
+            Items = new InfiniteScrollCollection<Tbl_ProductResponse>
+            {
+                OnLoadMore = async () =>
+                {
+                    // load the next page
+                    var page = Items.Count / PageSize;
+                    var items = await GetProducts(false,page, PageSize);
+                    return items;
+                }
+            };
+            await loadDataAsync();
         }
         public void Busy()
         {
@@ -62,10 +83,7 @@ namespace DellyShopApp.Views.TabbedPages
         }
         protected override void OnAppearing()
         {
-            if (ChechConnectivity())
-            {
-                InittHomePage();
-            }         
+
 
         }
         private bool ChechConnectivity()
@@ -102,7 +120,7 @@ namespace DellyShopApp.Views.TabbedPages
         {
             BasketLayout.IsVisible = false;
         }
-       async void DropBasketITem(System.Object sender, Xamarin.Forms.DropEventArgs e)
+        async void DropBasketITem(System.Object sender, Xamarin.Forms.DropEventArgs e)
         {
             if (!DataService.Instance.BasketModel.Contains(product))
                 DataService.Instance.BasketModel.Add(product);
@@ -171,13 +189,13 @@ namespace DellyShopApp.Views.TabbedPages
             await Navigation.PushAsync(new ProductDetail(evnt));
         }
 
-       
+
         private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
         {
             Navigation.PushAsync(new TopDeals());
         }
 
-        public void BindStack(string label, List<ProductResponse> productResponses)
+        public void BindStack(string label, List<Tbl_ProductResponse> productResponses)
         {
             var dynamicResourceBold = new Xamarin.Forms.Internals.DynamicResource("VerdanaProBold");
             var dynamicResourceRegular = new Xamarin.Forms.Internals.DynamicResource("VerdanaProRegular");
@@ -200,7 +218,8 @@ namespace DellyShopApp.Views.TabbedPages
             RepeaterView statusRepeaterView = new RepeaterView();
             statusRepeaterView.Orientation = StackOrientation.Horizontal;
             statusRepeaterView.Spacing = -5;
-            var dataTemplate = new DataTemplate(() => {
+            var dataTemplate = new DataTemplate(() =>
+            {
                 ViewCell vc = new ViewCell();
                 Image cacheImage = new Image
                 {
@@ -218,9 +237,9 @@ namespace DellyShopApp.Views.TabbedPages
                     VerticalOptions = LayoutOptions.Start
                 };
                 stacklabelChild.SetBinding(Label.TextProperty, "Title");
-                
-                
-                
+
+
+
                 Label childLabel = new Label
                 {
                     FontFamily = dynamicResourceBold.Key,
@@ -285,5 +304,126 @@ namespace DellyShopApp.Views.TabbedPages
             MainLayout.Children.Add(statusScrollView);
         }
 
+        public void BindFullProductStack(InfiniteScrollCollection<Tbl_ProductResponse> productResponses)
+        {
+            var dynamicResourceBold = new Xamarin.Forms.Internals.DynamicResource("VerdanaProBold");
+            var dynamicResourceRegular = new Xamarin.Forms.Internals.DynamicResource("VerdanaProRegular");
+            StackLayout stackLayout = new StackLayout();
+            stackLayout.Orientation = StackOrientation.Horizontal;
+            Label stacklabel = new Label();
+            stacklabel.Margin = new Thickness(0, 10, 0, 0);
+            stacklabel.Padding = new Thickness(5, 5, 0, 0);
+            stacklabel.FontAttributes = FontAttributes.Bold;
+            stacklabel.FontFamily = dynamicResourceBold.Key;
+            stacklabel.FontSize = 22;
+            stacklabel.HorizontalOptions = LayoutOptions.StartAndExpand;
+            stacklabel.Text = "Shooppy Xplore";
+            stacklabel.TextColor = Color.Black;
+            stacklabel.VerticalOptions = LayoutOptions.Start;
+            stackLayout.Children.Add(stacklabel);
+            MainLayout.Children.Add(stackLayout);
+            ListView productListView = new ListView();
+            productListView.RowHeight = 350;
+            productListView.VerticalOptions = LayoutOptions.FillAndExpand;
+            productListView.HorizontalOptions = LayoutOptions.FillAndExpand;
+            InfiniteScrollBehavior infiniteScrollBehavior = new InfiniteScrollBehavior();
+            productListView.Behaviors.Add(infiniteScrollBehavior);
+            var dataTemplate = new DataTemplate(() =>
+            {
+                ViewCell vc = new ViewCell();
+
+                Image cacheImage = new Image
+                {
+                    Aspect = Aspect.AspectFit,
+                    HeightRequest = 150,
+                    Margin = 5,
+                    VerticalOptions = LayoutOptions.Start
+                };
+                cacheImage.SetBinding(Image.SourceProperty, "Image");
+                Label stacklabelChild = new Label
+                {
+                    FontFamily = dynamicResourceRegular.Key,
+                    LineBreakMode = LineBreakMode.TailTruncation,
+                    TextColor = Color.Black,
+                    VerticalOptions = LayoutOptions.Start
+                };
+                stacklabelChild.SetBinding(Label.TextProperty, "Title");
+
+
+
+                Label childLabel = new Label
+                {
+                    FontFamily = dynamicResourceBold.Key,
+                    FontSize = 10,
+                    HorizontalOptions = LayoutOptions.EndAndExpand,
+                    TextColor = Color.Gray,
+                    WidthRequest = 80,
+                    TextDecorations = TextDecorations.Strikethrough,
+                    VerticalOptions = LayoutOptions.CenterAndExpand
+                };
+                childLabel.SetBinding(Label.TextProperty, "OldPrice");
+                Label childLabel2 = new Label
+                {
+                    FontFamily = dynamicResourceBold.Key,
+                    FontSize = 13,
+                    HorizontalOptions = LayoutOptions.End,
+                    TextColor = Color.Black,
+                    WidthRequest = 80,
+                    VerticalOptions = LayoutOptions.Center
+                };
+                childLabel2.SetBinding(Label.TextProperty, "Price");
+
+                StackLayout childStackLayout = new StackLayout
+                {
+                    Orientation = StackOrientation.Horizontal,
+                    VerticalOptions = LayoutOptions.EndAndExpand
+                };
+                childStackLayout.Children.Add(childLabel);
+                childStackLayout.Children.Add(childLabel2);
+
+                StackLayout pancakeChildLayout = new StackLayout();
+                pancakeChildLayout.Children.Add(cacheImage);
+                pancakeChildLayout.Children.Add(stacklabelChild);
+                pancakeChildLayout.Children.Add(childStackLayout);
+
+                PancakeView dataTemplatePancakeView = new PancakeView();
+                dataTemplatePancakeView.Margin = 5;
+                dataTemplatePancakeView.Padding = 5;
+                dataTemplatePancakeView.BackgroundColor = Color.White;
+                dataTemplatePancakeView.CornerRadius = 8;
+                dataTemplatePancakeView.Elevation = 3;
+                dataTemplatePancakeView.HasShadow = true;
+                dataTemplatePancakeView.HeightRequest = 250;
+                dataTemplatePancakeView.HorizontalOptions = LayoutOptions.StartAndExpand;
+                dataTemplatePancakeView.VerticalOptions = LayoutOptions.StartAndExpand;
+                dataTemplatePancakeView.WidthRequest = 140;
+                dataTemplatePancakeView.GestureRecognizers.Add(new TapGestureRecognizer
+                {
+                    Command = new Command(() => ProductDetailClick(dataTemplatePancakeView, null)),
+                });
+                dataTemplatePancakeView.Content = pancakeChildLayout;
+
+                //  dataTemplatePancakeView.ChildAdded(pancakeChildLayout); 
+                vc.View = dataTemplatePancakeView;
+                return vc;
+            });
+            productListView.ItemTemplate = dataTemplate;
+            productListView.ItemsSource = productResponses;
+            MainLayout.Children.Add(productListView);
+        }
+
+        private async Task loadDataAsync()
+        {
+            var items = await GetProducts(false,0,20);
+
+            Items.AddRange(items);
+            BindFullProductStack(Items);
+
+        }
+
+        public async Task<List<Tbl_ProductResponse>> GetProducts(bool IsHorizontal = true, int pageIndex = 0, int pageSize = 20)
+        {
+            return await App.SQLiteDb.GetItemsAsync(IsHorizontal, pageIndex, pageSize);
+        }
     }
 }

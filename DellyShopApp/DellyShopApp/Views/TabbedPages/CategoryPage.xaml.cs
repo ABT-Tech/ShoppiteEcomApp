@@ -1,4 +1,5 @@
 ﻿     using Acr.UserDialogs;
+using DellyShopApp.DbModels;
 using DellyShopApp.Languages;
 using DellyShopApp.Models;
 using DellyShopApp.Services;
@@ -101,6 +102,7 @@ namespace DellyShopApp.Views.TabbedPages
             }
 
             NotBusy();
+            
             //shop.ItemsSource = DataService.Instance.ShopDetails;
         }
 
@@ -199,6 +201,8 @@ namespace DellyShopApp.Views.TabbedPages
                 await DisplayAlert("Error occurred", ex.Message.ToString(), "Ok");
             }
         }
+
+        
 
     }
 }
