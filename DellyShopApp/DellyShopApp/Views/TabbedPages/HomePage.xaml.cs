@@ -278,7 +278,7 @@ namespace DellyShopApp.Views.TabbedPages
                 return vc;
             });
             statusRepeaterView.ItemTemplate = dataTemplate;
-            statusRepeaterView.ItemsSource = productResponses.ToList();
+            statusRepeaterView.ItemsSource = productResponses.Take(5).ToList();
             statusRepeaterView.BindingContext = productResponses.ToList();
             statusScrollView.Content = statusRepeaterView;
             MainLayout.Children.Add(stackLayout);
