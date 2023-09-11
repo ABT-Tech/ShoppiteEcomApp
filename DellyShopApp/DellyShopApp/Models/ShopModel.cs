@@ -14,9 +14,6 @@ namespace DellyShopApp.Models
         public int Org_CategoryId { get; set; }
 
 
-        public static implicit operator int(ShopModel v)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

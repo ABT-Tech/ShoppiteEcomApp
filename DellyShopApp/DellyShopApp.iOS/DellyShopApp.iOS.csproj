@@ -187,6 +187,17 @@
     <BundleResource Include="Resources\Mobile_Landscape_Banner.png" />
     <BundleResource Include="Resources\shoes.jpg" />
     <BundleResource Include="Resources\elecronics.jpeg" />
+    <BundleResource Include="Resources\menu.png" />
+    <BundleResource Include="Resources\Tarsi_Mobile_Logo.png" />
+    <BundleResource Include="Resources\Category.png" />
+    <BundleResource Include="Resources\Offer.png" />
+    <BundleResource Include="Resources\Shops.png" />
+    <BundleResource Include="Resources\close_circle_button.png" />
+    <BundleResource Include="Resources\github_octocat.png" />
+    <BundleResource Include="Resources\Notification.png" />
+    <BundleResource Include="Resources\ShooppyMobileLogo.png" />
+    <BundleResource Include="Resources\Shopping_Bag.png" />
+    <BundleResource Include="Resources\Wishlist.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -313,6 +324,12 @@
     </PackageReference>
     <PackageReference Include="CarouselView.FormsPlugin">
       <Version>6.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.8.116</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugin.Iconize">
+      <Version>3.5.0.129</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

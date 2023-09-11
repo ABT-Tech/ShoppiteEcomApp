@@ -1,6 +1,7 @@
 ﻿using DellyShopApp.Helpers;
 using DellyShopApp.Languages;
 using DellyShopApp.Models;
+using DellyShopApp.DbModels;
 using DellyShopApp.Renderers;
 using DellyShopApp.Views.Pages;
 using Newtonsoft.Json;
@@ -126,7 +127,7 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
-         public static async Task<List<ShopModel>> GetAllOrganizations(int Org_CategoryId)
+         public static async Task<List<Tbl_ShopModel>> GetAllOrganizations(int Org_CategoryId)
         {
             try
             {
@@ -140,10 +141,10 @@ namespace DellyShopApp.Services
                 };
                 HttpClient httpClient = new HttpClient(clientHandler);
                 var response = await httpClient.GetAsync(
-                    AppSettings.ApiUrl + "api/Organization/GetAllOrganizations?Org_CategoryId="+ Org_CategoryId);
+                    AppSettings.ApiUrl + "api/Organization/GetAllOrganizations");
 
                 string result = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<ShopModel>>(result);
+                return JsonConvert.DeserializeObject<List<Tbl_ShopModel>>(result);
             }
             catch (Exception ex)
             {
@@ -202,7 +203,7 @@ namespace DellyShopApp.Services
             }
         }
        
-        public static async Task<List<ProductListModel>> GetAllProductsByOrganizations(int orgId, int? UserId = null)
+        public static async Task<List<Tbl_ProductResponse>> GetAllProductsByOrganizations(int orgId, int? UserId = null,int? OrgCatId=0)
         {
             try
             {
@@ -216,10 +217,10 @@ namespace DellyShopApp.Services
                 };
                 HttpClient httpClient = new HttpClient(clientHandler);
                 var response = await httpClient.GetAsync(
-                    AppSettings.ApiUrl + "api/Products/GetAllProductsByOrganizations?org_Id=" + orgId + "&UserID=" + UserId);
+                    AppSettings.ApiUrl + "api/Products/GetAllProductsByOrganizations?org_Id=" + orgId + "&UserID=" + UserId + "&orgcat_id="+OrgCatId);
 
                 string result = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<ProductListModel>>(result);
+                return JsonConvert.DeserializeObject<List<Tbl_ProductResponse>>(result);
             }
             catch (Exception ex)
             {

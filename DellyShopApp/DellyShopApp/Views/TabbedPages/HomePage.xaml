@@ -1,498 +1,1 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<base:BasePage
-    x:Class="DellyShopApp.Views.TabbedPages.HomePage"
-    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:base="clr-namespace:DellyShopApp.Views.Pages.Base;assembly=DellyShopApp"
-    xmlns:controls="clr-namespace:DellyShopApp.Views.CustomView"
-    xmlns:customControl="clr-namespace:DellyShopApp.CustomControl;assembly=DellyShopApp"
-    xmlns:font="clr-namespace:DellyShopApp.Helpers;assembly=DellyShopApp"
-    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    xmlns:helpers="clr-namespace:DellyShopApp.Languages"
-    xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"
-    xmlns:proc="clr-namespace:DellyShopApp.Processors"
-    xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"
-    xmlns:forms11="http://xamarin.com/schemas/2014/forms"
-    BackgroundColor="#f5f5f5"
-    NavigationPage.HasNavigationBar="False"
-    Visual="Default">
-    <Grid>
-        <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
-            <StackLayout Margin="5,10,5,0" WidthRequest="150">
-                    <ActivityIndicator x:Name="uploadIndicator" IsVisible="False" IsRunning="False" Color="Chocolate" />
-                <Grid RowSpacing="5" ColumnSpacing="5">
-                <Image Source="{Binding Image}"
-                       x:Name="ShopLogo"
-                       WidthRequest="130" 
-                       HeightRequest="130"
-                     HorizontalOptions="Start"/>
-                
-                <Image Source="ShopHigh.png"
-                      VerticalOptions="Start"
-                       WidthRequest="175" 
-                       HeightRequest="175"
-                       HorizontalOptions="End">
-                      <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                    </Image.GestureRecognizers>
-                </Image>
-                    
-                </Grid>
-               
-         <renderers:BorderlessSearchBar x:Name="item"
-                                        BackgroundColor="White"
-           Placeholder="Search items..."
-           PlaceholderColor="Black"
-           TextColor="Black"
-           TextTransform="Lowercase"
-           FontSize="Medium"
-           TextChanged="SearchBar_TextChanged" />
-                <ListView x:Name="searchResults"
-                          IsVisible="False"
-                          ItemSelected="searchResults_ItemSelected">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell Text="{Binding Title}">
-                            </TextCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>                    
-                </ListView>
-               <Image
-                    x:Name="Discountbanner"
-                    IsVisible="false"
-                    Source="cou.gif"
-                    HeightRequest="150"
-                    Aspect="Fill"
-                    Margin="0,5,0,5"/>
-                
-                    <Label
-                    Margin="0"
-                    Padding="5,5,0,0"
-                    FontAttributes="Bold"
-                    FontFamily="{DynamicResource VerdanaProBold}"
-                    FontSize="22"
-                    HorizontalOptions="Start"
-                    Text="{x:Static helpers:AppResources.Categories}"
-                    TextColor="{DynamicResource TitleLabelColor}"
-                    VerticalOptions="Start" />
-                <ScrollView Orientation="Horizontal" Style="{DynamicResource ScrollViewStyle}">
-                    <customControl:RepeaterView
-                        x:Name="CategoryList"
-                        Orientation="Horizontal"
-                        Spacing="5">
-                        <customControl:RepeaterView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <StackLayout
-                                        Margin="0"                                        
-                                        HorizontalOptions="Start"
-                                        WidthRequest="150">
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="ClickCategory"/>
-                                        </StackLayout.GestureRecognizers>
-                                        <Grid BackgroundColor="#DC">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="80" />
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="150" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <forms:CachedImage
-                                                Grid.Row="0"
-                                                Grid.Column="0"
-                                                Aspect="AspectFill">
-                                                <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="ClickCategory" />
-                                                </Image.GestureRecognizers>
-                                            </forms:CachedImage>
-                                            <pancakeView:PancakeView
-                                                Grid.Row="0"
-                                                Grid.Column="0"
-                                                BackgroundGradientEndColor="{DynamicResource DarkFontColor}"
-                                                BackgroundGradientStartColor="White"
-                                                CornerRadius="10"
-                                                HorizontalOptions="FillAndExpand" />
-                                            <Label
-                                                Margin="0"
-                                                Padding="0,5,0,0"
-                                                FontAttributes="Bold"
-                                                FontFamily="{DynamicResource VerdanaProBold}"
-                                                FontSize="12"
-                                                HorizontalTextAlignment="Center"
-                                                HorizontalOptions="CenterAndExpand"
-                                                Text="{Binding CategoryName}"
-                                                TextColor="{DynamicResource LabelTextColor}"
-                                                VerticalOptions="CenterAndExpand" />
-                                        </Grid>
-
-                                    </StackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </customControl:RepeaterView.ItemTemplate>
-                    </customControl:RepeaterView>
-                </ScrollView>
-                <pancakeView:PancakeView
-                    x:Name="view"
-                    Margin="0,10,0,0"
-                    Padding="0"
-                    CornerRadius="8"
-                    Elevation="2"
-                    BackgroundColor="#f5f5f5"
-                    HasShadow="False">
-                    <controls:CarouselView
-                        x:Name="CarouselView"
-                        Margin="0,0,0,0"
-                        BackgroundColor="#f5f5f5"
-                        HeightRequest="{x:OnIdiom Tablet=350,
-                                                  Phone=200}"
-                        SelectedIndex="0"
-                        WidthRequest="300">
-                        <x:Arguments>
-                            <proc:BaseCarouselFrontViewProcessor
-                                OpacityFactor="0.5"
-                                RotationFactor="0"
-                                ScaleFactor=".8" />
-                            <proc:BaseCarouselBackViewProcessor
-                                OpacityFactor="0.5"
-                                RotationFactor="0"
-                                ScaleFactor=".8" />
-                        </x:Arguments>
-                        <customControl:IndicatorsControl SelectedIndicatorStyle="{StaticResource ActiveIndicator}" UnselectedIndicatorStyle="{DynamicResource InactiveIndicator}" />
-                        <controls:CarouselView.ItemTemplate>
-                            <DataTemplate>
-                                <ContentView>
-                                    <forms:CachedImage
-                              
-                                        Margin="0"
-                                        Aspect="Fill"
-                                        Source="{Binding Banner}"                                        
-                                        WidthRequest="50"
-                                        HeightRequest="50"/>
-                                    <forms:CachedImage.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="Click_Banner" />
-                                    </forms:CachedImage.GestureRecognizers>
-                                </ContentView>                                
-                            </DataTemplate>
-                        </controls:CarouselView.ItemTemplate>
-                    </controls:CarouselView>
-                </pancakeView:PancakeView>
-               
-                <StackLayout Orientation="Horizontal" x:Name="bestsellerstk" IsVisible="False">
-                    <Label
-                        Margin="0,10,0,0"
-                        Padding="5,5,0,0"
-                        FontAttributes="Bold"
-                        FontFamily="{DynamicResource VerdanaProBold}"
-                        FontSize="22"
-                        HorizontalOptions="StartAndExpand"
-                        Text="{x:Static helpers:AppResources.BestSeller}"
-                        TextColor= "Black"
-                        VerticalOptions="Start" />
-                    <Label
-                        Margin="0,10,0,0"
-                        Padding="5,5,0,0"
-                        FontAttributes="Bold"
-                        FontFamily="{DynamicResource VerdanaProBold}"
-                        FontSize="18"
-                        HorizontalOptions="End"
-                        Text="{x:Static helpers:AppResources.ViewAll}"
-                        TextColor="Gray"
-                        VerticalOptions="Start">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="VireAllTapped" />
-                        </Label.GestureRecognizers>
-                    </Label>
-                </StackLayout>
-                <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
-                    <customControl:RepeaterView
-                        x:Name="BestSellerList"
-                        Orientation="Horizontal"
-                        Spacing="-5">
-                        <customControl:RepeaterView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <pancakeView:PancakeView
-                                        Margin="5"
-                                        Padding="5"
-                                        BackgroundColor="White"
-                                        CornerRadius="8"
-                                        Elevation="3"
-                                        HasShadow="True"
-                                        HeightRequest="250"
-                                        HorizontalOptions="StartAndExpand"
-                                        VerticalOptions="StartAndExpand"
-                                       
-                                        WidthRequest="{x:OnIdiom Tablet=150,
-                                                                 Phone=130}">
-                                        <pancakeView:PancakeView.GestureRecognizers>
-                                            <DragGestureRecognizer
-                                                CanDrag="True"
-                                             
-                                                DragStarting="DragGestureRecognizer_DragStarting"
-                                                DropCompleted="DragGestureRecognizer_DropCompleted" />
-                                            <TapGestureRecognizer Tapped="ProductDetailClick" />
-                                        </pancakeView:PancakeView.GestureRecognizers>
-                                        <StackLayout>
-                                            <forms:CachedImage
-                                                Aspect="AspectFit"
-                                                HeightRequest="150"
-                                                Margin="5"
-                                                Source="{Binding Image}" />
-                                            <Label
-                                                FontFamily="{DynamicResource VerdanaProRegular}"
-                                                Text="{Binding Title}"
-                                                MaxLines="1"
-                                                LineBreakMode="TailTruncation"
-                                                TextColor="Black"
-                                                VerticalOptions="Start" />
-                                            <Label
-                                                FontFamily="{DynamicResource VerdanaProRegular}"
-                                                FontSize="7"
-                                                HorizontalOptions="Start"
-                                                Text="{Binding Brand}"
-                                                TextColor="{DynamicResource DescLabelColor}"
-                                                VerticalOptions="Start" />
-                                            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
-                                                <Label
-                                                    FontFamily="{DynamicResource VerdanaProBold}"
-                                                    FontSize="{x:OnPlatform Android=13,
-                                                                            iOS=13}"
-                                                    HorizontalOptions="EndAndExpand"
-                                                    IsVisible="{Binding OldPrice}"
-                                                    Text="{Binding OldPrice, StringFormat='₹{0}'}"
-                                                    TextColor="Gray"
-                                                    WidthRequest="100"
-                                                    TextDecorations="Strikethrough"
-                                                    VerticalOptions="CenterAndExpand" />
-                                                <Label
-                                                    FontFamily="{DynamicResource VerdanaProBold}"
-                                                    FontSize="14"
-                                                    HorizontalOptions="End"
-                                                    Text="{Binding Price, StringFormat='₹{0}'}"
-                                                    TextColor="Black"
-                                                    WidthRequest="100"
-                                                    VerticalOptions="CenterAndExpand" />
-                                            </StackLayout>
-                                        </StackLayout>
-                                    </pancakeView:PancakeView>
-                                </ViewCell>
-                            </DataTemplate>
-                        </customControl:RepeaterView.ItemTemplate>
-                    </customControl:RepeaterView>
-                </ScrollView>
-                <StackLayout Orientation="Horizontal">
-                <Label
-                    Margin="0,10,0,0"
-                    Padding="5,5,0,0"
-                    FontAttributes="Bold"
-                    FontFamily="{DynamicResource VerdanaProBold}"
-                    FontSize="22"
-                    HorizontalOptions="StartAndExpand"
-                    Text="Top Deals"
-                    TextColor="Black"
-                    VerticalOptions="Start" />
-                  <Label
-                        Margin="0,10,0,0"
-                        Padding="5,5,0,0"
-                        FontAttributes="Bold"
-                        FontFamily="{DynamicResource VerdanaProBold}"
-                        FontSize="18"
-                        HorizontalOptions="End"
-                        Text="{x:Static helpers:AppResources.ViewAll}"
-                        TextColor="Gray"
-                        VerticalOptions="Start">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="viewall" />
-                        </Label.GestureRecognizers>
-                    </Label>
-                    </StackLayout>
-                <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
-                    <customControl:RepeaterView
-                        x:Name="PreviousViewedList"
-                        Orientation="Horizontal"
-                        Spacing="-5">
-                        <customControl:RepeaterView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <pancakeView:PancakeView
-                                        Margin="5"
-                                        Padding="5"
-                                        BackgroundColor="White"
-                                        CornerRadius="8"
-                                        Elevation="2"
-                                        HasShadow="True"
-                                        HeightRequest="250"
-                                        HorizontalOptions="StartAndExpand"
-                                        VerticalOptions="StartAndExpand"
-                                        WidthRequest="{x:OnIdiom Tablet=150,
-                                                                 Phone=130}">
-                                       
-                                        <pancakeView:PancakeView.GestureRecognizers>
-                                             <DragGestureRecognizer
-                                                CanDrag="True"
-                                                DragStarting="DragGestureRecognizer_DragStarting"
-                                                DropCompleted="DragGestureRecognizer_DropCompleted" />
-                                            <TapGestureRecognizer Tapped="ProductDetailClick" />
-                                        </pancakeView:PancakeView.GestureRecognizers>
-                                        <StackLayout>
-                                            <forms:CachedImage
-                                                Aspect="AspectFit"
-                                                HeightRequest="150"
-                                                Margin="5"
-                                                Source="{Binding Image}" />
-                                            <Label
-                                                FontFamily="{DynamicResource VerdanaProRegular}"
-                                                Text="{Binding Title}"
-                                               
-                                                TextColor="{DynamicResource WhiteDarkFontColor}"
-                                                VerticalOptions="Start"
-                                                LineBreakMode="TailTruncation"
-                                                MaxLines="1"/>
-                                            <Label
-                                                FontFamily="{DynamicResource VerdanaProRegular}"
-                                                FontSize="10"
-                                                HorizontalOptions="Start"
-                                                Text="{Binding Brand}"
-                                                TextColor="{DynamicResource DescLabelColor}"
-                                                VerticalOptions="Start" />
-                                           
-
-                                             <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
-                                                <Label
-                                                    FontFamily="{DynamicResource VerdanaProBold}"
-                                                    FontSize="{x:OnPlatform Android=13,
-                                                                            iOS=13}"
-                                                    HorizontalOptions="EndAndExpand"
-                                                    IsVisible="{Binding OldPrice}"
-                                                    Text="{Binding OldPrice, StringFormat='₹{0}'}"
-                                                    TextColor="Gray"
-                                                    WidthRequest="100"
-                                                    TextDecorations="Strikethrough"
-                                                    VerticalOptions="CenterAndExpand" />
-                                                <Label
-                                                    FontFamily="{DynamicResource VerdanaProBold}"
-                                                    FontSize="14"
-                                                    HorizontalOptions="End"
-                                                    Text="{Binding Price, StringFormat='₹{0}'}"
-                                                    TextColor="Black"
-                                                    WidthRequest="100"
-                                                    VerticalOptions="CenterAndExpand" />
-                                            </StackLayout>
-                                        </StackLayout>
-                                    </pancakeView:PancakeView>
-                                </ViewCell>
-                            </DataTemplate>
-                        </customControl:RepeaterView.ItemTemplate>
-                    </customControl:RepeaterView>
-                </ScrollView>
-                <Label
-                    Margin="0,10,0,0"
-                    Padding="5,5,0,0"
-                    FontAttributes="Bold"
-                    FontFamily="{DynamicResource VerdanaProBold}"
-                    FontSize="22"
-                    HorizontalOptions="Start"
-                    Text="{x:Static helpers:AppResources.PreviousViewed}"
-                    TextColor="Black"
-                    VerticalOptions="Start" />
-                <controls:FlowListView
-                    x:Name="MostNews"
-                    BackgroundColor="#f5f5f5"
-                    FlowColumnCount="2"
-                    FlowColumnExpand="None"
-                    HasUnevenRows="False"
-                    RowHeight="280"
-                    SeparatorVisibility="None"
-                    VerticalOptions="StartAndExpand"
-                    VerticalScrollBarVisibility="Never">
-                    <controls:FlowListView.FlowColumnTemplate>
-                        <DataTemplate>
-                            <pancakeView:PancakeView
-                                Margin="5"
-                                Padding="5"
-                                BackgroundColor="White"
-                                CornerRadius="8"
-                                Elevation="2"
-                                HasShadow="False"
-                                HeightRequest="250"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="StartAndExpand"
-                                WidthRequest="{x:OnIdiom Tablet=150,
-                                                         Phone=130}">
-                                <pancakeView:PancakeView.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="ProductDetailClick" />
-                                </pancakeView:PancakeView.GestureRecognizers>
-                                <StackLayout>
-                                    <forms:CachedImage
-                                        Aspect="AspectFit"
-                                        HeightRequest="150"
-                                        Source="{Binding Image}" />
-                                    <Label
-                                        FontFamily="{DynamicResource VerdanaProRegular}"
-                                        Text="{Binding Title}"
-                                        MaxLines="1"
-                                        LineBreakMode="TailTruncation"
-                                        TextColor="Black"
-                                        VerticalOptions="Start"/>
-                                    <Label
-                                        FontFamily="{DynamicResource VerdanaProRegular}"
-                                        FontSize="10"
-                                        HorizontalOptions="Start"
-                                        Text="{Binding Brand}"
-                                        TextColor="{DynamicResource DescLabelColor}"
-                                        VerticalOptions="Start" />
-                                    <Label
-                                        FontFamily="{DynamicResource VerdanaProBold}"
-                                        FontSize="15"
-                                        HorizontalOptions="EndAndExpand"
-                                        Text="{Binding Price, StringFormat='₹{0}'}"
-                                        TextColor="Black"
-                                        VerticalOptions="EndAndExpand" />
-                                </StackLayout>
-                            </pancakeView:PancakeView>
-                        </DataTemplate>
-                    </controls:FlowListView.FlowColumnTemplate>
-                </controls:FlowListView>
-            </StackLayout>
-        </ScrollView>
-        <Label IsVisible="false"
-                            x:Name="ProductCountLabel"
-                            FontFamily="{DynamicResource VerdanaProLight}"
-                            FontSize="44"
-                            HorizontalOptions="End"
-                            Text="1"
-                            TextColor="{DynamicResource WhiteDarkFontColor}"
-                            VerticalOptions="CenterAndExpand" />
-        <controls:PancakeView
-            x:Name="BasketLayout"
-            IsVisible="false"
-            BackgroundColor="#f5f5f5"
-            CornerRadius="40"
-            Elevation="3"
-            Margin="10"
-            HeightRequest="80"
-            HorizontalOptions="StartAndExpand"
-            VerticalOptions="EndAndExpand"
-            WidthRequest="80">
-            <controls:PancakeView.GestureRecognizers>
-                <DropGestureRecognizer AllowDrop="True" Drop="DropBasketITem" ></DropGestureRecognizer>
-            </controls:PancakeView.GestureRecognizers>
-            <Image
-                Aspect="AspectFit"
-                HeightRequest="40"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="CenterAndExpand"
-                WidthRequest="40">
-                <Image.Source>
-                    <FontImageSource
-                        FontFamily="{DynamicResource MaterialFontFamily}"
-                        Glyph="{x:Static font:FontAwesomeIcons.CartAlt}"
-                        Size="50"
-                        Color="Chocolate" />
-                </Image.Source>
-            </Image>
-        </controls:PancakeView>
-    </Grid>
-</base:BasePage>
+﻿<?xml version="1.0" encoding="utf-8" ?><base:BasePage    x:Class="DellyShopApp.Views.TabbedPages.HomePage"    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"    xmlns="http://xamarin.com/schemas/2014/forms"    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    xmlns:base="clr-namespace:DellyShopApp.Views.Pages.Base;assembly=DellyShopApp"    xmlns:controls="clr-namespace:DellyShopApp.Views.CustomView"    xmlns:customControl="clr-namespace:DellyShopApp.CustomControl;assembly=DellyShopApp"    xmlns:font="clr-namespace:DellyShopApp.Helpers;assembly=DellyShopApp"    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"    xmlns:helpers="clr-namespace:DellyShopApp.Languages"    xmlns:pancakeView="clr-namespace:DellyShopApp.Views.CustomView"    xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"    xmlns:proc="clr-namespace:DellyShopApp.Processors"    xmlns:renderers="clr-namespace:DellyShopApp.Renderers;assembly=DellyShopApp"    BackgroundColor="#ffffff"    NavigationPage.HasNavigationBar="False"    Visual="Material">        <Grid>               <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">            <StackLayout Margin="5,10,5,0" x:Name="MainLayout">                <ActivityIndicator VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" x:Name="uploadIndicator" IsVisible="False" IsRunning="False"                                                               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,                                    Property=Height,                                    Factor=0.33}"                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,                                    Property=Height,                                    Factor=0.33}"                                   Color="Chocolate" />                <Grid RowSpacing="5" ColumnSpacing="5">                    <Image Source="mainlogo2.png" HorizontalOptions="Start"                             WidthRequest="100"                        HeightRequest="50"                       VerticalOptions="Start"/>                    <Image Source="Notification.png"                      VerticalOptions="Start"                       WidthRequest="25"                        HeightRequest="25"                           Margin="0,10,90,0"                       HorizontalOptions="End">                        <Image.GestureRecognizers>                            <TapGestureRecognizer Tapped="TapGestureRecognizer_NotificationTapped"/>                        </Image.GestureRecognizers>                    </Image>                    <Image Source="Wishlist1.png"                      VerticalOptions="Start"                       WidthRequest="25"                        HeightRequest="25"                           Margin="0,10,50,0"                       HorizontalOptions="End">                        <Image.GestureRecognizers>                            <TapGestureRecognizer Tapped="TapGestureRecognizer_WishlistTapped"/>                        </Image.GestureRecognizers>                    </Image>                    <Image Source="Shopping_Bag.png"                      VerticalOptions="Start"                       WidthRequest="25"                        HeightRequest="25"                           Margin="0,10,10,0"                       HorizontalOptions="End">                        <Image.GestureRecognizers>                            <TapGestureRecognizer Tapped="TapGestureRecognizer_BasketTapped"/>                        </Image.GestureRecognizers>                    </Image>                    <!--<Image Source="{Binding Image}"                       x:Name="ShopLogo"                       WidthRequest="130"                        HeightRequest="130"                     HorizontalOptions="Start"/>-->                    <!--<Image Source="ShopTHigh.png"                      VerticalOptions="Start"                       WidthRequest="130"                        HeightRequest="130"                       HorizontalOptions="End">                        <Image.GestureRecognizers>                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>                        </Image.GestureRecognizers>                    </Image>-->                </Grid>                <SearchBar Placeholder="Search items..."           CancelButtonColor="Gray"           PlaceholderColor="Black"           TextColor="Black" BackgroundColor="White"           TextTransform="Lowercase"           FontSize="Medium"           TextChanged="SearchBar_TextChanged" />                <ListView x:Name="searchResults" IsVisible="False" ItemSelected="searchResults_ItemSelected">                    <ListView.ItemTemplate>                        <DataTemplate>                            <TextCell Text="{Binding Title}" TextColor="Black">                            </TextCell>                        </DataTemplate>                    </ListView.ItemTemplate>                                    </ListView>                                <ScrollView HorizontalOptions="Center" HorizontalScrollBarVisibility="Always" Orientation="Horizontal">                    <StackLayout Orientation="Horizontal" x:Name="PlayingWindow2">                        <Image Source="https://markets.shooppy.in/images/Markets/Common/files/MobileCategory/womenParentCategory.png" Aspect="AspectFit" HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Start" />                        <Image Source="https://markets.shooppy.in/images/Markets/Common/files/MobileCategory/MenParentCategory.png" Aspect="AspectFit" HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Start" />                        <Image Source="https://markets.shooppy.in/images/Markets/Common/files/MobileCategory/kidsParentCategory.png" Aspect="AspectFit" HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Start" />                        <Image Source="https://markets.shooppy.in/images/Markets/Common/files/MobileCategory/1_JwelleryParentcategory.png" Aspect="AspectFit" HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Start" />                        <Image Source="https://markets.shooppy.in/images/Markets/Common/files/MobileCategory/Bags%26Luggages.png" Aspect="AspectFit" HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Start" />                        <Image Source="https://markets.shooppy.in/images/Markets/Common/files/MobileCategory/Footwear.png" Aspect="AspectFit" HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Start" />                        <Image Source="https://markets.shooppy.in/images/Markets/Common/files/MobileCategory/ELectronics.png" Aspect="AspectFit" HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Start" />                        <Image Source="https://markets.shooppy.in/images/Markets/Common/files/MobileCategory/beauty%26Cosmetics.png" Aspect="AspectFit" HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Start" />                        <Image Source="https://markets.shooppy.in/images/Markets/Common/files/MobileCategory/Homeapplicences.png" Aspect="AspectFit" HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Start" />                        <Image Source="https://markets.shooppy.in/images/Markets/Common/files/MobileCategory/Giftideas.png" Aspect="AspectFit" HeightRequest="100" WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Start" />                    </StackLayout>                </ScrollView>                <StackLayout x:Name="FirstChildLayout">                </StackLayout>                <StackLayout x:Name="SecondChildLayout">                </StackLayout>                           </StackLayout>        </ScrollView>        <Label IsVisible="false"                            x:Name="ProductCountLabel"                            FontFamily="{DynamicResource VerdanaProLight}"                            FontSize="44"                            HorizontalOptions="End"                            Text="1"                            TextColor="{DynamicResource WhiteDarkFontColor}"                            VerticalOptions="CenterAndExpand" />        <controls:PancakeView            x:Name="BasketLayout"            IsVisible="false"            BackgroundColor="#f5f5f5"            CornerRadius="40"            Elevation="3"            Margin="10"            HeightRequest="80"            HorizontalOptions="StartAndExpand"            VerticalOptions="EndAndExpand"            WidthRequest="80">            <controls:PancakeView.GestureRecognizers>                <DropGestureRecognizer AllowDrop="True" Drop="DropBasketITem" ></DropGestureRecognizer>            </controls:PancakeView.GestureRecognizers>            <Image                Aspect="AspectFit"                HeightRequest="40"                HorizontalOptions="CenterAndExpand"                VerticalOptions="CenterAndExpand"                WidthRequest="40">                <Image.Source>                    <FontImageSource                        FontFamily="{DynamicResource MaterialFontFamily}"                        Glyph="{x:Static font:FontAwesomeIcons.CartAlt}"                        Size="50"                        Color="Chocolate" />                </Image.Source>            </Image>        </controls:PancakeView>    </Grid></base:BasePage>

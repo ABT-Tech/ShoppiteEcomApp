@@ -20,42 +20,9 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             //    product.ProductList = new string[] { product.Image };
             //}
             _products = product;
-           
-            
-            //_startList.Add(new StartList
-            //{
-            //    StarImg = FontAwesomeIcons.Star
-            //});
-            //_startList.Add(new StartList
-            //{
-            //    StarImg = FontAwesomeIcons.Star
-            //});
-            //_startList.Add(new StartList
-            //{
-            //    StarImg = FontAwesomeIcons.Star
-            //});
-            //_startList.Add(new StartList
-            //{
-            //    StarImg = FontAwesomeIcons.Star
-            //});
-            //_startList.Add(new StartList
-            //{
-            //    StarImg = FontAwesomeIcons.Star
-            //});
-            //_comments.Add(new CommentModel
-            //{
-            //    Name = "Ufuk Sahin",
-            //    CommentTime = "12/1/19",
-            //    Id = 1,
-            //    Rates = _startList
-            //});
-            //_comments.Add(new CommentModel
-            //{
-            //    Name = "Hans Goldman",
-            //    CommentTime = "11/1/19",
-            //    Id = 2,
-            //    Rates = _startList.Skip(0).ToList()
-            //});
+
+
+          
             InitializeComponent();
 
             if ( _products.ProductList.Length != 0 )            {                specificationimage.IsVisible = false;                CarouselView.IsVisible = true;            }            else            {                specificationimage.IsVisible = true;                CarouselView.IsVisible = false;            }
@@ -70,12 +37,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             }
          
             this.BindingContext = product;
-           
-            //this.BindingContext = product.Quantity;
-            MainPage = new HomePage();            //starList.ItemsSource = _startList;            //starListglobal.ItemsSource = _startList;            //CommentList.ItemsSource = _comments;
-            //MainScroll.Scrolled += MainScroll_Scrolled; 
-
-            //InittProductDetail(product);        }
+            MainPage = new HomePage();                    }
         protected override void OnAppearing()        {            InittProductDetail(_products);        }        private async void InittProductDetail(ProductListModel product)        {
             Busy();
             List<ProductListModel> categories = new List<ProductListModel>();

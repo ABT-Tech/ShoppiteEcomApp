@@ -31,7 +31,7 @@ namespace DellyShopApp.Droid
            
             ///For Performance 
             Forms.SetFlags("FastRenderers_Experimental");
-
+            Rg.Plugins.Popup.Popup.Init(this);
             AndroidEnvironment.UnhandledExceptionRaiser -= StoreLogger;
             AndroidEnvironment.UnhandledExceptionRaiser += StoreLogger;
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
@@ -104,7 +104,10 @@ namespace DellyShopApp.Droid
            // PayCardsRecognizerService.OnActivityResult(requestCode, resultCode, data);
 
         }
-
+        public override void OnBackPressed()
+        {
+            Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
+        }
         protected override void OnDestroy()
         {
             base.OnDestroy();

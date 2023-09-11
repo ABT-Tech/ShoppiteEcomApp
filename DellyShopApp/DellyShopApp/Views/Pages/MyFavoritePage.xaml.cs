@@ -1,86 +1,11 @@
-﻿using DellyShopApp.Models;
-using DellyShopApp.Services;
-using DellyShopApp.Views.CustomView;
-using DellyShopApp.Views.TabbedPages;
-using Plugin.Connectivity;
-using System;
-using System.Collections.Generic;
-using Xamarin.Essentials;
-using Xamarin.Forms.Xaml;
+﻿using DellyShopApp.Models;using DellyShopApp.Services;using DellyShopApp.Views.CustomView;using Plugin.Connectivity;using System;using Xamarin.Essentials;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions.Compile)]    public partial class MyFavoritePage    {        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);        public string userAuth = SecureStorage.GetAsync("Usertype").Result;        public MyFavoritePage()        {            InitializeComponent();            if (ChechConnectivity())            {                if (userId == 0 || userAuth != "Client")                {                    Login.IsVisible = true;                    cartimg.IsVisible = true;                    txt.IsVisible = true;                    BasketItems.IsVisible = false;
 
-namespace DellyShopApp.Views.Pages
-{
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MyFavoritePage
-    {
-        public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
-        public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
-        List<ProductListModel> productListModel = new List<ProductListModel>();
+                }                else                {                    Login.IsVisible = false;                    cartimg.IsVisible = false;                    BasketItems.IsVisible = true;                    txt.IsVisible = false;                    InittFavoritePage();                }
 
-        public MyFavoritePage()
 
-        {
-
-            InitializeComponent();
-            if (ChechConnectivity())
-            {
-                InittFavoritePage(); 
             }
-         
-           
-        }
-        protected override void OnAppearing()
-        {
-            InittFavoritePage();
-        }
-        private bool ChechConnectivity()
-        {
-            if (CrossConnectivity.Current.IsConnected)
-            {
-                return true;
-            }
-            else
-            {
-                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");
-                return false;
-            }
-        }
-        private async void InittFavoritePage()
-        {
-            Busy();
-         var Wishlistproducts = await DataService.GetWishlistByUser(orgId,userId);//DataService.Instance.ProcutListModel;
-            BasketItems.ItemsSource = Wishlistproducts;
-            if (Wishlistproducts.Count == 0)
-            {
-                gif.IsVisible = true;
-                shopping.IsVisible = true;
-            }
-            NotBusy();
-           
-        }
-        private async void ClickItem(object sender, EventArgs e)
-        {
-            if (!(sender is PancakeView pancake)) return;
-            if (!(pancake.BindingContext is ProductListModel item)) return;
-            await Navigation.PushAsync(new ProductDetail(item));
-        }
-        public void Busy()
-        {
-            uploadIndicator.IsVisible = true;
-            uploadIndicator.IsRunning = true;
 
-        }
-
-        public void NotBusy()
-        {
-            uploadIndicator.IsVisible = false;
-            uploadIndicator.IsRunning = false;
-
-        }
-
-        private void TapGestureRecognizer_Tapped_2(System.Object sender, System.EventArgs e)
-        {
-            Navigation.PushAsync(new HomeTabbedPage());
-        }
-    }
-}
+        }        protected override void OnAppearing()        {
+            //    InittFavoritePage();
+        }        private bool ChechConnectivity()        {            if (CrossConnectivity.Current.IsConnected)            {                return true;            }            else            {                DisplayAlert("Opps!", "Please Check Your Internet Connection", "ok");                return false;            }        }        private async void InittFavoritePage()        {            Busy();            var Wishlistproducts = await DataService.GetWishlistByUser(orgId, userId);//DataService.Instance.ProcutListModel; 
+            BasketItems.ItemsSource = Wishlistproducts;            if (Wishlistproducts.Count == 0)            {                gif.IsVisible = true;                shopping.IsVisible = true;            }            NotBusy();        }        public void Busy()        {            uploadIndicator.IsVisible = true;            uploadIndicator.IsRunning = true;            MainLayout.Opacity = 0.7;        }        public void NotBusy()        {            uploadIndicator.IsVisible = false;            uploadIndicator.IsRunning = false;            MainLayout.Opacity = 100;        }        protected void LogInClick(object sender, EventArgs args)        {            Navigation.PushAsync(new LoginPage());        }        private async void ClickItem(object sender, EventArgs e)        {            if (!(sender is PancakeView pancake)) return;            if (!(pancake.BindingContext is ProductListModel item)) return;            await Navigation.PushAsync(new ProductDetail(item));        }        private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)        {            Navigation.PushAsync(new HomeTabbedPage());        }    }}

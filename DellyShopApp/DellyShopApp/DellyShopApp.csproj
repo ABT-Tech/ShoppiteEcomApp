@@ -29,6 +29,8 @@
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="CarouselView.FormsPlugin" Version="6.0.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+    <PackageReference Include="Xam.Plugin.Iconize" Version="3.5.0.129" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +43,7 @@
     <None Remove="Themes\clock.json" />
     <None Remove="Resources\clock.json" />
     <None Remove="Xam.Plugin.Connectivity" />
+    <None Remove="DbModels\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="App.xaml">
@@ -181,6 +184,7 @@
     <Folder Include="Services\" />
     <Folder Include="Views\Pages\Base\" />
     <Folder Include="Themes\" />
+    <Folder Include="DbModels\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Android">

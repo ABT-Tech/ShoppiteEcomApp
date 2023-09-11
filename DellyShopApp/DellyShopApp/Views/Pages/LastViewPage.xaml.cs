@@ -26,7 +26,7 @@ using Xamarin.Forms;using Xamarin.Forms.Xaml;namespace DellyShopApp.Views.Pag
         private async void InittLastViewPage()
         {
             Busy();
-            LastViewList.ItemsSource = await DataService.GetAllProductsByOrganizations(orgId);//DataService.Instance.ProcutListModel;
+            LastViewList.ItemsSource = DataService.Instance.ProcutListModel; //await DataService.GetAllProductsByOrganizations(orgId);
             NotBusy();
             foreach (var varient in productListModel)            {                if (varient.SpecificationNames != "")                {                    varient.IsSpecificationNames = true;                }                else
                 {
