@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DellyShopApp.DbModels
+{
+    public class Tbl_ShopModel
+    {
+        public string ShopName { get; set; }
+        public int OrgId { get; set; }
+        public int Org_CategoryId { get; set; }
+        public string Image { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsPublished { get; set; }
+    }
+}

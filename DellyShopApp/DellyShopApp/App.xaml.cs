@@ -96,10 +96,10 @@ namespace DellyShopApp
             if (!hasNotification)
             {
                 MainPage navigation = new MainPage();
-                MainPage = new NavigationPage(new MainPage());
+                //MainPage = new NavigationPage(new MainPage());
                 NavigationPage navpage = new NavigationPage(navigation);
                 NavigationPage.SetHasNavigationBar(navpage, false);
-                NavigationPage.SetHasNavigationBar(navigation, false);
+                //NavigationPage.SetHasNavigationBar(navigation, false);
                 MainPage = navpage;
             }
             else

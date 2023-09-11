@@ -1,11 +1,13 @@
 ﻿using Acr.UserDialogs;
 using DellyShopApp.CustomControl;
 using DellyShopApp.DbModels;
+using DellyShopApp.Enums;
 using DellyShopApp.Languages;
 using DellyShopApp.Models;
 using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
 using DellyShopApp.Views.Pages;
+using DellyShopApp.Views.Pages.Base;
 using FFImageLoading.Forms;
 using Plugin.Connectivity;
 using System;
@@ -21,7 +23,7 @@ using Xamarin.Forms.Xaml;
 namespace DellyShopApp.Views.TabbedPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HomePage
+    public partial class HomePage : BasePage
     {
 
         //Order product = new Order();
@@ -30,7 +32,6 @@ namespace DellyShopApp.Views.TabbedPages
         public int UserId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
         public string userAuth = SecureStorage.GetAsync("Usertype").Result;
         List<Category> categories = new List<Category>();
-        public InfiniteScrollCollection<Tbl_ProductResponse> Items { get; set; }
         private ProductListModel product;
         private const int PageSize = 20;
         public HomePage()
@@ -42,31 +43,26 @@ namespace DellyShopApp.Views.TabbedPages
             }
             //   ShopLogo.Source = SecureStorage.GetAsync("ImgId").Result; //DataService.Instance.ObjOrgData.Image;            
         }
-        private async void InittHomePage()
+        private async Task InittHomePage()
         {
             //Busy();
             Tbl_ProductMasterResponse masterProductDTO = new Tbl_ProductMasterResponse();
-            int? OrgUserID = UserId == 0 ? null : (int?)UserId;
-            categories = await DataService.GetAllCategories(orgId);
+            //int? OrgUserID = UserId == 0 ? null : (int?)UserId;
+            //categories = await DataService.GetAllCategories(orgId);
             var AllProducts = await GetProducts(true);
             var productList = AllProducts.GroupBy(p => p.status, p => p, (key, g) => new Tbl_ProductDetailResponse { Status = key, productsDTOs = g.ToList() }).ToList();
             masterProductDTO.MainProductDTOs = productList;
             //var AllProducts = await DataService.GetAllProductsByOrganizations(0, OrgUserID, OrgCatId);
             foreach (var prodDetails in masterProductDTO.MainProductDTOs)
             {
-                BindStack(prodDetails.Status, prodDetails.productsDTOs);
-            }
-            Items = new InfiniteScrollCollection<Tbl_ProductResponse>
-            {
-                OnLoadMore = async () =>
+                if (!string.IsNullOrWhiteSpace(prodDetails.Status))
+                    BindStack(prodDetails.Status, prodDetails.productsDTOs);
+                else
                 {
-                    // load the next page
-                    var page = Items.Count / PageSize;
-                    var items = await GetProducts(false,page, PageSize);
-                    return items;
+                    //var proList = prodDetails.productsDTOs.Take(100).ToList();
+                    //BindFullProductStack(proList);
                 }
-            };
-            await loadDataAsync();
+            }
         }
         public void Busy()
         {
@@ -81,10 +77,29 @@ namespace DellyShopApp.Views.TabbedPages
             uploadIndicator.IsRunning = false;
             MainLayout.Opacity = 100;
         }
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
+            Busy();
+            if(FirstChildLayout.Children.Count() == 0)
+            {
+                Tbl_ProductMasterResponse masterProductDTO = new Tbl_ProductMasterResponse();
 
-
+                var AllProducts = await GetProducts(true);
+                var productList = AllProducts.GroupBy(p => p.status, p => p, (key, g) => new Tbl_ProductDetailResponse { Status = key, productsDTOs = g.ToList() }).ToList();
+                masterProductDTO.MainProductDTOs = productList;
+                //var AllProducts = await DataService.GetAllProductsByOrganizations(0, OrgUserID, OrgCatId);
+                foreach (var prodDetails in masterProductDTO.MainProductDTOs)
+                {
+                    if (!string.IsNullOrWhiteSpace(prodDetails.Status))
+                        BindStack(prodDetails.Status, prodDetails.productsDTOs);
+                }
+            }
+            if(SecondChildLayout.Children.Count() == 0)
+            {
+                var AllProducts = await GetProducts(false);
+                BindFullProductStack(AllProducts);
+            }
+            NotBusy();
         }
         private bool ChechConnectivity()
         {
@@ -101,8 +116,29 @@ namespace DellyShopApp.Views.TabbedPages
         private async void ProductDetailClick(object sender, EventArgs e)
         {
             if (!(sender is PancakeView pancake)) return;
-            if (!(pancake.BindingContext is ProductListModel item)) return;
-            await Navigation.PushAsync(new ProductDetail(item));
+            if (!(pancake.BindingContext is Tbl_ProductResponse item)) return;
+
+            var productDetail = new ProductListModel
+            {
+                Id = item.Id,
+                Title = item.Title,
+                ProductGUId = item.ProductGUID,
+                Quantity = item.Quantity,
+                Description = item.Description,
+                Brand = item.Brand,
+                Image = item.Image,
+                Price = Convert.ToDouble(item.Price),
+                orgId = item.orgId,
+                OldPrice = Convert.ToInt32(item.OldPrice),
+                WishlistedProduct = item.WishlistedProduct,
+                BrandId = item.BrandId,
+                CategoryId = item.CategoryId,
+                SpecificationNames = item.SpecificationNames,
+                SpecificationId = item.SpecificationId
+            };
+            string[] productImageList = item.ProductOtherImages.Split(',');
+            productDetail.ProductList = productImageList;
+            await Navigation.PushAsync(new ProductDetail(productDetail));
             //if(item.Quantity  >10 )
         }
 
@@ -193,6 +229,21 @@ namespace DellyShopApp.Views.TabbedPages
         private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
         {
             Navigation.PushAsync(new TopDeals());
+        }
+
+        private void TapGestureRecognizer_BasketTapped(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MyCartPage());
+        }
+
+        private void TapGestureRecognizer_WishlistTapped(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MyFavoritePage());
+        }
+
+        private void TapGestureRecognizer_NotificationTapped(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MyCartPage());
         }
 
         public void BindStack(string label, List<Tbl_ProductResponse> productResponses)
@@ -300,11 +351,11 @@ namespace DellyShopApp.Views.TabbedPages
             statusRepeaterView.ItemsSource = productResponses.Take(5).ToList();
             statusRepeaterView.BindingContext = productResponses.ToList();
             statusScrollView.Content = statusRepeaterView;
-            MainLayout.Children.Add(stackLayout);
-            MainLayout.Children.Add(statusScrollView);
+            FirstChildLayout.Children.Add(stackLayout);
+            FirstChildLayout.Children.Add(statusScrollView);
         }
 
-        public void BindFullProductStack(InfiniteScrollCollection<Tbl_ProductResponse> productResponses)
+        public void BindFullProductStack(List<Tbl_ProductResponse> productResponses)
         {
             var dynamicResourceBold = new Xamarin.Forms.Internals.DynamicResource("VerdanaProBold");
             var dynamicResourceRegular = new Xamarin.Forms.Internals.DynamicResource("VerdanaProRegular");
@@ -321,16 +372,20 @@ namespace DellyShopApp.Views.TabbedPages
             stacklabel.TextColor = Color.Black;
             stacklabel.VerticalOptions = LayoutOptions.Start;
             stackLayout.Children.Add(stacklabel);
-            MainLayout.Children.Add(stackLayout);
+            SecondChildLayout.Children.Add(stackLayout);
             ListView productListView = new ListView();
-            productListView.RowHeight = 350;
-            productListView.VerticalOptions = LayoutOptions.FillAndExpand;
-            productListView.HorizontalOptions = LayoutOptions.FillAndExpand;
-            InfiniteScrollBehavior infiniteScrollBehavior = new InfiniteScrollBehavior();
-            productListView.Behaviors.Add(infiniteScrollBehavior);
+            FlowListView flowListView = new FlowListView();
+            flowListView.FlowColumnCount = 2;
+            flowListView.FlowColumnExpand = FlowColumnExpand.None;
+            flowListView.HasUnevenRows = false;
+            flowListView.RowHeight = 280;
+            flowListView.SeparatorVisibility = SeparatorVisibility.None;
+            flowListView.VerticalOptions = LayoutOptions.StartAndExpand;
+            flowListView.VerticalScrollBarVisibility = ScrollBarVisibility.Never;
+            flowListView.FlowIsLoadingInfinite = true;
+            flowListView.FlowIsLoadingInfiniteEnabled = true;
             var dataTemplate = new DataTemplate(() =>
             {
-                ViewCell vc = new ViewCell();
 
                 Image cacheImage = new Image
                 {
@@ -348,8 +403,6 @@ namespace DellyShopApp.Views.TabbedPages
                     VerticalOptions = LayoutOptions.Start
                 };
                 stacklabelChild.SetBinding(Label.TextProperty, "Title");
-
-
 
                 Label childLabel = new Label
                 {
@@ -391,10 +444,10 @@ namespace DellyShopApp.Views.TabbedPages
                 dataTemplatePancakeView.Padding = 5;
                 dataTemplatePancakeView.BackgroundColor = Color.White;
                 dataTemplatePancakeView.CornerRadius = 8;
-                dataTemplatePancakeView.Elevation = 3;
+                dataTemplatePancakeView.Elevation = 2;
                 dataTemplatePancakeView.HasShadow = true;
                 dataTemplatePancakeView.HeightRequest = 250;
-                dataTemplatePancakeView.HorizontalOptions = LayoutOptions.StartAndExpand;
+                dataTemplatePancakeView.HorizontalOptions = LayoutOptions.FillAndExpand;
                 dataTemplatePancakeView.VerticalOptions = LayoutOptions.StartAndExpand;
                 dataTemplatePancakeView.WidthRequest = 140;
                 dataTemplatePancakeView.GestureRecognizers.Add(new TapGestureRecognizer
@@ -404,21 +457,11 @@ namespace DellyShopApp.Views.TabbedPages
                 dataTemplatePancakeView.Content = pancakeChildLayout;
 
                 //  dataTemplatePancakeView.ChildAdded(pancakeChildLayout); 
-                vc.View = dataTemplatePancakeView;
-                return vc;
+                return dataTemplatePancakeView;
             });
-            productListView.ItemTemplate = dataTemplate;
-            productListView.ItemsSource = productResponses;
-            MainLayout.Children.Add(productListView);
-        }
-
-        private async Task loadDataAsync()
-        {
-            var items = await GetProducts(false,0,20);
-
-            Items.AddRange(items);
-            BindFullProductStack(Items);
-
+            flowListView.FlowColumnTemplate = dataTemplate;
+            flowListView.FlowItemsSource = productResponses;
+            SecondChildLayout.Children.Add(flowListView);
         }
 
         public async Task<List<Tbl_ProductResponse>> GetProducts(bool IsHorizontal = true, int pageIndex = 0, int pageSize = 20)

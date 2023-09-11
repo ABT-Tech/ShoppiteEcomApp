@@ -23,6 +23,7 @@ namespace DellyShopApp.DbModels
         public int SpecificationId { get; set; }
         public string status { get; set; }
         public int statusid { get; set; }
+        public string ProductOtherImages { get; set; }
     }
     public class Tbl_ProductMasterResponse
     {

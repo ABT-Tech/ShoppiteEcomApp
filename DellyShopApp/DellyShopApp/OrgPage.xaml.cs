@@ -10,6 +10,11 @@ using static DellyShopApp.Views.ListViewData;
 using System.Net.NetworkInformation;
 using System.Net;
 using Plugin.Connectivity;
+using Xamarin.Forms.Extended;
+using DellyShopApp.DbModels;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace DellyShopApp
 {
@@ -18,132 +23,48 @@ namespace DellyShopApp
     {
         public int oldorgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int Org_CategoryId = Convert.ToInt32(SecureStorage.GetAsync(" Org_CategoryId").Result);
-        
+        private const int PageSize = 20;
+        public bool IsWorking
+        {
+            get; set;
+        }
+        public InfiniteScrollCollection<Tbl_ShopModel> Items { get; set; }
+
+
+        public OrgPage()
+        {
+
+        }
 
         public OrgPage(int oId)
         {
             Org_CategoryId = oId;
             GetDeviceInfo();
             InitializeComponent();
-            if (ChechConnectivity())
-            {
-                InittMainPage();
-            }
         }
         
         private async void InittMainPage()
         {
             Busy();
             this.BindingContext = this;
-            var AllOrganizations = await DataService.GetAllOrganizations(Org_CategoryId); //DataService.Instance.ShopDetails;
-          
-            float rows = (float)AllOrganizations.Count / 2;
-            double rowcount = Math.Round(rows);
-            if (AllOrganizations.Count % 2 == 1)
+            var listOrgData = await GetProducts(0, 20);
+            if (listOrgData.Count() == 0)
             {
-                rowcount = rowcount + 1;
+                listOrgData = await DataService.GetAllOrganizations(Org_CategoryId); //DataService.Instance.ShopDetails;
+                await App.SQLiteDb.SaveOrganizationAsync(listOrgData);
             }
-            var productIndex = 0;
-            for (int rowIndex = 0; rowIndex < rowcount; rowIndex++)
+            Items = new InfiniteScrollCollection<Tbl_ShopModel>
             {
-                for (int columnIndex = 0; columnIndex < 2; columnIndex++)
+                OnLoadMore = async () =>
                 {
-                    if (productIndex >= AllOrganizations.Count)
-                    {
-                        break;
-                    }
-                    var product = AllOrganizations[productIndex];
-                    productIndex += 1;
-                    var label = new Label
-                    {
-                        Text = product.ShopName,
-                        VerticalOptions = LayoutOptions.End,
-                        HorizontalOptions = LayoutOptions.Center,
-                        MaxLines = 1,
-                        LineBreakMode = LineBreakMode.TailTruncation,
-                        HorizontalTextAlignment = TextAlignment.Center,
-                        TextColor = Color.Chocolate,
-                        FontAttributes = FontAttributes.Bold,
-                        FontSize = 20,
-
-                    };
-                    if (product.IsPublished == false)
-                    {
-                        var image = new Image
-                        {
-                            Aspect = Aspect.AspectFit,
-                            Source = product.Image,
-                            BackgroundColor = Color.WhiteSmoke,
-                            Margin = new Thickness(0, 20, 0, 25),
-                            VerticalOptions = LayoutOptions.Center,
-                            HorizontalOptions = LayoutOptions.Center,
-                            HeightRequest = 200,
-                            WidthRequest = 200,
-                            Opacity = 0.5
-                        };
-                        var bgimage = new Image
-                        {
-                            Source = "Cmg.png",
-                            Margin = new Thickness(0, 20, 0, 25),
-                            VerticalOptions = LayoutOptions.Center,
-
-                            HorizontalOptions = LayoutOptions.Center,
-                            HeightRequest = 200,
-                            WidthRequest = 200,
-                        };
-                        var Orglabel = new Label
-                        {
-                            Text = product.OrgId.ToString(),
-                            IsVisible = false
-                        };
-                        shop.Children.Add(image, columnIndex, rowIndex);
-                        shop.Children.Add(bgimage, columnIndex, rowIndex);
-                        shop.Children.Add(label, columnIndex, rowIndex);
-                        shop.Children.Add(Orglabel, columnIndex, rowIndex);
-                    }
-                    else
-                    {
-                        var label1 = new Label
-                        {
-                            Text = product.ShopName,
-                            VerticalOptions = LayoutOptions.End,
-                            HorizontalOptions = LayoutOptions.Center,
-                            MaxLines = 1,
-                            LineBreakMode = LineBreakMode.TailTruncation,
-                            HorizontalTextAlignment = TextAlignment.Center,
-                            TextColor = Color.Chocolate,
-                            FontAttributes = FontAttributes.Bold,
-                            FontSize = 20,
-
-                        };
-                        var image = new Image
-                        {
-                            Aspect = Aspect.AspectFit,
-                            Source = product.Image,
-                            BackgroundColor = Color.WhiteSmoke,
-                            Margin = new Thickness(0, 20, 0, 25),
-                            VerticalOptions = LayoutOptions.Center,
-                            HorizontalOptions = LayoutOptions.Center,
-                            HeightRequest = 200,
-                            WidthRequest = 200,
-                        };
-
-                        var Orglabel = new Label
-                        {
-                            Text = product.OrgId.ToString(),
-                            IsVisible = false
-                        };
-                        image.GestureRecognizers.Add(new TapGestureRecognizer
-                        {
-                            Command = new Command(() => TapGestureRecognizer_Tapped(Orglabel.Text, product.Image.ToString())),
-                        });
-                        shop.Children.Add(image, columnIndex, rowIndex);
-
-                        shop.Children.Add(label1, columnIndex, rowIndex);
-                        shop.Children.Add(Orglabel, columnIndex, rowIndex);
-                    }
+                    // load the next page
+                    var page = Items.Count / PageSize;
+                    var items = await GetProducts(page, PageSize); //await DataItems.GetItemsAsync(page, PageSize);
+                    IsWorking = false;
+                    return items;
                 }
-            }
+            };
+            await loadDataAsync();
             NotBusy();
             //shop.ItemsSource = DataService.Instance.ShopDetails;
         }
@@ -157,6 +78,10 @@ namespace DellyShopApp
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            if (ChechConnectivity())
+            {
+                InittMainPage();
+            }
         }
 
         public void NotBusy()
@@ -216,6 +141,18 @@ namespace DellyShopApp
         private void BackPage(object sender, EventArgs e)
         {
             Navigation.PopAsync();
+        }
+        public async Task<List<Tbl_ShopModel>> GetProducts(int pageIndex = 0, int pageSize = 20)
+        {
+            return await App.SQLiteDb.GetOrgAsync(pageIndex, pageSize);
+        }
+        private async Task loadDataAsync()
+        {
+            var items = await GetProducts(pageIndex: 0, pageSize: PageSize);
+
+            Items.AddRange(items);
+            OrgList.ItemsSource = Items;
+
         }
     }
 }

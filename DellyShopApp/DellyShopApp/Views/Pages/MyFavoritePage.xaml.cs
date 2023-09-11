@@ -13,19 +13,38 @@ namespace DellyShopApp.Views.Pages
     {
         public int orgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public int userId = Convert.ToInt32(SecureStorage.GetAsync("UserId").Result);
+        public string userAuth = SecureStorage.GetAsync("Usertype").Result;
+
         public MyFavoritePage()
 
         {
             InitializeComponent();
             if (ChechConnectivity())
             {
-                InittFavoritePage();
+                if (userId == 0 || userAuth != "Client")
+                {
+                    Login.IsVisible = true;
+                    cartimg.IsVisible = true;
+                    txt.IsVisible = true;
+                    BasketItems.IsVisible = false;
+                    
+                }
+                else
+                {
+                    Login.IsVisible = false;
+                    cartimg.IsVisible = false;
+                    BasketItems.IsVisible = true;
+                    txt.IsVisible = false;
+                    InittFavoritePage();
+                }
+
+                
             }
            
         }
         protected override void OnAppearing()
         {
-            InittFavoritePage();
+        //    InittFavoritePage();
         }
 
         private bool ChechConnectivity()
@@ -64,6 +83,10 @@ namespace DellyShopApp.Views.Pages
             uploadIndicator.IsVisible = false;
             uploadIndicator.IsRunning = false;
             MainLayout.Opacity = 100;
+        }
+        protected void LogInClick(object sender, EventArgs args)
+        {
+            Navigation.PushAsync(new LoginPage());
         }
         private async void ClickItem(object sender, EventArgs e)
         {

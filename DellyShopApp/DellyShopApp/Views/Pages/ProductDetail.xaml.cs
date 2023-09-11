@@ -16,18 +16,9 @@ using DellyShopApp.Views.TabbedPages;using Xamarin.Essentials;using Xamarin.Fo
         //public Color BGColor { get; private set; }
 
         public ProductDetail(ProductListModel product)        {
-            //if (product.ProductList.Length == 0 || (product.ProductList.Length == 1 && string.IsNullOrEmpty(product.ProductList[0])) )
-            //{
-            //    product.ProductList = new string[] { product.Image };
-            //}
-            _products = product;           var SpcName = _products.SpecificationNames;            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _startList.Add(new StartList            {                StarImg = FontAwesomeIcons.Star            });            _comments.Add(new CommentModel            {                Name = "Ufuk Sahin",                CommentTime = "12/1/19",                Id = 1,                Rates = _startList            });            _comments.Add(new CommentModel            {                Name = "Hans Goldman",                CommentTime = "11/1/19",                Id = 2,                Rates = _startList.Skip(0).ToList()            });            InitializeComponent();
-           
-            
+            _products = product;           var SpcName = _products.SpecificationNames;            InitializeComponent();
             BindingContext = this;
-            //InittProductDetail(product);
-            this.BindingContext = product;            //starList.ItemsSource = _startList;            //this.BindingContext = product.Quantity;                         //starListglobal.ItemsSource = _startList;            //CommentList.ItemsSource = _comments;
-            //MainScroll.Scrolled += MainScroll_Scrolled;           
-                   }
+            this.BindingContext = product;        }
 
         public ProductDetail()
         {

@@ -14,11 +14,24 @@ namespace DellyShopApp.DbModels
         {
             db = new SQLiteAsyncConnection(dbPath);
             db.CreateTableAsync<Tbl_ProductResponse>().Wait();
+            db.CreateTableAsync<Tbl_ShopModel>().Wait();
         }
 
-        public Task<int> SaveItemAsync(List<Tbl_ProductResponse> db_Product)
+        public async Task<int> SaveItemAsync(List<Tbl_ProductResponse> db_Product)
         {
-            return db.InsertAllAsync(db_Product);
+            var prodList = await db.Table<Tbl_ProductResponse>().ToListAsync();
+            if (prodList.Count() == 0)
+                return await db.InsertAllAsync(db_Product);
+            else
+            {
+                //var ExceptProd = db_Product.Where(x => !prodList.Contains(x)).ToList();
+                var ExceptProd = db_Product.Except(prodList, new IdComparer()).ToList();
+                if (ExceptProd.Count() > 0)
+                {
+                    await db.InsertAllAsync(ExceptProd);
+                }
+            }
+            return 0;
         }
         public async Task<List<Tbl_ProductResponse>> GetItemsAsync(bool IsHorizontal = true, int pageIndex = 0, int pageSize = 20)
         {
@@ -26,9 +39,85 @@ namespace DellyShopApp.DbModels
                 return await db.Table<Tbl_ProductResponse>().Where(x => !string.IsNullOrEmpty(x.status)).ToListAsync();
             else
             {
-                var prodResponse = await db.Table<Tbl_ProductResponse>().Where(x => x.status == string.Empty).ToListAsync();
-                prodResponse = prodResponse.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+                var prodResponse = await db.Table<Tbl_ProductResponse>().Where(x => x.status == string.Empty).Take(50).ToListAsync();
                 return prodResponse;
+            }
+
+        }
+
+        public async Task<List<Tbl_ShopModel>> GetOrgAsync(int pageIndex = 0, int pageSize = 20)
+        {
+            var prodResponse = await db.Table<Tbl_ShopModel>().ToListAsync();
+            prodResponse = prodResponse.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            return prodResponse;
+        }
+
+        public async Task<int> SaveOrganizationAsync(List<Tbl_ShopModel> db_Product)
+        {
+            var prodList = await db.Table<Tbl_ShopModel>().ToListAsync();
+            if (prodList.Count() == 0)
+                return await db.InsertAllAsync(db_Product);
+            else
+            {
+                //var ExceptProd = db_Product.Where(x => !prodList.Contains(x)).ToList();
+                var ExceptProd = db_Product.Except(prodList, new OrgIdComparer()).ToList();
+                if (ExceptProd.Count() > 0)
+                {
+                    await db.InsertAllAsync(ExceptProd);
+                }
+            }
+            return 0;
+        }
+
+        public class IdComparer : IEqualityComparer<Tbl_ProductResponse>
+        {
+            public int GetHashCode(Tbl_ProductResponse co)
+            {
+                if (co == null)
+                {
+                    return 0;
+                }
+                return co.Id.GetHashCode();
+            }
+
+            public bool Equals(Tbl_ProductResponse x1, Tbl_ProductResponse x2)
+            {
+                if (object.ReferenceEquals(x1, x2))
+                {
+                    return true;
+                }
+                if (object.ReferenceEquals(x1, null) ||
+                    object.ReferenceEquals(x2, null))
+                {
+                    return false;
+                }
+                return x1.Id == x2.Id;
+            }
+        }
+
+        public class OrgIdComparer : IEqualityComparer<Tbl_ShopModel>
+        {
+            public int GetHashCode(Tbl_ShopModel co)
+            {
+                if (co == null)
+                {
+                    return 0;
+                }
+                return co.OrgId.GetHashCode();
+            }
+
+            public bool Equals(Tbl_ShopModel x1, Tbl_ShopModel x2)
+            {
+                if (object.ReferenceEquals(x1, x2))
+                {
+                    return true;
+                }
+                if (object.ReferenceEquals(x1, null) ||
+                    object.ReferenceEquals(x2, null))
+                {
+                    return false;
+                }
+                return x1.OrgId == x2.OrgId;
             }
         }
     }

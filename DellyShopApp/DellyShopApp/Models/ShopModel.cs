@@ -12,10 +12,5 @@ namespace DellyShopApp.Models
         public string Image { get; set; }
         public bool IsActive { get; set; }
         public bool IsPublished { get; set; }
-
-        public static implicit operator int(ShopModel v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

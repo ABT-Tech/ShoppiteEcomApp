@@ -4,8 +4,10 @@ using DellyShopApp.Languages;
 using DellyShopApp.Models;
 using DellyShopApp.Services;
 using DellyShopApp.Views.CustomView;
+using DellyShopApp.Views.ModalPages;
 using DellyShopApp.Views.Pages;
 using Plugin.Connectivity;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,7 +25,7 @@ namespace DellyShopApp.Views.TabbedPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoryPage
     {
-
+        private LoginPopupPage _loginPopup;
         public int oldorgId = Convert.ToInt32(SecureStorage.GetAsync("OrgId").Result);
         public string Banner = "Mobile_Landscape_Banner.png";
         public string CurrentAddress = "";
@@ -32,16 +34,20 @@ namespace DellyShopApp.Views.TabbedPages
         {
             GetDeviceInfo();
             InitializeComponent();
+            _loginPopup = new LoginPopupPage();
             if (ChechConnectivity())
             {
                 InittMainPage();
             }
         }
 
+
+
         private async void InittMainPage()
         {
             Busy();
             this.BindingContext = this;
+            await PopupNavigation.Instance.PushAsync(_loginPopup);
             CarouselView.ItemsSource = DataService.Instance.Carousel;
             var AllOrganizations = await DataService.GetAllOrganizationCategories(); //DataService.Instance.ShopDetails;
 

@@ -165,7 +165,7 @@ namespace DellyShopApp.Services
 
             }
         }
-        public static async Task<List<ShopModel>> GetAllOrganizations( int Org_CategoryId)
+        public static async Task<List<Tbl_ShopModel>> GetAllOrganizations( int Org_CategoryId)
         {
             try
             {
@@ -179,10 +179,10 @@ namespace DellyShopApp.Services
                 };
                 HttpClient httpClient = new HttpClient(clientHandler);
                 var response = await httpClient.GetAsync(
-                    AppSettings.ApiUrl + "api/Organization/GetAllOrganizations?Org_CategoryId="+ Org_CategoryId);
+                    AppSettings.ApiUrl + "api/Organization/GetAllOrganizations");
 
                 string result = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<ShopModel>>(result);
+                return JsonConvert.DeserializeObject<List<Tbl_ShopModel>>(result);
             }
             catch (Exception ex)
             {

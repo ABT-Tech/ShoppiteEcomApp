@@ -26,7 +26,6 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 cartimg.IsVisible = true;
                 txt.IsVisible = true;
                 checkout.IsVisible = false;
-                vendorlogin.IsVisible = true;
                 
             }
             else
@@ -35,7 +34,6 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                 cartimg.IsVisible = false;
                 checkout.IsVisible = true;
                 txt.IsVisible = false;
-                vendorlogin.IsVisible = false;
                
             }
            

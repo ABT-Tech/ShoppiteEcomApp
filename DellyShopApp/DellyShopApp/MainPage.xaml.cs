@@ -26,15 +26,17 @@ namespace DellyShopApp
         CancellationTokenSource cts;
         public MainPage()
         {
+            SaveProductsRecords();
             InitializeComponent();
-        }
-
-        protected override void OnAppearing()
-        {
             if (ChechConnectivity())
             {
                 Navigation.PushAsync(new HomeTabbedPage());
             }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
         }
 
 
@@ -51,7 +53,10 @@ namespace DellyShopApp
             }
         }
 
-    
-
+        public async Task SaveProductsRecords()
+        {
+            var AllProducts = await DataService.GetAllProductsByOrganizations(0, null, 4);
+            await App.SQLiteDb.SaveItemAsync(AllProducts);
+        }
     }
 }
