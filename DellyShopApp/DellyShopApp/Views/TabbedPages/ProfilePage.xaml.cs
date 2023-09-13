@@ -27,7 +27,7 @@ namespace DellyShopApp.Views.TabbedPages
                 Login.IsVisible = true;
                 txt.IsVisible = true;
                 cartimg.IsVisible = true;
-                vendorlogin.IsVisible = true;
+                //vendorlogin.IsVisible = true;
             }
             else
             {
@@ -39,7 +39,7 @@ namespace DellyShopApp.Views.TabbedPages
                 Login.IsVisible = false;
                 txt.IsVisible = false;
                 cartimg.IsVisible = false;
-                vendorlogin.IsVisible = false;
+               //vendorlogin.IsVisible = false;
             }
         }
 

@@ -185,7 +185,7 @@ namespace DellyShopApp
 
        private async void BackPage(System.Object sender, System.EventArgs e)
         {
-            await Navigation.PopAsync();
+            await Navigation.PushAsync(new HomeTabbedPage());
         }
     }
    
