@@ -103,30 +103,7 @@ namespace DellyShopApp.Services
 
 
 
-        public static async Task<List<Category>> GetCategories(int orgId)
-        {
-            try
-            {
-                //await TokenValidator.CheckTokenValidity();
-
-                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
-                //    "bearer", Preferences.Get("accessToken", string.Empty));
-                HttpClientHandler clientHandler = new HttpClientHandler
-                {
-                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
-                };
-                HttpClient httpClient = new HttpClient(clientHandler);
-                var response = await httpClient.GetAsync(
-                    AppSettings.ApiUrl + "api/Category/GetAllCategories?OrgId=" + orgId);
-
-                string result = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<Category>>(result);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
+       
          public static async Task<List<Tbl_ShopModel>> GetAllOrganizations(int Org_CategoryId)
         {
             try
@@ -145,6 +122,31 @@ namespace DellyShopApp.Services
 
                 string result = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<Tbl_ShopModel>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+
+            }
+        }
+        public static async Task<List<Category>> GetAllSubCategories(int MainCategoryId)
+        {
+            try
+            {
+                // await TokenValidator.CheckTokenValidity();
+
+                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                //"bearer", Preferences.Get("accessToken", string.Empty));
+                HttpClientHandler clientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+                };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                var response = await httpClient.GetAsync(
+                    AppSettings.ApiUrl + "api/Category/GetAllSubCategories?MainCategoryId=" + MainCategoryId);
+
+                string result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<Category>>(result);
             }
             catch (Exception ex)
             {
@@ -252,7 +254,7 @@ namespace DellyShopApp.Services
                 throw;
             }
         }
-        public static async Task<List<Category>> GetAllCategories(int orgId)
+        public static async Task<List<Category>> GetAllParentcategories()
         {
             try
             {
@@ -266,7 +268,7 @@ namespace DellyShopApp.Services
                 };
                 HttpClient httpClient = new HttpClient(clientHandler);
                 var response = await httpClient.GetAsync(
-                    AppSettings.ApiUrl + "api/Category/GetAllCategories?OrgId=" + orgId);
+                    AppSettings.ApiUrl + "api/Category/GetAllParentcategories");
 
                 string result = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<Category>>(result);

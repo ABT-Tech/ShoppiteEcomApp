@@ -196,7 +196,6 @@
     <BundleResource Include="Resources\Notification.png" />
     <BundleResource Include="Resources\ShooppyMobileLogo.png" />
     <BundleResource Include="Resources\Shopping_Bag.png" />
-    <BundleResource Include="Resources\Wishlist.png" />
     <BundleResource Include="Resources\Shops.png" />
     <BundleResource Include="Resources\Shops%402x.png" />
     <BundleResource Include="Resources\Shops%403x.png" />
@@ -204,6 +203,8 @@
     <BundleResource Include="Resources\Category%403x.png" />
     <BundleResource Include="Resources\Offer%402x.png" />
     <BundleResource Include="Resources\Offer%403x.png" />
+    <BundleResource Include="Resources\blackimg.png" />
+    <BundleResource Include="Resources\nooffer.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">

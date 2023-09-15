@@ -39,7 +39,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             this.BindingContext = product;
             MainPage = new HomePage();                    }
         protected override void OnAppearing()        {            InittProductDetail(_products);        }        private async void InittProductDetail(ProductListModel product)        {
-            Busy();
+           // Busy();
             List<ProductListModel> categories = new List<ProductListModel>();
             categories.Add(product);
             var similarpro = await DataService.GetSimilarProducts(orgId, Convert.ToInt32(product.CategoryId), Convert.ToInt32(product.BrandId));
@@ -50,7 +50,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             }
             var atb = await DataService.GetProductVariation(orgId, product.ProductGUId);
             var atb2 = new List<Attributes>();
-            NotBusy();
+            //NotBusy();
             foreach(var Spect in atb)
             {
                 if(Spect.IsSpecificationExist == true)
@@ -171,9 +171,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
         {
             uploadIndicator.IsVisible = true;
             uploadIndicator.IsRunning = true;
-
         }
-
         public void NotBusy()
         {
             uploadIndicator.IsVisible = false;

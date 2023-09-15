@@ -17,6 +17,7 @@ namespace DellyShopApp.Views.TabbedPages
         {
 
             InitializeComponent();
+           
             if (userId == 0 || userAuth != "Client")
             {
                 EditProfile.IsVisible = false;
@@ -24,9 +25,11 @@ namespace DellyShopApp.Views.TabbedPages
                 MyFav.IsVisible = false;
                 LastView.IsVisible = false;
                 Logout.IsVisible = false;
+                terms.IsVisible = false;
                 Login.IsVisible = true;
                 txt.IsVisible = true;
                 cartimg.IsVisible = true;
+                Policy.IsVisible = true;
                 //vendorlogin.IsVisible = true;
             }
             else
@@ -39,11 +42,14 @@ namespace DellyShopApp.Views.TabbedPages
                 Login.IsVisible = false;
                 txt.IsVisible = false;
                 cartimg.IsVisible = false;
-               //vendorlogin.IsVisible = false;
+                Policy.IsVisible = false;
+                terms.IsVisible = true;
+                //vendorlogin.IsVisible = false;
+               
             }
         }
-
-        private void OrderInfoClick(object sender, EventArgs e)
+       
+            private void OrderInfoClick(object sender, EventArgs e)
         {
 
             if (!(sender is PancakeView stack)) return;
@@ -69,12 +75,13 @@ namespace DellyShopApp.Views.TabbedPages
                     OpenPage(new MyCommentsPage());
                     break;
 
-                case "Notifications":
-                    OpenPage(new NotificationPage());
-                    break;
-
+               
                 case "Settings":
                     OpenPage(new SettingsPage());
+                    break;
+
+                case "Policy":
+                    OpenPage(new Termsandpoliciespage());
                     break;
             }
 
@@ -88,8 +95,10 @@ namespace DellyShopApp.Views.TabbedPages
         }
         protected void LogOutClick(object sender, EventArgs args)
         {
-            Application.Current.MainPage = new NavigationPage(new MainPage());
             Xamarin.Essentials.SecureStorage.RemoveAll();
+            Application.Current.MainPage = new NavigationPage(new MainPage());
+
+            
         }
         protected void LogInClick(object sender, EventArgs args)
         {

@@ -1,19 +1,3 @@
-﻿using System;
-
-namespace DellyShopApp.Models
-{
-    public class Category
-    {
-       
-
-        public string Banner { get; set; }
-        public string CategoryName { get; set; }
-        public string CategoryId { get; set; }
-        public int orgID { get; set; }
-        public string SpecificationNames { get; set; }
-        public int SpecificationIds { get; set; }
-        public bool IsCouponEnabled { get; set; }
-
-
-    }
-}
+﻿using System;namespace DellyShopApp.Models{    public class Category    {        public string Banner { get; set; }        public string CategoryName { get; set; }        public string CategoryId { get; set; }        public string Categoryicon { get; set; }        public int orgID { get; set; }        public string SpecificationNames { get; set; }        public int SpecificationIds { get; set; }        public bool IsCouponEnabled { get; set; }
+        public int MainCategoryId { get; set; }        public string MainCategory { get; set; }        public string MainCategoryImage { get; set; }
+        public string CategoryImage { get; set; }    }}
