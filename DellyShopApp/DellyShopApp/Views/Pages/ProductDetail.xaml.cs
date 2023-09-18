@@ -80,7 +80,7 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
                     }
                 }
             }        }
-             private void MinusClick(object sender, EventArgs e)        {            if (productCount <= 1) return;            ProductCountLabel.Text = (--productCount).ToString();        }        private void MainScroll_Scrolled(object sender, ScrolledEventArgs e)        {            var height = Math.Round(Application.Current.MainPage.Height);            var ycordinate = Math.Round(e.ScrollY);            if (ycordinate > (height / 20))            {                NavbarStack.IsVisible = false;                return;            }            NavbarStack.IsVisible = false;        }        private async void CommentsPageClick(object sender, EventArgs e)        {            await Navigation.PushAsync(new CommentsPage(_products));        }
+             private void MinusClick(object sender, EventArgs e)        {            if (productCount <= 1) return;            ProductCountLabel.Text = (--productCount).ToString();        }        private void MainScroll_Scrolled(object sender, ScrolledEventArgs e)        {            var height = Math.Round(Application.Current.MainPage.Height);            var ycordinate = Math.Round(e.ScrollY);            if (ycordinate > (height / 20))            {                NavbarStack.IsVisible = true;                return;            }            NavbarStack.IsVisible = false;        }        private async void CommentsPageClick(object sender, EventArgs e)        {            await Navigation.PushAsync(new CommentsPage(_products));        }
 
         private async void AddBasketButton(object sender, EventArgs e)        {            if (UserId == 0 || UserId == null || userAuth != "Client")
             {
@@ -177,6 +177,15 @@ namespace DellyShopApp.Views.Pages{    [XamlCompilation(XamlCompilationOptions
             uploadIndicator.IsVisible = false;
             uploadIndicator.IsRunning = false;
 
+        }
+
+       private async void TapGestureRecognizer_Tapped(System.Object sender, System.EventArgs e)
+        {
+            if (!(sender is ContentView pancake)) return;
+            //if (!(pancake.BindingContext is ProductListModel item)) return;
+            var img = pancake.BindingContext.ToString();
+            //Navigation.ShowPopup (new imagepopup(img));
+            await Navigation.PushAsync(new Imageview(img));
         }
     }
 }
