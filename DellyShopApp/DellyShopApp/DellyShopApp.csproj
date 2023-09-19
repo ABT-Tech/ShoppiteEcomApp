@@ -45,6 +45,7 @@
     <None Remove="Resources\clock.json" />
     <None Remove="Xam.Plugin.Connectivity" />
     <None Remove="DbModels\" />
+    <None Remove="Animations\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="App.xaml">
@@ -180,6 +181,7 @@
     <Folder Include="Views\Pages\Base\" />
     <Folder Include="Themes\" />
     <Folder Include="DbModels\" />
+    <Folder Include="Animations\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Android">

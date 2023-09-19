@@ -6,6 +6,8 @@ using DellyShopApp.Models;
 using Xamarin.Essentials;
 using DellyShopApp.Services;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using System.Threading.Tasks;
+using DellyShopApp.Animations;
 
 namespace DellyShopApp.Views.Pages
 {
@@ -24,7 +26,15 @@ namespace DellyShopApp.Views.Pages
 	    protected override async void OnAppearing()
 	    {
 	        base.OnAppearing();
-	     
+            Task.Run(async () =>
+            {
+
+
+                await ViewAnimations.FadeAnimY(user1);
+                await ViewAnimations.FadeAnimY(user);
+
+            });
+
         }
         private async void RegisteruButtonClick(object sender, EventArgs e)
 	    {

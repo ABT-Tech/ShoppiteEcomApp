@@ -34,7 +34,7 @@
                     FontFamily="{DynamicResource MaterialFontFamily}"
                     Glyph="{x:Static font:FontAwesomeIcons.ThinLeft}"
                     Size="50"
-                    Color="{DynamicResource IconBgColor}" />
+                    Color="#ff002c" />
             </Image.Source>
         </Image>
         <Label
@@ -47,7 +47,7 @@
             HorizontalOptions="CenterAndExpand"
             LineBreakMode="TailTruncation"
             Text="{Binding Title}"
-            TextColor="{DynamicResource IconBgColor}"
+            TextColor="#ff002c"
             VerticalOptions="CenterAndExpand"
             VerticalTextAlignment="Center" />
 
